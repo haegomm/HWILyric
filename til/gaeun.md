@@ -11,6 +11,9 @@
 
 - TypeScript 의 기본 타입
   - https://www.notion.so/TypeScript-5310858662a94e9c9ba9d41ffa3a8176?pvs=4
+- TypeScript 함수
+  - https://www.notion.so/TypeScript-48290a1bcf2c48d3b1d7f49eb8ac4668?pvs=4
+
 
 
 
