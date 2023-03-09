@@ -16,9 +16,12 @@
 
 
 
+- 빅데이터 기초
+
+  - https://www.notion.so/21179408b8a6465793155d9337c8d8d4?pvs=4
+
 
 - 데이터 아카이빙과 데이터 백업의 차이
   - https://www.notion.so/9135975c051d4b9ab05b25846941e2c1?pvs=4
-
 - 데이터 전처리
   - https://www.notion.so/e99586f17794428eac378d5664374adf?pvs=4
