@@ -19,6 +19,9 @@
 - 빅데이터 기초
 
   - https://www.notion.so/21179408b8a6465793155d9337c8d8d4?pvs=4
+- 빅데이터 분산이란
+  - https://lab.ssafy.com/s08-bigdata-dist-sub2/S08P22B107.git
+
 
 
 - 데이터 아카이빙과 데이터 백업의 차이
