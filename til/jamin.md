@@ -21,3 +21,7 @@
 
 #### 230313
 [일지](https://spiky-scene-ef7.notion.site/76464e04daec46618380292d3168a8c7)
+
+
+#### 230314
+[일지](https://spiky-scene-ef7.notion.site/1ddf1e1e933744cb9c1b1fb7330a3913)
