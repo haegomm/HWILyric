@@ -14,6 +14,8 @@
 - TypeScript 함수
   - https://www.notion.so/TypeScript-48290a1bcf2c48d3b1d7f49eb8ac4668?pvs=4
 
+- WireFrame 작업
+
 
 
 - 빅데이터 기초
