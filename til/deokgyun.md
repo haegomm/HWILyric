@@ -53,3 +53,45 @@ ERD를 짜는 것은 쉽지는 않았다. 어떤 데이터가 어떤 형식으�
 고려해야할 사항들이 생각보다 많았던지라 시간이 상당히 걸렸다. 하지만, 어떤 식으로 데이터를 주고받을지를 정하는 중요한 작업이었던 만큼 이렇게 신중하게 의견을 모아야하는 것이 맞는 것 같다. 이후 와이어프레임을 프론트 팀과 함께 확인하면서 화면 구성과 서비스의 기능에 대해 추가적으로 논의했다.
 
 알고리즘 문제도 난이도가 높아지면 높아질 수록 막상 직접 코딩을 하는 시간은 점점 줄어들고, 어떻게 문제를 해결할 것인지 구상하고 사고하는 시간이 더 길어지는 것처럼, 좋은 서비스를 개발하고 성공적인 프로젝트를 완성해나가기 위해서는 긴 기획과 구상 및 조정 시간이 필요한 것이 당연할 것이다. 스스로를 믿으며 열심히 하자.
+
+# 20230315 일지
+
+```py
+import requests as req
+res  = req.get('https://www.melon.com/chart/age/index.htm?chartType=YE&chartGenre=KPOP&chartDate=1985')
+```
+
+여타 사이트와는 다르게, 멜론의 경우 이렇게 요청을 보내면 406을 응답하면서 정보를 보내주지 않는다.
+
+```py
+header = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36"}
+
+res  = req.get('https://www.melon.com/chart/age/index.htm?chartType=YE&chartGenre=KPOP&chartDate=1985', headers = header)
+```
+
+요청을 보낼때 위와 같이 헤더를 지정해주면 이번에는 제대로 200을 응답하며 정보를 보내주게된다. 하지만 여기서 또 하나의 문제가 생기는데
+
+```html
+<div id="tb_list" style="width:1008px;"></div>
+<div class="wrap_age_rvew">
+  <h3>댓글</h3>
+  <div class="wrap_rvew"></div>
+</div>
+```
+
+바로 위처럼 정보를 보내준다는 것이다. 내가 필요한 순위 차트 정보는 id=tb_list인 div태그 내부에 있는데, 그 정보는 어째서인지 보내주지를 않는다. 아마 어떤 자바스크립트 코드를 보내서 브라우저에서 직접 여는 경우에만 순위 차트를 랜더링하도록 되어있는게 아닌가 싶기도 하지만 정확하지는 않다.
+
+```py
+from selenium import webdriver
+
+url = 'https://www.melon.com/chart/age/index.htm?chartType=YE&chartGenre=KPOP&chartDate=2014'
+driver = webdriver.Chrome('C:/Users/SSAFY/Desktop/semester2/crawling/chromedriver.exe')
+driver.implicitly_wait(10)
+driver.get(url)
+
+html = driver.page_source
+```
+
+결국 위와 같이 셀레니움을 사용, 크롬 웹드라이버를 통해서 요청하는 것으로 어렵사리 차트 데이터에 접근을 할 수 있게 되었다.
+
+일견 단순하면서도 제일 복잡하고, 쉬우면서도 어려운 분야가 바로 데이터를 수집하고 정제하는 분야라는 것을 시작부터 살짝 맛을 본 것 같다. 빅데이터 도메인치고는 아직 크지도 않은 데이터이건만 쉬운건 없나보다.
