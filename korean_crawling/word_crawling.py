@@ -14,6 +14,7 @@ from selenium.webdriver.support.select import Select
 URL = 'http://dtims.dtaq.re.kr:8070/search/list/index.do'
 
 driver = webdriver.Chrome(ChromeDriverManager().install())
+
 driver.get(url=URL)
 driver.implicitly_wait(time_to_wait=5)
 
@@ -32,14 +33,35 @@ try:
     wait_time(driver, 1)
     driver.find_element(By.LINK_TEXT, "적용").click()
     wait_time(driver,1)
-    btn_excel = driver.find_element(By.CLASS_NAME,"align_xls").click()
+    driver.find_element(By.CLASS_NAME, "align_xls").click()
     wait_time(driver,1)
-    sb_excel_download = Select(driver.find_element(By.CLASS_NAME, "downPopup_sel"))
-    excel_size = len(sb_excel_download.options)
+    excel_size = len(Select(driver.find_element(By.CLASS_NAME, "downPopup_sel")).options)
     for i in range(excel_size):
-        sb_excel_download.select_by_index(str(i))
-        print("click",i)
-        wait_time(driver,1)
+        driver.get(url=URL)
+        driver.implicitly_wait(time_to_wait=5)
+        driver.find_element(By.LINK_TEXT, '기타사전').click()
+        wait_time(driver, 1)
+        driver.find_element(By.LINK_TEXT, "개방형한국어지식대사전").click()
+        wait_time(driver, 1)
+        print("사이트 접속 완료")
+
+        sb_count = driver.find_element(By.ID, "s_viewCount")
+        Select(sb_count).select_by_value("100")
+        wait_time(driver, 1)
+        driver.find_element(By.LINK_TEXT, "적용").click()
+        wait_time(driver, 1)
+        driver.find_element(By.CLASS_NAME, "align_xls").click()
+        wait_time(driver, 1)
+        print("엑셀 버튼 클릭 완료")
+
+        wait = WebDriverWait(driver, 20)
+        element = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "downPopup_sel")))
+        Select(element).select_by_index(str(i))
+        print(i+1,"번째 option 선택 완료")
+        # wait_time(driver,1)
+        btn_download = driver.find_element(By.XPATH, "//input[@value='다운로드']")
+        btn_download.click()
+        print(str(i+1)+"/"+str(excel_size)+" 번째 엑셀 파일 다운로드")
 
 except Exception as e:
     print("예외 발생 !!", e)
