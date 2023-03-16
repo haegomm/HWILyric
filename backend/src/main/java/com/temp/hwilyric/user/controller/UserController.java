@@ -2,6 +2,7 @@ package com.temp.hwilyric.user.controller;
 
 import com.temp.hwilyric.exception.DuplicateException;
 import com.temp.hwilyric.exception.NotFoundException;
+import com.temp.hwilyric.exception.UnAuthorizedException;
 import com.temp.hwilyric.jwt.AuthToken;
 import com.temp.hwilyric.jwt.AuthTokenProvider;
 import com.temp.hwilyric.oauth.domain.AppProperties;
@@ -19,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -181,6 +183,40 @@ public class UserController {
 
         return new ResponseEntity<>(successRes, HttpStatus.OK);
 
+    }
+
+    @ApiOperation(value = "Access Token 재발급")
+    @GetMapping("users/access-token")
+    public ResponseEntity<ReMakeAccessTokenRes> reMakeAccessToken(HttpServletRequest httpServletRequest) throws UnAuthorizedException {
+        User user = (User) httpServletRequest.getAttribute("user");
+
+        String refreshToken = CookieUtil.getCookie(httpServletRequest, REFRESH_TOKEN)
+                .map(Cookie::getValue)
+                .orElse(null);
+
+        log.debug("쿠키에 담긴 refreshToken : {}", refreshToken);
+
+        AuthToken authTokenRefreshToken = tokenProvider.convertAuthToken(refreshToken);
+
+        if(authTokenRefreshToken.validate() == false || user.getRefreshToken() == null){
+            log.debug("유효하지 않은 refresh token 입니다.");
+            throw new UnAuthorizedException("유효하지 않은 refresh token 입니다.");
+        }
+
+        Date now = new Date();
+
+
+        AuthToken accessToken = tokenProvider.createAuthToken(
+                user.getId(),
+                "ROLE_USER",
+                new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
+        );
+
+        log.debug("정상적으로 액세스토큰 재발급!!!");
+
+        ReMakeAccessTokenRes reMakeAccessTokenRes = ReMakeAccessTokenRes.builder().accessToken(accessToken.getToken()).build();
+
+        return new ResponseEntity<>(reMakeAccessTokenRes, HttpStatus.OK);
     }
 
     @ApiOperation(value = "비밀번호 일치 여부 확인")
