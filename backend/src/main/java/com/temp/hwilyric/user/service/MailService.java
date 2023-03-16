@@ -36,7 +36,7 @@ public class MailService {
         msg += "<br />";
         msg += "<br />";
         msg += "<img style='width: 15%' src='https://drive.google.com/file/d/1qILXGmoECJrsD9GJT5ag-DBchvt-EYJu/view?usp=sharing'/>"; // 해당 경로는 S3에 올린 후 변경 예정
-        msg += "<h1>인증코드 안내 관련 이메일 입니다.</h1>";
+        msg += "<h1>인증코드 안내 이메일 입니다.</h1>";
         msg += "<br />";
         msg += "<br />";
         msg += "<p>안녕하세요.</p>";
@@ -47,6 +47,9 @@ public class MailService {
         msg += "<div style='color: #765790; font-size: 130%'><strong>";
         msg += code + "</strong></div>";
         msg += "</div>";
+        msg += "<br />";
+        msg += "<br />";
+        msg += "<hr style='border: solid 5px #fbd5e0'/>";
         msg += "</div>";
 
         MailDto mailDto = new MailDto();
@@ -80,7 +83,7 @@ public class MailService {
         msg += "<br />";
         msg += "<br />";
         msg += "<img style='width: 15%' src='https://drive.google.com/file/d/1qILXGmoECJrsD9GJT5ag-DBchvt-EYJu/view?usp=sharing'/>"; // 해당 경로는 S3에 올린 후 변경 예정
-        msg += "<h1>인증코드 안내 관련 이메일 입니다.</h1>";
+        msg += "<h1>임시 비밀번호 안내 이메일 입니다.</h1>";
         msg += "<br />";
         msg += "<br />";
         msg += "<p>안녕하세요.</p>";
@@ -91,6 +94,9 @@ public class MailService {
         msg += "<div style='color: #765790; font-size: 130%'><strong>";
         msg += code + "</strong></div>";
         msg += "</div>";
+        msg += "<br />";
+        msg += "<br />";
+        msg += "<hr style='border: solid 5px #fbd5e0'/>";
         msg += "</div>";
 
         MailDto mailDto = new MailDto();
