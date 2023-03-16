@@ -9,5 +9,5 @@ import lombok.*;
 public class DuplicateEmailReq {
 
     // 이메일
-    String email;
+    private String email;
 }

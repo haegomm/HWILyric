@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class SendTempPasswordReq {
 
     // 이메일
-    String email;
+    private String email;
 }

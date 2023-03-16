@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 public class LoginUserReq {
 
     // 이메일
-    String email;
+    private String email;
 
     // 비밀번호
-    String password;
+    private String password;
 
 }

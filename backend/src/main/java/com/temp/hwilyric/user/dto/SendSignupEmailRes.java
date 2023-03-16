@@ -12,5 +12,5 @@ import lombok.Setter;
 public class SendSignupEmailRes {
 
     // 인증코드
-    String code;
+    private String code;
 }

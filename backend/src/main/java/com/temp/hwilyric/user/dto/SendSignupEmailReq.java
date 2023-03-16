@@ -11,5 +11,5 @@ import lombok.Setter;
 public class SendSignupEmailReq {
 
     // 수신 이메일
-    String email;
+    private String email;
 }

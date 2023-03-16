@@ -97,7 +97,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "임시 비밀번호 이메일 전송")
-    @PatchMapping("guests/password")
+    @PatchMapping("/guests/password")
     public ResponseEntity<SuccessRes> sendTempPassword(@RequestBody SendTempPasswordReq sendTempPasswordReq) throws NotFoundException, MessagingException {
         MailDto mailDto = mailService.createTempPassword(sendTempPasswordReq.getEmail());
         String msg;
@@ -114,5 +114,9 @@ public class UserController {
         SuccessRes successRes = SuccessRes.builder().message(msg).build();
         return new ResponseEntity<>(successRes, HttpStatus.OK);
     }
+
+//    @ApiOperation(value = "비밀번호 일치 여부 확인")
+//    @GetMapping("/users/password")
+//    public ResponseEntity<SuccessRes> checkPassword()
 
 }
