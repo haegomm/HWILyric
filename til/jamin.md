@@ -29,3 +29,7 @@
 
 #### 230315
 [일지](https://spiky-scene-ef7.notion.site/Querydsl-0237e1668d034bf89f06b4f37a8f5e9b)
+
+
+#### 230316
+[유사도 측정 알고리즘](https://scarlet-biplane-82e.notion.site/78c2019e09a44d35bd956c33ee30b7d5)
