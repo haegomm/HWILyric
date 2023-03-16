@@ -1,8 +1,10 @@
 package com.temp.hwilyric.user.service;
 
 import com.temp.hwilyric.exception.DuplicateException;
+import com.temp.hwilyric.exception.NotFoundException;
 import com.temp.hwilyric.user.dto.InsertUserReq;
 import com.temp.hwilyric.user.domain.User;
+import com.temp.hwilyric.user.dto.LoginUserReq;
 import com.temp.hwilyric.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -61,6 +63,19 @@ public class UserService {
         duplicateNickname(user.getNickname());
 
         userRepository.save(user);
+    }
+
+    // 로그인
+    public User loginUser(LoginUserReq loginUserReq) throws NotFoundException {
+        User user = userRepository.findByEmail(loginUserReq.getEmail()).orElseThrow(() -> new NotFoundException("존재하지 않는 사용자입니다."));
+
+        log.debug("로그인 시도한 사용자 : {}",user.toString());
+        if(bCryptPasswordEncoder.matches(loginUserReq.getPassword(), user.getPassword())){
+            return user;
+        }
+        else {
+            throw new NotFoundException("비밀번호가 일치하지 않습니다.");
+        }
     }
 
 }

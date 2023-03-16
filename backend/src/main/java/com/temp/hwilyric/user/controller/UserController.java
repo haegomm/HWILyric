@@ -2,6 +2,7 @@ package com.temp.hwilyric.user.controller;
 
 import com.temp.hwilyric.exception.DuplicateException;
 import com.temp.hwilyric.exception.NotFoundException;
+import com.temp.hwilyric.user.domain.User;
 import com.temp.hwilyric.user.dto.*;
 import com.temp.hwilyric.user.service.MailService;
 import com.temp.hwilyric.user.service.UserService;
@@ -75,15 +76,43 @@ public class UserController {
         return new ResponseEntity<>(successRes, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "회원가입 시 email 인증코드 발송")
+    @ApiOperation(value = "회원가입 시 email 인증코드 전송")
     @GetMapping("/guests/check")
     public ResponseEntity<SendSignupEmailRes> sendSignupEmail(@RequestBody SendSignupEmailReq sendSignupEmailReq) throws NotFoundException, MessagingException {
-        MailDto mailDto = mailService.createMail(sendSignupEmailReq.getEmail());
+        MailDto mailDto = mailService.createSignupEmail(sendSignupEmailReq.getEmail());
         mailService.sendEmail(mailDto);
 
         SendSignupEmailRes sendSignupEmailRes = new SendSignupEmailRes(mailDto.getCode());
 
         return new ResponseEntity<>(sendSignupEmailRes, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "로그인")
+    @PostMapping("/guests/login")
+    public ResponseEntity<SuccessRes> loginUser(@RequestBody LoginUserReq loginUserReq) throws NotFoundException {
+        User user = userService.loginUser(loginUserReq);
+
+        SuccessRes successRes = SuccessRes.builder().message(SUCCESS).build();
+        return new ResponseEntity<>(successRes, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "임시 비밀번호 이메일 전송")
+    @PatchMapping("guests/password")
+    public ResponseEntity<SuccessRes> sendTempPassword(@RequestBody SendTempPasswordReq sendTempPasswordReq) throws NotFoundException, MessagingException {
+        MailDto mailDto = mailService.createTempPassword(sendTempPasswordReq.getEmail());
+        String msg;
+
+        // 일반 회원인 경우
+        if(!mailDto.getCode().equals("KAKAO")) {
+            mailService.sendEmail(mailDto);
+            msg = SUCCESS;
+        }
+        // 카카오 회원인 경우
+        else {
+            msg = "KAKAO";
+        }
+        SuccessRes successRes = SuccessRes.builder().message(msg).build();
+        return new ResponseEntity<>(successRes, HttpStatus.OK);
     }
 
 }
