@@ -183,10 +183,17 @@ public class UserController {
 
     }
 
-//    @ApiOperation(value = "비밀번호 일치 여부 확인")
-//    @GetMapping("/users/password")
-//    public ResponseEntity<SuccessRes> checkPassword(@RequestBody CheckPasswordReq checkPasswordReq, HttpServletRequest httpServletRequest) throws NotFoundException {
-//        User user = (User) httpServletRequest.getAttribute("user");
-//    }
+    @ApiOperation(value = "비밀번호 일치 여부 확인")
+    @GetMapping("/users/password")
+    public ResponseEntity<SuccessRes> checkPassword(@RequestBody CheckPasswordReq checkPasswordReq, HttpServletRequest httpServletRequest) throws NotFoundException {
+        User user = (User) httpServletRequest.getAttribute("user");
+
+        userService.checkPassword(user.getId(), checkPasswordReq.getPassword());
+
+        SuccessRes successRes = SuccessRes.builder().message(SUCCESS).build();
+
+        return new ResponseEntity<>(successRes, HttpStatus.OK);
+
+    }
 
 }

@@ -78,17 +78,25 @@ public class UserService {
         }
     }
 
-    // refresh 토큰 DB에 저장
+    // refresh 토큰 DB에 저장 - 로그인용
     @Transactional
     public void saveRefreshToken(User user, String refreshToken){
         user.saveRefreshToken(refreshToken);
     }
 
-    // refresh 토큰 DB에서 삭제
+    // refresh 토큰 DB에서 삭제 - 로그아웃용
     @Transactional
     public void deleteRefreshToken(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("존재하지 않는 사용자입니다."));
         user.deleteRefreshToken();
+    }
+
+    // 비밀번호 일치 여부 확인
+    public void checkPassword(Long id, String password) throws NotFoundException {
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("존재하지 않는 사용자입니다."));
+        if(!bCryptPasswordEncoder.matches(password, user.getPassword())){
+            throw new NotFoundException("비밀번호가 일치하지 않습니다.");
+        }
     }
 
 }
