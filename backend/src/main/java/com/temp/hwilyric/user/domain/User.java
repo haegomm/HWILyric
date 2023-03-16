@@ -89,9 +89,9 @@ public class User implements Serializable {
 //        this.email = email;
 //    }
 //
-//    public void saveRefreshToken(String refreshToken) {
-//        this.refreshToken = refreshToken;
-//    }
+    public void saveRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
 //
 //    public void deleteRefreshToken() {
 //        this.refreshToken = null;

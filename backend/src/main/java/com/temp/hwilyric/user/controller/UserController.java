@@ -2,10 +2,14 @@ package com.temp.hwilyric.user.controller;
 
 import com.temp.hwilyric.exception.DuplicateException;
 import com.temp.hwilyric.exception.NotFoundException;
+import com.temp.hwilyric.jwt.AuthToken;
+import com.temp.hwilyric.jwt.AuthTokenProvider;
+import com.temp.hwilyric.oauth.domain.AppProperties;
 import com.temp.hwilyric.user.domain.User;
 import com.temp.hwilyric.user.dto.*;
 import com.temp.hwilyric.user.service.MailService;
 import com.temp.hwilyric.user.service.UserService;
+import com.temp.hwilyric.util.CookieUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +19,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.Date;
 
 
 @Slf4j // log 사용하기 위한 어노테이션
@@ -26,13 +33,14 @@ import javax.validation.Valid;
 public class UserController {
 
     private static final String SUCCESS = "success";
+    private static final String REFRESH_TOKEN = "refreshToken";
 
     private final UserService userService;
 //    private final AuthService authService;
     private final MailService mailService;
 //
-//    private final AuthTokenProvider tokenProvider;
-//    private final AppProperties appProperties;
+    private final AuthTokenProvider tokenProvider;
+    private final AppProperties appProperties;
 
 
     @ApiOperation(value = "이메일 중복체크") // Swagger에서 보이는 메서드 이름
@@ -89,11 +97,57 @@ public class UserController {
 
     @ApiOperation(value = "로그인")
     @PostMapping("/guests/login")
-    public ResponseEntity<SuccessRes> loginUser(@RequestBody LoginUserReq loginUserReq) throws NotFoundException {
-        User user = userService.loginUser(loginUserReq);
+    public ResponseEntity<LoginUserRes> loginUser(@RequestBody LoginUserReq loginUserReq, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws NotFoundException {
+        log.debug("로그인 요청 들어옴.");
 
-        SuccessRes successRes = SuccessRes.builder().message(SUCCESS).build();
-        return new ResponseEntity<>(successRes, HttpStatus.OK);
+        HttpStatus status = null;
+        LoginUserRes loginUserRes = null;
+
+        User loginUser = userService.loginUser(loginUserReq);
+
+        Date now = new Date();
+
+        AuthToken accessToken = tokenProvider.createAuthToken(
+                loginUser.getId(),
+                "ROLE_USER",
+                new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
+        );
+
+
+        long refreshTokenExpiry = appProperties.getAuth().getRefreshTokenExpiry();
+
+
+        AuthToken refreshToken = tokenProvider.createAuthToken(
+                appProperties.getAuth().getTokenSecret(),
+                new Date(now.getTime() + refreshTokenExpiry)
+        );
+
+        log.debug("일반 로그인 user id(PK) : {}, 닉네임 : {}", loginUser.getId(), loginUser.getNickname());
+        log.debug("일반 user 로그인 accessToken 정보 : {}", accessToken.getToken());
+        log.debug("일반 user 로그인 refreshToken 정보 : {}", refreshToken.getToken());
+
+
+        userService.saveRefreshToken(loginUser, refreshToken.getToken());
+
+        loginUserRes = LoginUserRes.builder()
+                .nickname(loginUser.getNickname())
+                .profileImg(loginUser.getProfileImg())
+                .userType(loginUser.getUserType())
+                .accessToken(accessToken.getToken())
+                .build();
+
+
+        int cookieMaxAge = (int) refreshTokenExpiry / 60;
+
+
+        CookieUtil.deleteCookie(httpServletRequest, httpServletResponse, REFRESH_TOKEN);
+
+        CookieUtil.addCookie(httpServletResponse, REFRESH_TOKEN, refreshToken.getToken(), cookieMaxAge);
+
+        status = HttpStatus.OK;
+
+
+        return new ResponseEntity<LoginUserRes>(loginUserRes, status);
     }
 
     @ApiOperation(value = "임시 비밀번호 이메일 전송")
@@ -117,6 +171,8 @@ public class UserController {
 
 //    @ApiOperation(value = "비밀번호 일치 여부 확인")
 //    @GetMapping("/users/password")
-//    public ResponseEntity<SuccessRes> checkPassword()
+//    public ResponseEntity<SuccessRes> checkPassword(@RequestBody CheckPasswordReq checkPasswordReq, HttpServletRequest httpServletRequest) throws NotFoundException {
+//
+//    }
 
 }

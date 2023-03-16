@@ -78,4 +78,10 @@ public class UserService {
         }
     }
 
+    // refresh 토큰 DB에 저장
+    @Transactional
+    public void saveRefreshToken(User user, String refreshToken){
+        user.saveRefreshToken(refreshToken);
+    }
+
 }
