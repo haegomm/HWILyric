@@ -1,5 +1,9 @@
 package com.temp.hwilyric.config;
 
+import com.temp.hwilyric.exception.RestAuthenticationEntryPoint;
+import com.temp.hwilyric.jwt.AuthTokenProvider;
+import com.temp.hwilyric.jwt.TokenAccessDeniedHandler;
+import com.temp.hwilyric.jwt.TokenAuthenticationFilter;
 import com.temp.hwilyric.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -17,8 +22,8 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
 //    private final CorsFilter corsFilter;
-//    private final AuthTokenProvider tokenProvider;
-//    private final TokenAccessDeniedHandler tokenAccessDeniedHandler;
+    private final AuthTokenProvider tokenProvider;
+    private final TokenAccessDeniedHandler tokenAccessDeniedHandler;
     private final UserRepository userRepository;
 //    private final AppProperties appProperties;
 
@@ -49,12 +54,13 @@ public class SecurityConfig {
                 .and()
                 .logout()
                 .logoutSuccessUrl("/")
-//                .and()
-//                .addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-//                .exceptionHandling()
-//                .authenticationEntryPoint(new RestAuthenticationEntryPoint())
-//                .accessDeniedHandler(tokenAccessDeniedHandler)
-                .and().build();
+                .and()
+                .addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling()
+                .authenticationEntryPoint(new RestAuthenticationEntryPoint())
+                .accessDeniedHandler(tokenAccessDeniedHandler)
+                .and()
+                .build();
     }
 
     @Bean
@@ -77,9 +83,9 @@ public class SecurityConfig {
 //        );
 //    }
 //
-//    @Bean
-//    public TokenAuthenticationFilter tokenAuthenticationFilter() {
-//        return new TokenAuthenticationFilter(tokenProvider);
-//    }
+    @Bean
+    public TokenAuthenticationFilter tokenAuthenticationFilter() {
+        return new TokenAuthenticationFilter(tokenProvider);
+    }
 
 }

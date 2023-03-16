@@ -84,4 +84,11 @@ public class UserService {
         user.saveRefreshToken(refreshToken);
     }
 
+    // refresh 토큰 DB에서 삭제
+    @Transactional
+    public void deleteRefreshToken(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("존재하지 않는 사용자입니다."));
+        user.deleteRefreshToken();
+    }
+
 }

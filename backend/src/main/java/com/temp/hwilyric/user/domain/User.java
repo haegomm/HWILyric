@@ -92,10 +92,10 @@ public class User implements Serializable {
     public void saveRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
     }
-//
-//    public void deleteRefreshToken() {
-//        this.refreshToken = null;
-//    }
+
+    public void deleteRefreshToken() {
+        this.refreshToken = null;
+    }
 //
 //    // 회원 정보 조회
 //    public GetUserRes toDTO() {

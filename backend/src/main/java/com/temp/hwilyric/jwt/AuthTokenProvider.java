@@ -2,6 +2,7 @@ package com.temp.hwilyric.jwt;
 
 import com.temp.hwilyric.exception.TokenValidFailedException;
 import com.temp.hwilyric.oauth.domain.PrincipalDetails;
+import com.temp.hwilyric.user.domain.User;
 import com.temp.hwilyric.user.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.security.Keys;
@@ -60,8 +61,8 @@ public class AuthTokenProvider {
                             .collect(Collectors.toList());
 
             log.debug("claims subject := [{}]", claims.getSubject());
-            
-            PrincipalDetails principalDetails = new PrincipalDetails(userRepository.findById(Long.valueOf(String.valueOf(claims.get("id")))).get());
+
+            PrincipalDetails principalDetails = new PrincipalDetails(userRepository.findById(Long.valueOf(String.valueOf(claims.get("id")))).orElse(null));
             return new UsernamePasswordAuthenticationToken(principalDetails, authToken, authorities);
         } else {
             throw new TokenValidFailedException();

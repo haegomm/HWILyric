@@ -169,10 +169,24 @@ public class UserController {
         return new ResponseEntity<>(successRes, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "로그아웃")
+    @GetMapping("users/logout")
+    public ResponseEntity<SuccessRes> logoutUser(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws NotFoundException {
+        User user = (User) httpServletRequest.getAttribute("user");
+
+        userService.deleteRefreshToken(user.getId());
+        CookieUtil.deleteCookie(httpServletRequest, httpServletResponse, REFRESH_TOKEN);
+
+        SuccessRes successRes = SuccessRes.builder().message(SUCCESS).build();
+
+        return new ResponseEntity<>(successRes, HttpStatus.OK);
+
+    }
+
 //    @ApiOperation(value = "비밀번호 일치 여부 확인")
 //    @GetMapping("/users/password")
 //    public ResponseEntity<SuccessRes> checkPassword(@RequestBody CheckPasswordReq checkPasswordReq, HttpServletRequest httpServletRequest) throws NotFoundException {
-//
+//        User user = (User) httpServletRequest.getAttribute("user");
 //    }
 
 }
