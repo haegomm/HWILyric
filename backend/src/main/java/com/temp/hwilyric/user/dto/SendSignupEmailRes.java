@@ -9,17 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MailDto {
-    
-    // 수신 이메일
-    private String address;
-    
-    // 메일 제목
-    private String title;
-    
-    // 메일 내용
-    private String message;
-    
+public class SendSignupEmailRes {
+
     // 인증코드
-    private String code;
+    String code;
 }

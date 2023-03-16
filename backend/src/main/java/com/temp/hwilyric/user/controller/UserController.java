@@ -1,10 +1,9 @@
 package com.temp.hwilyric.user.controller;
 
 import com.temp.hwilyric.exception.DuplicateException;
-import com.temp.hwilyric.user.dto.DuplicateEmailReq;
-import com.temp.hwilyric.user.dto.DuplicateNicknameReq;
-import com.temp.hwilyric.user.dto.InsertUserReq;
-import com.temp.hwilyric.user.dto.SuccessRes;
+import com.temp.hwilyric.exception.NotFoundException;
+import com.temp.hwilyric.user.dto.*;
+import com.temp.hwilyric.user.service.MailService;
 import com.temp.hwilyric.user.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -14,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 
 
@@ -28,7 +28,7 @@ public class UserController {
 
     private final UserService userService;
 //    private final AuthService authService;
-//    private final MailService mailService;
+    private final MailService mailService;
 //
 //    private final AuthTokenProvider tokenProvider;
 //    private final AppProperties appProperties;
@@ -73,6 +73,17 @@ public class UserController {
         SuccessRes successRes = SuccessRes.builder().message(SUCCESS).build();
 
         return new ResponseEntity<>(successRes, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "회원가입 시 email 인증코드 발송")
+    @GetMapping("/guests/check")
+    public ResponseEntity<SendSignupEmailRes> sendSignupEmail(@RequestBody SendSignupEmailReq sendSignupEmailReq) throws NotFoundException, MessagingException {
+        MailDto mailDto = mailService.createMail(sendSignupEmailReq.getEmail());
+        mailService.sendEmail(mailDto);
+
+        SendSignupEmailRes sendSignupEmailRes = new SendSignupEmailRes(mailDto.getCode());
+
+        return new ResponseEntity<>(sendSignupEmailRes, HttpStatus.OK);
     }
 
 }
