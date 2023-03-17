@@ -55,7 +55,7 @@ public class MailService {
         MailDto mailDto = new MailDto();
 
         mailDto.setAddress(email);
-        mailDto.setTitle("[HWILYric] 이메일 인증코드를 확인해주세요.");
+        mailDto.setTitle("[HWILyric] 이메일 인증코드를 확인해주세요.");
         mailDto.setMessage(msg);
         mailDto.setCode(code);
         return mailDto;
@@ -102,7 +102,7 @@ public class MailService {
         MailDto mailDto = new MailDto();
 
         mailDto.setAddress(email);
-        mailDto.setTitle("[HWILYric] 임시 비밀번호를 확인해주세요.");
+        mailDto.setTitle("[HWILyric] 임시 비밀번호를 확인해주세요.");
         mailDto.setMessage(msg);
         mailDto.setCode(code);
         return mailDto;
