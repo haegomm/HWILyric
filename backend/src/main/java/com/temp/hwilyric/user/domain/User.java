@@ -89,13 +89,13 @@ public class User implements Serializable {
 //        this.email = email;
 //    }
 //
-//    public void saveRefreshToken(String refreshToken) {
-//        this.refreshToken = refreshToken;
-//    }
-//
-//    public void deleteRefreshToken() {
-//        this.refreshToken = null;
-//    }
+    public void saveRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
+
+    public void deleteRefreshToken() {
+        this.refreshToken = null;
+    }
 //
 //    // 회원 정보 조회
 //    public GetUserRes toDTO() {
@@ -109,9 +109,9 @@ public class User implements Serializable {
 //        this.profileImg = updateUserReq.getPicture();
 //    }
 //
-//    // 비밀번호 변경
-//    public void updatePassword(String password){
-//        this.password = password;
-//    }
+    // 비밀번호 변경
+    public void updatePassword(String password){
+        this.password = password;
+    }
 
 }
