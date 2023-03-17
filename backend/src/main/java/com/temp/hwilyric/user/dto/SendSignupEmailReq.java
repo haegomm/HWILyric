@@ -3,15 +3,13 @@ package com.temp.hwilyric.user.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.Setter;
 
 @Getter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class DuplicateNicknameReq {
+public class SendSignupEmailReq {
 
-    // 닉네임
-    private String nickname;
-
+    // 수신 이메일
+    private String email;
 }
