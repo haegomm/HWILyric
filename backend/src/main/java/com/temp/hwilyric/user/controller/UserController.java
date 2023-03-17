@@ -172,7 +172,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "로그아웃")
-    @GetMapping("users/logout")
+    @GetMapping("/users/logout")
     public ResponseEntity<SuccessRes> logoutUser(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws NotFoundException {
         User user = (User) httpServletRequest.getAttribute("user");
 
@@ -186,7 +186,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "Access Token 재발급")
-    @GetMapping("users/access-token")
+    @GetMapping("/users/access-token")
     public ResponseEntity<ReMakeAccessTokenRes> reMakeAccessToken(HttpServletRequest httpServletRequest) throws UnAuthorizedException {
         User user = (User) httpServletRequest.getAttribute("user");
 
