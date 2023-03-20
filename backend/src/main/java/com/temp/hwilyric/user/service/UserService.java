@@ -10,6 +10,7 @@ import com.temp.hwilyric.user.dto.InsertUserReq;
 import com.temp.hwilyric.user.domain.User;
 import com.temp.hwilyric.user.dto.LoginUserReq;
 import com.temp.hwilyric.user.dto.UpdateUserReq;
+import com.temp.hwilyric.user.dto.UpdateUserRes;
 import com.temp.hwilyric.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -111,16 +112,22 @@ public class UserService {
         }
     }
 
-    //    // 프로필 수정
+    // 프로필 수정
     @Transactional
-    public void updateUser(Long id, UpdateUserReq updateUserReq, MultipartFile multipartFile) throws Exception {
+    public UpdateUserRes updateUser(Long id, UpdateUserReq updateUserReq, MultipartFile multipartFile) throws Exception, NotFoundException {
 
         User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("존재하지 않는 사용자입니다."));
 
         String password = bCryptPasswordEncoder.encode(updateUserReq.getPassword());
         String profileImg = upload(multipartFile);
+        LocalDateTime createDate = LocalDateTime.now();
 
-        user.updateUser(updateUserReq, password, profileImg);
+        user.updateUser(updateUserReq, password, profileImg, createDate);
+
+        UpdateUserRes updateUserRes = UpdateUserRes.builder().password(password).nickname(updateUserReq.getNickname()).profileImg(profileImg).build();
+
+        return updateUserRes;
+
     }
 
     // S3에 파일 업로드

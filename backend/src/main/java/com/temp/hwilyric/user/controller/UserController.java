@@ -8,6 +8,7 @@ import com.temp.hwilyric.jwt.AuthTokenProvider;
 import com.temp.hwilyric.oauth.domain.AppProperties;
 import com.temp.hwilyric.user.domain.User;
 import com.temp.hwilyric.user.dto.*;
+import com.temp.hwilyric.user.repository.UserRepository;
 import com.temp.hwilyric.user.service.MailService;
 import com.temp.hwilyric.user.service.UserService;
 import com.temp.hwilyric.util.CookieUtil;
@@ -45,6 +46,7 @@ public class UserController {
     //
     private final AuthTokenProvider tokenProvider;
     private final AppProperties appProperties;
+    private final UserRepository userRepository;
 
 
     @ApiOperation(value = "이메일 중복체크") // Swagger에서 보이는 메서드 이름
@@ -234,11 +236,13 @@ public class UserController {
 
     }
 
-    @ApiOperation(value = "파일 업로드 테스트")
-    @GetMapping("/guests/file")
-    public ResponseEntity<String> upload(@RequestPart(value = "profileImg") MultipartFile multipartFileList) throws Exception {
-        String imagePath = userService.upload(multipartFileList);
-        return new ResponseEntity<>(imagePath, HttpStatus.OK);
+    @ApiOperation(value = "프로필 수정")
+    @PatchMapping("/users/profile")
+    public ResponseEntity<UpdateUserRes> updateUser(@RequestPart UpdateUserReq updateUserReq, @RequestPart(value = "profileImg") MultipartFile multipartFile, HttpServletRequest httpServletRequest) throws Exception, NotFoundException {
+        User user = (User) httpServletRequest.getAttribute("user");
+        UpdateUserRes updateUserRes = userService.updateUser(user.getId(), updateUserReq, multipartFile);
+        
+        return new ResponseEntity<>(updateUserRes, HttpStatus.OK);
     }
 
 }

@@ -68,7 +68,7 @@ public class User implements Serializable {
         this.email = insertUserReq.getEmail();
         this.password = password;
         this.nickname = insertUserReq.getNickname();
-        this.profileImg = insertUserReq.getProfileImg();
+        this.profileImg = "https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/profile/hwilyric_logo.png";
         this.userType = "NORMAL";
         this.createdDate = createDate;
         this.role = "ROLE_USER";
@@ -105,10 +105,11 @@ public class User implements Serializable {
 //    }
 //
 //    // 프로필 수정
-    public void updateUser(UpdateUserReq updateUserReq, String password, String profileImg) {
+    public void updateUser(UpdateUserReq updateUserReq, String password, String profileImg, LocalDateTime updatedDate) {
         this.nickname = updateUserReq.getNickname();
         this.password = password;
         this.profileImg = profileImg;
+        this.updatedDate = updatedDate;
     }
 
     // 비밀번호 변경
