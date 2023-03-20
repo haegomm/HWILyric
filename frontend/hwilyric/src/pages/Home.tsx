@@ -1,10 +1,12 @@
-import Spotify from "../components/write/features/Spotify"
+import VideoPlayer from "../components/write/features/VideoPlayer"
+import VideoSearch from "../components/write/features/VideoSearch"
 
 function Home() {
     return (
         <div>
             <h1>HWILyric</h1>
-            <Spotify />
+            <VideoSearch />
+            <VideoPlayer />
         </div>
     )
 }
