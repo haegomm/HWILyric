@@ -75,16 +75,17 @@ public class User implements Serializable {
         this.isActive = true;
     }
 
-    //    // 카카오 사용자 회원가입
-//    public User(String email, String nickname, LocalDateTime createdDate) {
-//        this.email = email;
-//        this.nickname = nickname;
-//        this.profileImg = "default url";
-//        this.createdDate = createdDate;
-//        this.role = "ROLE_USER";
-//        this.isActive = true;
-//    }
-//
+        // 카카오 사용자 회원가입
+    public User(String email, String nickname, LocalDateTime createdDate) {
+        this.email = email;
+        this.nickname = nickname;
+        this.profileImg = "default";
+        this.userType = "KAKAO";
+        this.createdDate = createdDate;
+        this.role = "ROLE_USER";
+        this.isActive = true;
+    }
+
 //    // 카카오 사용자 이메일 수정
 //    public void updateEmail(String email) {
 //        this.email = email;
@@ -98,7 +99,6 @@ public class User implements Serializable {
         this.refreshToken = null;
     }
 
-    //
 //    // 회원 정보 조회
 //    public GetUserRes toDTO() {
 //        return new GetUserRes(id, email, nickname, profileImg);

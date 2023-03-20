@@ -6,6 +6,9 @@ import com.temp.hwilyric.exception.UnAuthorizedException;
 import com.temp.hwilyric.jwt.AuthToken;
 import com.temp.hwilyric.jwt.AuthTokenProvider;
 import com.temp.hwilyric.oauth.domain.AppProperties;
+import com.temp.hwilyric.oauth.dto.KakaoLoginReq;
+import com.temp.hwilyric.oauth.dto.KakaoLoginRes;
+import com.temp.hwilyric.oauth.service.OAuthService;
 import com.temp.hwilyric.user.domain.User;
 import com.temp.hwilyric.user.dto.*;
 import com.temp.hwilyric.user.repository.UserRepository;
@@ -41,7 +44,7 @@ public class UserController {
     private static final String REFRESH_TOKEN = "refreshToken";
 
     private final UserService userService;
-    //    private final AuthService authService;
+    private final OAuthService oAuthService;
     private final MailService mailService;
     //
     private final AuthTokenProvider tokenProvider;
@@ -95,6 +98,16 @@ public class UserController {
         SendSignupEmailRes sendSignupEmailRes = new SendSignupEmailRes(mailDto.getCode());
 
         return new ResponseEntity<>(sendSignupEmailRes, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "소셜 회원가입")
+    @PostMapping("/guests/kakao")
+    public ResponseEntity<KakaoLoginRes> kakaoLogin(@RequestBody KakaoLoginReq kakaoLoginReq , HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws NotFoundException, IllegalArgumentException {
+        log.debug("카카오 로그인 시작!");
+
+        String kakaoAccessToken = oAuthService.getKakaoAccessToken(kakaoLoginReq.getCode());
+
+        return oAuthService.kakaoLogin(kakaoAccessToken, httpServletRequest, httpServletResponse);
     }
 
     @ApiOperation(value = "로그인")
