@@ -40,9 +40,9 @@ public class UserController {
     private static final String REFRESH_TOKEN = "refreshToken";
 
     private final UserService userService;
-//    private final AuthService authService;
+    //    private final AuthService authService;
     private final MailService mailService;
-//
+    //
     private final AuthTokenProvider tokenProvider;
     private final AppProperties appProperties;
 
@@ -61,7 +61,7 @@ public class UserController {
         return new ResponseEntity<>(successRes, httpStatus);
 
     }
-    
+
     @ApiOperation(value = "닉네임 중복체크")
     @GetMapping("/guests/nickname")
     public ResponseEntity<SuccessRes> duplicateNickname(@RequestBody DuplicateNicknameReq duplicateNicknameReq) throws DuplicateException {
@@ -161,7 +161,7 @@ public class UserController {
         String msg;
 
         // 일반 회원인 경우
-        if(!mailDto.getCode().equals("KAKAO")) {
+        if (!mailDto.getCode().equals("KAKAO")) {
             mailService.sendEmail(mailDto);
             msg = SUCCESS;
         }
@@ -200,7 +200,7 @@ public class UserController {
 
         AuthToken authTokenRefreshToken = tokenProvider.convertAuthToken(refreshToken);
 
-        if(authTokenRefreshToken.validate() == false || user.getRefreshToken() == null){
+        if (authTokenRefreshToken.validate() == false || user.getRefreshToken() == null) {
             log.debug("유효하지 않은 refresh token 입니다.");
             throw new UnAuthorizedException("유효하지 않은 refresh token 입니다.");
         }
@@ -236,9 +236,9 @@ public class UserController {
 
     @ApiOperation(value = "파일 업로드 테스트")
     @GetMapping("/guests/file")
-    public ResponseEntity<Object> upload(MultipartFile multipartFileList) throws Exception {
-        List<String> imagePathList = userService.upload(multipartFileList);
-        return new ResponseEntity<Object>(imagePathList, HttpStatus.OK);
+    public ResponseEntity<String> upload(@RequestPart(value = "profileImg") MultipartFile multipartFileList) throws Exception {
+        String imagePath = userService.upload(multipartFileList);
+        return new ResponseEntity<>(imagePath, HttpStatus.OK);
     }
 
 }

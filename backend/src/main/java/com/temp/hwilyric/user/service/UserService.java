@@ -9,6 +9,7 @@ import com.temp.hwilyric.exception.NotFoundException;
 import com.temp.hwilyric.user.dto.InsertUserReq;
 import com.temp.hwilyric.user.domain.User;
 import com.temp.hwilyric.user.dto.LoginUserReq;
+import com.temp.hwilyric.user.dto.UpdateUserReq;
 import com.temp.hwilyric.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -81,18 +82,17 @@ public class UserService {
     public User loginUser(LoginUserReq loginUserReq) throws NotFoundException {
         User user = userRepository.findByEmail(loginUserReq.getEmail()).orElseThrow(() -> new NotFoundException("존재하지 않는 사용자입니다."));
 
-        log.debug("로그인 시도한 사용자 : {}",user.toString());
-        if(bCryptPasswordEncoder.matches(loginUserReq.getPassword(), user.getPassword())){
+        log.debug("로그인 시도한 사용자 : {}", user.toString());
+        if (bCryptPasswordEncoder.matches(loginUserReq.getPassword(), user.getPassword())) {
             return user;
-        }
-        else {
+        } else {
             throw new NotFoundException("비밀번호가 일치하지 않습니다.");
         }
     }
 
     // refresh 토큰 DB에 저장 - 로그인용
     @Transactional
-    public void saveRefreshToken(User user, String refreshToken){
+    public void saveRefreshToken(User user, String refreshToken) {
         user.saveRefreshToken(refreshToken);
     }
 
@@ -106,39 +106,43 @@ public class UserService {
     // 비밀번호 일치 여부 확인
     public void checkPassword(Long id, String password) throws NotFoundException {
         User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("존재하지 않는 사용자입니다."));
-        if(!bCryptPasswordEncoder.matches(password, user.getPassword())){
+        if (!bCryptPasswordEncoder.matches(password, user.getPassword())) {
             throw new NotFoundException("비밀번호가 일치하지 않습니다.");
         }
     }
 
-//    // 프로필 수정
-//    @Transactional
-//    public void updateUser(Long id, UpdateUserReq updateUserReq) throws NotFoundException {
-//
-//    }
+    //    // 프로필 수정
+    @Transactional
+    public void updateUser(Long id, UpdateUserReq updateUserReq, MultipartFile multipartFile) throws Exception {
+
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("존재하지 않는 사용자입니다."));
+
+        String password = bCryptPasswordEncoder.encode(updateUserReq.getPassword());
+        String profileImg = upload(multipartFile);
+
+        user.updateUser(updateUserReq, password, profileImg);
+    }
 
     // S3에 파일 업로드
-    public List<String> upload(MultipartFile multipartFile) throws Exception {
-        List<String> imagePathList = new ArrayList<>();
+    public String upload(MultipartFile multipartFile) throws Exception {
 
-            String originalName = multipartFile.getOriginalFilename(); // 파일 이름
-            long size = multipartFile.getSize(); // 파일 크기
+        String originalName = multipartFile.getOriginalFilename(); // 파일 이름
+        long size = multipartFile.getSize(); // 파일 크기
 
-            ObjectMetadata objectMetaData = new ObjectMetadata();
-            objectMetaData.setContentType(multipartFile.getContentType());
-            objectMetaData.setContentLength(size);
+        ObjectMetadata objectMetaData = new ObjectMetadata();
+        objectMetaData.setContentType(multipartFile.getContentType());
+        objectMetaData.setContentLength(size);
 
-            // S3에 업로드
-            amazonS3Client.putObject(
-                    new PutObjectRequest(bucket+"/profile", originalName, multipartFile.getInputStream(), objectMetaData)
-                            .withCannedAcl(CannedAccessControlList.PublicRead)
-            );
+        // S3에 업로드
+        amazonS3Client.putObject(
+                new PutObjectRequest(bucket + "/profile", originalName, multipartFile.getInputStream(), objectMetaData)
+                        .withCannedAcl(CannedAccessControlList.PublicRead)
+        );
 
-            String imagePath = amazonS3Client.getUrl(bucket, originalName).toString(); // 접근가능한 URL 가져오기
-            imagePathList.add(imagePath);
+        String imagePath = amazonS3Client.getUrl(bucket, originalName).toString(); // 접근가능한 URL 가져오기
 
 
-        return imagePathList;
+        return imagePath;
     }
 
 }

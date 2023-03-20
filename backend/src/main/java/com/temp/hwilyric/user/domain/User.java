@@ -1,6 +1,7 @@
 package com.temp.hwilyric.user.domain;
 
 import com.temp.hwilyric.user.dto.InsertUserReq;
+import com.temp.hwilyric.user.dto.UpdateUserReq;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -74,7 +75,7 @@ public class User implements Serializable {
         this.isActive = true;
     }
 
-//    // 카카오 사용자 회원가입
+    //    // 카카오 사용자 회원가입
 //    public User(String email, String nickname, LocalDateTime createdDate) {
 //        this.email = email;
 //        this.nickname = nickname;
@@ -96,21 +97,22 @@ public class User implements Serializable {
     public void deleteRefreshToken() {
         this.refreshToken = null;
     }
-//
+
+    //
 //    // 회원 정보 조회
 //    public GetUserRes toDTO() {
 //        return new GetUserRes(id, email, nickname, profileImg);
 //    }
 //
 //    // 프로필 수정
-//    public void updateUser(UpdateUserReq updateUserReq, String password) {
-//        this.nickname = updateUserReq.getNickname();
-//        this.password = password;
-//        this.profileImg = updateUserReq.getPicture();
-//    }
-//
+    public void updateUser(UpdateUserReq updateUserReq, String password, String profileImg) {
+        this.nickname = updateUserReq.getNickname();
+        this.password = password;
+        this.profileImg = profileImg;
+    }
+
     // 비밀번호 변경
-    public void updatePassword(String password){
+    public void updatePassword(String password) {
         this.password = password;
     }
 

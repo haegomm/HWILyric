@@ -76,7 +76,7 @@ public class MailService {
         String code = createKey(); // 임시 비밀번호 생성
 
         // 카카오 회원인 경우
-        if(user.getUserType().equals("KAKAO")){
+        if (user.getUserType().equals("KAKAO")) {
             code = "KAKAO";
         }
         // 일반 회원이 경우
