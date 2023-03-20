@@ -1,9 +1,11 @@
-import React, { useState } from "react"
+import React, { useState,useRef } from "react"
 import axios from "axios"
+import VideoPlayer from "./VideoPlayer";
 
 function VideoSearch() {
     const [query, setQuery] = useState("");
     const [results, setResults] = useState<any[]>([]);
+    const videoId = useRef<any>(null)
     
   
     const handleSearch = async () => {
@@ -28,24 +30,33 @@ function VideoSearch() {
       }
     };
   
+  const handleGetVideoId = (params: string) => {
+      videoId.current = params
+    }  
+  
     return (
       <div>
         <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} />
         <button onClick={handleSearch}>Search</button>
         {results.map((result) => (
           <div key={result.id.videoId}>
-            <h3>{result.snippet.title}</h3>
-            <img src={result.snippet.thumnails.default.url} alt="thumnail" />
-            <iframe
+            <div>
+              <h3 onClick={(e)=>{handleGetVideoId(result.id.videoId)}}>{result.snippet.title}</h3>
+              <img src={result.snippet.thumnails.default.url} alt="thumnail" />
+            </div>
+            {/* <iframe
               width="560"
               height="315"
               src={`https://www.youtube.com/embed/${result.id.videoId}`}
               title={result.snippet.title}
               frameBorder="0"
               allowFullScreen
-            ></iframe>
+            ></iframe> */}
           </div>
         ))}
+        <div>
+          { (videoId) ? <VideoPlayer videoId={videoId} /> : <div></div>}
+        </div>
       </div>
     );
 }
