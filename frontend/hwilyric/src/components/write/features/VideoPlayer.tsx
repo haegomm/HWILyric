@@ -3,10 +3,10 @@ import YouTube from "react-youtube";
 
 type PlayerState = "playing" | "paused" | "stopped" | "unstarted";
 
-function VideoPlayer() {
+function VideoPlayer(props: any) {
   const [playerState, setPlayerState] = useState<PlayerState>("unstarted");
-  const [videoId, setVideoId] = useState("");
   const playerRef = useRef<YT.Player | null>(null);
+  const videoId = props.videoId
 
   const handlePlayerReady = (event: YT.PlayerEvent) => {
     console.log("Player is ready");
@@ -51,27 +51,16 @@ function VideoPlayer() {
     }
   };
 
-  const handleSearch = () => {
-    // Perform YouTube API search to get video ID
-    // ...
-
-    // Set the video ID for the player
-    setVideoId("VIDEO_ID");
-  };
-
   
   return (
       
       <div>
         {/* <script src="https://www.youtube.com/iframe_api"></script> */}
         <button onClick={handlePlay} disabled={playerState !== "paused"}>
-            Play
+            ▶
         </button>
         <button onClick={handlePause} disabled={playerState !== "playing"}>
-            Pause
-        </button>
-        <button onClick={handleStop} disabled={playerState === "stopped"}>
-            Stop
+            ⏸
         </button>
         <div>
             <YouTube
