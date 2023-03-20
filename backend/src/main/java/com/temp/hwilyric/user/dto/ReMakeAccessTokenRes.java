@@ -14,10 +14,9 @@ public class ReMakeAccessTokenRes {
     private String accessToken;
 
     @Builder
-    public ReMakeAccessTokenRes(String accessToken){
+    public ReMakeAccessTokenRes(String accessToken) {
         this.accessToken = accessToken;
     }
-
 
 
 }

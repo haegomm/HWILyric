@@ -23,7 +23,7 @@ public class LoginUserRes {
     private String accessToken;
 
     @Builder
-    public LoginUserRes(String nickname, String profileImg, String userType, String accessToken){
+    public LoginUserRes(String nickname, String profileImg, String userType, String accessToken) {
         this.nickname = nickname;
         this.profileImg = profileImg;
         this.userType = userType;

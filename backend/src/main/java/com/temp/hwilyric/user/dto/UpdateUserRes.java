@@ -17,7 +17,7 @@ public class UpdateUserRes {
     private String profileImg;
 
     @Builder
-    public UpdateUserRes(String password, String nickname, String profileImg){
+    public UpdateUserRes(String password, String nickname, String profileImg) {
         this.password = password;
         this.nickname = nickname;
         this.profileImg = profileImg;

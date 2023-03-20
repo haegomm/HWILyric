@@ -95,14 +95,14 @@ public class UserController {
         MailDto mailDto = mailService.createSignupEmail(sendSignupEmailReq.getEmail());
         mailService.sendEmail(mailDto);
 
-        SendSignupEmailRes sendSignupEmailRes = new SendSignupEmailRes(mailDto.getCode());
+        SendSignupEmailRes sendSignupEmailRes = SendSignupEmailRes.builder().code(mailDto.getCode()).build();
 
         return new ResponseEntity<>(sendSignupEmailRes, HttpStatus.OK);
     }
 
     @ApiOperation(value = "소셜 회원가입")
     @PostMapping("/guests/kakao")
-    public ResponseEntity<KakaoLoginRes> kakaoLogin(@RequestBody KakaoLoginReq kakaoLoginReq , HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws NotFoundException, IllegalArgumentException {
+    public ResponseEntity<KakaoLoginRes> kakaoLogin(@RequestBody KakaoLoginReq kakaoLoginReq, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws NotFoundException, IllegalArgumentException {
         log.debug("카카오 로그인 시작!");
 
         String kakaoAccessToken = oAuthService.getKakaoAccessToken(kakaoLoginReq.getCode());
