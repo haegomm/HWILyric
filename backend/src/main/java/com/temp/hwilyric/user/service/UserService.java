@@ -45,10 +45,15 @@ public class UserService {
 
 
     // 이메일 중복체크
-    public void duplicateEmail(String email) throws DuplicateException {
-        if (userRepository.findByEmail(email).isPresent()) {
+    public String duplicateEmail(String email) throws DuplicateException {
+        User user = userRepository.findByEmail(email).orElse(null);
+        if (user != null) {
+            if (user.getUserType().equals("KAKAO")) {
+                return "KAKAO";
+            }
             throw new DuplicateException("중복된 이메일입니다.");
         }
+        return "success";
     }
 
     // 닉네임 중복체크
@@ -69,12 +74,6 @@ public class UserService {
         String password = bCryptPasswordEncoder.encode(insertUserReq.getPassword());
 
         User user = User.builder().insertUserReq(insertUserReq).createDate(createDate).password(password).build();
-
-        // 이메일 중복 체크
-        duplicateEmail(user.getEmail());
-
-        // 닉네임 중복 체크
-        duplicateNickname(user.getNickname());
 
         userRepository.save(user);
     }

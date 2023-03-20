@@ -46,7 +46,6 @@ public class UserController {
     //
     private final AuthTokenProvider tokenProvider;
     private final AppProperties appProperties;
-    private final UserRepository userRepository;
 
 
     @ApiOperation(value = "이메일 중복체크") // Swagger에서 보이는 메서드 이름
@@ -55,12 +54,10 @@ public class UserController {
 
         log.debug("중복체크 요청 이메일 = {}", duplicateEmailReq.getEmail());
 
-        userService.duplicateEmail(duplicateEmailReq.getEmail());
+        String msg = userService.duplicateEmail(duplicateEmailReq.getEmail());
 
-        HttpStatus httpStatus = HttpStatus.OK;
-        SuccessRes successRes = SuccessRes.builder().message(SUCCESS).build();
-
-        return new ResponseEntity<>(successRes, httpStatus);
+        SuccessRes successRes = SuccessRes.builder().message(msg).build();
+        return new ResponseEntity<>(successRes, HttpStatus.OK);
 
     }
 
@@ -72,10 +69,9 @@ public class UserController {
 
         userService.duplicateNickname(duplicateNicknameReq.getNickname());
 
-        HttpStatus httpStatus = HttpStatus.OK;
         SuccessRes successRes = SuccessRes.builder().message(SUCCESS).build();
 
-        return new ResponseEntity<>(successRes, httpStatus);
+        return new ResponseEntity<>(successRes, HttpStatus.OK);
     }
 
     @ApiOperation(value = "회원가입")
@@ -241,7 +237,7 @@ public class UserController {
     public ResponseEntity<UpdateUserRes> updateUser(@RequestPart UpdateUserReq updateUserReq, @RequestPart(value = "profileImg") MultipartFile multipartFile, HttpServletRequest httpServletRequest) throws Exception, NotFoundException {
         User user = (User) httpServletRequest.getAttribute("user");
         UpdateUserRes updateUserRes = userService.updateUser(user.getId(), updateUserReq, multipartFile);
-        
+
         return new ResponseEntity<>(updateUserRes, HttpStatus.OK);
     }
 
