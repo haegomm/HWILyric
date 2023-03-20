@@ -21,6 +21,8 @@ import java.util.Random;
 @Transactional(readOnly = true)
 public class MailService {
 
+    private static char[] special_mark = {'~', '!', '@', '#', '$', '%', '^', '&', '*', '_', '-', '+', '=', '|'}; // 비밀번호 or 코드 전송 시 필요한 특수문자 목록
+
     private final JavaMailSender javaMailSender;
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -122,7 +124,8 @@ public class MailService {
         Random rnd = new Random();
 
         for (int i = 0; i < 8; i++) { // 인증코드 8자리
-            int index = rnd.nextInt(3); // 0~2 까지 랜덤
+            int index = rnd.nextInt(4); // 0~2 까지 랜덤
+            int special_len = special_mark.length; // 특수문자 배열 길이
 
             switch (index) {
                 case 0:
@@ -136,6 +139,9 @@ public class MailService {
                 case 2:
                     key.append((rnd.nextInt(10)));
                     // 0~9
+                    break;
+                case 3:
+                    key.append(special_mark[rnd.nextInt(special_len)]);
                     break;
             }
         }
