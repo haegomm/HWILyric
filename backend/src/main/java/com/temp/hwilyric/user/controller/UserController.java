@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.Cookie;
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.List;
 
 
 @Slf4j // log 사용하기 위한 어노테이션
@@ -230,6 +232,13 @@ public class UserController {
 
         return new ResponseEntity<>(successRes, HttpStatus.OK);
 
+    }
+
+    @ApiOperation(value = "파일 업로드 테스트")
+    @GetMapping("/guests/file")
+    public ResponseEntity<Object> upload(MultipartFile multipartFileList) throws Exception {
+        List<String> imagePathList = userService.upload(multipartFileList);
+        return new ResponseEntity<Object>(imagePathList, HttpStatus.OK);
     }
 
 }

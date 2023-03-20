@@ -1,5 +1,9 @@
 package com.temp.hwilyric.user.service;
 
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.temp.hwilyric.exception.DuplicateException;
 import com.temp.hwilyric.exception.NotFoundException;
 import com.temp.hwilyric.user.dto.InsertUserReq;
@@ -8,13 +12,17 @@ import com.temp.hwilyric.user.dto.LoginUserReq;
 import com.temp.hwilyric.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Slf4j // log를 사용하기 위한 어노테이션
@@ -24,10 +32,14 @@ import java.time.LocalDateTime;
 // 만약 데이터를 insert 하거나 update 하는 등 DB에 변경사항이 생겨야 하는 메서드의 경우 46번 줄에 있는 주석 참고해주세요!
 public class UserService {
 
+    @Value("${cloud.aws.s3.bucket}")
+    private String bucket; // S3 버킷 이름
+
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final PasswordEncoder passwordEncoder;
     private final JavaMailSender mailSender;
+    private final AmazonS3Client amazonS3Client;
 
 
     // 이메일 중복체크
@@ -97,6 +109,36 @@ public class UserService {
         if(!bCryptPasswordEncoder.matches(password, user.getPassword())){
             throw new NotFoundException("비밀번호가 일치하지 않습니다.");
         }
+    }
+
+//    // 프로필 수정
+//    @Transactional
+//    public void updateUser(Long id, UpdateUserReq updateUserReq) throws NotFoundException {
+//
+//    }
+
+    // S3에 파일 업로드
+    public List<String> upload(MultipartFile multipartFile) throws Exception {
+        List<String> imagePathList = new ArrayList<>();
+
+            String originalName = multipartFile.getOriginalFilename(); // 파일 이름
+            long size = multipartFile.getSize(); // 파일 크기
+
+            ObjectMetadata objectMetaData = new ObjectMetadata();
+            objectMetaData.setContentType(multipartFile.getContentType());
+            objectMetaData.setContentLength(size);
+
+            // S3에 업로드
+            amazonS3Client.putObject(
+                    new PutObjectRequest(bucket+"/profile", originalName, multipartFile.getInputStream(), objectMetaData)
+                            .withCannedAcl(CannedAccessControlList.PublicRead)
+            );
+
+            String imagePath = amazonS3Client.getUrl(bucket, originalName).toString(); // 접근가능한 URL 가져오기
+            imagePathList.add(imagePath);
+
+
+        return imagePathList;
     }
 
 }
