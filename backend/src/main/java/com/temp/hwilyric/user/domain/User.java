@@ -1,6 +1,7 @@
 package com.temp.hwilyric.user.domain;
 
 import com.temp.hwilyric.user.dto.InsertUserReq;
+import com.temp.hwilyric.user.dto.UpdateUserReq;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -63,27 +64,28 @@ public class User implements Serializable {
 
     // 일반 사용자 회원가입
     @Builder
-    public User(InsertUserReq insertUserReq, LocalDateTime createDate, String password) {
+    public User(InsertUserReq insertUserReq, LocalDateTime createDate, String password, String profileImg) {
         this.email = insertUserReq.getEmail();
         this.password = password;
         this.nickname = insertUserReq.getNickname();
-        this.profileImg = insertUserReq.getProfileImg();
+        this.profileImg = profileImg;
         this.userType = "NORMAL";
         this.createdDate = createDate;
         this.role = "ROLE_USER";
         this.isActive = true;
     }
 
-//    // 카카오 사용자 회원가입
-//    public User(String email, String nickname, LocalDateTime createdDate) {
-//        this.email = email;
-//        this.nickname = nickname;
-//        this.profileImg = "default url";
-//        this.createdDate = createdDate;
-//        this.role = "ROLE_USER";
-//        this.isActive = true;
-//    }
-//
+        // 카카오 사용자 회원가입
+    public User(String email, String nickname, LocalDateTime createdDate) {
+        this.email = email;
+        this.nickname = nickname;
+        this.profileImg = "https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/profile/hwilyric_logo.png";
+        this.userType = "KAKAO";
+        this.createdDate = createdDate;
+        this.role = "ROLE_USER";
+        this.isActive = true;
+    }
+
 //    // 카카오 사용자 이메일 수정
 //    public void updateEmail(String email) {
 //        this.email = email;
@@ -96,21 +98,21 @@ public class User implements Serializable {
     public void deleteRefreshToken() {
         this.refreshToken = null;
     }
-//
+
 //    // 회원 정보 조회
 //    public GetUserRes toDTO() {
 //        return new GetUserRes(id, email, nickname, profileImg);
 //    }
 //
 //    // 프로필 수정
-//    public void updateUser(UpdateUserReq updateUserReq, String password) {
-//        this.nickname = updateUserReq.getNickname();
-//        this.password = password;
-//        this.profileImg = updateUserReq.getPicture();
-//    }
-//
+    public void updateUser(String nickname, String profileImg, LocalDateTime updatedDate) {
+        this.nickname = nickname;
+        this.profileImg = profileImg;
+        this.updatedDate = updatedDate;
+    }
+
     // 비밀번호 변경
-    public void updatePassword(String password){
+    public void updatePassword(String password) {
         this.password = password;
     }
 
