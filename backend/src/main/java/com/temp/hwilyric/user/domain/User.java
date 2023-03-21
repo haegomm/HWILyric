@@ -79,7 +79,7 @@ public class User implements Serializable {
     public User(String email, String nickname, LocalDateTime createdDate) {
         this.email = email;
         this.nickname = nickname;
-        this.profileImg = "default";
+        this.profileImg = "https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/profile/hwilyric_logo.png";
         this.userType = "KAKAO";
         this.createdDate = createdDate;
         this.role = "ROLE_USER";
