@@ -29,6 +29,6 @@ public class InsertUserReq {
     @Size(min = 1, max = 8) // 1자 이상, 8자 이하
     private String nickname;
 
-    // 프로필 이미지 URL
-    private String profileImg;
+//    // 프로필 이미지 URL
+//    private String profileImg;
 }

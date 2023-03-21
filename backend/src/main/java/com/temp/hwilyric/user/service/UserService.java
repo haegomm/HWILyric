@@ -64,16 +64,25 @@ public class UserService {
 
     }
 
-    // DB가 변경되어야 하는 메서드에는 @Transactional 어노테이션을 붙여줘야 변화한다.
+    // 일반 사용자 회원가입
     @Transactional
-    public void insertUser(InsertUserReq insertUserReq) throws DuplicateException {
+    public void insertUser(InsertUserReq insertUserReq, MultipartFile multipartFile) throws Exception, DuplicateException {
+
+        // 사용자가 프로필 사진 업로드 하지 않으면 주어지는 default 프사
+        String profileImg = "https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/profile/hwilyric_logo.png";
+        log.debug("사용자가 넘겨준 프사가 null인가? {}",multipartFile.isEmpty());
+
+        if(!multipartFile.isEmpty()){
+            log.debug("프사가 null이 아니네!!");
+            profileImg = upload(multipartFile); // 프로필 이미지 업로드
+        }
 
         LocalDateTime createDate = LocalDateTime.now();
 
         // 사용자 비밀번호 암호화
         String password = bCryptPasswordEncoder.encode(insertUserReq.getPassword());
 
-        User user = User.builder().insertUserReq(insertUserReq).createDate(createDate).password(password).build();
+        User user = User.builder().insertUserReq(insertUserReq).createDate(createDate).password(password).profileImg(profileImg).build();
 
         userRepository.save(user);
     }

@@ -79,11 +79,11 @@ public class UserController {
 
     @ApiOperation(value = "회원가입")
     @PostMapping("/guests")
-    public ResponseEntity<SuccessRes> insertUser(@Valid @RequestBody InsertUserReq insertUserReq) throws DuplicateException {
+    public ResponseEntity<SuccessRes> insertUser(@Valid @RequestPart(value = "userInfo") InsertUserReq insertUserReq, @RequestPart(value = "profileImg") MultipartFile multipartFile) throws Exception, DuplicateException {
 
         log.debug("회원가입 정보 = {} ", insertUserReq.toString());
 
-        userService.insertUser(insertUserReq);
+        userService.insertUser(insertUserReq, multipartFile);
         SuccessRes successRes = SuccessRes.builder().message(SUCCESS).build();
 
         return new ResponseEntity<>(successRes, HttpStatus.OK);

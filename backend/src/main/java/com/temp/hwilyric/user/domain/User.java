@@ -64,11 +64,11 @@ public class User implements Serializable {
 
     // 일반 사용자 회원가입
     @Builder
-    public User(InsertUserReq insertUserReq, LocalDateTime createDate, String password) {
+    public User(InsertUserReq insertUserReq, LocalDateTime createDate, String password, String profileImg) {
         this.email = insertUserReq.getEmail();
         this.password = password;
         this.nickname = insertUserReq.getNickname();
-        this.profileImg = "https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/profile/hwilyric_logo.png";
+        this.profileImg = profileImg;
         this.userType = "NORMAL";
         this.createdDate = createDate;
         this.role = "ROLE_USER";
