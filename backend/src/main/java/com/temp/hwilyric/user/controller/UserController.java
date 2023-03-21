@@ -53,12 +53,12 @@ public class UserController {
 
 
     @ApiOperation(value = "이메일 중복체크") // Swagger에서 보이는 메서드 이름
-    @GetMapping(value = "/guests/email")
-    public ResponseEntity<SuccessRes> duplicateEmail(@RequestBody DuplicateEmailReq duplicateEmailReq) throws DuplicateException {
+    @GetMapping(value = "/guests/email/{email}")
+    public ResponseEntity<SuccessRes> duplicateEmail(@PathVariable("email") String email) throws DuplicateException {
 
-        log.debug("중복체크 요청 이메일 = {}", duplicateEmailReq.getEmail());
+        log.debug("중복체크 요청 이메일 = {}", email);
 
-        String msg = userService.duplicateEmail(duplicateEmailReq.getEmail());
+        String msg = userService.duplicateEmail(email);
 
         SuccessRes successRes = SuccessRes.builder().message(msg).build();
         return new ResponseEntity<>(successRes, HttpStatus.OK);
@@ -66,12 +66,12 @@ public class UserController {
     }
 
     @ApiOperation(value = "닉네임 중복체크")
-    @GetMapping(value = "/guests/nickname")
-    public ResponseEntity<SuccessRes> duplicateNickname(@RequestBody DuplicateNicknameReq duplicateNicknameReq) throws DuplicateException {
+    @GetMapping(value = "/guests/nickname/{nickname}")
+    public ResponseEntity<SuccessRes> duplicateNickname(@PathVariable("nickname") String nickname) throws DuplicateException {
 
-        log.debug("중복체크 요청 닉네임 = {}", duplicateNicknameReq.getNickname());
+        log.debug("중복체크 요청 닉네임 = {}", nickname);
 
-        userService.duplicateNickname(duplicateNicknameReq.getNickname());
+        userService.duplicateNickname(nickname);
 
         SuccessRes successRes = SuccessRes.builder().message(SUCCESS).build();
 
@@ -91,9 +91,9 @@ public class UserController {
     }
 
     @ApiOperation(value = "회원가입 시 email 인증코드 전송")
-    @GetMapping(value = "/guests/check")
-    public ResponseEntity<SendSignupEmailRes> sendSignupEmail(@RequestBody SendSignupEmailReq sendSignupEmailReq) throws NotFoundException, MessagingException {
-        MailDto mailDto = mailService.createSignupEmail(sendSignupEmailReq.getEmail());
+    @GetMapping(value = "/guests/check/{email}")
+    public ResponseEntity<SendSignupEmailRes> sendSignupEmail(@PathVariable("email") String email) throws NotFoundException, MessagingException {
+        MailDto mailDto = mailService.createSignupEmail(email);
         mailService.sendEmail(mailDto);
 
         SendSignupEmailRes sendSignupEmailRes = SendSignupEmailRes.builder().code(mailDto.getCode()).build();
@@ -234,7 +234,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "비밀번호 일치 여부 확인")
-    @GetMapping(value = "/users/password")
+    @PostMapping(value = "/users/password")
     public ResponseEntity<SuccessRes> checkPassword(@RequestBody CheckPasswordReq checkPasswordReq, HttpServletRequest httpServletRequest) throws NotFoundException {
         User user = (User) httpServletRequest.getAttribute("user");
 
