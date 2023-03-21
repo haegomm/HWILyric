@@ -53,7 +53,7 @@ public class UserController {
 
 
     @ApiOperation(value = "이메일 중복체크") // Swagger에서 보이는 메서드 이름
-    @GetMapping("/guests/email")
+    @GetMapping(value = "/guests/email")
     public ResponseEntity<SuccessRes> duplicateEmail(@RequestBody DuplicateEmailReq duplicateEmailReq) throws DuplicateException {
 
         log.debug("중복체크 요청 이메일 = {}", duplicateEmailReq.getEmail());
@@ -66,7 +66,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "닉네임 중복체크")
-    @GetMapping("/guests/nickname")
+    @GetMapping(value = "/guests/nickname")
     public ResponseEntity<SuccessRes> duplicateNickname(@RequestBody DuplicateNicknameReq duplicateNicknameReq) throws DuplicateException {
 
         log.debug("중복체크 요청 닉네임 = {}", duplicateNicknameReq.getNickname());
@@ -91,7 +91,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "회원가입 시 email 인증코드 전송")
-    @GetMapping("/guests/check")
+    @GetMapping(value = "/guests/check")
     public ResponseEntity<SendSignupEmailRes> sendSignupEmail(@RequestBody SendSignupEmailReq sendSignupEmailReq) throws NotFoundException, MessagingException {
         MailDto mailDto = mailService.createSignupEmail(sendSignupEmailReq.getEmail());
         mailService.sendEmail(mailDto);
@@ -102,7 +102,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "소셜 로그인-카카오")
-    @PostMapping("/guests/kakao")
+    @PostMapping(value = "/guests/kakao")
     public ResponseEntity<KakaoLoginRes> kakaoLogin(@RequestBody KakaoLoginReq kakaoLoginReq, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws NotFoundException, IllegalArgumentException {
         log.debug("카카오 로그인 시작!");
 
@@ -112,7 +112,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "로그인")
-    @PostMapping("/guests/login")
+    @PostMapping(value = "/guests/login")
     public ResponseEntity<LoginUserRes> loginUser(@RequestBody LoginUserReq loginUserReq, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws NotFoundException {
         log.debug("로그인 요청 들어옴.");
 
@@ -167,7 +167,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "임시 비밀번호 이메일 전송")
-    @PatchMapping("/guests/password")
+    @PatchMapping(value = "/guests/password")
     public ResponseEntity<SuccessRes> sendTempPassword(@RequestBody SendTempPasswordReq sendTempPasswordReq) throws NotFoundException, MessagingException {
         MailDto mailDto = mailService.createTempPassword(sendTempPasswordReq.getEmail());
         String msg;
@@ -186,7 +186,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "로그아웃")
-    @GetMapping("/users/logout")
+    @GetMapping(value = "/users/logout")
     public ResponseEntity<SuccessRes> logoutUser(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws NotFoundException {
         User user = (User) httpServletRequest.getAttribute("user");
 
@@ -200,7 +200,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "Access Token 재발급")
-    @GetMapping("/users/access-token")
+    @GetMapping(value = "/users/access-token")
     public ResponseEntity<ReMakeAccessTokenRes> reMakeAccessToken(HttpServletRequest httpServletRequest) throws UnAuthorizedException {
         User user = (User) httpServletRequest.getAttribute("user");
 
@@ -234,7 +234,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "비밀번호 일치 여부 확인")
-    @GetMapping("/users/password")
+    @GetMapping(value = "/users/password")
     public ResponseEntity<SuccessRes> checkPassword(@RequestBody CheckPasswordReq checkPasswordReq, HttpServletRequest httpServletRequest) throws NotFoundException {
         User user = (User) httpServletRequest.getAttribute("user");
 
@@ -247,7 +247,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "프로필 수정")
-    @PatchMapping("/users/profile")
+    @PatchMapping(value = "/users/profile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<UpdateUserRes> updateUser(@RequestPart(value = "userInfo") UpdateUserReq updateUserReq, @RequestPart(value = "profileImg") MultipartFile multipartFile, HttpServletRequest httpServletRequest) throws Exception, NotFoundException, DuplicateException {
         User user = (User) httpServletRequest.getAttribute("user");
         UpdateUserRes updateUserRes = userService.updateUser(user.getId(), updateUserReq, multipartFile);
@@ -256,7 +256,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "비밀번호 수정")
-    @PatchMapping("/users/password")
+    @PatchMapping(value = "/users/password")
     public ResponseEntity<SuccessRes> updatePassword(@RequestBody UpdatePasswordReq updatePasswordReq, HttpServletRequest httpServletRequest){
         User user = (User) httpServletRequest.getAttribute("user");
 
