@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from 'recoil';
+import axios from 'axios';
 
 import userAtom from "../atoms/userAtom";
 import userApi from "../api/userApi";
 import { SignupTypes } from "../types/apiType";
+import authValidation from "../components/signup/validation";
 
 function Signup() {
   const navigate = useNavigate();
@@ -15,7 +17,8 @@ function Signup() {
   const [Nickname, setNickname] = useState("");
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
-  const [profileImageUrl, setProfileImageUrl] = useState(null);
+  const [profileImage, setProfileImage] = useState<File | null>(null);
+  const [profileImageUrl, setProfileImageUrl] = useState("")
   const [emailError, setEmailError] = useState("");
   const [emailFormError, setEmailFormError] = useState("");
   const [verificationError, setVerificationError] = useState("");
@@ -24,20 +27,66 @@ function Signup() {
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   
-  // const onSubmitHandler = (e) => {
-  //   e.preventDefault();
 
-  //   let body = {
-  //     userType: "NORMAL",
-  //     email: Email,
-  //     password: Password,
-  //     nickname: Nickname,
-  //     picture: profileImageUrl,
-  //   };
+//   const handleClick = useCallback(async () => {
+//     if (!profileImage) return;
 
-    // userApi.signup(body:SignupTypes).then(data:Response) {
+//     const formData = new FormData();
+//     await formData.append('file', profileImage);
 
-    // }
+//     const res = await axios.post(
+//         'http://localhost:4000/file/upload',
+//         formData,
+//         {
+//             headers: {
+//                 'Content-Type': 'multipart/form-data'
+//             }
+//         }
+//     );
+//     if (res.status === 201) console.log(res.data);
+// }, [profileImage]);
+
+// const handleClick = useCallback(async () => {
+//   if (!file) return;
+
+//   const formData = new FormData();
+//   await formData.append('file', file);
+//   const uploader: Uploader = {name: 'huewilliams'};
+//   await formData.append('uploader', JSON.stringify(uploader));
+
+//   const res = await axios.post(
+//       'http://localhost:4000/file/upload',
+//       formData,
+//       {
+//           headers: {
+//               'Content-Type': 'multipart/form-data'
+//           }
+//       }
+//   );
+//   if (res.status === 201) console.log(res.data);
+// }, [file]);
+
+
+
+  const onSubmitHandler = async(e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (!profileImage) return;
+
+    const formData = new FormData();
+    await formData.append('profileImg', profileImage);
+    const userInfo: SignupTypes = {
+      email: Email,
+      password: Password,
+      nickname: Nickname,
+    };
+    await formData.append('userInfo', JSON.stringify(userInfo))
+
+    const message = await userApi.signup(formData)
+    console.log(formData)
+
+    if (message === "success") {
+      alert('가입성공!')
+    }
 
     // dispatch(authAction.signup(body)).then((response) => {
     //   if (response.payload.message === "success") {
@@ -47,49 +96,40 @@ function Signup() {
     //     alert("가입에 실패하였습니다. 다시 시도해주세요");
     //   }
     // });
-  // };
+  };
 
-    const onEmailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onEmailHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
       const currentEmail = e.currentTarget.value;
+      authValidation(currentEmail, "email")
+      ? setEmailFormError("")
+      : setEmailFormError("올바르지 않은 이메일 형식입니다");
+      const message = await userApi.checkEmail(currentEmail)
+      if (message === "success") {
+        setEmailError("");
+      } else {
+        setEmailError("이미 가입한 이메일입니다");
+      }
       setEmail(currentEmail);
-      // authValidation(currentEmail, "email")
-        // ? setEmailFormError("")
-        // : setEmailFormError("올바르지 않은 이메일 형식입니다");
-      // dispatch(authAction.checkEmail(currentEmail)).then((response) => {
-      //   if (response.payload.message === "success" || currentEmail === "") {
-      //     setEmailError("");
-      //   } else {
-      //     setEmailError("이미 가입한 이메일입니다");
-      //   }
-      // });
-      const message = userApi.checkEmail(currentEmail)
-      console.log('저는', message)
-      console.log('이메일 찍혓다')
     };
 
-    const onNicknameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onNicknameHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
       const currentNickname = e.currentTarget.value;
+      authValidation(currentNickname, "nickname")
+        ? setNicknameFormError("")
+        : setNicknameFormError("2자 이상 8자 이하의 닉네임을 입력해주세요");
+      const message = await userApi.checkNickname(currentNickname)
+      if (message === "success") {
+        setNicknameError("");
+      } else {
+        setNicknameError("중복 닉네임이 존재합니다");
+      }
       setNickname(currentNickname);
-      // authValidation(currentNickname, "nickname")
-      //   ? setNicknameFormError("")
-      //   : setNicknameFormError("2자 이상 8자 이하의 닉네임을 입력해주세요");
-      // dispatch(authAction.checkNickname(currentNickname)).then((response) => {
-      //   if (response.payload.message === "success" || currentNickname === "") {
-      //     setNicknameError("");
-      //   } else {
-      //     setNicknameError("중복 닉네임이 존재합니다");
-      //   }
-      // });
-      const message = userApi.checkNickname(currentNickname)
-      console.log('저는', message)
-      console.log('닉네임 찍혓다')
     };
     
-    const onSendHandler = (e: React.MouseEvent<HTMLDivElement>) => {
-      const code = userApi.verifyEmail(Email)
-      console.log('저는', code)
-      console.log('코드 찍었다')
-      // setCode(code)
+    const onSendHandler = async (e: React.MouseEvent<HTMLDivElement>) => {
+      const code = await userApi.verifyEmail(Email)
+      setCode(code)
+      console.log(code)
     }
     
     const onCodeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,14 +138,53 @@ function Signup() {
     }
 
     const onVerificationHandler = (e: React.MouseEvent<HTMLDivElement>) => {
-      if (Code === VerificationNumber) {
-        setVerificationError("인증이 완료되었습니다")
+      if (VerificationNumber !== '') {
+        if (Code === VerificationNumber) {
+          setVerificationError("인증이 완료되었습니다")
+        } else {
+          setVerificationError("인증번호가 일치하지 않습니다")
+        }
       } else {
-        setVerificationError("인증번호가 일치하지 않습니다")
+        setVerificationError('')
       }
-      console.log('인증해보았다')
-      // setCode(code)
     }
+
+    const onPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setPassword(e.currentTarget.value);
+      authValidation(e.currentTarget.value, "password")
+        ? setPasswordError("")
+        : setPasswordError("8자 이상 20자 이하의 비밀번호를 입력해주세요");
+    };
+
+    const onConfirmPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setConfirmPassword(e.currentTarget.value);
+      Password === e.currentTarget.value
+        ? setConfirmPasswordError("")
+        : setConfirmPasswordError("비밀번호가 일치하지 않습니다");
+    };
+
+    const onProfileImgHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (e.target.files === null) return;
+
+      if (e.target.files[0]) {
+        console.log(e.target.files[0])
+        setProfileImage(e.target.files[0]);
+        const url = URL.createObjectURL(e.target.files[0])
+        console.log(url)
+        setProfileImageUrl(url)
+        // const reader = new FileReader();
+        // reader.readAsDataURL(e.target.files[0])
+        // reader.onload = () => {
+        //   const url = reader.result
+        //   console.log('나는 result',reader.result)
+        //   console.log(typeof(url))
+          // setProfileImageUrl(url)
+        // }
+        // console.log(reader)
+      }
+  }
+
+
     
   return (
     <div>
@@ -156,7 +235,7 @@ function Signup() {
             {nicknameFormError}
           </span>
 
-          {/* <div className="passwordDiv">
+          <div className="passwordDiv">
             <input
               type="password"
               placeholder="비밀번호"
@@ -175,26 +254,34 @@ function Signup() {
               value={ConfirmPassword}
               onChange={onConfirmPasswordHandler}
             />
-          </div> */}
+          </div>
           <span className="passwordCheckError">{confirmPasswordError}</span>
+          <input type={"file"} onChange={onProfileImgHandler}/>
+          <img
+              // className={classes.hiddenImg}
+              // ref=
+              src={profileImageUrl}
+              alt="profileImg"
+            />
+            {/* <button onClick={handleClick}>업로드 요청</button> */}
           <button
             type="submit"
             className="signupButton"
-            disabled={
-              Email &&
-              Nickname &&
-              Password &&
-              ConfirmPassword &&
-              profileImageUrl &&
-              !emailError &&
-              !emailFormError &&
-              !nicknameError &&
-              !nicknameFormError &&
-              !passwordError &&
-              !confirmPasswordError
-                ? false
-                : true
-            }
+            // disabled={
+            //   Email &&
+            //   Nickname &&
+            //   Password &&
+            //   ConfirmPassword &&
+            //   profileImage &&
+            //   !emailError &&
+            //   !emailFormError &&
+            //   !nicknameError &&
+            //   !nicknameFormError &&
+            //   !passwordError &&
+            //   !confirmPasswordError
+            //     ? false
+            //     : true
+            // }
           >
             가입하기
           </button>
