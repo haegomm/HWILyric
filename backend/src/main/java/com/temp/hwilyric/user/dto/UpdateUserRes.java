@@ -7,9 +7,6 @@ import lombok.*;
 @NoArgsConstructor
 public class UpdateUserRes {
 
-    // 비밀번호
-    private String password;
-
     // 닉네임
     private String nickname;
 
@@ -17,8 +14,7 @@ public class UpdateUserRes {
     private String profileImg;
 
     @Builder
-    public UpdateUserRes(String password, String nickname, String profileImg) {
-        this.password = password;
+    public UpdateUserRes(String nickname, String profileImg) {
         this.nickname = nickname;
         this.profileImg = profileImg;
     }

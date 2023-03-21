@@ -113,17 +113,26 @@ public class UserService {
 
     // 프로필 수정
     @Transactional
-    public UpdateUserRes updateUser(Long id, UpdateUserReq updateUserReq, MultipartFile multipartFile) throws Exception, NotFoundException {
+    public UpdateUserRes updateUser(Long id, UpdateUserReq updateUserReq, MultipartFile multipartFile) throws Exception, NotFoundException, DuplicateException {
 
         User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("존재하지 않는 사용자입니다."));
 
         String password = bCryptPasswordEncoder.encode(updateUserReq.getPassword());
-        String profileImg = upload(multipartFile);
+
+        // 닉네임을 수정한 경우에만 닉네임 중복 체크를 한다.
+        if (!updateUserReq.getNickname().equals(user.getNickname())) {
+            log.debug("닉네임 중복체크 하러 들어옴");
+
+            duplicateNickname(updateUserReq.getNickname());
+
+        }
+
+        String profileImg = upload(multipartFile); // 프로필 이미지 업로드
         LocalDateTime createDate = LocalDateTime.now();
 
         user.updateUser(updateUserReq, password, profileImg, createDate);
 
-        UpdateUserRes updateUserRes = UpdateUserRes.builder().password(password).nickname(updateUserReq.getNickname()).profileImg(profileImg).build();
+        UpdateUserRes updateUserRes = UpdateUserRes.builder().nickname(updateUserReq.getNickname()).profileImg(profileImg).build();
 
         return updateUserRes;
 

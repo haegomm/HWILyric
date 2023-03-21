@@ -247,7 +247,7 @@ public class UserController {
 
     @ApiOperation(value = "프로필 수정")
     @PatchMapping("/users/profile")
-    public ResponseEntity<UpdateUserRes> updateUser(@RequestPart UpdateUserReq updateUserReq, @RequestPart(value = "profileImg") MultipartFile multipartFile, HttpServletRequest httpServletRequest) throws Exception, NotFoundException {
+    public ResponseEntity<UpdateUserRes> updateUser(@RequestPart(value = "userInfo") UpdateUserReq updateUserReq, @RequestPart(value = "profileImg") MultipartFile multipartFile, HttpServletRequest httpServletRequest) throws Exception, NotFoundException, DuplicateException {
         User user = (User) httpServletRequest.getAttribute("user");
         UpdateUserRes updateUserRes = userService.updateUser(user.getId(), updateUserReq, multipartFile);
 
