@@ -1,5 +1,11 @@
 pipeline {
     agent any
+
+    tools {
+        gradle '7.6.1'
+        nodejs '18.13.0'
+    }
+
     stages {
         stage('BUILD') {
             steps {
