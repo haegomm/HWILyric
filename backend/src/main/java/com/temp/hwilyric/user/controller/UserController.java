@@ -254,4 +254,16 @@ public class UserController {
         return new ResponseEntity<>(updateUserRes, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "비밀번호 수정")
+    @PatchMapping("/users/password")
+    public ResponseEntity<SuccessRes> updatePassword(@RequestBody UpdatePasswordReq updatePasswordReq, HttpServletRequest httpServletRequest){
+        User user = (User) httpServletRequest.getAttribute("user");
+
+        userService.updatePassword(user.getId(), updatePasswordReq);
+
+        SuccessRes successRes = SuccessRes.builder().message(SUCCESS).build();
+
+        return new ResponseEntity<>(successRes, HttpStatus.OK);
+    }
+
 }

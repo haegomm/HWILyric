@@ -6,11 +6,8 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.temp.hwilyric.exception.DuplicateException;
 import com.temp.hwilyric.exception.NotFoundException;
-import com.temp.hwilyric.user.dto.InsertUserReq;
+import com.temp.hwilyric.user.dto.*;
 import com.temp.hwilyric.user.domain.User;
-import com.temp.hwilyric.user.dto.LoginUserReq;
-import com.temp.hwilyric.user.dto.UpdateUserReq;
-import com.temp.hwilyric.user.dto.UpdateUserRes;
 import com.temp.hwilyric.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -70,10 +67,10 @@ public class UserService {
 
         // 사용자가 프로필 사진 업로드 하지 않으면 주어지는 default 프사
         String profileImg = "https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/profile/hwilyric_logo.png";
-        log.debug("사용자가 넘겨준 프사가 null인가? {}",multipartFile.isEmpty());
+        log.debug("사용자가 넘겨준 프사가 null인가? {}", multipartFile.isEmpty());
 
         // 만약 사용자가 프사를 업로드 한 경우
-        if(!multipartFile.isEmpty()){
+        if (!multipartFile.isEmpty()) {
             log.debug("프사가 null이 아니네!!");
             profileImg = upload(multipartFile); // 프로필 이미지 업로드
         }
@@ -121,6 +118,7 @@ public class UserService {
         }
     }
 
+
     // 프로필 수정
     @Transactional
     public UpdateUserRes updateUser(Long id, UpdateUserReq updateUserReq, MultipartFile multipartFile) throws Exception, NotFoundException, DuplicateException {
@@ -131,7 +129,7 @@ public class UserService {
         String nickname = user.getNickname();
 
         // 닉네임을 수정한 경우에만 닉네임 중복 체크를 하고 nickname 변수에 담아준다.
-        if (updateUserReq.getNickname()!=null) {
+        if (updateUserReq.getNickname() != null) {
             log.debug("닉네임 중복체크 하러 들어옴");
             duplicateNickname(updateUserReq.getNickname());
             nickname = updateUserReq.getNickname();
@@ -142,7 +140,7 @@ public class UserService {
         String profileImg = user.getProfileImg();
 
         // 만약 사용자가 프사를 수정한 경우
-        if(!multipartFile.isEmpty()) {
+        if (!multipartFile.isEmpty()) {
             profileImg = upload(multipartFile); // 프로필 이미지 업로드
         }
         LocalDateTime createDate = LocalDateTime.now();
@@ -152,6 +150,19 @@ public class UserService {
         UpdateUserRes updateUserRes = UpdateUserRes.builder().nickname(updateUserReq.getNickname()).profileImg(profileImg).build();
 
         return updateUserRes;
+
+    }
+
+    // 비밀번호 수정
+    @Transactional
+    public void updatePassword(Long id, UpdatePasswordReq updatePasswordReq) {
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("존재하지 않는 사용자입니다."));
+
+        // 비밀번호를 변경한 경우에만 update 수행
+        if (updatePasswordReq.getPassword() != null) {
+            String password = bCryptPasswordEncoder.encode(updatePasswordReq.getPassword());
+            user.updatePassword(password);
+        }
 
     }
 
