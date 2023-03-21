@@ -69,7 +69,7 @@ function VideoPlayer() {
   // };
 
   let intervalId: any
-  const onStateChange = (event) => {
+  const onStateChange = (event: any) => {
     if (event.data === YouTube.PlayerState.PLAYING) {
       // setInterval 함수를 사용하여 100ms마다 현재 재생 시간을 업데이트합니다.
       intervalId = setInterval(() => {
