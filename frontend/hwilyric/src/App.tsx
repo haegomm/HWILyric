@@ -15,20 +15,20 @@ import ProfileModification from './pages/ProfileModification';
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Navbar />
-        <Routes>
-          <Route path='*' element={<Home />} />
-          <Route path='/write' element={<Write />} />
-          {/* <Route path='/datavisualize' element={<DataVisualize />} /> */}
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
-          <Route path='/mypage' element={<Mypage />} />
-          <Route path='/profilemodification' element={<ProfileModification />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+      <BrowserRouter>
+        <div className="App">
+          <Navbar />
+          <Routes>
+            <Route path='*' element={<Home />} />
+            <Route path='/write' element={<Write />} />
+            {/* <Route path='/datavisualize' element={<DataVisualize />} /> */}
+            <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/mypage' element={<Mypage />} />
+            <Route path='/profilemodification' element={<ProfileModification />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
   );
 }
 
