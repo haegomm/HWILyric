@@ -105,9 +105,8 @@ public class User implements Serializable {
 //    }
 //
 //    // 프로필 수정
-    public void updateUser(UpdateUserReq updateUserReq, String password, String profileImg, LocalDateTime updatedDate) {
-        this.nickname = updateUserReq.getNickname();
-        this.password = password;
+    public void updateUser(String nickname, String profileImg, LocalDateTime updatedDate) {
+        this.nickname = nickname;
         this.profileImg = profileImg;
         this.updatedDate = updatedDate;
     }

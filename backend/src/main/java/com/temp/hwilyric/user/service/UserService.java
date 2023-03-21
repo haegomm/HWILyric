@@ -72,6 +72,7 @@ public class UserService {
         String profileImg = "https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/profile/hwilyric_logo.png";
         log.debug("사용자가 넘겨준 프사가 null인가? {}",multipartFile.isEmpty());
 
+        // 만약 사용자가 프사를 업로드 한 경우
         if(!multipartFile.isEmpty()){
             log.debug("프사가 null이 아니네!!");
             profileImg = upload(multipartFile); // 프로필 이미지 업로드
@@ -126,20 +127,27 @@ public class UserService {
 
         User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("존재하지 않는 사용자입니다."));
 
-        String password = bCryptPasswordEncoder.encode(updateUserReq.getPassword());
+        // 닉네임을 기본으로 DB에 저장되어 있는 값을 저장
+        String nickname = user.getNickname();
 
-        // 닉네임을 수정한 경우에만 닉네임 중복 체크를 한다.
-        if (!updateUserReq.getNickname().equals(user.getNickname())) {
+        // 닉네임을 수정한 경우에만 닉네임 중복 체크를 하고 nickname 변수에 담아준다.
+        if (updateUserReq.getNickname()!=null) {
             log.debug("닉네임 중복체크 하러 들어옴");
-
             duplicateNickname(updateUserReq.getNickname());
+            nickname = updateUserReq.getNickname();
 
         }
 
-        String profileImg = upload(multipartFile); // 프로필 이미지 업로드
+        // profileImg에 기존에 user 프로필 이미지 URL을 넣어준다.
+        String profileImg = user.getProfileImg();
+
+        // 만약 사용자가 프사를 수정한 경우
+        if(!multipartFile.isEmpty()) {
+            profileImg = upload(multipartFile); // 프로필 이미지 업로드
+        }
         LocalDateTime createDate = LocalDateTime.now();
 
-        user.updateUser(updateUserReq, password, profileImg, createDate);
+        user.updateUser(nickname, profileImg, createDate);
 
         UpdateUserRes updateUserRes = UpdateUserRes.builder().nickname(updateUserReq.getNickname()).profileImg(profileImg).build();
 

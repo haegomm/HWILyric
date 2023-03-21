@@ -9,9 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UpdateUserReq {
 
-    // 비밀번호
-    private String password;
-
     // 닉네임
     private String nickname;
 
