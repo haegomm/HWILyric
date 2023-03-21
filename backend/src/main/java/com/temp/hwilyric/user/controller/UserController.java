@@ -100,7 +100,7 @@ public class UserController {
         return new ResponseEntity<>(sendSignupEmailRes, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "소셜 회원가입")
+    @ApiOperation(value = "소셜 로그인-카카오")
     @PostMapping("/guests/kakao")
     public ResponseEntity<KakaoLoginRes> kakaoLogin(@RequestBody KakaoLoginReq kakaoLoginReq, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws NotFoundException, IllegalArgumentException {
         log.debug("카카오 로그인 시작!");
