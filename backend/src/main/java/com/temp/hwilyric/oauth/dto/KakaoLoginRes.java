@@ -1,14 +1,14 @@
-package com.temp.hwilyric.user.dto;
+package com.temp.hwilyric.oauth.dto;
 
-import lombok.*;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
 @ToString
 @NoArgsConstructor
-public class LoginUserRes {
+public class KakaoLoginRes {
 
     // 닉네임
     private String nickname;
@@ -23,7 +23,7 @@ public class LoginUserRes {
     private String accessToken;
 
     @Builder
-    public LoginUserRes(String nickname, String profileImg, String userType, String accessToken) {
+    public KakaoLoginRes(String nickname, String profileImg, String userType, String accessToken){
         this.nickname = nickname;
         this.profileImg = profileImg;
         this.userType = userType;

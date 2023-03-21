@@ -6,8 +6,12 @@ import com.temp.hwilyric.exception.UnAuthorizedException;
 import com.temp.hwilyric.jwt.AuthToken;
 import com.temp.hwilyric.jwt.AuthTokenProvider;
 import com.temp.hwilyric.oauth.domain.AppProperties;
+import com.temp.hwilyric.oauth.dto.KakaoLoginReq;
+import com.temp.hwilyric.oauth.dto.KakaoLoginRes;
+import com.temp.hwilyric.oauth.service.OAuthService;
 import com.temp.hwilyric.user.domain.User;
 import com.temp.hwilyric.user.dto.*;
+import com.temp.hwilyric.user.repository.UserRepository;
 import com.temp.hwilyric.user.service.MailService;
 import com.temp.hwilyric.user.service.UserService;
 import com.temp.hwilyric.util.CookieUtil;
@@ -18,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.Cookie;
@@ -25,6 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.List;
 
 
 @Slf4j // log 사용하기 위한 어노테이션
@@ -38,9 +44,9 @@ public class UserController {
     private static final String REFRESH_TOKEN = "refreshToken";
 
     private final UserService userService;
-//    private final AuthService authService;
+    private final OAuthService oAuthService;
     private final MailService mailService;
-//
+    //
     private final AuthTokenProvider tokenProvider;
     private final AppProperties appProperties;
 
@@ -51,15 +57,13 @@ public class UserController {
 
         log.debug("중복체크 요청 이메일 = {}", duplicateEmailReq.getEmail());
 
-        userService.duplicateEmail(duplicateEmailReq.getEmail());
+        String msg = userService.duplicateEmail(duplicateEmailReq.getEmail());
 
-        HttpStatus httpStatus = HttpStatus.OK;
-        SuccessRes successRes = SuccessRes.builder().message(SUCCESS).build();
-
-        return new ResponseEntity<>(successRes, httpStatus);
+        SuccessRes successRes = SuccessRes.builder().message(msg).build();
+        return new ResponseEntity<>(successRes, HttpStatus.OK);
 
     }
-    
+
     @ApiOperation(value = "닉네임 중복체크")
     @GetMapping("/guests/nickname")
     public ResponseEntity<SuccessRes> duplicateNickname(@RequestBody DuplicateNicknameReq duplicateNicknameReq) throws DuplicateException {
@@ -68,19 +72,18 @@ public class UserController {
 
         userService.duplicateNickname(duplicateNicknameReq.getNickname());
 
-        HttpStatus httpStatus = HttpStatus.OK;
         SuccessRes successRes = SuccessRes.builder().message(SUCCESS).build();
 
-        return new ResponseEntity<>(successRes, httpStatus);
+        return new ResponseEntity<>(successRes, HttpStatus.OK);
     }
 
     @ApiOperation(value = "회원가입")
     @PostMapping("/guests")
-    public ResponseEntity<SuccessRes> insertUser(@Valid @RequestBody InsertUserReq insertUserReq) throws DuplicateException {
+    public ResponseEntity<SuccessRes> insertUser(@Valid @RequestPart(value = "userInfo") InsertUserReq insertUserReq, @RequestPart(value = "profileImg") MultipartFile multipartFile) throws Exception, DuplicateException {
 
         log.debug("회원가입 정보 = {} ", insertUserReq.toString());
 
-        userService.insertUser(insertUserReq);
+        userService.insertUser(insertUserReq, multipartFile);
         SuccessRes successRes = SuccessRes.builder().message(SUCCESS).build();
 
         return new ResponseEntity<>(successRes, HttpStatus.OK);
@@ -92,9 +95,19 @@ public class UserController {
         MailDto mailDto = mailService.createSignupEmail(sendSignupEmailReq.getEmail());
         mailService.sendEmail(mailDto);
 
-        SendSignupEmailRes sendSignupEmailRes = new SendSignupEmailRes(mailDto.getCode());
+        SendSignupEmailRes sendSignupEmailRes = SendSignupEmailRes.builder().code(mailDto.getCode()).build();
 
         return new ResponseEntity<>(sendSignupEmailRes, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "소셜 로그인-카카오")
+    @PostMapping("/guests/kakao")
+    public ResponseEntity<KakaoLoginRes> kakaoLogin(@RequestBody KakaoLoginReq kakaoLoginReq, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws NotFoundException, IllegalArgumentException {
+        log.debug("카카오 로그인 시작!");
+
+        String kakaoAccessToken = oAuthService.getKakaoAccessToken(kakaoLoginReq.getCode());
+
+        return oAuthService.kakaoLogin(kakaoAccessToken, httpServletRequest, httpServletResponse);
     }
 
     @ApiOperation(value = "로그인")
@@ -159,7 +172,7 @@ public class UserController {
         String msg;
 
         // 일반 회원인 경우
-        if(!mailDto.getCode().equals("KAKAO")) {
+        if (!mailDto.getCode().equals("KAKAO")) {
             mailService.sendEmail(mailDto);
             msg = SUCCESS;
         }
@@ -198,7 +211,7 @@ public class UserController {
 
         AuthToken authTokenRefreshToken = tokenProvider.convertAuthToken(refreshToken);
 
-        if(authTokenRefreshToken.validate() == false || user.getRefreshToken() == null){
+        if (authTokenRefreshToken.validate() == false || user.getRefreshToken() == null) {
             log.debug("유효하지 않은 refresh token 입니다.");
             throw new UnAuthorizedException("유효하지 않은 refresh token 입니다.");
         }
@@ -230,6 +243,27 @@ public class UserController {
 
         return new ResponseEntity<>(successRes, HttpStatus.OK);
 
+    }
+
+    @ApiOperation(value = "프로필 수정")
+    @PatchMapping("/users/profile")
+    public ResponseEntity<UpdateUserRes> updateUser(@RequestPart(value = "userInfo") UpdateUserReq updateUserReq, @RequestPart(value = "profileImg") MultipartFile multipartFile, HttpServletRequest httpServletRequest) throws Exception, NotFoundException, DuplicateException {
+        User user = (User) httpServletRequest.getAttribute("user");
+        UpdateUserRes updateUserRes = userService.updateUser(user.getId(), updateUserReq, multipartFile);
+
+        return new ResponseEntity<>(updateUserRes, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "비밀번호 수정")
+    @PatchMapping("/users/password")
+    public ResponseEntity<SuccessRes> updatePassword(@RequestBody UpdatePasswordReq updatePasswordReq, HttpServletRequest httpServletRequest){
+        User user = (User) httpServletRequest.getAttribute("user");
+
+        userService.updatePassword(user.getId(), updatePasswordReq);
+
+        SuccessRes successRes = SuccessRes.builder().message(SUCCESS).build();
+
+        return new ResponseEntity<>(successRes, HttpStatus.OK);
     }
 
 }
