@@ -47,14 +47,14 @@ function VideoSearch() {
               <h3 onClick={(e)=>{handleGetVideoId(result.id.videoId)}}>{result.snippet.title}</h3>
               <img src={result.snippet.thumbnails.default.url} alt="thumnail" />
             </div>
-            <iframe
+            {/* <iframe
               width="560"
               height="315"
               src={`https://www.youtube.com/embed/${result.id.videoId}`}
               title={result.snippet.title}
               frameBorder="0"
               allowFullScreen
-            ></iframe>
+            ></iframe> */}
           </div>
         ))}
         {/* <div>
