@@ -67,10 +67,10 @@ public class UserService {
 
         // 사용자가 프로필 사진 업로드 하지 않으면 주어지는 default 프사
         String profileImg = "https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/profile/hwilyric_logo.png";
-        log.debug("사용자가 넘겨준 프사가 null인가? {}", multipartFile.isEmpty());
+        log.debug("사용자가 넘겨준 프사가 null인가? {}", multipartFile == null);
 
         // 만약 사용자가 프사를 업로드 한 경우
-        if (!multipartFile.isEmpty()) {
+        if (multipartFile != null) {
             log.debug("프사가 null이 아니네!!");
             profileImg = upload(multipartFile); // 프로필 이미지 업로드
         }
@@ -129,7 +129,7 @@ public class UserService {
         String nickname = user.getNickname();
 
         // 닉네임을 수정한 경우에만 닉네임 중복 체크를 하고 nickname 변수에 담아준다.
-        if (updateUserReq.getNickname() != null) {
+        if (multipartFile != null) {
             log.debug("닉네임 중복체크 하러 들어옴");
             duplicateNickname(updateUserReq.getNickname());
             nickname = updateUserReq.getNickname();
