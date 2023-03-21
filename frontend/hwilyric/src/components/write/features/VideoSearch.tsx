@@ -1,11 +1,13 @@
-import React, { useState,useRef } from "react"
 import axios from "axios"
-import VideoPlayer from "./VideoPlayer";
+import { useState,useRef } from "react"
+import { useRecoilState } from "recoil"
+import { PlayVideoId } from "../../../atoms/YoutubeVideoAtoms";
+
 
 function VideoSearch() {
     const [query, setQuery] = useState("");
     const [results, setResults] = useState<any[]>([]);
-    const videoId = useRef<any>(null)
+    const [videoId, setVideoId] = useRecoilState(PlayVideoId)
     
   
     const handleSearch = async () => {
@@ -54,9 +56,9 @@ function VideoSearch() {
             ></iframe> */}
           </div>
         ))}
-        <div>
+        {/* <div>
           { (videoId) ? <VideoPlayer videoId={videoId} /> : <div></div>}
-        </div>
+        </div> */}
       </div>
     );
 }

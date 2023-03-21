@@ -1,6 +1,6 @@
 import { atom, selector } from "recoil";
 
-const VideoId = atom({
-    key: "VideoId",
+export const VideoIdAtom = atom({
+    key: "VideoIdAtom",
     default: "",
 })

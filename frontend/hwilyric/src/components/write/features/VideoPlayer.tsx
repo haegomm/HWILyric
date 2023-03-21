@@ -1,12 +1,14 @@
 import React, { useState, useRef } from "react";
+import { useRecoilState } from "recoil";
 import YouTube from "react-youtube";
+import { PlayVideoId } from "../../../atoms/YoutubeVideoAtoms";
 
 type PlayerState = "playing" | "paused" | "stopped" | "unstarted";
 
-function VideoPlayer(props: any) {
+function VideoPlayer() {
   const [playerState, setPlayerState] = useState<PlayerState>("unstarted");
   const playerRef = useRef<YT.Player | null>(null);
-  const videoId = props.videoId
+  const [videoId, setVideoId] = useRecoilState(PlayVideoId)
 
   const handlePlayerReady = (event: YT.PlayerEvent) => {
     console.log("Player is ready");
