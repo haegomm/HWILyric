@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useState,useRef } from "react"
+import { useState } from "react"
 import { useRecoilState } from "recoil"
 import { PlayVideoId } from "../../../atoms/YoutubeVideoAtoms";
 
@@ -33,7 +33,8 @@ function VideoSearch() {
     };
   
   const handleGetVideoId = (params: string) => {
-      videoId.current = params
+    setVideoId(params)
+    console.log(params)
     }  
   
     return (
@@ -44,16 +45,16 @@ function VideoSearch() {
           <div key={result.id.videoId}>
             <div>
               <h3 onClick={(e)=>{handleGetVideoId(result.id.videoId)}}>{result.snippet.title}</h3>
-              <img src={result.snippet.thumnails.default.url} alt="thumnail" />
+              <img src={result.snippet.thumbnails.default.url} alt="thumnail" />
             </div>
-            {/* <iframe
+            <iframe
               width="560"
               height="315"
               src={`https://www.youtube.com/embed/${result.id.videoId}`}
               title={result.snippet.title}
               frameBorder="0"
               allowFullScreen
-            ></iframe> */}
+            ></iframe>
           </div>
         ))}
         {/* <div>
