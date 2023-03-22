@@ -102,11 +102,11 @@ public class UserController {
     }
 
     @ApiOperation(value = "소셜 로그인-카카오")
-    @PostMapping(value = "/guests/kakao")
-    public ResponseEntity<KakaoLoginRes> kakaoLogin(@RequestBody KakaoLoginReq kakaoLoginReq, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws NotFoundException, IllegalArgumentException {
+    @GetMapping(value = "/guests/kakao/{code}")
+    public ResponseEntity<KakaoLoginRes> kakaoLogin(@PathVariable("code") String code, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws NotFoundException, IllegalArgumentException {
         log.debug("카카오 로그인 시작!");
 
-        String kakaoAccessToken = oAuthService.getKakaoAccessToken(kakaoLoginReq.getCode());
+        String kakaoAccessToken = oAuthService.getKakaoAccessToken(code);
 
         return oAuthService.kakaoLogin(kakaoAccessToken, httpServletRequest, httpServletResponse);
     }
