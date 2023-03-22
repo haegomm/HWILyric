@@ -12,5 +12,5 @@ echo "***BUILDING DOCKER CONTAINERS***"
 echo "********************************"
 
 # docker container 빌드
-cd /var/jenkins_home/workspace/frontend-pipeline/pipeline/frontend
+cd /var/jenkins_home/workspace/frontend-pipeline/pipeline/jenkins/frontend
 docker compose build --no-cache
