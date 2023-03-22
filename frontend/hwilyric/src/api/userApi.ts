@@ -38,11 +38,11 @@ async function verifyEmail(email:string) {
 }
 
 async function signup(formData:FormData) {
+  console.log(formData)
   try{
     const res = await fileAxios.post('api/auth/guests', formData)
-    console.log(res)
-    console.log('된거?')
-    return res.data.message
+    const message = res.data.message
+    return message
   } catch(err) {
     console.log('가입 안됐단다')
     return err

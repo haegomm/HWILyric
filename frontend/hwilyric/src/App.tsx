@@ -1,23 +1,36 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom'
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter } from 'react-router-dom';
+import { Route, Routes } from 'react-router';
 import './App.css';
+
+import Navbar from './components/common/Navbar';
+import Home from './pages/Home';
+import Write from './pages/Write';
+import DataVisualize from './pages/DataVisualize';
+import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Mypage from './pages/Mypage';
+import ProfileModification from './pages/ProfileModification';
+import HWILyric from './pages/Hwilyric';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-      </header>
-        <Router>
+      <BrowserRouter>
+        <div className="App">
+          <Navbar />
           <Routes>
-            {/* <Route path="/" element={<Signup />}> */}
-              <Route index element={<Signup />} />
-              {/* <Route path="study" element={<Study />} /> */}
-              {/* </Route> */}
+            <Route path='*' element={<HWILyric />} />
+            <Route path='/zslkdrj' element={<Home />} />
+            <Route path='/write/sdalkfjadslkfj' element={<Write />} />
+            {/* <Route path='/datavisualize' element={<DataVisualize />} /> */}
+            <Route path='/login/dlkfjsaldkfj' element={<Login />} />
+            <Route path='/signup/dkfjdlksj' element={<Signup />} />
+            <Route path='/mypage/dsajhfawjehdg' element={<Mypage />} />
+            <Route path='/profilemodification/sajhdgdjakhsd' element={<ProfileModification />} />
           </Routes>
-        </Router>
-    </div>
+        </div>
+      </BrowserRouter>
   );
 }
 
