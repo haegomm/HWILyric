@@ -18,8 +18,12 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
+<<<<<<< HEAD
+    "recoil": "^0.7.7",
+=======
     "react-youtube": "^10.1.0",
     "recoil": "^0.7.6",
+>>>>>>> 219b599cedb9b4340f81f62b65e74b0ccfc82e4c
     "styled-components": "^5.3.6",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
