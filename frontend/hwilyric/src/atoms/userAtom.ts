@@ -1,4 +1,7 @@
 import { atom } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
+
+const { persistAtom } = recoilPersist();
 
 
 const userEmailAtom = atom<string>({
@@ -9,11 +12,13 @@ const userEmailAtom = atom<string>({
 const userNicknameAtom = atom<string>({
   key: 'nickname',
   default: '',
+  effects_UNSTABLE: [persistAtom],
 });
 
 const userProfileImgAtom = atom<string>({
   key: 'profileImg',
   default: '',
+  effects_UNSTABLE: [persistAtom],
 });
 
 const userPasswordAtom = atom<string>({
@@ -24,6 +29,7 @@ const userPasswordAtom = atom<string>({
 const IsLoginAtom = atom<boolean>({
   key: 'isLogin',
   default: false,
+  effects_UNSTABLE: [persistAtom],
 });
 
 const IsKnownPassword = atom<boolean>({
