@@ -1,6 +1,5 @@
+import { ILoginTypes } from '../types/apiType'
 import { axios, fileAxios } from './https'
-import { SignupTypes } from '../types/apiType'
-
 
 async function checkEmail(email:string) {
   try{
@@ -49,11 +48,35 @@ async function signup(formData:FormData) {
   }
 }
 
+async function login(body: ILoginTypes) {
+  try{
+    const res = await axios.post('api/auth/guests/login', body)
+    const data = res.data
+    return data
+  } catch(err) {
+    console.log('로그인 안됐단다')
+    return null
+  }
+}
+
+async function resetPassword(email: object) {
+  try{
+    const res = await axios.patch('api/auth/guests/password', email)
+    const message = res.data.message
+    return message
+  } catch(err) {
+    console.log('메일 못 보냇어용')
+    return err
+  }
+}
+
 const userApi = {
   checkEmail,
   checkNickname,
   verifyEmail,
   signup,
+  login,
+  resetPassword,
 }
 
 export default userApi
