@@ -39,25 +39,12 @@ public class SimilarityService {
         String[] userLyricList = reqDto.getUserLyricList();
 
         //Spark 기본 설정
-        SparkConf conf = new SparkConf().setMaster("local").setAppName("Spark Test");
-        JavaSparkContext sc = new JavaSparkContext(conf);
+//        SparkConf conf = new SparkConf().setMaster("local").setAppName("Spark Test");
+//        JavaSparkContext sc = new JavaSparkContext();
         //session 설정
-        SparkSession spark = SparkSession
-                .builder()
-                .appName("Spark Test")
-                .master("local[*]")
-                .getOrCreate();
-
+        SparkSqlManager ssm = new SparkSqlManager();
         //db 및 테이블 설정
-        Dataset<Row> dataset = spark
-                .read()
-                .format("jdbc")
-                .option("driver", "com.mysql.cj.jdbc.Driver")
-                .option("url", "jdbc:mysql://j8b107.p.ssafy.io:3306/hwilyric")
-                .option("user", "root")
-                .option("password", "hwilYRIC107")
-                .option("dbtable", "music")
-                .load();
+        Dataset<Row> dataset = ssm.selectTable("music");
 
 
         Object[] tempList = new Object[(int)dataset.count()];

@@ -7,7 +7,7 @@ import org.apache.spark.sql.SparkSession;
 import org.springframework.beans.factory.annotation.Value;
 
 @Slf4j
-public class SparkSql {
+public class SparkSqlManager {
 
     @Value("${spring.datasource.url}")
     private static String db_url;
@@ -19,15 +19,14 @@ public class SparkSql {
     private static String db_pw;
     private static SparkSession sparkSession;
 
-    private SparkSession createSession() {
+    public SparkSession createSession() {
         // session 설정.
-        synchronized (SparkSql.class) {
+        synchronized (SparkSqlManager.class) {
             if (sparkSession == null) {
-                SparkSql.sparkSession = SparkSession
+                SparkSqlManager.sparkSession = SparkSession
                         .builder()
                         .master("local[*]")
                         .appName("Java Spark SQL basic example")
-                        .config("spark.sql.shuffle.partitions", 6)
                         .getOrCreate();
             }
         }
@@ -40,25 +39,27 @@ public class SparkSql {
      * 테이블 전체 데이터 조회
      */
     public Dataset<Row> selectTable(String table) {
+        createSession();
 
         // session 설정.
 //        SparkSession spark = SparkSessionPool.getSparkSession();
-        SparkSession spark = SparkSession
-                .builder()
-                .appName("Spark Test")
-                .master("local[*]")
-                .getOrCreate();
+//        SparkSession spark = SparkSession
+//                .builder()
+//                .appName("Spark Test")
+//                .master("local[*]")
+//                .getOrCreate();
 
         //db 및 테이블 설정
-        Dataset<Row> dataset = spark
+        Dataset<Row> dataset = sparkSession
                 .read()
                 .format("jdbc")
-                .option("driver", db_driver)
-                .option("url", db_url)
-                .option("user", db_name)
-                .option("password", db_pw)
-                .option("dbtable", "music_line")
+                .option("driver", "com.mysql.cj.jdbc.Driver")
+                .option("url", "jdbc:mysql://j8b107.p.ssafy.io:3306/hwilyric")
+                .option("user", "root")
+                .option("password", "hwilYRIC107")
+                .option("dbtable", "music")
                 .load();
+
 
         return dataset;
     }
