@@ -22,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.method.P;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -102,11 +103,11 @@ public class UserController {
     }
 
     @ApiOperation(value = "소셜 로그인-카카오")
-    @GetMapping(value = "/guests/kakao")
-    public ResponseEntity<KakaoLoginRes> kakaoLogin(@RequestBody KakaoLoginReq kakaoLoginReq, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws NotFoundException, IllegalArgumentException {
+    @GetMapping(value = "/guests/kakao/{code}")
+    public ResponseEntity<KakaoLoginRes> kakaoLogin(@PathVariable("code") String code, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws NotFoundException, IllegalArgumentException {
         log.debug("카카오 로그인 시작!");
 
-        String kakaoAccessToken = oAuthService.getKakaoAccessToken(kakaoLoginReq.getCode());
+        String kakaoAccessToken = oAuthService.getKakaoAccessToken(code);
 
         return oAuthService.kakaoLogin(kakaoAccessToken, httpServletRequest, httpServletResponse);
     }
