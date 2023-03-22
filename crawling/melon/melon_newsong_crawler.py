@@ -10,27 +10,6 @@ import csv
 import traceback
 from datetime import datetime, timedelta
 
-# datetime.today()            # 현재 날짜 가져오기
-
-# datetime.today().year        # 현재 연도 가져오기
-
-# datetime.today().month      # 현재 월 가져오기
-
-# datetime.today().day        # 현재 일 가져오기
-
-# datetime.today().hour        # 현재 시간 가져오기
-
-# datetime.today().strftime("%Y%m%d%H%M%S")    # YYYYmmddHHMMSS 형태의 시간 출력
-
-# datetime.today().strftime("%Y/%m/%d %H:%M:%S")  # YYYY/mm/dd HH:MM:SS 형태의 시간 출력
-
-# from datetime import datetime, 
-
-
-
-# yesterday = datetime.today() - timedelta(1)
-
-
 time_to_wait = 10
 time_to_sleep = 4
 TIMEDELTA = 2
@@ -43,13 +22,7 @@ order_num = 0
 
 
 
-# print(TODAY, TARGET_DATE)
-
-
-
 driver = webdriver.Chrome('C:/Users/SSAFY/Desktop/semester2/crawling/chromedriver.exe')
-
-# https://www.melon.com/new/index.htm#params%5BareaFlg%5D=I&po=pageObj&startIndex=1
 
 
 # 한 페이지의 노래를 전부 받아올 리스트 초기화
@@ -83,8 +56,6 @@ while (not is_end):
             time.sleep(time_to_sleep)
             html = driver.page_source
             song_soup = bs(html, 'html.parser')
-            # csv_col = ['title', 'artist', 'album', 'release_date', 'genre', 'rank', 'chart_year']
-            # print(song_num)
             artist = song_soup.select_one('div.info > div.artist > a > span').get_text()
             meta_data = song_soup.select('div.meta > dl.list > dd')
             album = meta_data[0].select_one('a').get_text()
@@ -121,7 +92,3 @@ f_lyrics = open("lyrics_newly.csv", "w", encoding="utf8")
 writer = csv.writer(f_lyrics)
 writer.writerows(lyrics_list)
 f_lyrics.close()
-
-
-
-

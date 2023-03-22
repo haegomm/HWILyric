@@ -1,11 +1,16 @@
 import pandas as pd
 import pymysql
 import traceback
+
+f_env = open(".env")
+
 # DB Information
 host = "j8b107.p.ssafy.io"
-user = ""
-password = ""
+user = f_env.readline().strip()
+password = f_env.readline().strip()
 database = "hwilyric"
+
+f_env.close()
 
 # MySQL Connection
 conn = pymysql.connect(host=host, user=user, password=password, db=database, charset="utf8")
@@ -53,8 +58,6 @@ for i in range(musics_length):
                         each_sql += "\"" + date_list[0] + '-' + date_list[1] + '-' + "01" + "\""
             elif column == 'rank' or column == 'chart_year':
                 each_sql += str(musics_file[column][i])
-            # elif column == 'genre' and ',' in musics_file[column][i]:
-            #     each_sql += "\"" + musics_file[column][i] + "\""
             else:
                 each_sql += "\"" + str(musics_file[column][i]) + "\""
             each_sql += ', '
