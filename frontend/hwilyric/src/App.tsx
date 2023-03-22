@@ -11,24 +11,26 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Mypage from './pages/Mypage';
 import ProfileModification from './pages/ProfileModification';
+import HWILyric from './pages/Hwilyric';
 
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Navbar />
-        <Routes>
-          <Route path='*' element={<Home />} />
-          <Route path='/write' element={<Write />} />
-          {/* <Route path='/datavisualize' element={<DataVisualize />} /> */}
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
-          <Route path='/mypage' element={<Mypage />} />
-          <Route path='/profilemodification' element={<ProfileModification />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+      <BrowserRouter>
+        <div className="App">
+          <Navbar />
+          <Routes>
+            <Route path='*' element={<HWILyric />} />
+            <Route path='/zslkdrj' element={<Home />} />
+            <Route path='/write/sdalkfjadslkfj' element={<Write />} />
+            {/* <Route path='/datavisualize' element={<DataVisualize />} /> */}
+            <Route path='/login/dlkfjsaldkfj' element={<Login />} />
+            <Route path='/signup/dkfjdlksj' element={<Signup />} />
+            <Route path='/mypage/dsajhfawjehdg' element={<Mypage />} />
+            <Route path='/profilemodification/sajhdgdjakhsd' element={<ProfileModification />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
   );
 }
 
