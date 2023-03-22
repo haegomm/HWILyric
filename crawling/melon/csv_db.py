@@ -1,12 +1,10 @@
-import os
 import pandas as pd
 import pymysql
-import re
 import traceback
 # DB Information
 host = "j8b107.p.ssafy.io"
-user = "root"
-password = "hwilYRIC107"
+user = ""
+password = ""
 database = "hwilyric"
 
 # MySQL Connection
