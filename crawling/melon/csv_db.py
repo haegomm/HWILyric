@@ -21,8 +21,8 @@ columns = ['title','artist','album','released_date','genre','rank','chart_year']
 
 # csv파일 경로 설정
 path = "./"
-musics = "musics_new.csv"
-lyrics = "lyrics_new.csv"
+musics = "musics_newly.csv"
+lyrics = "lyrics_newly.csv"
 
 # csv 파일 읽기
 
