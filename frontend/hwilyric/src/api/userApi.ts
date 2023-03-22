@@ -48,6 +48,19 @@ async function signup(formData:FormData) {
   }
 }
 
+async function loginKakao(code: string) {
+  try{
+    const res = await axios.get(`api/auth/guests/kakao/${code}`);
+    const data = res.data
+    return data
+  } catch(err) {
+    console.log('카카오 안됐단다')
+    console.log(err)
+    return null
+  }
+  
+}
+
 async function login(body: ILoginTypes) {
   try{
     const res = await axios.post('api/auth/guests/login', body)
@@ -75,6 +88,7 @@ const userApi = {
   checkNickname,
   verifyEmail,
   signup,
+  loginKakao,
   login,
   resetPassword,
 }
