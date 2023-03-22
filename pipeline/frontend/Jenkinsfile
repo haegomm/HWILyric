@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+
+    tools {
+        nodejs 'nodejs 18.13.0'
+    }
+
+    stages {
+        stage('BUILD') {
+            steps {
+		sh "chmod +x -R ${env.WORKSPACE}"
+                sh './pipeline/jenkins/frontend/build/build.sh'
+            }
+        }
+	stage('DEPLOY') {
+            steps {
+                sh "chmod +x -R ${env.WORKSPACE}"
+                sh './pipeline/jenkins/frontend/deploy/deploy.sh'
+            }
+        }
+
+    }
+}
