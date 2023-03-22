@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from 'recoil';
 
@@ -6,6 +7,7 @@ import userApi from "../../api/userApi";
 import { ILoginTypes } from "../../types/apiType";
 import { saveUserInfo } from "./userInfo";
 import userAtom from "../../atoms/userAtom";
+import socailLoginButton from "../../assets/socialLogin/socialLoginButton";
 
 function LoginInput() {
   const navigate = useNavigate();
@@ -81,6 +83,15 @@ function LoginInput() {
           </button>
         </div>
       </form>
+      <div className="idMessage">아직 아이디가 없으신가요?</div>
+      <div className="bottomButton">
+        <Link to="/signup/dkfjdlksj">
+          <div className="normalSignUpButton">가입하기</div>
+        </Link>
+        <a href={KAKAO_REQUEST}>
+          <img src={socailLoginButton} className="kakaoSignUpButton" alt="" />
+        </a>
+      </div>
     </div>
   )
 }

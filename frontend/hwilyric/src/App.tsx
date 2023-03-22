@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Write from './pages/Write';
 import DataVisualize from './pages/DataVisualize';
 import Login from './pages/Login';
+import LoginKakao from './components/login/LoginKakao';
 import Signup from './pages/Signup';
 import Mypage from './pages/Mypage';
 import ProfileModification from './pages/ProfileModification';
@@ -25,6 +26,7 @@ function App() {
             <Route path='/write/sdalkfjadslkfj' element={<Write />} />
             {/* <Route path='/datavisualize' element={<DataVisualize />} /> */}
             <Route path='/login/dlkfjsaldkfj' element={<Login />} />
+            <Route path="oauth2/code/kakao" element={<LoginKakao />} />
             <Route path='/signup/dkfjdlksj' element={<Signup />} />
             <Route path='/mypage/dsajhfawjehdg' element={<Mypage />} />
             <Route path='/profilemodification/sajhdgdjakhsd' element={<ProfileModification />} />
