@@ -21,6 +21,16 @@ const userPasswordAtom = atom<string>({
   default: '',
 });
 
+const IsLoginAtom = atom<boolean>({
+  key: 'isLogin',
+  default: false,
+});
+
+const IsKnownPassword = atom<boolean>({
+  key: 'isKnownPassword',
+  default: true,
+})
+
 interface UserInfoTypes {
   userType : string;
   email: string;
@@ -45,6 +55,8 @@ const userAtom = {
   userNicknameAtom,
   userProfileImgAtom,
   userPasswordAtom,
+  IsLoginAtom,
+  IsKnownPassword,
   userInfoAtom,
 }
 

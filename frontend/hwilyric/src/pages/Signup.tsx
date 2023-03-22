@@ -1,12 +1,8 @@
-
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState, useRecoilValue } from 'recoil';
-import axios from 'axios';
 
-import userAtom from "../atoms/userAtom";
 import userApi from "../api/userApi";
-import { SignupTypes } from "../types/apiType";
+import { ISignupTypes } from "../types/apiType";
 import authValidation from "../components/signup/validation";
 
 function Signup() {
@@ -18,7 +14,7 @@ function Signup() {
   const [Nickname, setNickname] = useState("");
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
-  const [profileImage, setProfileImage] = useState<File | null>(null);
+  const [profileImage, setProfileImage] = useState<File | ''>('');
   const [profileImageUrl, setProfileImageUrl] = useState("")
   const [emailError, setEmailError] = useState("");
   const [emailFormError, setEmailFormError] = useState("");
@@ -31,11 +27,11 @@ function Signup() {
 
   const onSubmitHandler = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!profileImage) return;
+    // if (!profileImage) return;
 
     const formData = new FormData();
     await formData.append('profileImg', profileImage);
-    const userInfo: SignupTypes = {
+    const userInfo: ISignupTypes = {
       email: Email,
       password: Password,
       nickname: Nickname,
@@ -50,6 +46,7 @@ function Signup() {
 
     if (message === "success") {
       alert('가입성공!')
+      navigate("/login/dlkfjsaldkfj");
     } else {
       alert("가입에 실패하였습니다. 다시 시도해주세요");
     }
