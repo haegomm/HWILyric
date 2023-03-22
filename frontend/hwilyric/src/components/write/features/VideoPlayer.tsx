@@ -3,7 +3,6 @@ import { useRecoilValue } from "recoil";
 import YouTube from "react-youtube";
 import ProgressBar from "react-bootstrap/ProgressBar";
 
-
 import { PlayVideoId } from "../../../atoms/YoutubeVideoAtoms";
 import { PlayerBox, PlayerVideoBox, PlayButton } from "../../../styles/VideoPlayerStyles";
 
@@ -71,7 +70,6 @@ function VideoPlayer() {
   let intervalId: any
   const onStateChange = (event: any) => {
     if (event.data === YouTube.PlayerState.PLAYING) {
-      // setInterval 함수를 사용하여 100ms마다 현재 재생 시간을 업데이트합니다.
       intervalId = setInterval(() => {
         setCurrentTime(event.target.getCurrentTime());
       }, 100);
@@ -98,7 +96,7 @@ function VideoPlayer() {
             videoId={videoId}
             onReady={handlePlayerReady}
             onStateChange={handlePlayerStateChange}
-            onEnd={(e)=>{e.target.stopVideo(0);}} 
+            onEnd={(event)=>{event.target.stopVideo(0);}} 
             />
         </PlayerVideoBox>
         {/* <ProgressBar
