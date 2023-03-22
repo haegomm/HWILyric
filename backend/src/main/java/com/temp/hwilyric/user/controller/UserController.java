@@ -80,7 +80,7 @@ public class UserController {
 
     @ApiOperation(value = "회원가입")
     @PostMapping(value = "/guests", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<SuccessRes> insertUser(@Valid @RequestPart(value = "userInfo") InsertUserReq insertUserReq, @RequestPart(value = "profileImg", required = false) MultipartFile multipartFile) throws Exception, DuplicateException {
+    public ResponseEntity<SuccessRes> insertUser(@Valid @RequestPart(value = "userInfo") InsertUserReq insertUserReq, @RequestPart(value = "profileImg", required = false) MultipartFile multipartFile) throws Exception, DuplicateException, NullPointerException {
 
         log.debug("회원가입 정보 = {} ", insertUserReq.toString());
 
@@ -248,7 +248,7 @@ public class UserController {
 
     @ApiOperation(value = "프로필 수정")
     @PatchMapping(value = "/users/profile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<UpdateUserRes> updateUser(@RequestPart(value = "userInfo") UpdateUserReq updateUserReq, @RequestPart(value = "profileImg") MultipartFile multipartFile, HttpServletRequest httpServletRequest) throws Exception, NotFoundException, DuplicateException {
+    public ResponseEntity<UpdateUserRes> updateUser(@RequestPart(value = "userInfo") UpdateUserReq updateUserReq, @RequestPart(value = "profileImg") MultipartFile multipartFile, HttpServletRequest httpServletRequest) throws Exception, NotFoundException, DuplicateException, NullPointerException {
         User user = (User) httpServletRequest.getAttribute("user");
         UpdateUserRes updateUserRes = userService.updateUser(user.getId(), updateUserReq, multipartFile);
 
