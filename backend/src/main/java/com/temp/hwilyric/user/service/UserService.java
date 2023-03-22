@@ -63,7 +63,7 @@ public class UserService {
 
     // 일반 사용자 회원가입
     @Transactional
-    public void insertUser(InsertUserReq insertUserReq, MultipartFile multipartFile) throws Exception, DuplicateException {
+    public void insertUser(InsertUserReq insertUserReq, MultipartFile multipartFile) throws Exception, DuplicateException, NullPointerException {
 
         // 사용자가 프로필 사진 업로드 하지 않으면 주어지는 default 프사
         String profileImg = "https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/profile/hwilyric_logo.png";
@@ -121,7 +121,7 @@ public class UserService {
 
     // 프로필 수정
     @Transactional
-    public UpdateUserRes updateUser(Long id, UpdateUserReq updateUserReq, MultipartFile multipartFile) throws Exception, NotFoundException, DuplicateException {
+    public UpdateUserRes updateUser(Long id, UpdateUserReq updateUserReq, MultipartFile multipartFile) throws Exception, NotFoundException, DuplicateException, NullPointerException {
 
         User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("존재하지 않는 사용자입니다."));
 
