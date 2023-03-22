@@ -35,8 +35,6 @@ public class SparkSql {
         return sparkSession;
     }
 
-    ;
-
 
     /**
      * 테이블 전체 데이터 조회

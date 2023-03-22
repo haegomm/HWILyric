@@ -27,10 +27,11 @@ public class SimilarityController {
     private SimilarityService service;
 
     @PostMapping("/similarity")
-    public ResponseEntity<String> similarityCheck(@RequestBody SimilarityReq reqDto) {
+    public ResponseEntity<SimilarityRes> similarityCheck(@RequestBody SimilarityReq reqDto) {
         SimilarityRes result = service.checkSimilarity(reqDto);
         if(result!=null)
-            return new ResponseEntity<String>("유사한 가사 있음요", HttpStatus.OK);
-        return new ResponseEntity<String>("유사한 가사 없음", HttpStatus.NO_CONTENT);
+            return new ResponseEntity<SimilarityRes>(result, HttpStatus.OK);
+
+        return new ResponseEntity<SimilarityRes>(result, HttpStatus.NO_CONTENT);
     }
 }

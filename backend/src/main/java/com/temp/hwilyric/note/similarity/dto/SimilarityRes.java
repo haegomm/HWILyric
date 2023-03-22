@@ -10,7 +10,10 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class SimilarityRes {
     private List<LyricPairDto> similarList;
+
+    public SimilarityRes(List<LyricPairDto> similarList) {
+        this.similarList = similarList;
+    }
 }

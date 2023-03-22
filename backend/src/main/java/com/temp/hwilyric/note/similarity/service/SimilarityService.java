@@ -1,5 +1,6 @@
 package com.temp.hwilyric.note.similarity.service;
 
+import com.temp.hwilyric.note.similarity.dto.LyricInfo;
 import com.temp.hwilyric.note.similarity.dto.LyricPairDto;
 import com.temp.hwilyric.note.similarity.dto.SimilarityReq;
 import com.temp.hwilyric.note.similarity.dto.SimilarityRes;
@@ -12,9 +13,9 @@ import org.apache.spark.sql.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import scala.collection.mutable.ArrayBuffer;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -31,7 +32,7 @@ public class SimilarityService {
     private static String db_pw;
 
     public SimilarityRes checkSimilarity(SimilarityReq reqDto) {
-        SimilarityRes result = new SimilarityRes();
+        SimilarityRes result = new SimilarityRes(new ArrayList<LyricPairDto>());
         //유사도 검사 라이브러리 사용을 위한 객체
         JaroWinklerSimilarity js = new JaroWinklerSimilarity();
         //사용자가 입력한 가사가 한 줄씩 들어있는 배열
@@ -40,7 +41,6 @@ public class SimilarityService {
         //Spark 기본 설정
         SparkConf conf = new SparkConf().setMaster("local").setAppName("Spark Test");
         JavaSparkContext sc = new JavaSparkContext(conf);
-
         //session 설정
         SparkSession spark = SparkSession
                 .builder()
@@ -52,28 +52,63 @@ public class SimilarityService {
         Dataset<Row> dataset = spark
                 .read()
                 .format("jdbc")
-                .option("driver", db_driver)
-                .option("url", db_url)
-                .option("user", db_name)
-                .option("password", db_pw)
-                .option("dbtable", "music_line")
+                .option("driver", "com.mysql.cj.jdbc.Driver")
+                .option("url", "jdbc:mysql://j8b107.p.ssafy.io:3306/hwilyric")
+                .option("user", "root")
+                .option("password", "hwilYRIC107")
+                .option("dbtable", "music")
                 .load();
 
+
+        Object[] tempList = new Object[(int)dataset.count()];
+        dataset.select("title", "artist", "lyrics").getRows((int)dataset.count(),20).copyToArray(tempList, 3);
+
+
         for(int i=0, arrSize=userLyricList.length;i<arrSize;i++) { //사용자가 입력한 가사 한 줄에 대해
-            //임시로 유사한 가사를 넣어둘 리스트
-            List<String> tempList = new ArrayList<>();
-            for(int j=0,size=(int)dataset.count();j<size;j++) { //전체 가사를 대상으로 유사도 검사
-                //dataset 조작 로직 들어갈 것.
-                Dataset<Row> oneRow = dataset.select("title", "artist", "lyric").where("id랑 j 비교할 곳");
-                if(js.apply(userLyricList[i], oneRow.select("lyric").toString())>=0.7) {
-                    //임시 리스트에 가사, 가수, 노래제목 넣기
-                    tempList.add(oneRow.select("lyric").toString());
+            //임시로 유사한 가사와 해당 곡제목, 가수를 넣어둘 리스트 -> 나중에 정렬할 것
+            List<LyricInfo> similarLyrics = new ArrayList<>();
+            LyricPairDto lpd = new LyricPairDto(userLyricList[i], new String[3], new String[3], new String[3]);
+
+            for (int j = 4, size = (int) dataset.count(); j < size; j++) { //전체 가사를 대상으로 유사도 검사
+                //Spark에서 읽어온 데이터 꺼내오기
+                ArrayBuffer arr = (ArrayBuffer) tempList[j];
+                Object[] newArr = new Object[3];
+                arr.copyToArray(newArr);
+
+                //유사도 측정
+                Double ratio = js.apply(userLyricList[i], (String) newArr[2]);
+                if (tempList[j] != null && ratio >= 0.7) {
+                    //임시 리스트에 가사, 가수, 노래제목, 유사도(비율)넣기
+                    LyricInfo info = new LyricInfo((String) newArr[0], (String) newArr[1], (String) newArr[2], ratio);
+                    similarLyrics.add(info);
                 }
             }
+
+            //유사한 가사가 있을 경우
+            if (!similarLyrics.isEmpty()) {
+                //유사한 가사들을 비율별로 정렬
+                Collections.sort(similarLyrics, new Comparator<LyricInfo>() {
+                    @Override
+                    public int compare(LyricInfo l1, LyricInfo l2) {
+                        if (l1.getRatio() < l2.getRatio()) return 1;
+                        else if (l1.getRatio() > l2.getRatio()) return -1;
+                        return 0;
+                    }
+                });
+
+                //상위 3개의 가사 및 곡정보를 Dto에 저장
+                for (int k = 0; k < similarLyrics.size(); k++) {
+                    if(k>2) break;
+
+                    lpd.getLyricList()[0] = similarLyrics.get(k).getLyric();
+                    lpd.getArtistList()[0] = similarLyrics.get(k).getArtist();
+                    lpd.getTitleList()[0] = similarLyrics.get(k).getTitle();
+                }
+
+                //저장한 dto를 리스트에 추가
+                result.getSimilarList().add(lpd);
+            }
         }
-
-
-
         return result;
 
     }
