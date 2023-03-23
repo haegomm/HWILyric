@@ -2,9 +2,11 @@ node {
   stage('SCM') {
     checkout scm
   }
+  env.NODEJS_HOME = "${tool 'nodejs 18.13.0'}"
+    // on linux / mac
+  env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
   stage('SonarQube Analysis') {
     def scannerHome = tool 'SonarScanner';
-    def nodejsHome = tool 'nodejs 18.13.0'
     withSonarQubeEnv() {
       sh "${scannerHome}/bin/sonar-scanner"
     }
