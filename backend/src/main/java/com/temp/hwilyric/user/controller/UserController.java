@@ -30,6 +30,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.List;
 
@@ -265,6 +268,74 @@ public class UserController {
         SuccessRes successRes = SuccessRes.builder().message(SUCCESS).build();
 
         return new ResponseEntity<>(successRes, HttpStatus.OK);
+    }
+
+    @GetMapping(value="/pythonbuilder")
+    public String pythonProcessbuilder() throws IOException, InterruptedException {
+//        log.debug("pythonbuilder ");
+//        String arg1;
+//        ProcessBuilder builder;
+//        BufferedReader br;
+//
+//        arg1 = "C:/Users/SSAFY/PycharmProjects/pythonProject/test4.py";
+//        builder = new ProcessBuilder("python",arg1); //python3 error
+//
+//        builder.redirectErrorStream(true);
+//        Process process = builder.start();
+//
+//        // 자식 프로세스가 종료될 때까지 기다림
+////        int exitval = process.waitFor();
+//
+//        //// 서브 프로세스가 출력하는 내용을 받기 위해
+//        br = new BufferedReader(new InputStreamReader(process.getInputStream(),"UTF-8"));
+//
+//        String line;
+////        log.debug("line : {}", line);
+//        while ((line = br.readLine()) != null) {
+//            System.out.println(">> " + line); // 표준출력에 쓴다
+//        }
+//
+////        if(exitval !=0){
+////            //비정상종료
+////            log.debug("비정상종료");
+////        }
+//
+//        return "pythonconnet";
+
+        // 파이썬 파일 경로 설정
+        String pythonFilePath = "C:/Users/SSAFY/PycharmProjects/pythonProject/spark.py";
+
+        // 파이썬 실행기 경로 설정 (예: Windows의 경우 "C:\\Python39\\python.exe", Linux의 경우 "/usr/bin/python3")
+        String pythonExecutablePath = "C:/Users/SSAFY/AppData/Local/Programs/Python/Python310/python.exe";
+
+        ProcessBuilder processBuilder = new ProcessBuilder(pythonExecutablePath, pythonFilePath);
+
+        try {
+            Process process = processBuilder.start();
+
+            // error stream 읽어오는 부분
+            BufferedReader error_reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+            String error_line;
+            while ((error_line = error_reader.readLine()) != null) {
+                System.out.println(error_line);
+            }
+
+            // 파이썬 스크립트의 출력을 읽어옵니다.
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream(), "euc-kr"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+
+            // 파이썬 스크립트 실행이 완료되면 종료 코드를 확인합니다.
+            int exitCode = process.waitFor();
+            System.out.println("Python script exited with code: " + exitCode);
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return "success";
     }
 
 }
