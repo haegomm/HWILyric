@@ -1,5 +1,6 @@
 package com.temp.hwilyric.note.similarity.controller;
 
+import com.jcraft.jsch.JSchException;
 import com.temp.hwilyric.note.similarity.dto.SimilarityReq;
 import com.temp.hwilyric.note.similarity.dto.SimilarityRes;
 import com.temp.hwilyric.note.similarity.service.SimilarityService;
@@ -27,7 +28,7 @@ public class SimilarityController {
     private SimilarityService service;
 
     @PostMapping("/similarity")
-    public ResponseEntity<SimilarityRes> similarityCheck(@RequestBody SimilarityReq reqDto) {
+    public ResponseEntity<SimilarityRes> similarityCheck(@RequestBody SimilarityReq reqDto) throws JSchException {
         SimilarityRes result = service.checkSimilarity(reqDto);
         if(result!=null)
             return new ResponseEntity<SimilarityRes>(result, HttpStatus.OK);

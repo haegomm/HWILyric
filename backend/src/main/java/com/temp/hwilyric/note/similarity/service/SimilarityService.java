@@ -1,5 +1,6 @@
 package com.temp.hwilyric.note.similarity.service;
 
+import com.jcraft.jsch.JSchException;
 import com.temp.hwilyric.note.similarity.dto.LyricInfo;
 import com.temp.hwilyric.note.similarity.dto.LyricPairDto;
 import com.temp.hwilyric.note.similarity.dto.SimilarityReq;
@@ -10,6 +11,7 @@ import org.apache.commons.text.similarity.JaroWinklerSimilarity;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,34 +24,23 @@ import java.util.*;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class SimilarityService {
-    @Value("${spring.datasource.url}")
-    private static String db_url;
-    @Value("${spring.datasource.driver-class-name}")
-    static private String db_driver;
-    @Value("${spring.datasource.username}")
-    private static String db_name;
-    @Value("${spring.datasource.password}")
-    private static String db_pw;
 
-    public SimilarityRes checkSimilarity(SimilarityReq reqDto) {
+    private final SparkSqlManager ssm;
+    public SimilarityRes checkSimilarity(SimilarityReq reqDto) throws JSchException {
         SimilarityRes result = new SimilarityRes(new ArrayList<LyricPairDto>());
         //유사도 검사 라이브러리 사용을 위한 객체
         JaroWinklerSimilarity js = new JaroWinklerSimilarity();
         //사용자가 입력한 가사가 한 줄씩 들어있는 배열
         String[] userLyricList = reqDto.getUserLyricList();
 
-        //Spark 기본 설정
-//        SparkConf conf = new SparkConf().setMaster("local").setAppName("Spark Test");
-//        JavaSparkContext sc = new JavaSparkContext();
         //session 설정
-        SparkSqlManager ssm = new SparkSqlManager();
+//        SparkSqlManager ssm = new SparkSqlManager();
         //db 및 테이블 설정
-        Dataset<Row> dataset = ssm.selectTable("music");
+        Dataset<Row> dataset = ssm.selectTable("music_line");
 
 
         Object[] tempList = new Object[(int)dataset.count()];
-        dataset.select("title", "artist", "lyrics").getRows((int)dataset.count(),20).copyToArray(tempList, 3);
-
+        dataset.select("title", "artist", "lyric").getRows((int)dataset.count(),50).copyToArray(tempList, 3);
 
         for(int i=0, arrSize=userLyricList.length;i<arrSize;i++) { //사용자가 입력한 가사 한 줄에 대해
             //임시로 유사한 가사와 해당 곡제목, 가수를 넣어둘 리스트 -> 나중에 정렬할 것
@@ -64,7 +55,7 @@ public class SimilarityService {
 
                 //유사도 측정
                 Double ratio = js.apply(userLyricList[i], (String) newArr[2]);
-                if (tempList[j] != null && ratio >= 0.7) {
+                if (tempList[j] != null && ratio >= 0.75) {
                     //임시 리스트에 가사, 가수, 노래제목, 유사도(비율)넣기
                     LyricInfo info = new LyricInfo((String) newArr[0], (String) newArr[1], (String) newArr[2], ratio);
                     similarLyrics.add(info);
@@ -87,9 +78,9 @@ public class SimilarityService {
                 for (int k = 0; k < similarLyrics.size(); k++) {
                     if(k>2) break;
 
-                    lpd.getLyricList()[0] = similarLyrics.get(k).getLyric();
-                    lpd.getArtistList()[0] = similarLyrics.get(k).getArtist();
-                    lpd.getTitleList()[0] = similarLyrics.get(k).getTitle();
+                    lpd.getLyricList()[k] = similarLyrics.get(k).getLyric();
+                    lpd.getArtistList()[k] = similarLyrics.get(k).getArtist();
+                    lpd.getTitleList()[k] = similarLyrics.get(k).getTitle();
                 }
 
                 //저장한 dto를 리스트에 추가
