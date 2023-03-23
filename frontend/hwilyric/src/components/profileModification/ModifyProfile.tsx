@@ -57,7 +57,7 @@ function ModifyProfile() {
     await formData.append('profileImg', newProfileImage);
 
     const userInfo: IModifyTypes = {
-      nickname: nickname,
+      nickname: newNickname,
     }
 
     const userInfoString = JSON.stringify(userInfo)
