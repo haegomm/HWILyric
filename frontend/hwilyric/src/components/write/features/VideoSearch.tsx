@@ -7,6 +7,7 @@ import { PlayVideoId } from "../../../atoms/YoutubeVideoAtoms";
 function VideoSearch() {
     const [query, setQuery] = useState("");
     const [results, setResults] = useState<any[]>([]);
+    // const [videoId, setVideoId] = useState("")
     const [videoId, setVideoId] = useRecoilState(PlayVideoId)
     
   
@@ -19,7 +20,7 @@ function VideoSearch() {
               part: "snippet",
               q: query,
               type: "video",
-              maxResults: 10,
+              maxResults: 1,
               key: process.env.REACT_APP_YOUTUBE_API_KEY, // Replace with your YouTube API key
             },
           }
@@ -47,14 +48,6 @@ function VideoSearch() {
               <h3 onClick={(e)=>{handleGetVideoId(result.id.videoId)}}>{result.snippet.title}</h3>
               <img src={result.snippet.thumbnails.default.url} alt="thumnail" />
             </div>
-            {/* <iframe
-              width="560"
-              height="315"
-              src={`https://www.youtube.com/embed/${result.id.videoId}`}
-              title={result.snippet.title}
-              frameBorder="0"
-              allowFullScreen
-            ></iframe> */}
           </div>
         ))}
         {/* <div>
