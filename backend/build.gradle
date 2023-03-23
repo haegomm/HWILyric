@@ -54,7 +54,7 @@ dependencies {
     implementation "com.amazonaws:aws-java-sdk-s3:1.12.281"
 
     //mongodb 추가
-    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+//    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 
     // QueryDSL 라이브러리
     implementation 'com.querydsl:querydsl-core'
@@ -67,14 +67,48 @@ dependencies {
     // java.lang.NoClassDefFoundError(javax.annotation.Generated) 발생 시 추가
     annotationProcessor('jakarta.annotation:jakarta.annotation-api')
 
-    // Querydsl 설정부
-    def generated = 'src/main/generated'
-
-    // gradle clean 시에 QClass 디렉토리 삭제
-    clean {
-        delete file(generated)
+    //spark 추가
+    implementation ('org.codehaus.janino:commons-compiler') {
+        version {
+            strictly '3.0.16'
+        }
+    }
+    implementation ('org.codehaus.janino:janino') {
+        version {
+            strictly '3.0.16'
+        }
     }
 
+    implementation ('org.apache.spark:spark-core_2.12:3.2.3') {
+        exclude group: 'org.codehaus.janino', module: 'janino'
+        exclude group: 'org.codehaus.janino', module: 'commons-compiler'
+    }
+    implementation ('org.apache.spark:spark-sql_2.12:3.2.3') {
+        exclude group: 'org.codehaus.janino', module: 'janino'
+        exclude group: 'org.codehaus.janino', module: 'commons-compiler'
+    }
+    implementation 'io.netty:netty-all:4.1.68.Final'
+
+    //유사도 검사 apache library 추가
+    implementation group: 'org.apache.commons', name: 'commons-text', version: '1.9'
+
+    // https://mvnrepository.com/artifact/com.jcraft/jsch
+    implementation group: 'com.jcraft', name: 'jsch', version: '0.1.55'
+
+
+}
+
+// Querydsl 설정부
+def generated = 'src/main/generated'
+
+// gradle clean 시에 QClass 디렉토리 삭제
+clean {
+    delete file(generated)
+}
+
+//spark 관련 log4j/slf4j error remove
+configurations.all {
+    exclude module: 'slf4j-log4j12'
 }
 
 tasks.named('test') {
