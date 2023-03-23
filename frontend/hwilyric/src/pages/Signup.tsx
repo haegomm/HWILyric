@@ -27,10 +27,9 @@ function Signup() {
 
   const onSubmitHandler = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // if (!profileImage) return;
 
     const formData = new FormData();
-    await formData.append('profileImg', profileImage);
+    formData.append('profileImg', profileImage);
     const userInfo: ISignupTypes = {
       email: Email,
       password: Password,
@@ -38,7 +37,7 @@ function Signup() {
     };
 
     const userInfoString = JSON.stringify(userInfo)
-    await formData.append('userInfo', new Blob([userInfoString], {type: 'application/json'}));
+    formData.append('userInfo', new Blob([userInfoString], {type: 'application/json'}));
 
     const message = await userApi.signup(formData)
     console.log(formData)

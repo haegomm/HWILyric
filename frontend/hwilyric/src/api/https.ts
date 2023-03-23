@@ -20,13 +20,12 @@ axios.interceptors.response.use(
   },
   function (error) {
     if (error.response && error.response.status) {
-      switch (error.response.status) {
-        case 401:
+      if (error.response.status === 401) {
           alert("로그인이 필요합니다.");
           window.location.replace("/login");
           deleteUserInfo();
           return new Promise(() => {});
-        default:
+      } else {
           return Promise.reject(error);
       }
     }
@@ -53,13 +52,12 @@ fileAxios.interceptors.response.use(
   },
   function (error) {
     if (error.response && error.response.status) {
-      switch (error.response.status) {
-        case 401:
+      if (error.response.status === 401) {
           alert("로그인이 필요합니다.");
           window.location.replace("/login");
           deleteUserInfo();
           return new Promise(() => {});
-        default:
+      } else{
           return Promise.reject(error);
       }
     }
