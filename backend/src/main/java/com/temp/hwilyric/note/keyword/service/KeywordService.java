@@ -30,7 +30,7 @@ public class KeywordService {
     }
 
     // 유사 키워드 조회
-    public List<String> getSimilarKeyword(String keyword) throws NotFoundException {
+    public List<String> getSimilarKeyword(String word) throws NotFoundException {
         // 파이썬 파일 경로 설정
         String pythonFilePath = "C:/Users/SSAFY/PycharmProjects/pythonProject/spark_test.py";
 

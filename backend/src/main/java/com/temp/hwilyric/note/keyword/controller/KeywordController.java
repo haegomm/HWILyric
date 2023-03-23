@@ -38,10 +38,10 @@ public class KeywordController {
     }
 
     @ApiOperation(value = "유사 키워드 조회")
-    @GetMapping(value="/similarity/{keyword}")
-    public ResponseEntity<List<String>> getSimilarKeyword(@PathVariable("keyword") String keyword) throws IOException, InterruptedException, NotFoundException {
+    @GetMapping(value="/similarity/{word}")
+    public ResponseEntity<List<String>> getSimilarKeyword(@PathVariable("word") String word) throws IOException, InterruptedException, NotFoundException {
 
-        List<String> similar_list = keywordService.getSimilarKeyword(keyword);
+        List<String> similar_list = keywordService.getSimilarKeyword(word);
 
         return new ResponseEntity<List<String>>(similar_list, HttpStatus.OK);
     }
