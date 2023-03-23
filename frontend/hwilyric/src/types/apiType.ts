@@ -9,6 +9,10 @@ export interface ILoginTypes {
   password: string;
 }
 
+export interface IModifyTypes {
+  nickname: string;
+}
+
 export interface IUserInfoTypes {
   nickname: string;
   profileImg: string;
