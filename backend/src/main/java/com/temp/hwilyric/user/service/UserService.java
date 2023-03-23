@@ -129,8 +129,8 @@ public class UserService {
         String nickname = user.getNickname();
 
         // 닉네임을 수정한 경우에만 닉네임 중복 체크를 하고 nickname 변수에 담아준다.
-        if (multipartFile != null) {
-            log.debug("닉네임 중복체크 하러 들어옴");
+        if (!updateUserReq.getNickname().equals(nickname)) {
+            log.debug("기존 닉네임이랑 달라!!! 닉네임 중복체크 하러 들어옴");
             duplicateNickname(updateUserReq.getNickname());
             nickname = updateUserReq.getNickname();
 
@@ -140,7 +140,8 @@ public class UserService {
         String profileImg = user.getProfileImg();
 
         // 만약 사용자가 프사를 수정한 경우
-        if (!multipartFile.isEmpty()) {
+        if (multipartFile!=null) {
+            log.debug("프사 수정했네!");
             profileImg = upload(multipartFile); // 프로필 이미지 업로드
         }
         LocalDateTime createDate = LocalDateTime.now();
