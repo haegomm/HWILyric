@@ -6,7 +6,12 @@ export interface BlockTypes {
     lyrics: Array<string>,
 }
 
-export const blockList = atom<BlockTypes[]>({
-    key: 'blockList',
+export const blockId = atom<number>({
+    key: 'blockId',
+    default: 0
+})
+
+export const lyricsList = atom<BlockTypes[]>({
+    key: 'lyrics',
     default: []
 })
