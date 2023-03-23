@@ -16,7 +16,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/keyword")
+@RequestMapping("/api/keywords")
 @RequiredArgsConstructor
 @Api(tags = {"키워드 API"}) // Swagger에서 보이는 controller 이름
 public class KeywordController {
