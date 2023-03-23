@@ -303,7 +303,7 @@ public class UserController {
 //        return "pythonconnet";
 
         // 파이썬 파일 경로 설정
-        String pythonFilePath = "C:/Users/SSAFY/PycharmProjects/pythonProject/spark.py";
+        String pythonFilePath = "C:/Users/SSAFY/PycharmProjects/pythonProject/spark_test.py";
 
         // 파이썬 실행기 경로 설정 (예: Windows의 경우 "C:\\Python39\\python.exe", Linux의 경우 "/usr/bin/python3")
         String pythonExecutablePath = "C:/Users/SSAFY/AppData/Local/Programs/Python/Python310/python.exe";
