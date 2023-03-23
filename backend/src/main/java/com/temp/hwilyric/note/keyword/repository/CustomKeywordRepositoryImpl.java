@@ -1,6 +1,7 @@
 package com.temp.hwilyric.note.keyword.repository;
 
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.NumberExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.temp.hwilyric.note.keyword.domain.QKeyword;
@@ -27,7 +28,7 @@ public class CustomKeywordRepositoryImpl implements CustomKeywordRepository{
                 .select(Projections.bean(RandomKeywordRes.class, keyword.word))
                 .from(keyword)
                 .where(keyword.category.eq("랜덤"))
-                .orderBy(NumberExpression.random().asc())
+                .orderBy(Expressions.numberTemplate(Double.class, "function('rand')").asc())
                 .limit(10)
                 .fetch();
     }
