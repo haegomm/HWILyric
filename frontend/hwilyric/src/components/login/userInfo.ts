@@ -7,7 +7,7 @@ export const saveUserInfo = (user: IUserInfoTypes) => {
 };
 export const getUserInfo = () => {
   return {
-    level:window.localStorage.getItem('userType'),
+    userType:window.localStorage.getItem('userType'),
     accessToken:window.localStorage.getItem('accessToken'),
   }
 };

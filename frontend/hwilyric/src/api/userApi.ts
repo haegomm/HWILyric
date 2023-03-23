@@ -83,14 +83,50 @@ async function resetPassword(email: object) {
   }
 }
 
+async function checkPassword(password: object) {
+  try{
+    const res = await axios.post('api/auth/users/password', password)
+    const message = res.data.message
+    return message
+  } catch(err) {
+    console.log('비밀번호 틀렸대')
+    return err
+  }
+}
+
+async function modifyPassword(password: object) {
+  try{
+    const res = await axios.patch('api/auth/users/password', password)
+    const message = res.data.message
+    return message
+  } catch(err) {
+    console.log('비번 못바꿧어용')
+    return err
+  }
+}
+
+async function modifyProfile(formData: FormData) {
+  try{
+    const res = await fileAxios.patch('api/auth/users/profile', formData)
+    const data = res.data
+    return data
+  } catch(err) {
+    console.log('수정 안됐단다')
+    return null
+  }
+}
+
 const userApi = {
   checkEmail,
   checkNickname,
+  checkPassword,
   verifyEmail,
   signup,
   loginKakao,
   login,
   resetPassword,
+  modifyPassword,
+  modifyProfile,
 }
 
 export default userApi

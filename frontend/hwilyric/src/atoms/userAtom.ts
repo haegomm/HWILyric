@@ -37,24 +37,29 @@ const IsKnownPassword = atom<boolean>({
   default: true,
 })
 
-interface UserInfoTypes {
-  userType : string;
-  email: string;
-  nickname: string;
-  profileImg: string;
-}
+const selectModificationPage = atom<string>({
+  key: 'selectModificationPage',
+  default: 'select',
+})
 
-const userInfoAtom = atom<UserInfoTypes[]>({
-  key: 'userInfo',
-  default: [
-    {
-      userType: '',
-      email: '',
-      nickname: '',
-      profileImg: '',
-    },
-  ],
-});
+// interface UserInfoTypes {
+//   userType : string;
+//   email: string;
+//   nickname: string;
+//   profileImg: string;
+// }
+
+// const userInfoAtom = atom<UserInfoTypes[]>({
+//   key: 'userInfo',
+//   default: [
+//     {
+//       userType: '',
+//       email: '',
+//       nickname: '',
+//       profileImg: '',
+//     },
+//   ],
+// });
 
 const userAtom = {
   userEmailAtom,
@@ -63,7 +68,8 @@ const userAtom = {
   userPasswordAtom,
   IsLoginAtom,
   IsKnownPassword,
-  userInfoAtom,
+  selectModificationPage,
+  // userInfoAtom,
 }
 
 
