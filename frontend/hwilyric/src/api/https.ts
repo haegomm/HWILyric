@@ -10,6 +10,7 @@ export const axios = baseAxios.create({
 
 axios.interceptors.request.use((config) => {
   config.headers.Authorization = `Bearer ${getUserInfo().accessToken}`;
+  console.log('토큰 넣었어~',getUserInfo().accessToken)
   return config;
 });
 
@@ -42,6 +43,7 @@ export const fileAxios = baseAxios.create({
 
 fileAxios.interceptors.request.use((config) => {
   config.headers.Authorization = `Bearer ${getUserInfo().accessToken}`;
+  console.log('토큰 넣었어~',getUserInfo().accessToken)
   return config;
 });
 
