@@ -27,7 +27,7 @@ connection = pymysql.connect(host=host, user=user, password=password, database=d
 cursor = connection.cursor()
 years = 1963
 
-f_df = open('log.txt', "w", encoding="utf8")
+f_log = open('log_spark_trend_keyword.txt', "a", encoding="utf8")
 
 for year_id in range(1, 60):
     data = []
@@ -76,17 +76,17 @@ for year_id in range(1, 60):
         sql2_plus += "), "
         sql_cnt += 1
         if (sql_cnt == 100):
-            f_df.write(sql2 + sql2_plus.rstrip(', ')+'\n\n\n')
+            f_log.write(sql2 + sql2_plus.rstrip(', ')+'\n\n\n')
             cursor.execute(sql2 + sql2_plus.rstrip(', '))
             sql_cnt = 0
             sql2_plus = ''
 
     if (sql2_plus != ''):
-        f_df.write(sql2 + sql2_plus.rstrip(', ')+'\n\n\n')
+        f_log.write(sql2 + sql2_plus.rstrip(', ')+'\n\n\n')
         cursor.execute(sql2 + sql2_plus.rstrip(', '))
 
     connection.commit()
 
-connection.close
+connection.close()
 
-f_df.close()
+f_log.close()
