@@ -22,11 +22,13 @@ import java.util.Random;
 @Transactional(readOnly = true)
 public class MailService {
 
-    private static char[] special_mark = {'~', '!', '@', '#', '$', '%', '^', '&', '*', '_', '-', '+', '=', '|'}; // 비밀번호 or 코드 전송 시 필요한 특수문자 목록
-
+    // 인증 코드 생성 시 사용될 문자열
+    private static final String CHARACTERS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+";
     private final JavaMailSender javaMailSender;
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    
+    private static SecureRandom random = new SecureRandom(); // 그냥 Random() 보다 강력한 친구
 
     // 회원가입용 이메일
     public MailDto createSignupEmail(String email) {
@@ -122,30 +124,12 @@ public class MailService {
     // 인증코드 생성
     public static String createKey() {
         StringBuffer key = new StringBuffer();
-        SecureRandom random = new SecureRandom();
 
-        for (int i = 0; i < 8; i++) { // 인증코드 8자리
-            int index = random.nextInt(4); // 0~2 까지 랜덤
-            int special_len = special_mark.length; // 특수문자 배열 길이
-
-            switch (index) {
-                case 0:
-                    key.append((char) ((int) (random.nextInt(26)) + 97));
-                    //  a~z  (ex. 1+97=98 => (char)98 = 'b')
-                    break;
-                case 1:
-                    key.append((char) ((int) (random.nextInt(26)) + 65));
-                    //  A~Z
-                    break;
-                case 2:
-                    key.append((random.nextInt(10)));
-                    // 0~9
-                    break;
-                case 3:
-                    key.append(special_mark[random.nextInt(special_len)]);
-                    break;
-            }
+        // CHARACTERS 상수는 인증 코드에서 사용할 수 있는 문자들(숫자, 영어 대소문자, 특수문자)을 모두 포함함.
+        for (int i = 0; i < 8; i++) {
+            key.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length())));
         }
+
         return key.toString();
     }
 
