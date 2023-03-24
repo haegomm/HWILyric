@@ -29,6 +29,7 @@ public class NoteController {
         if(newNote == null)
             return new ResponseEntity<>(FAIL, HttpStatus.NO_CONTENT);
         return new ResponseEntity<>(newNote.getId(), HttpStatus.OK);
+        
     }
 
     @GetMapping("/list")
