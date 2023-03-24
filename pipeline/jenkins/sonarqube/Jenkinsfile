@@ -9,6 +9,7 @@ node {
     def scannerHome = tool 'SonarScanner';
     withSonarQubeEnv() {
       sh "${scannerHome}/bin/sonar-scanner"
+      sh "/backend/gradlew sonarqube"
     }
   }
 }
