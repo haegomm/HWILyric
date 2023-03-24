@@ -21,4 +21,9 @@ public class LyricInfo {
         this.title = title;
         this.ratio = ratio;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return ((LyricInfo)o).getTitle().equals(title) && ((LyricInfo)o).getArtist().equals(artist) && ((LyricInfo)o).getLyric().equals(lyric);
+    }
 }
