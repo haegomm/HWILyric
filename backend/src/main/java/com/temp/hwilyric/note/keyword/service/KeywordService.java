@@ -38,7 +38,7 @@ public class KeywordService {
 
         ProcessBuilder processBuilder = new ProcessBuilder(pythonExecutablePath, pythonFilePath);
         processBuilder.command().add(word); // 파이썬으로 매개변수 전달
-        List<String> similar_list = new ArrayList<>(); // 결과값 저장할 리스트
+        List<String> similarList = new ArrayList<>(); // 결과값 저장할 리스트
         try {
             Process process = processBuilder.start();
 
@@ -46,7 +46,7 @@ public class KeywordService {
             BufferedReader error_reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
             String error_line;
             while ((error_line = error_reader.readLine()) != null) {
-                System.out.println(error_line);
+                log.debug("에러 문구 : {}",error_line);
             }
 
             // 파이썬 스크립트의 출력을 읽어옵니다.
@@ -54,20 +54,19 @@ public class KeywordService {
             String line;
 
             while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-                similar_list.add(line);
+                similarList.add(line);
             }
 
-            log.debug(String.valueOf(similar_list));
+            log.debug(String.valueOf(similarList));
 
             // 파이썬 스크립트 실행이 완료되면 종료 코드를 확인합니다.
             int exitCode = process.waitFor();
-            System.out.println("Python script exited with code: " + exitCode);
+            log.debug("Python script exited wite code : {}", Integer.toString(exitCode));
 
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
-        return similar_list;
+        return similarList;
     }
 
 }

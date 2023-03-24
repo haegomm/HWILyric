@@ -37,9 +37,9 @@ public class KeywordController {
     @GetMapping(value = "/similarity/{word}", produces = "application/json;charset=utf-8")
     public ResponseEntity<List<String>> getSimilarKeyword(@PathVariable("word") String word) throws IOException, InterruptedException, NotFoundException {
 
-        List<String> similar_list = keywordService.getSimilarKeyword(word);
+        List<String> similarList = keywordService.getSimilarKeyword(word);
 
-        return new ResponseEntity<List<String>>(similar_list, HttpStatus.OK);
+        return new ResponseEntity<List<String>>(similarList, HttpStatus.OK);
     }
 
 }
