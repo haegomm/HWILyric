@@ -116,6 +116,28 @@ async function modifyProfile(formData: FormData) {
   }
 }
 
+async function reissueToken() {
+  try{
+    const res = await axios.get('api/auth/users/access-token')
+    const accessToken = res.data.accessToken 
+    return accessToken
+  } catch(err) {
+    console.log('토큰 재발급 안됐단다')
+    return null
+  }
+}
+
+async function logout() {
+  try{
+    const res = await axios.get('api/auth/users/logout')
+    const message = res.data.message
+    return message
+  } catch(err) {
+    console.log('로그아웃 안됐단다')
+    return null
+  }
+}
+
 const userApi = {
   checkEmail,
   checkNickname,
@@ -127,6 +149,8 @@ const userApi = {
   resetPassword,
   modifyPassword,
   modifyProfile,
+  reissueToken,
+  logout,
 }
 
 export default userApi
