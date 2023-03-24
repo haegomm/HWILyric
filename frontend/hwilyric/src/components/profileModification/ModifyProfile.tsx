@@ -54,14 +54,14 @@ function ModifyProfile() {
 
   const onSaveProfileHandler = async(e: React.MouseEvent<HTMLButtonElement>) => {
     const formData = new FormData();
-    await formData.append('profileImg', newProfileImage);
+    formData.append('profileImg', newProfileImage);
 
     const userInfo: IModifyTypes = {
       nickname: newNickname,
     }
 
     const userInfoString = JSON.stringify(userInfo)
-    await formData.append('userInfo', new Blob([userInfoString], {type: 'application/json'}));
+    formData.append('userInfo', new Blob([userInfoString], {type: 'application/json'}));
 
     const data = await userApi.modifyProfile(formData)
     console.log(data)
