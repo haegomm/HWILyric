@@ -1,8 +1,9 @@
-import * as React from 'react';
+import React, { useEffect } from "react";
 import { BrowserRouter } from 'react-router-dom';
 import { Route, Routes } from 'react-router';
-import './App.css';
+import { useRecoilValue } from "recoil"
 
+import './App.css';
 import Navbar from './components/common/Navbar';
 import Home from './pages/Home';
 import Write from './pages/Write';
@@ -13,9 +14,30 @@ import Signup from './pages/Signup';
 import Mypage from './pages/Mypage';
 import ProfileModification from './pages/ProfileModification';
 import HWILyric from './pages/Hwilyric';
-
+import userAtom from './atoms/userAtom';
+import userApi from './api/userApi';
 
 function App() {
+  const isLogin = useRecoilValue(userAtom.IsLoginAtom)
+
+  
+  useEffect(() => {
+    async function reissueToken() {
+      const accessToken = await userApi.reissueToken()
+      if (accessToken !== null) {
+        console.log('토큰 재발급~~')
+        window.localStorage.setItem('accessToken', accessToken)
+      } else {
+        console.log("토큰재발급 실패ㅜㅜ");
+      }
+    }
+    setInterval(() => {
+      if (isLogin) {
+        reissueToken();
+      }
+    }, 300000);
+  }, []);
+
   return (
       <BrowserRouter>
         <div className="App">
