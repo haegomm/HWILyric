@@ -54,7 +54,7 @@ dependencies {
     implementation "com.amazonaws:aws-java-sdk-s3:1.12.281"
 
     //mongodb 추가
-//    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 
     // QueryDSL 라이브러리
     implementation 'com.querydsl:querydsl-core'
