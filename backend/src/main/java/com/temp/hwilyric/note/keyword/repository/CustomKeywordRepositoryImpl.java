@@ -8,7 +8,7 @@ import java.util.List;
 import static com.temp.hwilyric.note.keyword.domain.QKeyword.keyword;
 
 
-public class CustomKeywordRepositoryImpl implements CustomKeywordRepository{
+public class CustomKeywordRepositoryImpl implements CustomKeywordRepository {
 
     private final JPAQueryFactory queryFactory;
 

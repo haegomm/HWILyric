@@ -22,7 +22,7 @@ public class KeywordService {
     private final KeywordRepository keywordRepository;
 
     // 랜덤 키워드 불러오기
-    public List<String> getRandomKeyword(){
+    public List<String> getRandomKeyword() {
         List<String> randomList = keywordRepository.findRandomWord();
         log.debug("랜덤 키워드 리스트 : {}", randomList);
         return randomList;
@@ -37,7 +37,8 @@ public class KeywordService {
         String pythonExecutablePath = "C:/Users/SSAFY/AppData/Local/Programs/Python/Python310/python.exe";
 
         ProcessBuilder processBuilder = new ProcessBuilder(pythonExecutablePath, pythonFilePath);
-        List<String> similar_list = new ArrayList<>();
+        processBuilder.command().add(word); // 파이썬으로 매개변수 전달
+        List<String> similar_list = new ArrayList<>(); // 결과값 저장할 리스트
         try {
             Process process = processBuilder.start();
 

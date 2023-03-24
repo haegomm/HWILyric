@@ -34,7 +34,7 @@ public class KeywordController {
     }
 
     @ApiOperation(value = "유사 키워드 조회")
-    @GetMapping(value="/similarity/{word}")
+    @GetMapping(value = "/similarity/{word}", produces = "application/json;charset=utf-8")
     public ResponseEntity<List<String>> getSimilarKeyword(@PathVariable("word") String word) throws IOException, InterruptedException, NotFoundException {
 
         List<String> similar_list = keywordService.getSimilarKeyword(word);
