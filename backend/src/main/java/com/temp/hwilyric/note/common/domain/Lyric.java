@@ -1,5 +1,6 @@
 package com.temp.hwilyric.note.common.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,4 +11,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Lyric {
     private String type;
     private String lyrics;
+
+    @Builder
+    public Lyric(String type, String lyrics) {
+        this.type = type;
+        this.lyrics = lyrics;
+    }
 }
