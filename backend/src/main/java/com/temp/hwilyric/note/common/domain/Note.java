@@ -8,6 +8,8 @@ import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.List;
 
@@ -16,20 +18,11 @@ import java.util.List;
 @Setter
 public class Note extends TimeConfig {
     @Id
-    private Long id;
+    private String id;
     private Long userId;
     private String title;
     private String thumnail;
     private String memo;
+    private boolean isActive;
     private List<Lyric> lyricList;
-
-    @Builder
-    public Note(Long id, Long userId, String title, String thumnail, String memo, List<Lyric> lyricList) {
-        this.id = id;
-        this.userId = userId;
-        this.title = title;
-        this.thumnail = thumnail;
-        this.memo = memo;
-        this.lyricList = lyricList;
-    }
 }

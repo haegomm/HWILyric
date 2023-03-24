@@ -11,10 +11,4 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Lyric {
     private String type;
     private String lyrics;
-
-    @Builder
-    public Lyric(String type, String lyrics) {
-        this.type = type;
-        this.lyrics = lyrics;
-    }
 }
