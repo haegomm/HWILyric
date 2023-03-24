@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
+import java.util.List;
 
 @Document(collection = "notes")
 @Getter
@@ -16,8 +17,7 @@ public class Note extends TimeConfig {
     private Long id;
     private String title;
     private Long userId;
-
-
+    private List<Lyric> lyricList;
 
 
 }
