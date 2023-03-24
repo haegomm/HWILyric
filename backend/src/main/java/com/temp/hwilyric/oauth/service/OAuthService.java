@@ -201,7 +201,7 @@ public class OAuthService {
                 String nickname = "kakao" + (userRepository.count() + 1);
                 LocalDateTime createdDate = LocalDateTime.now();
 
-                user = new User(email, nickname, createdDate);
+                user = new User(email, nickname);
 
                 return userRepository.saveAndFlush(user);
             }

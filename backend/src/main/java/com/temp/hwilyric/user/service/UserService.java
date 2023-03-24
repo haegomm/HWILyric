@@ -75,12 +75,12 @@ public class UserService {
             profileImg = upload(multipartFile); // 프로필 이미지 업로드
         }
 
-        LocalDateTime createDate = LocalDateTime.now();
+//        LocalDateTime createDate = LocalDateTime.now();
 
         // 사용자 비밀번호 암호화
         String password = bCryptPasswordEncoder.encode(insertUserReq.getPassword());
 
-        User user = User.builder().insertUserReq(insertUserReq).createDate(createDate).password(password).profileImg(profileImg).build();
+        User user = User.builder().insertUserReq(insertUserReq).password(password).profileImg(profileImg).build();
 
         userRepository.save(user);
     }
@@ -144,9 +144,9 @@ public class UserService {
             log.debug("프사 수정했네!");
             profileImg = upload(multipartFile); // 프로필 이미지 업로드
         }
-        LocalDateTime createDate = LocalDateTime.now();
+//        LocalDateTime createDate = LocalDateTime.now();
 
-        user.updateUser(nickname, profileImg, createDate);
+        user.updateUser(nickname, profileImg);
 
         UpdateUserRes updateUserRes = UpdateUserRes.builder().nickname(updateUserReq.getNickname()).profileImg(profileImg).build();
 
