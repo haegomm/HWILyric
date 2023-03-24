@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
+import java.security.SecureRandom;
 import java.util.Random;
 
 @Slf4j
@@ -121,27 +122,27 @@ public class MailService {
     // 인증코드 생성
     public static String createKey() {
         StringBuffer key = new StringBuffer();
-        Random rnd = new Random();
+        SecureRandom random = new SecureRandom();
 
         for (int i = 0; i < 8; i++) { // 인증코드 8자리
-            int index = rnd.nextInt(4); // 0~2 까지 랜덤
+            int index = random.nextInt(4); // 0~2 까지 랜덤
             int special_len = special_mark.length; // 특수문자 배열 길이
 
             switch (index) {
                 case 0:
-                    key.append((char) ((int) (rnd.nextInt(26)) + 97));
+                    key.append((char) ((int) (random.nextInt(26)) + 97));
                     //  a~z  (ex. 1+97=98 => (char)98 = 'b')
                     break;
                 case 1:
-                    key.append((char) ((int) (rnd.nextInt(26)) + 65));
+                    key.append((char) ((int) (random.nextInt(26)) + 65));
                     //  A~Z
                     break;
                 case 2:
-                    key.append((rnd.nextInt(10)));
+                    key.append((random.nextInt(10)));
                     // 0~9
                     break;
                 case 3:
-                    key.append(special_mark[rnd.nextInt(special_len)]);
+                    key.append(special_mark[random.nextInt(special_len)]);
                     break;
             }
         }
