@@ -1,5 +1,6 @@
 package com.temp.hwilyric.user.domain;
 
+import com.temp.hwilyric.config.TimeConfig;
 import com.temp.hwilyric.user.dto.InsertUserReq;
 import com.temp.hwilyric.user.dto.UpdateUserReq;
 import lombok.*;
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User implements Serializable {
+public class User extends TimeConfig {
 
     // pk
     @Id
@@ -46,13 +47,13 @@ public class User implements Serializable {
     @Column(unique = true, length = 200, name = "refresh_token")
     private String refreshToken;
 
-    // 가입일시
-    @Column(nullable = false, name = "created_date")
-    private LocalDateTime createdDate;
-
-    // 수정일시
-    @Column(name = "updated_date")
-    private LocalDateTime updatedDate;
+//    // 가입일시
+//    @Column(nullable = false, name = "created_date")
+//    private LocalDateTime createdDate;
+//
+//    // 수정일시
+//    @Column(name = "updated_date")
+//    private LocalDateTime updatedDate;
 
     // spring security용 컬럼
     @Column(nullable = false, length = 15)
@@ -64,24 +65,24 @@ public class User implements Serializable {
 
     // 일반 사용자 회원가입
     @Builder
-    public User(InsertUserReq insertUserReq, LocalDateTime createDate, String password, String profileImg) {
+    public User(InsertUserReq insertUserReq, String password, String profileImg) {
         this.email = insertUserReq.getEmail();
         this.password = password;
         this.nickname = insertUserReq.getNickname();
         this.profileImg = profileImg;
         this.userType = "NORMAL";
-        this.createdDate = createDate;
+//        this.createdDate = createDate;
         this.role = "ROLE_USER";
         this.isActive = true;
     }
 
         // 카카오 사용자 회원가입
-    public User(String email, String nickname, LocalDateTime createdDate) {
+    public User(String email, String nickname) {
         this.email = email;
         this.nickname = nickname;
         this.profileImg = "https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/profile/hwilyric_logo.png";
         this.userType = "KAKAO";
-        this.createdDate = createdDate;
+//        this.createdDate = createdDate;
         this.role = "ROLE_USER";
         this.isActive = true;
     }
@@ -105,10 +106,10 @@ public class User implements Serializable {
 //    }
 //
 //    // 프로필 수정
-    public void updateUser(String nickname, String profileImg, LocalDateTime updatedDate) {
+    public void updateUser(String nickname, String profileImg) {
         this.nickname = nickname;
         this.profileImg = profileImg;
-        this.updatedDate = updatedDate;
+//        this.updatedDate = updatedDate;
     }
 
     // 비밀번호 변경
