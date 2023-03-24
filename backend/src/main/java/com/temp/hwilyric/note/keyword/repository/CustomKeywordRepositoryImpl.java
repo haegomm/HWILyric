@@ -1,13 +1,7 @@
 package com.temp.hwilyric.note.keyword.repository;
 
-import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
-import com.querydsl.core.types.dsl.NumberExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.temp.hwilyric.note.keyword.domain.QKeyword;
-import com.temp.hwilyric.note.keyword.dto.RandomKeywordRes;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -23,9 +17,9 @@ public class CustomKeywordRepositoryImpl implements CustomKeywordRepository{
     }
 
     @Override
-    public List<RandomKeywordRes> findRandomWord() {
+    public List<String> findRandomWord() {
         return queryFactory
-                .select(Projections.bean(RandomKeywordRes.class, keyword.word))
+                .select(keyword.word)
                 .from(keyword)
                 .where(keyword.category.eq("랜덤"))
                 .orderBy(Expressions.numberTemplate(Double.class, "function('rand')").asc())
