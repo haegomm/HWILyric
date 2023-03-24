@@ -19,7 +19,7 @@ import scala.collection.mutable.ArrayBuffer;
 
 import java.util.*;
 
-@Slf4j
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -32,9 +32,6 @@ public class SimilarityService {
         JaroWinklerSimilarity js = new JaroWinklerSimilarity();
         //사용자가 입력한 가사가 한 줄씩 들어있는 배열
         String[] userLyricList = reqDto.getUserLyricList();
-
-        //session 설정
-//        SparkSqlManager ssm = new SparkSqlManager();
         //db 및 테이블 설정
         Dataset<Row> dataset = ssm.selectTable("music_line");
 
@@ -58,6 +55,8 @@ public class SimilarityService {
                 if (tempList[j] != null && ratio >= 0.75) {
                     //임시 리스트에 가사, 가수, 노래제목, 유사도(비율)넣기
                     LyricInfo info = new LyricInfo((String) newArr[0], (String) newArr[1], (String) newArr[2], ratio);
+                    if(similarLyrics.contains(info))
+                        continue;
                     similarLyrics.add(info);
                 }
             }
