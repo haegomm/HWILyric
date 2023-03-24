@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.9'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
-    id "org.sonarqube" version "3.4.0.2513"
 }
 
 group = 'com.temp'
@@ -54,13 +53,4 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
-}
-
-sonarqube {
-    properties {
-        property "sonar.host.url", "http://j8b107.p.ssafy.io:9000/"
-        property "sonar.login", "admin"        // 로그인 id 또는 인증토큰
-        property "sonar.projectKey", "s08-bigdata-dist-sub2_S08P22B107_AYcADkHE3U4L5PuEVzi1"
-        property "sonar.sourceEncoding", "UTF-8"
-    }
 }
