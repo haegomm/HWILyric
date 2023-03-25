@@ -11,7 +11,7 @@ export const blockIdState = atom<number>({
 })
 
 export interface BlockData {
-    index: number,
+    id: number,
     type?: string,
     lyrics?: Array<string>,
 }
