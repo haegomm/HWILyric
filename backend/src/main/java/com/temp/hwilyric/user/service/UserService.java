@@ -40,7 +40,7 @@ public class UserService {
     private final JavaMailSender mailSender;
     private final AmazonS3Client amazonS3Client;
 
-    private static final String NOTFOUNDUSER = "존재하지 않는 사용자입니다.";
+    private static final String NOT_FOUND_USER = "존재하지 않는 사용자입니다.";
 
 
     // 이메일 중복체크
@@ -89,7 +89,7 @@ public class UserService {
 
     // 로그인
     public User loginUser(LoginUserReq loginUserReq) throws NotFoundException {
-        User user = userRepository.findByEmail(loginUserReq.getEmail()).orElseThrow(() -> new NotFoundException(NOTFOUNDUSER));
+        User user = userRepository.findByEmail(loginUserReq.getEmail()).orElseThrow(() -> new NotFoundException(NOT_FOUND_USER));
 
         log.debug("로그인 시도한 사용자 : {}", user.toString());
         if (bCryptPasswordEncoder.matches(loginUserReq.getPassword(), user.getPassword())) {
@@ -108,13 +108,13 @@ public class UserService {
     // refresh 토큰 DB에서 삭제 - 로그아웃용
     @Transactional
     public void deleteRefreshToken(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(NOTFOUNDUSER));
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(NOT_FOUND_USER));
         user.deleteRefreshToken();
     }
 
     // 비밀번호 일치 여부 확인
     public void checkPassword(Long id, String password) throws NotFoundException {
-        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(NOTFOUNDUSER));
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(NOT_FOUND_USER));
         if (!bCryptPasswordEncoder.matches(password, user.getPassword())) {
             throw new NotFoundException("비밀번호가 일치하지 않습니다.");
         }
@@ -125,7 +125,7 @@ public class UserService {
     @Transactional
     public UpdateUserRes updateUser(Long id, UpdateUserReq updateUserReq, MultipartFile multipartFile) throws Exception, NotFoundException, DuplicateException, NullPointerException {
 
-        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(NOTFOUNDUSER));
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(NOT_FOUND_USER));
 
         // 닉네임을 기본으로 DB에 저장되어 있는 값을 저장
         String nickname = user.getNickname();
@@ -159,7 +159,7 @@ public class UserService {
     // 비밀번호 수정
     @Transactional
     public void updatePassword(Long id, UpdatePasswordReq updatePasswordReq) {
-        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(NOTFOUNDUSER));
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(NOT_FOUND_USER));
 
         // 비밀번호를 변경한 경우에만 update 수행
         if (updatePasswordReq.getPassword() != null) {
