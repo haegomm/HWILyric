@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useRecoilState } from "recoil"
 import { BlockData, blockListState, blockIdState } from "../../../atoms/BlockAtoms"
-import BlockList from "./BlockList"
+// import BlockList from "./BlockList"
 
 function BlockCreate() {
     const [ blockList, setBlockList ] = useRecoilState<BlockData[]>(blockListState)
@@ -15,19 +15,19 @@ function BlockCreate() {
 
     const onCreate = (): void => {
         const newBlock: BlockData = {
-            index: blockId,
+            id: blockId,
             type: blockType,
             lyrics: []
         }
         setBlockId(() => blockId + 1)
-        setBlockList(() => [newBlock, ...blockList])
+        setBlockList(() => [...blockList, newBlock])
     }
 
     return (
         <div>
-            <div className="BlockListBox">
+            {/* <div className="BlockListBox">
                 { blockList ? (<BlockList />) : (<></>) }
-            </div>
+            </div> */}
             <div className="addBlockBox">
                 <select
                     onChange={selectBlockType}>
