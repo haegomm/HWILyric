@@ -1,31 +1,27 @@
-import { useRef } from "react"
-import { useRecoilState } from "recoil"
-import { titleState,  } from "../../../atoms/BlockAtoms"
+import { useRecoilValue } from "recoil"
+import { blockListState, BlockData } from "../../../atoms/BlockAtoms"
+import BlockItem from "./BlockItem"
 
 function BlockList() {
-    const titleInput = useRef<HTMLInputElement>(null)
-    const [ title, setWTitle] = useRecoilState(titleState)
 
-    const handleChangeTitle = () => {
-        if (titleInput.current) {
-            setWTitle(titleInput.current.value)
-            console.log("제목이 뭐야?", title )
-        }
-    }
-
-    const handleSubmit = () => {
-
-    }
+    const blockList = useRecoilValue(blockListState)
 
     return (
-        <div>
-            <input
-                ref={titleInput}
-                value={title}
-                placeholder={"무제"}
-                onChange={handleChangeTitle}
-            />
-            <button onClick={handleSubmit}>저장</button>
+        <div className="blockListBox">
+            {
+                blockList.length > 0 ? blockList.map((block: BlockData) => {
+                    return (
+                        <BlockItem
+                            key={block.id}
+                            {...block}
+                        />
+                    )
+                }) : (
+                    <div>
+                        가사를 자유롭게 작사해보세요🎶      
+                    </div>
+                )
+            }
         </div>
     )
 }
