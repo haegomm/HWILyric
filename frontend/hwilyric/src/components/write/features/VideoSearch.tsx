@@ -19,8 +19,8 @@ function VideoSearch() {
               part: "snippet",
               q: query,
               type: "video",
-              maxResults: 10,
-              key: process.env.REACT_APP_YOUTUBE_API_KEY, // Replace with your YouTube API key
+              maxResults: 1,
+              key: process.env.REACT_APP_YOUTUBE_API_KEY,
             },
           }
         );
@@ -47,14 +47,6 @@ function VideoSearch() {
               <h3 onClick={(e)=>{handleGetVideoId(result.id.videoId)}}>{result.snippet.title}</h3>
               <img src={result.snippet.thumbnails.default.url} alt="thumnail" />
             </div>
-            {/* <iframe
-              width="560"
-              height="315"
-              src={`https://www.youtube.com/embed/${result.id.videoId}`}
-              title={result.snippet.title}
-              frameBorder="0"
-              allowFullScreen
-            ></iframe> */}
           </div>
         ))}
         {/* <div>
