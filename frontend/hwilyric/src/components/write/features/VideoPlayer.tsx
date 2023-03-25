@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import YouTube from "react-youtube";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -14,7 +14,7 @@ type PlayerState = "playing" | "paused" | "stopped" | "unstarted";
 function VideoPlayer() {
   const [playerState, setPlayerState] = useState<PlayerState>("unstarted")
   const playerRef = useRef<YT.Player | null>(null)
-  const [videoId, setVideoId] = useRecoilState(PlayVideoId)
+  const videoId = useRecoilValue(PlayVideoId)
 
   const [isPlay, setIsPlay] = useState(false)
   const toggleIsPlay = () => setIsPlay(!isPlay)
@@ -28,16 +28,11 @@ function VideoPlayer() {
   
   
   const handlePlayerReady = (event: YT.PlayerEvent) => {
-    console.log("Player is ready")
-    console.log("헤이~!여기~!", event.target)
     setDurationTime(event.target.getDuration())
     playerRef.current = event.target
   }
   
   const handlePlayerStateChange = (event: YT.OnStateChangeEvent) => {
-    console.log("Player state has changed", event.data)
-    console.log("이벤트가 뭐야", event)
-    console.log("타입이 뭐야",)
     setPlayerState(() => getPlayerState(event.data))
     onCurrentChange(event)
   }
@@ -75,7 +70,6 @@ function VideoPlayer() {
   }
             
   const secondToHourMinute = () => {
-    console.log("현재 시간", currentTime)
     const now = currentTime.current
     const hour: number = Math.floor(now / 3600)
     const min: number = Math.floor((now % 3600) / 60)
@@ -89,7 +83,6 @@ function VideoPlayer() {
   let intervalId: NodeJS.Timer
   const onCurrentChange = (event: any) => {
     if (playerState === "playing") {
-      console.log("여기!!!!!!!!!!!!!", event.data)
       intervalId = setInterval(() => {
         currentTime.current = Math.floor(event.target.getCurrentTime())
         secondToHourMinute()

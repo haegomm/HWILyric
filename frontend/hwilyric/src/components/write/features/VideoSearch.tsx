@@ -7,7 +7,6 @@ import { PlayVideoId } from "../../../atoms/YoutubeVideoAtoms";
 function VideoSearch() {
     const [query, setQuery] = useState("");
     const [results, setResults] = useState<any[]>([]);
-    // const [videoId, setVideoId] = useState("")
     const [videoId, setVideoId] = useRecoilState(PlayVideoId)
     
   
@@ -21,7 +20,7 @@ function VideoSearch() {
               q: query,
               type: "video",
               maxResults: 1,
-              key: process.env.REACT_APP_YOUTUBE_API_KEY, // Replace with your YouTube API key
+              key: process.env.REACT_APP_YOUTUBE_API_KEY,
             },
           }
         );
