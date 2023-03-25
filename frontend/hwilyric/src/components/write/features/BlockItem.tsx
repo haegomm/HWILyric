@@ -13,10 +13,14 @@ function BlockItem({ id, type, lyrics }: BlockData) {
         return [...blockList.slice(0, index), editedBlock, ...blockList.slice(index+1)]
     }
 
+    const selectBlockType = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setBlockType(event.target.value)
+    }
+
     const editLyrics = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         const editedBlock = {
             id,
-            type,
+            type: blockType,
             lytics: event.target.value,
         }
         const newList = replaceIndex(blockList, index, editedBlock)
@@ -26,13 +30,14 @@ function BlockItem({ id, type, lyrics }: BlockData) {
     return (
         <div>
             <select
-                defaultValue={type}>
+                defaultValue={type}
+                onChange={selectBlockType}>
                 <option value={"Verse 1"}>verse 1</option>
                 <option value={"Verse 2"}>verse 2</option>
                 <option value={"Bridge"}>Bridge</option>
                 <option value={"Hook"}>Hook</option>
                 <option value={"Etc"}>Etc</option>
-                </select>
+            </select>
             <textarea
                 className="writeLyric"
                 value={lyrics}
