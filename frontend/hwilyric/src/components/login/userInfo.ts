@@ -1,5 +1,5 @@
 import React from 'react'
-import { IUserInfoTypes } from '../../types/apiType';
+import { IUserInfoTypes } from '../../types/userType';
 
 export const saveUserInfo = (user: IUserInfoTypes) => {
   window.localStorage.setItem('userType', user.userType)

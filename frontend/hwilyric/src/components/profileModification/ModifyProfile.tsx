@@ -4,7 +4,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import authValidation from "../signup/validation";
 import userApi from "../../api/userApi";
-import { IModifyTypes } from "../../types/apiType";
+import { IModifyTypes } from "../../types/userType";
 import userAtom from "../../atoms/userAtom";
 
 
