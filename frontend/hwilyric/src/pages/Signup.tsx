@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import userApi from "../api/userApi";
-import { ISignupTypes } from "../types/apiType";
+import { ISignupTypes } from "../types/userType";
 import authValidation from "../components/signup/validation";
 
 function Signup() {

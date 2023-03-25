@@ -1,4 +1,4 @@
-import { ILoginTypes } from '../types/apiType'
+import { ILoginTypes } from '../types/userType'
 import { axios, fileAxios } from './https'
 
 async function checkEmail(email:string) {
