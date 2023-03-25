@@ -5,8 +5,6 @@ function Home() {
     return (
         <div>
             <h1>HWILyric</h1>
-            <VideoSearch />
-            <VideoPlayer />
         </div>
     )
 }
