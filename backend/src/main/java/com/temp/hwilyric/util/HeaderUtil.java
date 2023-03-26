@@ -4,8 +4,12 @@ import javax.servlet.http.HttpServletRequest;
 
 public class HeaderUtil {
 
-    private final static String HEADER_AUTHORIZATION = "Authorization";
-    private final static String TOKEN_PREFIX = "Bearer ";
+    private static final String HEADER_AUTHORIZATION = "Authorization";
+    private static final String TOKEN_PREFIX = "Bearer ";
+
+    private HeaderUtil(){
+        throw new IllegalStateException("HeaderUtil class");
+    }
 
     public static String getAccessToken(HttpServletRequest request) {
         String headerValue = request.getHeader(HEADER_AUTHORIZATION);
