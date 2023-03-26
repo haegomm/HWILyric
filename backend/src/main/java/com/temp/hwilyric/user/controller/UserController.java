@@ -209,7 +209,7 @@ public class UserController {
 
         AuthToken authTokenRefreshToken = tokenProvider.convertAuthToken(refreshToken);
 
-        if (authTokenRefreshToken.validate() == false || user.getRefreshToken() == null) {
+        if (!authTokenRefreshToken.validate() || user.getRefreshToken() == null) {
             log.debug("유효하지 않은 refresh token 입니다.");
             throw new UnAuthorizedException("유효하지 않은 refresh token 입니다.");
         }
