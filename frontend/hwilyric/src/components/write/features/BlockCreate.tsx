@@ -1,13 +1,12 @@
 import { useState } from "react"
 import { useRecoilState } from "recoil"
 import { BlockData, blockListState, blockIdState } from "../../../atoms/BlockAtoms"
-// import BlockList from "./BlockList"
 
 function BlockCreate() {
     const [ blockList, setBlockList ] = useRecoilState<BlockData[]>(blockListState)
     const [ blockId, setBlockId ] = useRecoilState<number>(blockIdState)
 
-    const [ blockType, setBlockType ] = useState<string>()
+    const [ blockType, setBlockType ] = useState<string>("Verse 1")
 
     const selectBlockType = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setBlockType(event.target.value)
@@ -17,7 +16,7 @@ function BlockCreate() {
         const newBlock: BlockData = {
             id: blockId,
             type: blockType,
-            lyrics: []
+            lyrics: ""
         }
         setBlockId(() => blockId + 1)
         setBlockList(() => [...blockList, newBlock])
@@ -25,9 +24,6 @@ function BlockCreate() {
 
     return (
         <div>
-            {/* <div className="BlockListBox">
-                { blockList ? (<BlockList />) : (<></>) }
-            </div> */}
             <div className="addBlockBox">
                 <select
                     onChange={selectBlockType}>
