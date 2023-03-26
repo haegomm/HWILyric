@@ -145,9 +145,7 @@ public class UserService {
 
         user.updateUser(nickname, profileImg);
 
-        UpdateUserRes updateUserRes = UpdateUserRes.builder().nickname(updateUserReq.getNickname()).profileImg(profileImg).build();
-
-        return updateUserRes;
+        return UpdateUserRes.builder().nickname(updateUserReq.getNickname()).profileImg(profileImg).build();
 
     }
 
@@ -180,10 +178,7 @@ public class UserService {
                         .withCannedAcl(CannedAccessControlList.PublicRead)
         );
 
-        String imagePath = amazonS3Client.getUrl(bucket, originalName).toString(); // 접근가능한 URL 가져오기
-
-
-        return imagePath;
+        return amazonS3Client.getUrl(bucket, originalName).toString(); // 접근가능한 URL 가져오기
     }
 
 }

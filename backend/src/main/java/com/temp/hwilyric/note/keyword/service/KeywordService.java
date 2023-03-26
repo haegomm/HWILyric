@@ -43,10 +43,10 @@ public class KeywordService {
             Process process = processBuilder.start();
 
             // error stream 읽어오는 부분
-            BufferedReader error_reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            String error_line;
-            while ((error_line = error_reader.readLine()) != null) {
-                log.debug("에러 문구 : {}",error_line);
+            BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+            String errorLine;
+            while ((errorLine = errorReader.readLine()) != null) {
+                log.debug("에러 문구 : {}",errorLine);
             }
 
             // 파이썬 스크립트의 출력을 읽어옵니다.
