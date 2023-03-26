@@ -2,7 +2,6 @@ package com.temp.hwilyric.jwt;
 
 import com.temp.hwilyric.exception.TokenValidFailedException;
 import com.temp.hwilyric.oauth.domain.PrincipalDetails;
-import com.temp.hwilyric.user.domain.User;
 import com.temp.hwilyric.user.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.security.Keys;
