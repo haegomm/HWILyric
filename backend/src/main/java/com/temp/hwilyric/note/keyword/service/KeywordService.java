@@ -23,7 +23,14 @@ public class KeywordService {
 
     // 랜덤 키워드 불러오기
     public List<String> getRandomKeyword() {
-        List<String> randomList = keywordRepository.findRandomWord();
+        String random = "랜덤";
+        List<String> randomList = keywordRepository.findRandomWord(random, true, 7); // 한글 단어 담기
+        List<String> englishList = keywordRepository.findRandomWord(random, false, 3); // 영어 단어
+
+        // randomList에 영어 단어 추가하기
+        for(String english : englishList){
+            randomList.add(english);
+        }
         log.debug("랜덤 키워드 리스트 : {}", randomList);
         return randomList;
     }
