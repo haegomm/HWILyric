@@ -15,7 +15,7 @@ import java.util.*;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class PrincipalDetails {
-    
+
     private Map<String, Object> attributes;
     private User user;
 
