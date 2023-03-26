@@ -36,16 +36,16 @@ public class AuthTokenProvider {
         this.userRepository = userRepository;
     }
 
-    public AuthToken createAuthToken(String id, Date expiry) {
-        return new AuthToken(id, expiry, key, userRepository);
+    public AuthToken createAuthToken(Date expiry) {
+        return new AuthToken(expiry, key);
     }
 
     public AuthToken createAuthToken(Long id, String role, Date expiry) {
-        return new AuthToken(id, role, expiry, key, userRepository);
+        return new AuthToken(id, role, expiry, key);
     }
 
     public AuthToken convertAuthToken(String token) {
-        return new AuthToken(token, key, userRepository);
+        return new AuthToken(token, key);
     }
 
     public Authentication getAuthentication(AuthToken authToken) {

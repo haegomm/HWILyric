@@ -128,7 +128,6 @@ public class OAuthService {
             long refreshTokenExpiry = appProperties.getAuth().getRefreshTokenExpiry();
 
             AuthToken refreshToken = tokenProvider.createAuthToken(
-                    appProperties.getAuth().getTokenSecret(),
                     new Date(now.getTime() + refreshTokenExpiry)
             );
 
