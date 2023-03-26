@@ -1,23 +1,25 @@
-import { useState } from "react"
+import { useCallback, useRef, useState } from "react"
 import { useRecoilState } from "recoil"
 import { blockListState, BlockData } from "../../../atoms/BlockAtoms"
 
 function BlockItem({ id, type, lyrics }: BlockData) {
 
     const [blockList, setBlockList] = useRecoilState(blockListState)
-    const index = blockList.findIndex((block)=> block.id === id)
+    const index = blockList.findIndex((block) => block.id === id)
 
-    const [ blockType, setBlockType ] = useState<string>()
+    const [blockType, setBlockType] = useState<string>()
 
-    const replaceIndex = (blockList: BlockData[], index: number, editedBlock: BlockData ) => {
-        return [...blockList.slice(0, index), editedBlock, ...blockList.slice(index+1)]
+    const ref = useRef<HTMLTextAreaElement>(null)
+
+    const replaceIndex = (blockList: BlockData[], index: number, editedBlock: BlockData) => {
+        return [...blockList.slice(0, index), editedBlock, ...blockList.slice(index + 1)]
     }
 
     const selectBlockType = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setBlockType(event.target.value)
     }
 
-    const editLyrics = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const onEditLyrics = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         const editedBlock = {
             id,
             type: blockType,
@@ -26,6 +28,19 @@ function BlockItem({ id, type, lyrics }: BlockData) {
         const newList = replaceIndex(blockList, index, editedBlock)
         setBlockList(newList)
     }
+
+    const onDeleteBlock = () => {
+        const newBlockList = blockList.filter((block) => block.id !== id)
+        setBlockList(newBlockList)
+    }
+
+    const handleResizeHeight = useCallback(() => {
+        if (ref === null || ref.current === null) {
+            return
+        }
+        ref.current.style.height = '88px'
+        ref.current.style.height = ref.current.scrollHeight + 'px'
+    }, [])
 
     return (
         <div>
@@ -41,8 +56,11 @@ function BlockItem({ id, type, lyrics }: BlockData) {
             <textarea
                 className="writeLyric"
                 value={lyrics}
-                onChange={editLyrics}
+                ref={ref}
+                onChange={onEditLyrics}
+                onInput={handleResizeHeight}
             />
+            <button onClick={onDeleteBlock}>-</button>
         </div>
     )
 }
