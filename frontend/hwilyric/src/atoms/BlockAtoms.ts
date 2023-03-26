@@ -13,7 +13,7 @@ export const blockIdState = atom<number>({
 export interface BlockData {
     id: number,
     type?: string,
-    lyrics?: Array<string>,
+    lyrics?: string,
 }
 
 export const blockListState = atom<BlockData[]>({
