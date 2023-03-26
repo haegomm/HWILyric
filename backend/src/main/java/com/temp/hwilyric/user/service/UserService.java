@@ -36,8 +36,6 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final PasswordEncoder passwordEncoder;
-    private final JavaMailSender mailSender;
     private final AmazonS3Client amazonS3Client;
 
     private static final String NOT_FOUND_USER = "존재하지 않는 사용자입니다.";
@@ -76,8 +74,6 @@ public class UserService {
             log.debug("프사가 null이 아니네!!");
             profileImg = upload(multipartFile); // 프로필 이미지 업로드
         }
-
-//        LocalDateTime createDate = LocalDateTime.now();
 
         // 사용자 비밀번호 암호화
         String password = bCryptPasswordEncoder.encode(insertUserReq.getPassword());
@@ -146,7 +142,6 @@ public class UserService {
             log.debug("프사 수정했네!");
             profileImg = upload(multipartFile); // 프로필 이미지 업로드
         }
-//        LocalDateTime createDate = LocalDateTime.now();
 
         user.updateUser(nickname, profileImg);
 
