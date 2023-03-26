@@ -2,9 +2,6 @@ package com.temp.hwilyric.user.dto;
 
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
 @Getter
 @ToString
 @NoArgsConstructor

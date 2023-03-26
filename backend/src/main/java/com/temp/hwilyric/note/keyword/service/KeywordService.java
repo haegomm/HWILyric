@@ -43,10 +43,10 @@ public class KeywordService {
             Process process = processBuilder.start();
 
             // error stream 읽어오는 부분
-            BufferedReader error_reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            String error_line;
-            while ((error_line = error_reader.readLine()) != null) {
-                log.debug("에러 문구 : {}",error_line);
+            BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+            String errorLine;
+            while ((errorLine = errorReader.readLine()) != null) {
+                log.debug("에러 문구 : {}",errorLine);
             }
 
             // 파이썬 스크립트의 출력을 읽어옵니다.
@@ -63,8 +63,10 @@ public class KeywordService {
             int exitCode = process.waitFor();
             log.debug("Python script exited wite code : {}", Integer.toString(exitCode));
 
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+        } catch (InterruptedException | IOException e) {
+            log.error(e.getMessage());
+            // 스레드에 exception이 발생하면 해당 메서드가 interrupt 됐음을 알려줌.
+            Thread.currentThread().interrupt();
         }
         return similarList;
     }

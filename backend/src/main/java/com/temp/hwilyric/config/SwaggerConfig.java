@@ -16,6 +16,8 @@ import java.util.List;
 @EnableSwagger2
 public class SwaggerConfig {
 
+    private static final String AUTHORIZATION = "Authorization";
+
     @Bean
     public Docket api() {
 
@@ -40,11 +42,11 @@ public class SwaggerConfig {
         AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;
-        return Arrays.asList(new SecurityReference("Authorization", authorizationScopes));
+        return Arrays.asList(new SecurityReference(AUTHORIZATION, authorizationScopes));
     }
 
     private ApiKey apiKey() {
-        return new ApiKey("Authorization", "Authorization", "header");
+        return new ApiKey(AUTHORIZATION, AUTHORIZATION, "header");
     }
 
     private ApiInfo apiInfo() {

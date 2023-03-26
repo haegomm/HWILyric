@@ -47,14 +47,6 @@ public class User extends TimeConfig {
     @Column(unique = true, length = 200, name = "refresh_token")
     private String refreshToken;
 
-//    // 가입일시
-//    @Column(nullable = false, name = "created_date")
-//    private LocalDateTime createdDate;
-//
-//    // 수정일시
-//    @Column(name = "updated_date")
-//    private LocalDateTime updatedDate;
-
     // spring security용 컬럼
     @Column(nullable = false, length = 15)
     private String role;
@@ -71,7 +63,6 @@ public class User extends TimeConfig {
         this.nickname = insertUserReq.getNickname();
         this.profileImg = profileImg;
         this.userType = "NORMAL";
-//        this.createdDate = createDate;
         this.role = "ROLE_USER";
         this.isActive = true;
     }
@@ -82,16 +73,10 @@ public class User extends TimeConfig {
         this.nickname = nickname;
         this.profileImg = "https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/profile/hwilyric_logo.png";
         this.userType = "KAKAO";
-//        this.createdDate = createdDate;
         this.role = "ROLE_USER";
         this.isActive = true;
     }
 
-//    // 카카오 사용자 이메일 수정
-//    public void updateEmail(String email) {
-//        this.email = email;
-//    }
-//
     public void saveRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
     }
@@ -100,16 +85,10 @@ public class User extends TimeConfig {
         this.refreshToken = null;
     }
 
-//    // 회원 정보 조회
-//    public GetUserRes toDTO() {
-//        return new GetUserRes(id, email, nickname, profileImg);
-//    }
-//
-//    // 프로필 수정
+    // 프로필 수정
     public void updateUser(String nickname, String profileImg) {
         this.nickname = nickname;
         this.profileImg = profileImg;
-//        this.updatedDate = updatedDate;
     }
 
     // 비밀번호 변경

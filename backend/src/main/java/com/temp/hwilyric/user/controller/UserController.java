@@ -6,12 +6,10 @@ import com.temp.hwilyric.exception.UnAuthorizedException;
 import com.temp.hwilyric.jwt.AuthToken;
 import com.temp.hwilyric.jwt.AuthTokenProvider;
 import com.temp.hwilyric.oauth.domain.AppProperties;
-import com.temp.hwilyric.oauth.dto.KakaoLoginReq;
 import com.temp.hwilyric.oauth.dto.KakaoLoginRes;
 import com.temp.hwilyric.oauth.service.OAuthService;
 import com.temp.hwilyric.user.domain.User;
 import com.temp.hwilyric.user.dto.*;
-import com.temp.hwilyric.user.repository.UserRepository;
 import com.temp.hwilyric.user.service.MailService;
 import com.temp.hwilyric.user.service.UserService;
 import com.temp.hwilyric.util.CookieUtil;
@@ -30,11 +28,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Date;
-import java.util.List;
 
 
 @Slf4j // log 사용하기 위한 어노테이션
@@ -50,7 +44,7 @@ public class UserController {
     private final UserService userService;
     private final OAuthService oAuthService;
     private final MailService mailService;
-    //
+
     private final AuthTokenProvider tokenProvider;
     private final AppProperties appProperties;
 
@@ -137,7 +131,6 @@ public class UserController {
 
 
         AuthToken refreshToken = tokenProvider.createAuthToken(
-                appProperties.getAuth().getTokenSecret(),
                 new Date(now.getTime() + refreshTokenExpiry)
         );
 
@@ -166,7 +159,7 @@ public class UserController {
         status = HttpStatus.OK;
 
 
-        return new ResponseEntity<LoginUserRes>(loginUserRes, status);
+        return new ResponseEntity<>(loginUserRes, status);
     }
 
     @ApiOperation(value = "임시 비밀번호 이메일 전송")
@@ -215,7 +208,7 @@ public class UserController {
 
         AuthToken authTokenRefreshToken = tokenProvider.convertAuthToken(refreshToken);
 
-        if (authTokenRefreshToken.validate() == false || user.getRefreshToken() == null) {
+        if (!authTokenRefreshToken.validate() || user.getRefreshToken() == null) {
             log.debug("유효하지 않은 refresh token 입니다.");
             throw new UnAuthorizedException("유효하지 않은 refresh token 입니다.");
         }
