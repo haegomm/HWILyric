@@ -13,6 +13,11 @@ import java.util.Optional;
  */
 public class CookieUtil {
 
+//    static 멤버들로 구성된 클래스를 정의 할 때는 non-public한 생성자를 하나 명시적으로 정의
+    private CookieUtil(){
+        throw new IllegalStateException("CookieUtil class");
+    }
+
     public static Optional<Cookie> getCookie(HttpServletRequest request, String name) {
         Cookie[] cookies = request.getCookies();
 

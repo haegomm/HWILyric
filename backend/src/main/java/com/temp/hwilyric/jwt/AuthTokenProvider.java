@@ -2,7 +2,6 @@ package com.temp.hwilyric.jwt;
 
 import com.temp.hwilyric.exception.TokenValidFailedException;
 import com.temp.hwilyric.oauth.domain.PrincipalDetails;
-import com.temp.hwilyric.user.domain.User;
 import com.temp.hwilyric.user.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.security.Keys;
@@ -37,16 +36,16 @@ public class AuthTokenProvider {
         this.userRepository = userRepository;
     }
 
-    public AuthToken createAuthToken(String id, Date expiry) {
-        return new AuthToken(id, expiry, key, userRepository);
+    public AuthToken createAuthToken(Date expiry) {
+        return new AuthToken(expiry, key);
     }
 
     public AuthToken createAuthToken(Long id, String role, Date expiry) {
-        return new AuthToken(id, role, expiry, key, userRepository);
+        return new AuthToken(id, role, expiry, key);
     }
 
     public AuthToken convertAuthToken(String token) {
-        return new AuthToken(token, key, userRepository);
+        return new AuthToken(token, key);
     }
 
     public Authentication getAuthentication(AuthToken authToken) {

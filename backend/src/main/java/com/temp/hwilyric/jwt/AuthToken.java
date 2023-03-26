@@ -20,18 +20,14 @@ public class AuthToken {
     private final Key key;
     private static final String AUTHORITIES_KEY = "role";
 
-    private final UserRepository userRepository;
 
-
-    public AuthToken(String id, Date expiry, Key key, UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public AuthToken(Date expiry, Key key) {
         this.key = key;
-        this.token = createAuthToken(id, expiry);
+        this.token = createAuthToken(expiry);
     }
 
 
-    public AuthToken(Long id, String role, Date expiry, Key key, UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public AuthToken(Long id, String role, Date expiry, Key key) {
         this.key = key;
         this.token = createAuthToken(id, role, expiry);
     }
@@ -43,7 +39,7 @@ public class AuthToken {
      * expire : 토큰 유효기간 설정을 위한 값
      * jwt 토큰의 구성 : header+payload+signature
      */
-    private String createAuthToken(String id, Date expiry) {
+    private String createAuthToken(Date expiry) {
         return Jwts.builder()
                 .setHeaderParam("type", "JWT")
                 .setHeaderParam("createdDate", System.currentTimeMillis())

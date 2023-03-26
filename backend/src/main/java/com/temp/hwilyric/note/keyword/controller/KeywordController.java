@@ -30,16 +30,16 @@ public class KeywordController {
     public ResponseEntity<List<String>> getRandomKeyword() {
         List<String> randomList = keywordService.getRandomKeyword();
 
-        return new ResponseEntity<List<String>>(randomList, HttpStatus.OK);
+        return new ResponseEntity<>(randomList, HttpStatus.OK);
     }
 
     @ApiOperation(value = "유사 키워드 조회")
     @GetMapping(value = "/similarity/{word}", produces = "application/json;charset=utf-8")
-    public ResponseEntity<List<String>> getSimilarKeyword(@PathVariable("word") String word) throws IOException, InterruptedException, NotFoundException {
+    public ResponseEntity<List<String>> getSimilarKeyword(@PathVariable("word") String word) throws NotFoundException {
 
         List<String> similarList = keywordService.getSimilarKeyword(word);
 
-        return new ResponseEntity<List<String>>(similarList, HttpStatus.OK);
+        return new ResponseEntity<>(similarList, HttpStatus.OK);
     }
 
 }
