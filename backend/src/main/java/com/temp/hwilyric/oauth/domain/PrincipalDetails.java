@@ -14,36 +14,10 @@ import java.util.*;
 @Data
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class PrincipalDetails implements UserDetails, OAuth2User {
-
-    private String email;
-    private String password;
-    private ProviderType providerType;
-    private RoleType roleType;
-    private Collection<GrantedAuthority> authorities;
+public class PrincipalDetails {
+    
     private Map<String, Object> attributes;
     private User user;
-
-    public <T> PrincipalDetails(String email, String password, ProviderType providerType, RoleType user, List<T> singletonList) {
-    }
-
-    public static PrincipalDetails create(User user) {
-        ProviderType providerType = ProviderType.valueOf(user.getUserType());
-        return new PrincipalDetails(
-                user.getEmail(),
-                user.getPassword(),
-                providerType,
-                RoleType.USER,
-                Collections.singletonList(new SimpleGrantedAuthority(RoleType.USER.getCode()))
-        );
-    }
-
-    public static PrincipalDetails create(User user, Map<String, Object> attributes) {
-        PrincipalDetails userPrincipal = create(user);
-        userPrincipal.setAttributes(attributes);
-
-        return userPrincipal;
-    }
 
     public PrincipalDetails(User user) {
         this.user = user;
@@ -52,57 +26,5 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     public PrincipalDetails(User user, Map<String, Object> attributes) {
         this.user = user;
         this.attributes = attributes;
-    }
-
-    @Override
-    public String getName() {
-        return null;
-    }
-
-    @Override
-    public Map<String, Object> getAttributes() {
-        return attributes;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> collect = new ArrayList<>();
-        collect.add(new GrantedAuthority() {
-            @Override
-            public String getAuthority() {
-                return user.getRole();
-            }
-        });
-        return collect;
-    }
-
-    @Override
-    public String getPassword() {
-        return user.getPassword();
-    }
-
-    @Override
-    public String getUsername() {
-        return user.getNickname();
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
     }
 }
