@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
 import java.security.SecureRandom;
-import java.util.Random;
 
 @Slf4j
 @Service
@@ -126,7 +125,7 @@ public class MailService {
 
     // 인증코드 생성
     public static String createKey() {
-        StringBuffer key = new StringBuffer();
+        StringBuilder key = new StringBuilder();
 
         // CHARACTERS 상수는 인증 코드에서 사용할 수 있는 문자들(숫자, 영어 대소문자, 특수문자)을 모두 포함함.
         for (int i = 0; i < 8; i++) {
