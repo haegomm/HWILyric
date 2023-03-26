@@ -63,8 +63,10 @@ public class KeywordService {
             int exitCode = process.waitFor();
             log.debug("Python script exited wite code : {}", Integer.toString(exitCode));
 
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+        } catch (InterruptedException | IOException e) {
+            log.error(e.getMessage());
+            // 스레드에 exception이 발생하면 해당 메서드가 interrupt 됐음을 알려줌.
+            Thread.currentThread().interrupt();
         }
         return similarList;
     }
