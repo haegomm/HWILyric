@@ -36,9 +36,9 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final PasswordEncoder passwordEncoder;
-    private final JavaMailSender mailSender;
     private final AmazonS3Client amazonS3Client;
+
+    private static final String NOT_FOUND_USER = "존재하지 않는 사용자입니다.";
 
 
     // 이메일 중복체크
@@ -75,8 +75,6 @@ public class UserService {
             profileImg = upload(multipartFile); // 프로필 이미지 업로드
         }
 
-//        LocalDateTime createDate = LocalDateTime.now();
-
         // 사용자 비밀번호 암호화
         String password = bCryptPasswordEncoder.encode(insertUserReq.getPassword());
 
@@ -87,7 +85,7 @@ public class UserService {
 
     // 로그인
     public User loginUser(LoginUserReq loginUserReq) throws NotFoundException {
-        User user = userRepository.findByEmail(loginUserReq.getEmail()).orElseThrow(() -> new NotFoundException("존재하지 않는 사용자입니다."));
+        User user = userRepository.findByEmail(loginUserReq.getEmail()).orElseThrow(() -> new NotFoundException(NOT_FOUND_USER));
 
         log.debug("로그인 시도한 사용자 : {}", user.toString());
         if (bCryptPasswordEncoder.matches(loginUserReq.getPassword(), user.getPassword())) {
@@ -106,13 +104,13 @@ public class UserService {
     // refresh 토큰 DB에서 삭제 - 로그아웃용
     @Transactional
     public void deleteRefreshToken(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("존재하지 않는 사용자입니다."));
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(NOT_FOUND_USER));
         user.deleteRefreshToken();
     }
 
     // 비밀번호 일치 여부 확인
     public void checkPassword(Long id, String password) throws NotFoundException {
-        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("존재하지 않는 사용자입니다."));
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(NOT_FOUND_USER));
         if (!bCryptPasswordEncoder.matches(password, user.getPassword())) {
             throw new NotFoundException("비밀번호가 일치하지 않습니다.");
         }
@@ -123,7 +121,7 @@ public class UserService {
     @Transactional
     public UpdateUserRes updateUser(Long id, UpdateUserReq updateUserReq, MultipartFile multipartFile) throws Exception, NotFoundException, DuplicateException, NullPointerException {
 
-        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("존재하지 않는 사용자입니다."));
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(NOT_FOUND_USER));
 
         // 닉네임을 기본으로 DB에 저장되어 있는 값을 저장
         String nickname = user.getNickname();
@@ -144,20 +142,17 @@ public class UserService {
             log.debug("프사 수정했네!");
             profileImg = upload(multipartFile); // 프로필 이미지 업로드
         }
-//        LocalDateTime createDate = LocalDateTime.now();
 
         user.updateUser(nickname, profileImg);
 
-        UpdateUserRes updateUserRes = UpdateUserRes.builder().nickname(updateUserReq.getNickname()).profileImg(profileImg).build();
-
-        return updateUserRes;
+        return UpdateUserRes.builder().nickname(updateUserReq.getNickname()).profileImg(profileImg).build();
 
     }
 
     // 비밀번호 수정
     @Transactional
     public void updatePassword(Long id, UpdatePasswordReq updatePasswordReq) {
-        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("존재하지 않는 사용자입니다."));
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(NOT_FOUND_USER));
 
         // 비밀번호를 변경한 경우에만 update 수행
         if (updatePasswordReq.getPassword() != null) {
@@ -183,10 +178,7 @@ public class UserService {
                         .withCannedAcl(CannedAccessControlList.PublicRead)
         );
 
-        String imagePath = amazonS3Client.getUrl(bucket, originalName).toString(); // 접근가능한 URL 가져오기
-
-
-        return imagePath;
+        return amazonS3Client.getUrl(bucket, originalName).toString(); // 접근가능한 URL 가져오기
     }
 
 }

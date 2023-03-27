@@ -85,13 +85,13 @@ public class OAuthService {
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
             String line = "";
-            String kakaoResponse = "";
+            StringBuilder kakaoResponse = new StringBuilder();
 
             while ((line = br.readLine()) != null) {
-                kakaoResponse += line;
+                kakaoResponse.append(line);
             }
             JSONParser parser = new JSONParser();
-            JSONObject jsonObject = (JSONObject) parser.parse(kakaoResponse);
+            JSONObject jsonObject = (JSONObject) parser.parse(kakaoResponse.toString());
 
             kakaoAccessToken = (String) jsonObject.get("access_token");
 
@@ -128,7 +128,6 @@ public class OAuthService {
             long refreshTokenExpiry = appProperties.getAuth().getRefreshTokenExpiry();
 
             AuthToken refreshToken = tokenProvider.createAuthToken(
-                    appProperties.getAuth().getTokenSecret(),
                     new Date(now.getTime() + refreshTokenExpiry)
             );
 
@@ -157,7 +156,7 @@ public class OAuthService {
             throw new IllegalArgumentException("카카오로부터 user 정보를 가져오지 못했습니다.");
         }
 
-        return new ResponseEntity<KakaoLoginRes>(kakaoLoginRes, status);
+        return new ResponseEntity<>(kakaoLoginRes, status);
 
     }
 
@@ -186,9 +185,9 @@ public class OAuthService {
             JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(kakaoResponse);
 
-            Map<String, Object> kakao_account = (Map<String, Object>) jsonObject.get("kakao_account");
+            Map<String, Object> kakaoAccount = (Map<String, Object>) jsonObject.get("kakao_account");
 
-            String email = (String) kakao_account.get("email");
+            String email = (String) kakaoAccount.get("email");
             log.debug("kakao에 등록된 이메일 : {}", email);
 
             user = userRepository.findByEmail(email).orElse(null);
@@ -199,7 +198,6 @@ public class OAuthService {
                 log.debug("카카오 로그인 최초입니다.");
 
                 String nickname = "kakao" + (userRepository.count() + 1);
-                LocalDateTime createdDate = LocalDateTime.now();
 
                 user = new User(email, nickname);
 
