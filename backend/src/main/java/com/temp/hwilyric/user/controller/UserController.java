@@ -244,7 +244,7 @@ public class UserController {
 
     @ApiOperation(value = "프로필 수정")
     @PatchMapping(value = "/users/profile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<UpdateUserRes> updateUser(@RequestPart(value = "userInfo") UpdateUserReq updateUserReq, @RequestPart(value = "profileImg") MultipartFile multipartFile, HttpServletRequest httpServletRequest) throws Exception, NotFoundException, DuplicateException, NullPointerException {
+    public ResponseEntity<UpdateUserRes> updateUser(@RequestPart(value = "userInfo") UpdateUserReq updateUserReq, @RequestPart(value = "profileImg", required = false) MultipartFile multipartFile, HttpServletRequest httpServletRequest) throws Exception, NotFoundException, DuplicateException, NullPointerException {
         User user = (User) httpServletRequest.getAttribute("user");
         UpdateUserRes updateUserRes = userService.updateUser(user.getId(), updateUserReq, multipartFile);
 

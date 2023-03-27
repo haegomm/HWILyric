@@ -17,6 +17,9 @@ configurations {
 
 repositories {
     mavenCentral()
+
+    // 한글 형태소 분석기 KOMORAN
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -96,6 +99,15 @@ dependencies {
     // https://mvnrepository.com/artifact/com.jcraft/jsch
     implementation group: 'com.jcraft', name: 'jsch', version: '0.1.55'
 
+    // 한글 형태소 분석기 KOMORAN
+    implementation 'com.github.shin285:KOMORAN:3.3.4'
+
+    // Word2Vec 관련
+    implementation group: 'org.deeplearning4j', name: 'deeplearning4j-ui', version: '1.0.0-M2'
+    implementation group: 'org.deeplearning4j', name: 'deeplearning4j-nlp', version: '1.0.0-M2'
+    testImplementation group: 'org.nd4j', name: 'nd4j-native', version: '1.0.0-M2'
+    implementation group: 'org.nd4j', name: 'nd4j-native-platform', version: '1.0.0-M2'
+    implementation group: 'org.deeplearning4j', name: 'deeplearning4j-core', version: '1.0.0-M2'
 
 }
 

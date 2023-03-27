@@ -174,16 +174,16 @@ public class OAuthService {
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
             String line = "";
-            String kakaoResponse = "";
+            StringBuilder kakaoResponse = new StringBuilder();
 
             while ((line = br.readLine()) != null) {
-                kakaoResponse += line;
+                kakaoResponse.append(line);
             }
 
             log.debug("카카오에서 사용자 정보 가져오기 response body : {} ", kakaoResponse);
 
             JSONParser parser = new JSONParser();
-            JSONObject jsonObject = (JSONObject) parser.parse(kakaoResponse);
+            JSONObject jsonObject = (JSONObject) parser.parse(kakaoResponse.toString());
 
             Map<String, Object> kakaoAccount = (Map<String, Object>) jsonObject.get("kakao_account");
 

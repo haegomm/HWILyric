@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 
 @Slf4j
@@ -25,7 +25,7 @@ public class KeywordController {
 
     private final KeywordService keywordService;
 
-    @ApiOperation(value = "이메일 중복체크") // Swagger에서 보이는 메서드 이름
+    @ApiOperation(value = "랜덤 키워드") // Swagger에서 보이는 메서드 이름
     @GetMapping(value = "/random")
     public ResponseEntity<List<String>> getRandomKeyword() {
         List<String> randomList = keywordService.getRandomKeyword();
