@@ -1,4 +1,10 @@
 import { atom } from "recoil"
+import { IBlockData } from "../types/noteType"
+
+export const noteIdState = atom<string | null>({
+    key: "noteIdState",
+    default: null
+})
 
 export const titleState = atom<string>({
     key: "titleState",
@@ -10,13 +16,7 @@ export const blockIdState = atom<number>({
     default: 0
 })
 
-export interface BlockData {
-    id: number,
-    type?: string,
-    lyrics?: string,
-}
-
-export const blockListState = atom<BlockData[]>({
+export const blockListState = atom<IBlockData[]>({
     key: 'blockListState',
     default: []
 })

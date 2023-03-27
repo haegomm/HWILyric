@@ -1,19 +1,20 @@
 import { useState } from "react"
 import { useRecoilState } from "recoil"
-import { BlockData, blockListState, blockIdState } from "../../../atoms/BlockAtoms"
+import { blockListState, blockIdState } from "../../../atoms/NoteAtoms"
+import { IBlockData } from "../../../types/noteType"
 
 function BlockCreate() {
-    const [ blockList, setBlockList ] = useRecoilState<BlockData[]>(blockListState)
+    const [ blockList, setBlockList ] = useRecoilState<IBlockData[]>(blockListState)
     const [ blockId, setBlockId ] = useRecoilState<number>(blockIdState)
 
-    const [ blockType, setBlockType ] = useState<string>("Verse 1")
+    const [ blockType, setBlockType ] = useState<string>("Verse")
 
     const selectBlockType = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setBlockType(event.target.value)
     }
 
     const onCreate = (): void => {
-        const newBlock: BlockData = {
+        const newBlock: IBlockData = {
             id: blockId,
             type: blockType,
             lyrics: ""
@@ -27,8 +28,7 @@ function BlockCreate() {
             <div className="addBlockBox">
                 <select
                     onChange={selectBlockType}>
-                    <option value={"Verse 1"}>verse 1</option>
-                    <option value={"Verse 2"}>verse 2</option>
+                    <option value={"Verse"}>Verse</option>
                     <option value={"Bridge"}>Bridge</option>
                     <option value={"Hook"}>Hook</option>
                     <option value={"Etc"}>Etc</option>

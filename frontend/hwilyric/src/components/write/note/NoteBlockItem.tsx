@@ -1,10 +1,11 @@
-import { useCallback, useRef, useState } from "react"
+import { useCallback, useRef } from "react"
 import { Draggable } from "react-beautiful-dnd"
 import { useRecoilState } from "recoil"
-import { blockListState, BlockData } from "../../../atoms/BlockAtoms"
+import { blockListState } from "../../../atoms/NoteAtoms"
+import { IBlockData  } from "../../../types/noteType"
 
 interface BlockItemProps {
-    block: BlockData
+    block: IBlockData
     index: number
 }
 
@@ -12,30 +13,28 @@ function BlockItem({ block, index}: BlockItemProps) {
 
     const [blockList, setBlockList] = useRecoilState(blockListState)
 
-    const [blockType, setBlockType] = useState<string>()
-    const [lyrics, setLyrics] = useState<string>("")
-
     const ref = useRef<HTMLTextAreaElement>(null)
 
-    const onChangeBlockType = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setBlockType(event.target.value)
+    const onEditBlockType = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        let newType: string = event.target.value
+
+        const newBlockList = blockList.map((it) => it.id === block.id ? {
+            ...it,
+            type: newType
+        } : it)
+        
+        setBlockList(newBlockList)
     }
 
-    const onChangeLyrics = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setLyrics(event.target.value)
-        console.log(lyrics)
-    }
-
-    // 자동저장 or 저장 버튼 눌렸을 때
-    const onEditBlocks = () => {
-        let newLyrics: string = lyrics
+    const onEditLyrics = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        let newLyrics: string = event.target.value
         newLyrics = newLyrics.replaceAll("<br>", "\r\n")
 
         const newBlockList = blockList.map((it) => it.id === block.id ? {
             ...it,
-            type: blockType,
             lyrics: newLyrics
         } : it)
+        
         setBlockList(newBlockList)
     }
 
@@ -48,7 +47,7 @@ function BlockItem({ block, index}: BlockItemProps) {
         if (ref === null || ref.current === null) {
             return
         }
-        ref.current.style.height = '88px'
+        ref.current.style.height = '80px'
         ref.current.style.height = ref.current.scrollHeight + 'px'
     }, [])
 
@@ -61,18 +60,17 @@ function BlockItem({ block, index}: BlockItemProps) {
                     ref={provided.innerRef}>
                     <select
                         defaultValue={block.type}
-                        onChange={onChangeBlockType}>
-                        <option value={"Verse 1"}>verse 1</option>
-                        <option value={"Verse 2"}>verse 2</option>
+                        onChange={onEditBlockType}>
+                        <option value={"Verse"}>Verse</option>
                         <option value={"Bridge"}>Bridge</option>
                         <option value={"Hook"}>Hook</option>
                         <option value={"Etc"}>Etc</option>
                     </select>
                     <textarea
                         className="writeLyric"
-                        value={lyrics}
+                        value={block.lyrics}
                         ref={ref}
-                        onChange={onChangeLyrics}
+                        onChange={onEditLyrics}
                         onInput={handleResizeHeight}
                     />
                     <button onClick={onDeleteBlock}>-</button>
