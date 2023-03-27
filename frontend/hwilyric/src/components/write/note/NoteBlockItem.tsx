@@ -1,7 +1,7 @@
 import { useCallback, useRef } from "react"
 import { Draggable } from "react-beautiful-dnd"
 import { useRecoilState } from "recoil"
-import { blockListState } from "../../../atoms/NoteAtoms"
+import { blockListState } from "../../../atoms/noteAtoms"
 import { IBlockData  } from "../../../types/noteType"
 
 interface BlockItemProps {

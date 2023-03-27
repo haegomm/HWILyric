@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import YouTube from "react-youtube";
 import ProgressBar from "react-bootstrap/ProgressBar";
 
-import { PlayVideoId } from "../../../atoms/YoutubeVideoAtoms";
+import { PlayVideoId } from "../../../atoms/youtubeVideoAtoms";
 import { PlayerBox, PlayerVideoBox, PlayButton } from "../../../styles/VideoPlayerStyles";
 
 type PlayerState = "playing" | "paused" | "stopped" | "unstarted";

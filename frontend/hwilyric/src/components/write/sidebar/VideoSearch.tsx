@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useState } from "react"
 import { useRecoilState } from "recoil"
-import { PlayVideoId } from "../../../atoms/YoutubeVideoAtoms";
+import { PlayVideoId } from "../../../atoms/youtubeVideoAtoms";
 
 
 function VideoSearch() {
