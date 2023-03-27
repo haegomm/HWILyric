@@ -1,10 +1,9 @@
-import { useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
 import baseAxios from "axios";
 
 import { deleteUserInfo, getUserInfo } from "../components/login/userInfo";
 import userApi from "./userApi";
 import userAtom from "../atoms/userAtom";
+import ForcedLogout from "./logout";
 
 export const axios = baseAxios.create({
   baseURL: process.env.REACT_APP_API,
@@ -25,25 +24,9 @@ axios.interceptors.response.use(
   function (error) {
     if (error.response && error.response.status) {
       if (error.response.status === 401) {
-        const navigate = useNavigate();
-
-        const setIsLogin = useSetRecoilState(userAtom.IsLoginAtom)
-        const setNickname = useSetRecoilState(userAtom.userNicknameAtom)
-        const setProfileImg = useSetRecoilState(userAtom.userProfileImgAtom)
-
+        console.log('여기까진 왔다')
+        ForcedLogout()
         alert("로그인이 필요합니다.");
-       (async () => {
-          const message = await userApi.logout()
-          if (message === 'success') {
-            deleteUserInfo()
-            setIsLogin(false)
-            setNickname('')
-            setProfileImg('')
-            navigate("/login/dlkfjsaldkfj");
-          } else {
-            alert('로그아웃 실패ㅜ;')
-          }
-        })()
         return new Promise(() => {});
       } else {
         return Promise.reject(error);
@@ -72,25 +55,10 @@ fileAxios.interceptors.response.use(
   function (error) {
     if (error.response && error.response.status) {
       if (error.response.status === 401) {
-        const navigate = useNavigate();
-
-        const setIsLogin = useSetRecoilState(userAtom.IsLoginAtom)
-        const setNickname = useSetRecoilState(userAtom.userNicknameAtom)
-        const setProfileImg = useSetRecoilState(userAtom.userProfileImgAtom)
-
+        console.log('여기까진 왔다')
+        const logout = ForcedLogout()
+        console.log(logout)
         alert("로그인이 필요합니다.");
-        (async () => {
-          const message = await userApi.logout()
-          if (message === 'success') {
-            deleteUserInfo()
-            setIsLogin(false)
-            setNickname('')
-            setProfileImg('')
-            navigate("/login/dlkfjsaldkfj");
-          } else {
-            alert('로그아웃 실패ㅜ;')
-          }
-        })()
           return new Promise(() => {});
       } else{
           return Promise.reject(error);
