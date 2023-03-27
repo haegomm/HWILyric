@@ -1,22 +1,37 @@
 package com.temp.hwilyric.note.common.domain;
 
 import com.temp.hwilyric.config.TimeConfig;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.List;
 
 @Document(collection = "notes")
 @Getter
 @Setter
-public class Note extends TimeConfig {
+@NoArgsConstructor
+public class Note {
     @Id
     private String id;
     private Long userId;
     private String title;
     private String thumnail;
     private String memo;
-    private boolean isActive;
     private List<Lyric> lyricList;
+
+    @Builder
+    public Note(String id, Long userId, String title, String thumnail, String memo, List<Lyric> lyricList) {
+        this.id = id;
+        this.userId = userId;
+        this.title = title;
+        this.thumnail = thumnail;
+        this.memo = memo;
+        this.lyricList = lyricList;
+    }
 }

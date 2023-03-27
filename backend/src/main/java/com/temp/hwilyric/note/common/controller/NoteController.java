@@ -24,8 +24,10 @@ public class NoteController {
     private static final String FAIL = "fail";
 
     @PostMapping("/insert")
-    public ResponseEntity<String> addNote(@RequestBody Note note) {
-        Note newNote = noteService.insert(note);
+    public ResponseEntity<String> addNote(@RequestBody Note note, HttpServletRequest httpServletRequest) {
+        User user = (User) httpServletRequest.getAttribute("user");
+
+        Note newNote = noteService.insert(note, user.getId());
         if(newNote == null)
             return new ResponseEntity<>(FAIL, HttpStatus.NO_CONTENT);
         return new ResponseEntity<>(newNote.getId(), HttpStatus.OK);
@@ -52,8 +54,10 @@ public class NoteController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity<String> updateNote(@RequestBody Note note) {
-        Note newNote = noteService.update(note);
+    public ResponseEntity<String> updateNote(@RequestBody Note note, HttpServletRequest httpServletRequest) {
+        User user = (User) httpServletRequest.getAttribute("user");
+
+        Note newNote = noteService.insert(note, user.getId());
         if(newNote == null)
             return new ResponseEntity<>(FAIL, HttpStatus.NO_CONTENT);
         return new ResponseEntity<>(newNote.getId(), HttpStatus.OK);
