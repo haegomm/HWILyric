@@ -4,7 +4,6 @@ import com.temp.hwilyric.exception.RestAuthenticationEntryPoint;
 import com.temp.hwilyric.jwt.AuthTokenProvider;
 import com.temp.hwilyric.jwt.TokenAccessDeniedHandler;
 import com.temp.hwilyric.jwt.TokenAuthenticationFilter;
-import com.temp.hwilyric.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

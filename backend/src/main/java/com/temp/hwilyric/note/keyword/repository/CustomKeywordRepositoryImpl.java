@@ -17,13 +17,16 @@ public class CustomKeywordRepositoryImpl implements CustomKeywordRepository {
     }
 
     @Override
-    public List<String> findRandomWord() {
+    public List<String> findRandomWord(String category, boolean isHangul, int num) {
         return queryFactory
                 .select(keyword.word)
                 .from(keyword)
-                .where(keyword.category.eq("랜덤"))
+                .where(
+                        keyword.category.eq(category),
+                        keyword.isHangul.eq(isHangul)
+                )
                 .orderBy(Expressions.numberTemplate(Double.class, "function('rand')").asc())
-                .limit(10)
+                .limit(num)
                 .fetch();
     }
 }
