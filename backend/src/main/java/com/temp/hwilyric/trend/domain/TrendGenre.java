@@ -1,29 +1,31 @@
 package com.temp.hwilyric.trend.domain;
 
+
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Slf4j
 @ToString
-@Table(name="trend")
+@Table(name="trend_genre")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Trend {
+public class TrendGenre {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "annual")
-    private int annual;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "trend_id")
+    private Trend trend;
 
-    @OneToMany(mappedBy = "trend")
-    private List<TrendGenre> trendGenres;
+    @Column(name = "name")
+    private String name;
 
-    @OneToMany(mappedBy = "trend")
-    private List<TrendKeyword> trendKeywords;
+    @Column(name = "ratio")
+    private Double ratio;
 }
