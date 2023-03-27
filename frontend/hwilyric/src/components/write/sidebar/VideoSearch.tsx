@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useState } from "react"
 import { useRecoilState } from "recoil"
-import { PlayVideoId } from "../../../atoms/youtubeVideoAtoms";
+import { PlayVideoId } from "../../../atoms/youtubeVideoAtoms"
 
 
 function VideoSearch() {
@@ -20,7 +20,7 @@ function VideoSearch() {
               q: query,
               type: "video",
               maxResults: 10,
-              key: process.env.REACT_APP_YOUTUBE_API_KEY, // Replace with your YouTube API key
+              key: process.env.REACT_APP_YOUTUBE_API_KEY,
             },
           }
         );
