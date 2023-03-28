@@ -1,4 +1,4 @@
-package com.holorok.hwilyric.works.similarity.service;
+package com.holorok.hwilyric.common;
 
 import com.jcraft.jsch.JSchException;
 import lombok.extern.slf4j.Slf4j;

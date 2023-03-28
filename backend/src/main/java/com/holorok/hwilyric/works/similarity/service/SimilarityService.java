@@ -1,5 +1,6 @@
 package com.holorok.hwilyric.works.similarity.service;
 
+import com.holorok.hwilyric.common.SparkSqlManager;
 import com.holorok.hwilyric.works.similarity.dto.LyricInfo;
 import com.holorok.hwilyric.works.similarity.dto.LyricPairDto;
 import com.jcraft.jsch.JSchException;
