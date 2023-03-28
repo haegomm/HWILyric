@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 
+import java.io.Serializable;
+
 
 @Entity
 @Slf4j
@@ -13,7 +15,7 @@ import javax.persistence.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class TrendKeyword {
+public class TrendKeyword implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
