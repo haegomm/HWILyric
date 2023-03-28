@@ -57,7 +57,7 @@ function Signup() {
       ? setEmailFormError("")
       : setEmailFormError("올바르지 않은 이메일 형식입니다");
       const message = await userApi.checkEmail(currentEmail)
-      if (message === "success") {
+      if ((message === "success") || !currentEmail) {
         setEmailError("");
       } else {
         setEmailError("이미 가입한 이메일입니다");
@@ -106,7 +106,7 @@ function Signup() {
       setPassword(e.currentTarget.value);
       authValidation(e.currentTarget.value, "password")
         ? setPasswordError("")
-        : setPasswordError("8자 이상 20자 이하의 비밀번호를 입력해주세요");
+        : setPasswordError("영대/소문자, 숫자, 특수문자가 포함된 8자 이상 20자 이하의 비밀번호를 입력해주세요");
     };
 
     const onConfirmPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -209,21 +209,21 @@ function Signup() {
           <button
             type="submit"
             className="signupButton"
-            // disabled={
-            //   Email &&
-            //   Nickname &&
-            //   Password &&
-            //   ConfirmPassword &&
-            //   profileImage &&
-            //   !emailError &&
-            //   !emailFormError &&
-            //   !nicknameError &&
-            //   !nicknameFormError &&
-            //   !passwordError &&
-            //   !confirmPasswordError
-            //     ? false
-            //     : true
-            // }
+            disabled={
+              Email &&
+              Nickname &&
+              Password &&
+              ConfirmPassword &&
+              (verificationError === '인증이 완료되었습니다') &&
+              !emailError &&
+              !emailFormError &&
+              !nicknameError &&
+              !nicknameFormError &&
+              !passwordError &&
+              !confirmPasswordError
+                ? false
+                : true
+            }
           >
             가입하기
           </button>
