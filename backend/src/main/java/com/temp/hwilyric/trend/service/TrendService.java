@@ -22,7 +22,7 @@ import com.temp.hwilyric.trend.repository.TrendKeywordRepository;
 public class TrendService {
 
     @Autowired
-    private NewlyTrendRepository newlytrendRepository;
+    private NewlyTrendRepository newlyTrendRepository;
 
     @Autowired
     private TrendGenreRepository trendGenreRepository;
@@ -34,7 +34,7 @@ public class TrendService {
     private TrendSongRepository trendSongRepository;
 
     public List<NewlyTrend> getMusicsByReleaseDateBetween(Date startDate, Date endDate) {
-        return newlytrendRepository.findByReleasedDateBetween(startDate, endDate);
+        return newlyTrendRepository.findByReleasedDateBetween(startDate, endDate);
     }
     public List<TrendGenre> getTrendGenresByYear(int annual) {
         return trendGenreRepository.findByTrend_Annual(annual);

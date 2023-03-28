@@ -29,7 +29,7 @@ public class Music {
     private String lyrics;
 
     @Column(name = "is_foreign")
-    private byte is_foreign;
+    private byte isForeign;
 
     @Column(name = "album")
     private String album;
@@ -44,7 +44,7 @@ public class Music {
     private int chartYear;
 
     @Column(name = "is_active")
-    private byte is_active;
+    private byte isActive;
 
     @Column(name = "created_date")
     private Date createdDate;

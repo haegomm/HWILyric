@@ -59,14 +59,14 @@ public class TrendController {
     public ResponseEntity<TotalGenreRes> getTotalTrend() {
         List<TotalGenreDTO> trendGenres = trendService.getTotalTrendGenres();
         List<TotalGenreDTO> genres = new ArrayList<>();
-        int year_num = 0;
+        int yearNum = 0;
         for (TotalGenreDTO trendGenre : trendGenres) {
             int trendYear = trendGenre.getAnnual();
-            if (year_num == trendYear)
+            if (yearNum == trendYear)
                 continue;
             TotalGenreDTO genre = new TotalGenreDTO(trendYear, trendGenre.getName(), trendGenre.getRatio());
             genres.add(genre);
-            year_num = trendYear;
+            yearNum = trendYear;
         }
         TotalGenreRes totalGenreRes = new TotalGenreRes(genres);
         return ResponseEntity.ok(totalGenreRes);
@@ -77,14 +77,14 @@ public class TrendController {
     public ResponseEntity<AnnualGenreKeywordRes> getAnnualTrend(
             @PathVariable("year") String year) {
 
-        int year_num = Integer.parseInt(year);
+        int yearNum = Integer.parseInt(year);
 
-        List<TrendGenre> trendGenres = trendService.getTrendGenresByYear(year_num);
-        List<TrendKeyword> trendKeywords = trendService.getTrendKeywordsByYear(year_num);
+        List<TrendGenre> trendGenres = trendService.getTrendGenresByYear(yearNum);
+        List<TrendKeyword> trendKeywords = trendService.getTrendKeywordsByYear(yearNum);
         List<GenreSongDTO> genres = new ArrayList<>();
         List<KeywordDTO> keywords = new ArrayList<>();
         for (TrendGenre trendGenre : trendGenres) {
-            List<Music> rankedMusics = trendService.getTrendSongByChartYear(year_num, trendGenre.getName());
+            List<Music> rankedMusics = trendService.getTrendSongByChartYear(yearNum, trendGenre.getName());
             List<String> songs = new ArrayList<>();
             if (!rankedMusics.isEmpty()) {
                 songs.add(rankedMusics.get(0).getTitle());
