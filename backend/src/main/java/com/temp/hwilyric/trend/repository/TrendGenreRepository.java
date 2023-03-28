@@ -1,16 +1,12 @@
 package com.temp.hwilyric.trend.repository;
 
-import java.time.LocalDate;
-import com.temp.hwilyric.trend.domain.Music;
 import java.util.List;
-import java.util.Date;
 
 
 import com.temp.hwilyric.trend.domain.TrendGenre;
 import com.temp.hwilyric.trend.dto.TotalGenreDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 
 public interface TrendGenreRepository extends JpaRepository<TrendGenre, Long> {

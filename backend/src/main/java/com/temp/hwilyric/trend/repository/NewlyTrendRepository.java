@@ -1,7 +1,5 @@
 package com.temp.hwilyric.trend.repository;
 
-import java.time.LocalDate;
-import com.temp.hwilyric.trend.domain.Music;
 import java.util.List;
 import java.util.Date;
 

@@ -8,7 +8,6 @@ import com.temp.hwilyric.trend.domain.Music;
 import com.temp.hwilyric.trend.domain.NewlyTrend;
 import com.temp.hwilyric.trend.domain.TrendGenre;
 import com.temp.hwilyric.trend.domain.TrendKeyword;
-import com.temp.hwilyric.trend.dto.GenreDTO;
 import com.temp.hwilyric.trend.dto.TotalGenreDTO;
 import com.temp.hwilyric.trend.repository.TrendSongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
