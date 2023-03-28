@@ -1,4 +1,4 @@
-package com.temp.hwilyric.note.rhyme.dto;
+package com.holorok.hwilyric.note.rhyme.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

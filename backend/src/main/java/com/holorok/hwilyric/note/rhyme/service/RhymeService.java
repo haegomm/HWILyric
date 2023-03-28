@@ -1,14 +1,9 @@
-package com.temp.hwilyric.note.rhyme.service;
+package com.holorok.hwilyric.note.rhyme.service;
 
 
-import com.jcraft.jsch.JSchException;
-import com.temp.hwilyric.exception.NotFoundException;
-import com.temp.hwilyric.note.rhyme.dto.RhymeReq;
-import com.temp.hwilyric.note.rhyme.dto.RhymeRes;
+import com.holorok.hwilyric.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.spark.sql.Dataset;
-import org.apache.spark.sql.Row;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -108,7 +103,7 @@ public class RhymeService {
 
         ProcessBuilder processBuilder = new ProcessBuilder(pythonExecutablePath, pythonFilePath);
         processBuilder.command().add(word);
-        processBuilder.command().add(checkJaccard);
+//        processBuilder.command().add(checkJaccard);
 
         List<String> rhymeList = new ArrayList<>();
         try {

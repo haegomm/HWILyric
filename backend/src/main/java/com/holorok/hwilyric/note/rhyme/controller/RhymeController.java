@@ -1,7 +1,7 @@
-package com.temp.hwilyric.note.rhyme.controller;
+package com.holorok.hwilyric.note.rhyme.controller;
 
-import com.temp.hwilyric.exception.NotFoundException;
-import com.temp.hwilyric.note.rhyme.service.RhymeService;
+import com.holorok.hwilyric.exception.NotFoundException;
+import com.holorok.hwilyric.note.rhyme.service.RhymeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
