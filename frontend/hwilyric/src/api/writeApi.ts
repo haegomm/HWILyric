@@ -1,6 +1,6 @@
 import { axios } from './https'
 import { ISaveNoteType } from '../types/noteType'
-import { ICheckSimilarity } from '../types/sideBarType'
+import { ICheckSimilarity } from '../types/sidebarType'
 
 // 자동저장
 export async function saveNote(body: ISaveNoteType) {

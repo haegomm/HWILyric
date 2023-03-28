@@ -7,7 +7,7 @@ import './App.css';
 import Navbar from './components/common/Navbar';
 import Home from './pages/Home';
 import Write from './pages/Write';
-import DataVisualize from './pages/DataVisualize';
+// import DataVisualize from './pages/DataVisualize';
 import Login from './pages/Login';
 import LoginKakao from './components/login/LoginKakao';
 import Signup from './pages/Signup';
