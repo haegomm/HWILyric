@@ -36,3 +36,4 @@ application-oauth.yml
 
 ### VS Code ###
 .vscode/
+/.metadata/
