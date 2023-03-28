@@ -1,4 +1,4 @@
-package com.holorok.hwilyric.config;
+package com.holorok.hwilyric.common;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import java.time.ZonedDateTime;
 @Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class) // 변경되었을 때, 자동으로 등록
-public abstract class TimeConfig {
+public abstract class TimeEntity {
 
     @CreationTimestamp
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")

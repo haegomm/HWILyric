@@ -1,7 +1,7 @@
 package com.holorok.hwilyric.user.domain;
 
+import com.holorok.hwilyric.common.TimeEntity;
 import com.holorok.hwilyric.user.dto.InsertUserReq;
-import com.holorok.hwilyric.config.TimeConfig;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User extends TimeConfig {
+public class User extends TimeEntity {
 
     // pk
     @Id

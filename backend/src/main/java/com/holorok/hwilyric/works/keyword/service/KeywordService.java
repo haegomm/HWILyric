@@ -30,7 +30,6 @@ import java.util.regex.Pattern;
 public class KeywordService {
 
     private final KeywordRepository keywordRepository;
-//    private final Word2Vec word2vec;
 
     // 랜덤 키워드 불러오기
     public List<String> getRandomKeyword() {
@@ -113,7 +112,7 @@ public class KeywordService {
 
         Collection<String> englishList = new ArrayList<>();
 
-        if(english.size()>0){
+        if(!english.isEmpty()){
             // 영어 Word2Vec 모델 저장 경로
             File googleModel = new File("C:/Users/SSAFY/PycharmProjects/pythonProject/GoogleNews-vectors-negative300.bin");
 
@@ -126,12 +125,12 @@ public class KeywordService {
 
         List<String> resultList = new ArrayList<>();
 
-        if(hangulList.size()>0) {
+        if(!hangulList.isEmpty()) {
             for (String hangulWord : hangulList) {
                 resultList.add(hangulWord);
             }
         }
-        if(englishList.size()>0) {
+        if(!englishList.isEmpty()) {
             for (String englighWord : englishList) {
                 resultList.add(englighWord);
             }
