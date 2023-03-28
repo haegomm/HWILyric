@@ -7,8 +7,14 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
+<<<<<<< HEAD
   <React.StrictMode>
     <App />
   </React.StrictMode>
+=======
+    <RecoilRoot>
+      <App />
+    </RecoilRoot>
+>>>>>>> dev-front
 );
 

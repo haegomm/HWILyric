@@ -1,0 +1,12 @@
+# docker-compose.yml
+
+version: "3"
+services:
+  hl-frontend:
+    container_name: hl-frontend
+    build:
+      context: ../../../frontend/hwilyric
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+
