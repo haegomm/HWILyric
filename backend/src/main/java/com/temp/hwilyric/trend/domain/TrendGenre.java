@@ -4,6 +4,8 @@ package com.temp.hwilyric.trend.domain;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,7 +15,7 @@ import javax.persistence.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class TrendGenre {
+public class TrendGenre implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
