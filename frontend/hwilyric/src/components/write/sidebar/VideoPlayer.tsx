@@ -4,8 +4,8 @@ import YouTube from "react-youtube";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { PlayVideoId } from "../../../atoms/YoutubeVideoAtoms";
-import { PlayerBox, PlayerVideoBox, PlayButton } from "../../../styles/VideoPlayerStyles";
+import { PlayVideoId } from "../../../atoms/youtubeVideoAtoms";
+import { PlayerBox, PlayerVideoBox, PlayButton } from "../../../styles/VideoPlayerStyle";
 
 type PlayerState = "playing" | "paused" | "stopped" | "unstarted";
 
