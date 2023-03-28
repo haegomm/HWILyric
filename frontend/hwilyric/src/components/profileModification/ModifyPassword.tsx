@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import userApi from "../../api/userApi";
 import authValidation from "../signup/validation";
 
 function ModifyPassword() {
+  const navigate = useNavigate();
+
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -19,7 +22,7 @@ function ModifyPassword() {
   const onConfirmPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setConfirmPassword(e.currentTarget.value);
     Password === e.currentTarget.value
-      ? setConfirmPasswordError("")
+      ? setConfirmPasswordError("비밀번호가 일치합니다")
       : setConfirmPasswordError("비밀번호가 일치하지 않습니다");
   };
 
@@ -29,6 +32,7 @@ function ModifyPassword() {
 
     if (message === 'success') {
       alert('비밀번호 변경이 완료되었습니다')
+      navigate("/mypage/dsajhfawjehdg");
     } else {
       alert('비밀번호 변경이 실패했습니다. 다시 시도해주세요')
     }
@@ -61,7 +65,11 @@ function ModifyPassword() {
         </div>
         <span className="passwordCheckError">{confirmPasswordError}</span>
       </div>
-      <button onClick={onSavePasswordHandler}>저장</button>
+      <button
+      onClick={onSavePasswordHandler}
+      disabled={
+        (confirmPasswordError ==='비밀번호가 일치합니다') ? false : true
+      }>저장</button>
     </div>
   )
 }

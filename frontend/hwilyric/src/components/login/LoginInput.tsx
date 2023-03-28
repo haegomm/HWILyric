@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from 'recoil';
 
 import userApi from "../../api/userApi";
-import { ILoginTypes } from "../../types/apiType";
+import { ILoginTypes } from "../../types/userType";
 import { saveUserInfo } from "./userInfo";
 import userAtom from "../../atoms/userAtom";
 import socailLoginButton from "../../assets/socialLogin/socialLoginButton";

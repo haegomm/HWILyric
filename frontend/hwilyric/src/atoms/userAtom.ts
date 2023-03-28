@@ -42,25 +42,6 @@ const selectModificationPage = atom<string>({
   default: 'select',
 })
 
-// interface UserInfoTypes {
-//   userType : string;
-//   email: string;
-//   nickname: string;
-//   profileImg: string;
-// }
-
-// const userInfoAtom = atom<UserInfoTypes[]>({
-//   key: 'userInfo',
-//   default: [
-//     {
-//       userType: '',
-//       email: '',
-//       nickname: '',
-//       profileImg: '',
-//     },
-//   ],
-// });
-
 const userAtom = {
   userEmailAtom,
   userNicknameAtom,
@@ -69,7 +50,6 @@ const userAtom = {
   IsLoginAtom,
   IsKnownPassword,
   selectModificationPage,
-  // userInfoAtom,
 }
 
 

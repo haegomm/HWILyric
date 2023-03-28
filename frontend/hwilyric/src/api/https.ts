@@ -1,5 +1,7 @@
 import baseAxios from "axios";
+
 import { deleteUserInfo, getUserInfo } from "../components/login/userInfo";
+import ForcedLogout from "./logout";
 
 export const axios = baseAxios.create({
   baseURL: process.env.REACT_APP_API,
@@ -10,7 +12,6 @@ export const axios = baseAxios.create({
 
 axios.interceptors.request.use((config) => {
   config.headers.Authorization = `Bearer ${getUserInfo().accessToken}`;
-  console.log('토큰 넣었어~',getUserInfo().accessToken)
   return config;
 });
 
@@ -20,14 +21,16 @@ axios.interceptors.response.use(
   },
   function (error) {
     if (error.response && error.response.status) {
-      switch (error.response.status) {
-        case 401:
-          alert("로그인이 필요합니다.");
-          window.location.replace("/login");
-          deleteUserInfo();
-          return new Promise(() => {});
-        default:
-          return Promise.reject(error);
+      if (error.response.status === 401) {
+        deleteUserInfo()
+        window.location.replace("/login/dlkfjsaldkfj");
+        alert("로그인이 필요합니다.");
+        // console.log('여기까진 왔다')
+        // ForcedLogout()
+        alert("로그인이 필요합니다.");
+        return new Promise(() => {});
+      } else {
+        return Promise.reject(error);
       }
     }
     return Promise.reject(error);
@@ -43,7 +46,6 @@ export const fileAxios = baseAxios.create({
 
 fileAxios.interceptors.request.use((config) => {
   config.headers.Authorization = `Bearer ${getUserInfo().accessToken}`;
-  console.log('토큰 넣었어~',getUserInfo().accessToken)
   return config;
 });
 
@@ -53,14 +55,17 @@ fileAxios.interceptors.response.use(
   },
   function (error) {
     if (error.response && error.response.status) {
-      switch (error.response.status) {
-        case 401:
-          alert("로그인이 필요합니다.");
-          window.location.replace("/login");
-          deleteUserInfo();
-          return new Promise(() => {});
-        default:
-          return Promise.reject(error);
+      if (error.response.status === 401) {
+        // console.log('여기까진 왔다')
+        deleteUserInfo()
+        alert("로그인이 필요합니다.");
+        window.location.replace("/login/dlkfjsaldkfj");
+        // ForcedLogout()
+        // const logout = ForcedLogout()
+        console.log('여기도 돼')
+        return new Promise(() => {});
+      } else{
+        return Promise.reject(error);
       }
     }
     return Promise.reject(error);

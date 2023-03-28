@@ -14,8 +14,6 @@ export interface IModifyTypes {
 }
 
 export interface IUserInfoTypes {
-  nickname: string;
-  profileImg: string;
   userType: string;
   accessToken : string;
 }

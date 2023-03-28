@@ -3,7 +3,7 @@ import React from "react";
 function authValidation(value:string, type:string) {
   const REGEX = {
     EMAIL: /\S+@\S+\.\S+/,
-    PASSWORD_RULE: /^(?=.*[a-zA-Z]).{8,20}$/,
+    PASSWORD_RULE: /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-_~|&])(?=.*[0-9]).{8,20}$/,
     NICKNAME_RULE: /^[a-zA-Zㄱ-힣0-9-_.]{2,10}$/,
   };
 

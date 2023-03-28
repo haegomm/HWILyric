@@ -4,7 +4,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import authValidation from "../signup/validation";
 import userApi from "../../api/userApi";
-import { IModifyTypes } from "../../types/apiType";
+import { IModifyTypes } from "../../types/userType";
 import userAtom from "../../atoms/userAtom";
 
 
@@ -54,14 +54,14 @@ function ModifyProfile() {
 
   const onSaveProfileHandler = async(e: React.MouseEvent<HTMLButtonElement>) => {
     const formData = new FormData();
-    await formData.append('profileImg', newProfileImage);
+    formData.append('profileImg', newProfileImage);
 
     const userInfo: IModifyTypes = {
       nickname: newNickname,
     }
 
     const userInfoString = JSON.stringify(userInfo)
-    await formData.append('userInfo', new Blob([userInfoString], {type: 'application/json'}));
+    formData.append('userInfo', new Blob([userInfoString], {type: 'application/json'}));
 
     const data = await userApi.modifyProfile(formData)
     console.log(data)
@@ -70,8 +70,7 @@ function ModifyProfile() {
       setNickname(data.nickname)
       setProfileImg(data.profileImg)
       alert('수정성공!')
-      navigate("/login/dlkfjsaldkfj");
-
+      navigate("/mypage/dsajhfawjehdg");
     } else {
       alert("수정에 실패하였습니다. 다시 시도해주세요");
     }

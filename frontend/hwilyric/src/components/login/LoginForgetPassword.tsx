@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from 'recoil';
 
 import userApi from "../../api/userApi";
@@ -7,8 +6,6 @@ import authValidation from "../signup/validation";
 import userAtom from "../../atoms/userAtom";
 
 function LoginForgetPassword() {
-  const navigate = useNavigate();
-
   const [Email, setEmail] = useState("");
   const [emailFormError, setEmailFormError] = useState("");
   const setIsKnownPassword = useSetRecoilState(userAtom.IsKnownPassword)
@@ -34,6 +31,7 @@ function LoginForgetPassword() {
     } else {
       console.log('가입을 안햇어용')
     }
+    setIsKnownPassword(true)
   }
 
   const onLoginPageHandler = (e: React.MouseEvent<HTMLDivElement>) => {
