@@ -36,10 +36,22 @@ async function similarKeyword(word: String) {
   }
 }
 
+async function lyricList() {
+  try{
+    const res = await axios.get('api/notes/list')
+    const data = res.data
+    return data
+  } catch(err) {
+    console.log('리스트 못 받았단다')
+    return null
+  }
+}
+
 const writingApi = {
   checkSimilarity,
   randomKeyword,
   similarKeyword,
+  lyricList,
 }
 
 export default writingApi
