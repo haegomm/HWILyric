@@ -10,8 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class RhymeRes {
     private List<String> rhymeList;
-
-    public RhymeRes(List<String> rhymeList) { this.rhymeList = rhymeList; }
 }
