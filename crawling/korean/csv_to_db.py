@@ -17,7 +17,7 @@ curs = conn.cursor(pymysql.cursors.DictCursor)
 sql = 'INSERT INTO keyword (word, category, is_hangul) VALUES'
 
 # csv파일 경로 설정
-path = "/Users/sonny/Downloads"
+path = ""
 file_list = os.listdir(path)
 csv_list = [file for file in file_list if file.startswith("downFile")]
 
