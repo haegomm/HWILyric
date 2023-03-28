@@ -5,7 +5,7 @@ plugins {
     id "org.sonarqube" version "3.4.0.2513"
 }
 
-group = 'com.temp'
+group = 'com.holorok'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
