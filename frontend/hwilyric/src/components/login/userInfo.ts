@@ -14,4 +14,5 @@ export const getUserInfo = () => {
 export const deleteUserInfo = () => {
   window.localStorage.removeItem('userType')
   window.localStorage.removeItem('accessToken')
+  window.localStorage.removeItem('recoil-persist')
 };
