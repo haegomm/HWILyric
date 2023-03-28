@@ -1,13 +1,13 @@
 import axios from "axios"
 import { useState } from "react"
-import { useRecoilState } from "recoil"
-import { PlayVideoId } from "../../../atoms/youtubeVideoAtoms"
+import { useSetRecoilState } from "recoil"
+import { PlayVideoId } from "../../../atoms/youtubeVideoAtoms";
 
 
-function VideoSearch() {
+function SearchVideo() {
     const [query, setQuery] = useState("");
     const [results, setResults] = useState<any[]>([]);
-    const [videoId, setVideoId] = useRecoilState(PlayVideoId)
+    const setVideoId = useSetRecoilState(PlayVideoId)
     
   
     const handleSearch = async () => {
@@ -19,7 +19,7 @@ function VideoSearch() {
               part: "snippet",
               q: query,
               type: "video",
-              maxResults: 10,
+              maxResults: 1,
               key: process.env.REACT_APP_YOUTUBE_API_KEY,
             },
           }
@@ -47,21 +47,10 @@ function VideoSearch() {
               <h3 onClick={(e)=>{handleGetVideoId(result.id.videoId)}}>{result.snippet.title}</h3>
               <img src={result.snippet.thumbnails.default.url} alt="thumnail" />
             </div>
-            {/* <iframe
-              width="560"
-              height="315"
-              src={`https://www.youtube.com/embed/${result.id.videoId}`}
-              title={result.snippet.title}
-              frameBorder="0"
-              allowFullScreen
-            ></iframe> */}
           </div>
         ))}
-        {/* <div>
-          { (videoId) ? <VideoPlayer videoId={videoId} /> : <div></div>}
-        </div> */}
       </div>
     );
 }
   
-export default VideoSearch
+export default SearchVideo
