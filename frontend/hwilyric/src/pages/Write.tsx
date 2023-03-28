@@ -1,13 +1,19 @@
-import VideoSearch from "../components/write/features/VideoSearch"
-import VideoPlayer from "../components/write/features/VideoPlayer"
+import BlockCreate from "../components/write/note/NoteCreateBlock"
+import BlockList from "../components/write/note/NoteBlockList"
+import NoteTitle from "../components/write/note/NoteTitle"
+import { NoteBox } from "../styles/LyricNoteStyle"
 
 function Write() {
   return (
-      <div>
-        <h1>작사하기 페이지 입니다.</h1>
-        <VideoSearch />
-        <VideoPlayer />
-      </div>
+      <NoteBox>
+          <div className="titleBox">
+            <NoteTitle />
+          </div>
+          <div className="BlocksBox">
+              <BlockList />
+              <BlockCreate />
+          </div>
+        </NoteBox>
   )
 }
 

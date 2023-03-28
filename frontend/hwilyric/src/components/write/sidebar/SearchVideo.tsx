@@ -1,13 +1,13 @@
 import axios from "axios"
 import { useState } from "react"
-import { useRecoilState } from "recoil"
-import { PlayVideoId } from "../../../atoms/YoutubeVideoAtoms";
+import { useSetRecoilState } from "recoil"
+import { PlayVideoId } from "../../../atoms/youtubeVideoAtoms";
 
 
-function VideoSearch() {
+function SearchVideo() {
     const [query, setQuery] = useState("");
     const [results, setResults] = useState<any[]>([]);
-    const [videoId, setVideoId] = useRecoilState(PlayVideoId)
+    const setVideoId = useSetRecoilState(PlayVideoId)
     
   
     const handleSearch = async () => {
@@ -49,11 +49,8 @@ function VideoSearch() {
             </div>
           </div>
         ))}
-        {/* <div>
-          { (videoId) ? <VideoPlayer videoId={videoId} /> : <div></div>}
-        </div> */}
       </div>
     );
 }
   
-export default VideoSearch
+export default SearchVideo
