@@ -1,5 +1,6 @@
 package com.holorok.hwilyric.user.controller;
 
+import com.holorok.hwilyric.common.SuccessRes;
 import com.holorok.hwilyric.jwt.AuthToken;
 import com.holorok.hwilyric.jwt.AuthTokenProvider;
 import com.holorok.hwilyric.oauth.domain.AppProperties;

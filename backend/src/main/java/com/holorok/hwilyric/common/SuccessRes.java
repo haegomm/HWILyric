@@ -1,4 +1,4 @@
-package com.holorok.hwilyric.user.dto;
+package com.holorok.hwilyric.common;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
