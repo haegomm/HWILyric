@@ -10,13 +10,13 @@ pipeline {
         stage('BUILD') {
             steps {
 		sh "chmod +x -R ${env.WORKSPACE}"
-                sh './pipeline/jenkins/build/build.sh'
+                sh './pipeline/jenkins/backend/build/build.sh'
             }
         }
 	stage('DEPLOY') {
             steps {
                 sh "chmod +x -R ${env.WORKSPACE}"
-                sh './pipeline/jenkins/deploy/deploy.sh'
+                sh './pipeline/jenkins/backend/deploy/deploy.sh'
             }
         }
 
