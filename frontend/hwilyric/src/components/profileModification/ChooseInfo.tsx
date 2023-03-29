@@ -2,7 +2,7 @@ import React from 'react'
 import { useSetRecoilState } from 'recoil';
 import { selectModification } from '../../atoms/userAtom';
 
-import { getUserInfo } from '../login/userInfo'
+import { getUserInfo } from '../../features/userInfo'
 function ChooseInfo() {
   const setSelectModificationPage = useSetRecoilState(selectModification)
 

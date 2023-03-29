@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import userApi from "../../api/userApi";
-import authValidation from "../signup/validation";
+import authValidation from "../../features/validation";
 
 function ModifyPassword() {
   const navigate = useNavigate();

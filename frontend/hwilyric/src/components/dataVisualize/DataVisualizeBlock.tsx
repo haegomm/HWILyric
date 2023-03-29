@@ -1,5 +1,5 @@
 import React from 'react'
-import { DataVisualizeBlockStyle } from '../../styles/DataVisualizeStyle'
+import { DataVisualizeBlockStyle } from '../../styles/dataVisualizeStyle'
 
 function DataVisualizeBlock() {
   return (

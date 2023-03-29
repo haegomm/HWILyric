@@ -2,10 +2,10 @@ import { useCallback, useRef } from "react"
 import { Draggable } from "react-beautiful-dnd"
 import { useRecoilState } from "recoil"
 import { blockListState } from "../../../atoms/noteAtoms"
-import { IBlockData  } from "../../../types/noteType"
+import { ILyricBlockTypes } from "../../../types/writingType"
 
 interface BlockItemProps {
-    block: IBlockData
+    block: ILyricBlockTypes
     index: number
 }
 

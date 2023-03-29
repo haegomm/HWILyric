@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from 'recoil';
 
 import userApi from "../../api/userApi";
-import { saveUserInfo } from "./userInfo";
+import { saveUserInfo } from "../../features/userInfo";
 import { IsLoginAtom, userNicknameAtom, userProfileImgAtom } from "../../atoms/userAtom";
 
 

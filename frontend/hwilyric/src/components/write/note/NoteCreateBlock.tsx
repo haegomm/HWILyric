@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { useRecoilState } from "recoil"
 import { blockListState, blockIdState } from "../../../atoms/noteAtoms"
-import { IBlockData } from "../../../types/noteType"
+import { ILyricBlockTypes } from "../../../types/writingType"
 
 function BlockCreate() {
-    const [ blockList, setBlockList ] = useRecoilState<IBlockData[]>(blockListState)
+    const [ blockList, setBlockList ] = useRecoilState<ILyricBlockTypes[]>(blockListState)
     const [ blockId, setBlockId ] = useRecoilState<number>(blockIdState)
 
     const [ blockType, setBlockType ] = useState<string>("Verse")
@@ -15,7 +15,7 @@ function BlockCreate() {
 
     const onCreate = (): void => {
         
-        const newBlock: IBlockData = {
+        const newBlock: ILyricBlockTypes = {
             blockId: blockId,
             type: blockType,
             lyrics: ""

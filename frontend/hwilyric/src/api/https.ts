@@ -1,6 +1,6 @@
 import baseAxios from "axios";
 
-import { deleteUserInfo, getUserInfo } from "../components/login/userInfo";
+import { deleteUserInfo, getUserInfo } from "../features/userInfo";
 import ForcedLogout from "./logout";
 
 export const axios = baseAxios.create({
