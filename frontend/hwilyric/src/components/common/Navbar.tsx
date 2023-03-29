@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom"
 import { useRecoilValue } from "recoil"
 
-import userAtom from "../../atoms/userAtom"
+import { IsLoginAtom, userNicknameAtom }from "../../atoms/userAtom"
 
 function Navbar() {
-  const isLogin = useRecoilValue(userAtom.IsLoginAtom)
-  const nickname = useRecoilValue(userAtom.userNicknameAtom)
+  const isLogin = useRecoilValue(IsLoginAtom)
+  const nickname = useRecoilValue(userNicknameAtom)
   return (
     <nav>
       <div>

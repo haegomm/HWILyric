@@ -4,7 +4,7 @@ import { useSetRecoilState } from 'recoil';
 import userApi from "../api/userApi";
 
 import { IsLoginAtom, userNicknameAtom, userProfileImgAtom } from "../atoms/userAtom";
-import { deleteUserInfo } from "../components/login/userInfo";
+import { deleteUserInfo } from "../features/userInfo";
 
 function Mypage() {
   const navigate = useNavigate();

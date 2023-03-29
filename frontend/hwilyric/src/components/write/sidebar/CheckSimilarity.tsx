@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil"
 import { blockListState } from "../../../atoms/noteAtoms"
 import { ISimilarityTypes } from "../../../types/writingType"
-import { checkSimilarity } from "../../../api/writeApi"
+import { checkSimilarity } from "../../../api/writingApi"
 
 function CheckSimilarity() {
     

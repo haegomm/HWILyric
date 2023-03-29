@@ -2,9 +2,9 @@ import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd"
 import { useCallback, useEffect } from "react"
 import { useRecoilState, useRecoilValue } from "recoil"
 import { blockListState, titleState, noteIdState } from "../../../atoms/noteAtoms"
-import  userAtom  from "../../../atoms/userAtom"
-import { ISaveNoteType } from "../../../types/noteType"
-import { saveNote } from "../../../api/writeApi"
+import  { IsLoginAtom }  from "../../../atoms/userAtom"
+import { ILyricInfoTypes } from "../../../types/writingType"
+import { saveNote } from "../../../api/writingApi"
 import BlockItem from "./NoteBlockItem"
 
 function BlockList() {
@@ -13,7 +13,7 @@ function BlockList() {
     const [noteId, setNoteId] = useRecoilState(noteIdState)
     const title = useRecoilValue(titleState)
 
-    const isLogin = useRecoilValue(userAtom.IsLoginAtom)
+    const isLogin = useRecoilValue(IsLoginAtom)
 
     // useEffect(() => {
     //     const autoSaveNote = setInterval(() => {
@@ -45,7 +45,7 @@ function BlockList() {
     }, [blockList, setBlockList])
 
     const onSaveBlockList = async() => {
-        const body: ISaveNoteType = {
+        const body: ILyricInfoTypes = {
             id: noteId,
             title: title,
             thumnail: "하잉ㅎ 나 썸네일ㅎ",
