@@ -52,7 +52,7 @@ public class KeywordService {
     }
 
     // 유사 키워드 조회
-    public List<String> getSimilarKeyword(String word) throws NotFoundException, IOException {
+    public List<String> getSimilarKeyword(String word) throws NotFoundException {
 
         long startTime = System.nanoTime();
 //        SparkConf sparkConf = new SparkConf()
