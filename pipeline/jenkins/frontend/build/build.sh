@@ -4,7 +4,7 @@ echo "*******************************"
 
 # frontend 빌드
 cd /var/jenkins_home/workspace/pipeline-fe/frontend/hwilyric
-npm install
+npm install --force
 npm run build
 
 echo "********************************"
