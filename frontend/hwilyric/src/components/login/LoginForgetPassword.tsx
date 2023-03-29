@@ -3,12 +3,12 @@ import { useSetRecoilState } from 'recoil';
 
 import userApi from "../../api/userApi";
 import authValidation from "../signup/validation";
-import userAtom from "../../atoms/userAtom";
+import { IsKnownPassword } from "../../atoms/userAtom";
 
 function LoginForgetPassword() {
   const [Email, setEmail] = useState("");
   const [emailFormError, setEmailFormError] = useState("");
-  const setIsKnownPassword = useSetRecoilState(userAtom.IsKnownPassword)
+  const setIsKnownPassword = useSetRecoilState(IsKnownPassword)
 
   const onEmailHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentEmail = e.currentTarget.value;

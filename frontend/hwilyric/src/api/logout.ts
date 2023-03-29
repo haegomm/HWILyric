@@ -2,14 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 
 import { deleteUserInfo } from "../components/login/userInfo";
-import userAtom from "../atoms/userAtom";
+import { IsLoginAtom, userNicknameAtom, userProfileImgAtom } from "../atoms/userAtom";
 
 function ForcedLogout() {
   // const navigate = useNavigate();
 
-  const setIsLogin = useSetRecoilState(userAtom.IsLoginAtom)
-  const setNickname = useSetRecoilState(userAtom.userNicknameAtom)
-  const setProfileImg = useSetRecoilState(userAtom.userProfileImgAtom)
+  const setIsLogin = useSetRecoilState(IsLoginAtom)
+  const setNickname = useSetRecoilState(userNicknameAtom)
+  const setProfileImg = useSetRecoilState(userProfileImgAtom)
 
   deleteUserInfo()
   setIsLogin(false)

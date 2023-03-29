@@ -2,10 +2,10 @@ import { useRecoilValue } from "recoil"
 
 import LoginInput from "../components/login/LoginInput"
 import LoginForgetPassword from "../components/login/LoginForgetPassword"
-import userAtom from "../atoms/userAtom"
+import { IsKnownPassword } from "../atoms/userAtom"
 
 function Login() {
-  const isKnownPassword = useRecoilValue(userAtom.IsKnownPassword)
+  const isKnownPassword = useRecoilValue(IsKnownPassword)
 
   return (
       <div>

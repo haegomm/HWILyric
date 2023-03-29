@@ -1,6 +1,6 @@
 import { useRef } from "react"
 import { useRecoilState } from "recoil"
-import { titleState } from "../../../atoms/NoteAtoms"
+import { titleState } from "../../../atoms/noteAtoms"
 
 function NoteTitle() {
     const titleInput = useRef<HTMLInputElement>(null)
