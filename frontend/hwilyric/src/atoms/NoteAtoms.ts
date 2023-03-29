@@ -1,6 +1,6 @@
 import { atom } from "recoil"
 import { recoilPersist } from 'recoil-persist';
-import { IBlockData } from "../types/noteType"
+import { ILyricBlockTypes } from "../types/writingType"
 
 const { persistAtom } = recoilPersist();
 
@@ -13,7 +13,7 @@ function getCurrentDateTime() {
     const minute = String(now.getMinutes()).padStart(2, '0');
     const id = `${year}${month}${day}${hour}${minute}`;
     return Number(id);
-  }
+}
 
 export const noteIdState = atom<string | null>({
     key: "noteIdState",
@@ -32,7 +32,7 @@ export const blockIdState = atom<number>({
     default: getCurrentDateTime()
 })
 
-export const blockListState = atom<IBlockData[]>({
+export const blockListState = atom<ILyricBlockTypes[]>({
     key: 'blockListState',
     default: [],
     effects_UNSTABLE: [persistAtom],

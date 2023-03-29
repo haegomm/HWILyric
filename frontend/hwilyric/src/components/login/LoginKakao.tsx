@@ -4,15 +4,15 @@ import { useSetRecoilState } from 'recoil';
 
 import userApi from "../../api/userApi";
 import { saveUserInfo } from "./userInfo";
-import userAtom from "../../atoms/userAtom";
+import { IsLoginAtom, userNicknameAtom, userProfileImgAtom } from "../../atoms/userAtom";
 
 
 function LoginKakao() {
   const navigate = useNavigate();
 
-  const setIsLogin = useSetRecoilState(userAtom.IsLoginAtom)
-  const setNickname = useSetRecoilState(userAtom.userNicknameAtom)
-  const setProfileImg = useSetRecoilState(userAtom.userProfileImgAtom)
+  const setIsLogin = useSetRecoilState(IsLoginAtom)
+  const setNickname = useSetRecoilState(userNicknameAtom)
+  const setProfileImg = useSetRecoilState(userProfileImgAtom)
 
   let params = new URL(document.URL).searchParams;
   let code = params.get("code");

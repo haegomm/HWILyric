@@ -1,5 +1,5 @@
 import { useRecoilValue } from "recoil"
-import userAtom from "../atoms/userAtom"
+import { selectModification } from "../atoms/userAtom"
 import CheckPassword from "../components/profileModification/CheckPassword"
 
 import ChooseInfo from "../components/profileModification/ChooseInfo"
@@ -8,7 +8,7 @@ import ModifyProfile from "../components/profileModification/ModifyProfile"
 
 
 function ProfileModification() {
-  const selectModificationPage = useRecoilValue(userAtom.selectModificationPage)
+  const selectModificationPage = useRecoilValue(selectModification)
 
   
   return (

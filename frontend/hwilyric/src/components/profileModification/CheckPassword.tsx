@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useSetRecoilState } from 'recoil';
 import userApi from '../../api/userApi';
-import userAtom from '../../atoms/userAtom';
+import { selectModification } from '../../atoms/userAtom';
 
 function CheckPassword() {
-  const setSelectModificationPage = useSetRecoilState(userAtom.selectModificationPage)
+  const setSelectModificationPage = useSetRecoilState(selectModification)
   const [Password, setPassword] = useState('')
 
   const onPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

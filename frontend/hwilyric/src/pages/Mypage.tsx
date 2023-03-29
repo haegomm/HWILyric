@@ -3,15 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from 'recoil';
 import userApi from "../api/userApi";
 
-import userAtom from "../atoms/userAtom";
+import { IsLoginAtom, userNicknameAtom, userProfileImgAtom } from "../atoms/userAtom";
 import { deleteUserInfo } from "../components/login/userInfo";
 
 function Mypage() {
   const navigate = useNavigate();
 
-  const setIsLogin = useSetRecoilState(userAtom.IsLoginAtom)
-  const setNickname = useSetRecoilState(userAtom.userNicknameAtom)
-  const setProfileImg = useSetRecoilState(userAtom.userProfileImgAtom)
+  const setIsLogin = useSetRecoilState(IsLoginAtom)
+  const setNickname = useSetRecoilState(userNicknameAtom)
+  const setProfileImg = useSetRecoilState(userProfileImgAtom)
 
   const onProfileHandler = (e: React.MouseEvent<HTMLDivElement>) => {
     navigate('/profilemodification/sajhdgdjakhsd')

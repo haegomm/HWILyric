@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useRecoilState } from "recoil"
-import { blockListState, blockIdState } from "../../../atoms/NoteAtoms"
+import { blockListState, blockIdState } from "../../../atoms/noteAtoms"
 import { IBlockData } from "../../../types/noteType"
 
 function BlockCreate() {

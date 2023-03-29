@@ -1,5 +1,5 @@
 import { useRecoilValue } from "recoil"
-import { blockListState } from "../../../atoms/NoteAtoms"
+import { blockListState } from "../../../atoms/noteAtoms"
 import { ISimilarityTypes } from "../../../types/writingType"
 import { checkSimilarity } from "../../../api/writeApi"
 
