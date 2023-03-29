@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilValue } from 'recoil'
+import ScrollHorizontal from 'react-scroll-horizontal';
 import writingApi from "../../api/writingApi";
 
 import userAtom from '../../atoms/userAtom'
@@ -25,7 +26,7 @@ function HomeQuickview() {
     getLyricList()
   }, [])
   return (
-    <div>
+    <div id='scroll-horizontal' style={{ height: `30em` }}>
       <h3>{nickname}님의 작사노트</h3>
       <div>
         {nullLyrics ? 
