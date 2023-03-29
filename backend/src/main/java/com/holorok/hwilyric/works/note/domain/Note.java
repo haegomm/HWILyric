@@ -18,16 +18,17 @@ public class Note {
     private String id;
     private Long userId;
     private String title;
-    private String thumnail;
+    private String thumbnail;
     private String memo;
     private List<Lyric> lyricList;
 
+
     @Builder
-    public Note(String id, Long userId, String title, String thumnail, String memo, List<Lyric> lyricList) {
+    public Note(String id, Long userId, String title, String thumbnail, String memo, List<Lyric> lyricList) {
         this.id = id;
         this.userId = userId;
         this.title = title;
-        this.thumnail = thumnail;
+        this.thumbnail = thumbnail;
         this.memo = memo;
         this.lyricList = lyricList;
     }

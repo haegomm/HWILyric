@@ -1,5 +1,7 @@
 package com.holorok.hwilyric.works.note.service;
 
+import com.holorok.hwilyric.works.note.dto.AutoSaveRes;
+import com.holorok.hwilyric.works.note.dto.NoteReq;
 import com.holorok.hwilyric.works.note.repository.NoteRepository;
 import com.holorok.hwilyric.works.note.domain.Note;
 import lombok.extern.slf4j.Slf4j;
@@ -13,16 +15,26 @@ public class NoteService {
 
     @Autowired
     private NoteRepository noteRepository;
-    public Note insert(Note note, Long userId) {
+    public AutoSaveRes save(NoteReq note, Long userId) {
+        if(note.getId().equals(""))
+            note.setId(null);
+
         Note newNote = Note.builder()
                 .id(note.getId())
                 .title(note.getTitle())
                 .userId(userId)
-                .thumnail(note.getThumnail())
+                .thumbnail(note.getThumbnail())
                 .memo(note.getMemo())
                 .lyricList(note.getLyricList())
                 .build();
-        return noteRepository.save(newNote);
+        newNote = noteRepository.save(newNote);
+
+        AutoSaveRes res = AutoSaveRes.builder()
+                .id(newNote.getId())
+//                .updatedDate(newNote.getUpdated_date())
+                .build();
+
+        return res;
     }
 
     public List<Note> selectAll(Long userId) {
@@ -34,17 +46,13 @@ public class NoteService {
         Note result = Note.builder()
                 .id(findNote.getId())
                 .title(findNote.getTitle())
-                .thumnail(findNote.getThumnail())
+                .thumbnail(findNote.getThumbnail())
                 .memo(findNote.getMemo())
                 .lyricList(findNote.getLyricList())
                 .build();
 
         return result;
     }
-
-//    public Note update(Note newNote) {
-//        return noteRepository.save(newNote);
-//    }
 
     public boolean delete(String noteId) {
         Note note = noteRepository.findById(noteId).get();
