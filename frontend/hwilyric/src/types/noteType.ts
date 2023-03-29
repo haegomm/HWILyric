@@ -1,13 +1,13 @@
 export interface IBlockData {
-    id: number,
+    blockId: number,
     type?: string,
     lyrics?: string,
 }
 
 export interface ISaveNoteType {
-    userId: string| null
+    id: string| null
     title: string
     thumnail: string
     memo: string
-    blockList : IBlockData[]
+    lyricList : IBlockData[]
 }
