@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -34,7 +35,7 @@ public class KeywordController {
 
     @ApiOperation(value = "유사 키워드 조회")
     @GetMapping(value = "/similarity/{word}", produces = "application/json;charset=utf-8")
-    public ResponseEntity<List<String>> getSimilarKeyword(@PathVariable("word") String word) throws NotFoundException {
+    public ResponseEntity<List<String>> getSimilarKeyword(@PathVariable("word") String word) throws NotFoundException, IOException {
 
         List<String> similarList = keywordService.getSimilarKeyword(word);
 
