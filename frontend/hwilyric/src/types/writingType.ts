@@ -1,5 +1,5 @@
 export interface ISimilarityTypes {
-  userLyricList: [string];
+  userLyricList: string[];
 }
 
 export interface ILyricBlockTypes {
