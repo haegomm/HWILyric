@@ -5,7 +5,7 @@ echo "***DEPLOYING DOCKER CONTAINERS***"
 echo "*********************************"
 
 # docker container 실행
-cd /var/jenkins_home/workspace/hl-pipeline/pipeline
+cd /var/jenkins_home/workspace/pipeline-be/pipeline
 docker compose up -d
 
 # dangling images 삭제
