@@ -3,6 +3,7 @@ package com.holorok.hwilyric.works.note.controller;
 import com.holorok.hwilyric.works.note.domain.Note;
 import com.holorok.hwilyric.works.note.dto.AutoSaveRes;
 import com.holorok.hwilyric.works.note.dto.NoteReq;
+import com.holorok.hwilyric.works.note.dto.NoteRes;
 import com.holorok.hwilyric.works.note.service.NoteService;
 import com.holorok.hwilyric.user.domain.User;
 import io.swagger.annotations.Api;
@@ -34,14 +35,10 @@ public class NoteController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<Note>> getNoteList(HttpServletRequest httpServletRequest) {
+    public ResponseEntity<List<NoteRes>> getNoteList(HttpServletRequest httpServletRequest) {
         User user = (User) httpServletRequest.getAttribute("user");
 
-        List<Note> noteList = noteService.selectAll(user.getId());
-
-        if(noteList == null)
-            return new ResponseEntity<>(new ArrayList<Note>(), HttpStatus.NO_CONTENT);
-        return new ResponseEntity<>(noteList, HttpStatus.OK);
+        return new ResponseEntity<>(noteService.selectAll(user.getId()), HttpStatus.OK);
     }
 
     @GetMapping("/detail")

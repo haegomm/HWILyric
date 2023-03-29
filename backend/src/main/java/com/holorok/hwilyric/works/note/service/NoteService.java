@@ -1,12 +1,16 @@
 package com.holorok.hwilyric.works.note.service;
 
+import com.holorok.hwilyric.exception.NotFoundException;
 import com.holorok.hwilyric.works.note.dto.AutoSaveRes;
 import com.holorok.hwilyric.works.note.dto.NoteReq;
+import com.holorok.hwilyric.works.note.dto.NoteRes;
 import com.holorok.hwilyric.works.note.repository.NoteRepository;
 import com.holorok.hwilyric.works.note.domain.Note;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -37,8 +41,27 @@ public class NoteService {
         return res;
     }
 
-    public List<Note> selectAll(Long userId) {
-        return noteRepository.findAllByUserId(userId);
+    public List<NoteRes> selectAll(Long userId) {
+        List<NoteRes> result = new ArrayList<>();
+        List<Note> noteList = noteRepository.findAllByUserId(userId);
+
+        if(noteList == null) throw new NotFoundException("작성한 노트가 없습니다.");
+
+        for(Note n: noteList) {
+            NoteRes res = NoteRes.builder()
+                    .id(n.getId())
+                    .title(n.getTitle())
+                    .thumbnail(n.getThumbnail())
+                    .memo(n.getMemo())
+                    .lyricList(n.getLyricList())
+//                    .createdDate()
+//                    .updatedDate()
+                    .build();
+            result.add(res);
+        }
+
+        return result;
+
     }
 
     public Note selectOne(String noteId) {

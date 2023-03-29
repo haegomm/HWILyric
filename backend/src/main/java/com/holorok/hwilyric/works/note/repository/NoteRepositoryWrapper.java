@@ -4,6 +4,6 @@ import com.holorok.hwilyric.works.note.domain.Note;
 
 import java.util.List;
 
-public interface CustomNoteRepository {
+public interface NoteRepositoryWrapper {
     List<Note> findAllByUserId(Long userId);
 }
