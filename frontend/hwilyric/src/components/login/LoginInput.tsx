@@ -5,7 +5,7 @@ import { useSetRecoilState } from 'recoil';
 import userApi from "../../api/userApi";
 import { ILoginTypes } from "../../types/userType";
 import { saveUserInfo } from "./userInfo";
-import userAtom from "../../atoms/userAtom";
+import { IsLoginAtom, userNicknameAtom, userProfileImgAtom, IsKnownPassword } from "../../atoms/userAtom";
 import socailLoginButton from "../../assets/socialLogin/socialLoginButton";
 
 function LoginInput() {
@@ -18,10 +18,10 @@ function LoginInput() {
 
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  const setIsLogin = useSetRecoilState(userAtom.IsLoginAtom)
-  const setNickname = useSetRecoilState(userAtom.userNicknameAtom)
-  const setProfileImg = useSetRecoilState(userAtom.userProfileImgAtom)
-  const setIsKnownPassword = useSetRecoilState(userAtom.IsKnownPassword)
+  const setIsLogin = useSetRecoilState(IsLoginAtom)
+  const setNickname = useSetRecoilState(userNicknameAtom)
+  const setProfileImg = useSetRecoilState(userProfileImgAtom)
+  const setIsKnownPassword = useSetRecoilState(IsKnownPassword)
 
   const onEmailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.currentTarget.value);

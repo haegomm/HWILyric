@@ -1,7 +1,7 @@
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd"
 import { useCallback, useEffect } from "react"
 import { useRecoilState, useRecoilValue } from "recoil"
-import { blockListState, titleState, noteIdState } from "../../../atoms/NoteAtoms"
+import { blockListState, titleState, noteIdState } from "../../../atoms/noteAtoms"
 import  userAtom  from "../../../atoms/userAtom"
 import { ISaveNoteType } from "../../../types/noteType"
 import { saveNote } from "../../../api/writeApi"

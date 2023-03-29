@@ -3,14 +3,15 @@ export interface ISimilarityTypes {
 }
 
 export interface ILyricBlockTypes {
+  blockId: number;
   type: string;
-  lyrics: string;
+  lyrics?: string;
 }
 
 export interface ILyricInfoTypes {
-  id: string;   
-  title: string;    
+  id: string| null;
+  title: string;
   thumnail: string;
   memo: string;
-  lyricList: [ILyricBlockTypes]
+  lyricList : ILyricBlockTypes[];
 }
