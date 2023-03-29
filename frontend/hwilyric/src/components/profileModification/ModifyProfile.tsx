@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
-import authValidation from "../signup/validation";
+import authValidation from "../../features/validation";
 import userApi from "../../api/userApi";
 import { IModifyTypes } from "../../types/userType";
 import { userNicknameAtom, userProfileImgAtom } from "../../atoms/userAtom";

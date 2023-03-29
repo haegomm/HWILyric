@@ -4,7 +4,7 @@ import { useSetRecoilState } from 'recoil';
 
 import userApi from "../../api/userApi";
 import { ILoginTypes } from "../../types/userType";
-import { saveUserInfo } from "./userInfo";
+import { saveUserInfo } from "../../features/userInfo";
 import { IsLoginAtom, userNicknameAtom, userProfileImgAtom, IsKnownPassword } from "../../atoms/userAtom";
 import socailLoginButton from "../../assets/socialLogin/socialLoginButton";
 

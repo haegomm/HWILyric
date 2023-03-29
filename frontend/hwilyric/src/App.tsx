@@ -14,11 +14,11 @@ import Signup from './pages/Signup';
 import Mypage from './pages/Mypage';
 import ProfileModification from './pages/ProfileModification';
 import HWILyric from './pages/Hwilyric';
-import userAtom from './atoms/userAtom';
+import { IsLoginAtom } from './atoms/userAtom';
 import userApi from './api/userApi';
 
 function App() {
-  const isLogin = useRecoilValue(userAtom.IsLoginAtom)
+  const isLogin = useRecoilValue(IsLoginAtom)
 
   
   useEffect(() => {

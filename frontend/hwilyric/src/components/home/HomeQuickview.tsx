@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilValue } from 'recoil'
 import ScrollHorizontal from 'react-scroll-horizontal';
-import writingApi from "../../api/writingApi";
+import { getLyricList } from "../../api/writingApi";
 
-import userAtom from '../../atoms/userAtom'
+import { userNicknameAtom } from '../../atoms/userAtom'
 import { ILyricInfoTypes } from "../../types/writingType";
 import HomeQuickviewBlock from "./HomeQuickviewBlock";
 
 function HomeQuickview() {
-  const nickname = useRecoilValue(userAtom.userNicknameAtom)
+  const nickname = useRecoilValue(userNicknameAtom)
   const [lyrics, setLyrics] = useState([])
   const [nullLyrics, setNullLyrics] = useState('')
   
   useEffect(()  => {
-    async function getLyricList() {
-      const lyricList = await writingApi.lyricList()
+    async function userLyricList() {
+      const lyricList = await getLyricList()
       if (lyricList !== null) {
         setLyrics(lyricList)
         console.log('세팅완')        
@@ -23,7 +23,7 @@ function HomeQuickview() {
         setNullLyrics('새로운 곡을 작사해보세요')
       }
     }
-    getLyricList()
+    userLyricList()
   }, [])
   return (
     <div id='scroll-horizontal' style={{ height: `30em` }}>

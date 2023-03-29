@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 
-import { deleteUserInfo } from "../components/login/userInfo";
+import { deleteUserInfo } from "../features/userInfo";
 import { IsLoginAtom, userNicknameAtom, userProfileImgAtom } from "../atoms/userAtom";
 
 function ForcedLogout() {

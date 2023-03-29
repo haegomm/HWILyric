@@ -48,7 +48,7 @@ export async function similarKeyword(word: String) {
   }
 }
 
-export async function lyricList() {
+export async function getLyricList() {
   try{
     const res = await axios.get('api/notes/list')
     const data = res.data

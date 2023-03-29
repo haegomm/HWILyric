@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSetRecoilState } from 'recoil';
 
 import userApi from "../../api/userApi";
-import authValidation from "../signup/validation";
+import authValidation from "../../features/validation";
 import { IsKnownPassword } from "../../atoms/userAtom";
 
 function LoginForgetPassword() {

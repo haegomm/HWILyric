@@ -16,3 +16,4 @@ export const PlayerVideoBox = styled.div`
     width: 96px;
     height: 96px;
 `
+
