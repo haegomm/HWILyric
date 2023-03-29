@@ -18,19 +18,19 @@ function BlockItem({ block, index}: BlockItemProps) {
     const onEditBlockType = (event: React.ChangeEvent<HTMLSelectElement>) => {
         let newType: string = event.target.value
 
-        const newBlockList = blockList.map((it) => it.id === block.id ? {
+        const newBlockList = blockList.map((it) => it.blockId === block.blockId ? {
             ...it,
             type: newType
         } : it)
         
-        setBlockList(newBlockList)
+        setBlockList(() => newBlockList)
     }
 
     const onEditLyrics = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         let newLyrics: string = event.target.value
         newLyrics = newLyrics.replaceAll("<br>", "\r\n")
 
-        const newBlockList = blockList.map((it) => it.id === block.id ? {
+        const newBlockList = blockList.map((it) => it.blockId === block.blockId ? {
             ...it,
             lyrics: newLyrics
         } : it)
@@ -39,7 +39,7 @@ function BlockItem({ block, index}: BlockItemProps) {
     }
 
     const onDeleteBlock = () => {
-        const newBlockList = blockList.filter((item) => item.id !== block.id)
+        const newBlockList = blockList.filter((item) => item.blockId !== block.blockId)
         setBlockList(newBlockList)
     }
 
@@ -52,7 +52,7 @@ function BlockItem({ block, index}: BlockItemProps) {
     }, [])
 
     return (
-        <Draggable draggableId={block.id.toString()} index={index}>
+        <Draggable draggableId={block.blockId.toString()} index={index}>
             {(provided) => (
                 <div
                     {...provided.draggableProps}

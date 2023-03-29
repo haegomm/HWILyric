@@ -1,5 +1,5 @@
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd"
-import { useCallback } from "react"
+import { useCallback, useEffect } from "react"
 import { useRecoilState, useRecoilValue } from "recoil"
 import { blockListState, titleState, noteIdState } from "../../../atoms/NoteAtoms"
 import  userAtom  from "../../../atoms/userAtom"
@@ -12,6 +12,19 @@ function BlockList() {
     const [blockList, setBlockList] = useRecoilState(blockListState)
     const [noteId, setNoteId] = useRecoilState(noteIdState)
     const title = useRecoilValue(titleState)
+
+    const isLogin = useRecoilValue(userAtom.IsLoginAtom)
+
+    // useEffect(() => {
+    //     const autoSaveNote = setInterval(() => {
+    //         onSaveBlockList()
+    //   }, 180000)
+    
+    //   return () => {
+    //     clearInterval(autoSaveNote)
+    //   }
+    // }, [])
+    
 
     const onDragEnd = useCallback((result: DropResult) => {
         const { destination, source } = result
@@ -33,20 +46,24 @@ function BlockList() {
 
     const onSaveBlockList = async() => {
         const body: ISaveNoteType = {
-            userId: noteId,
+            id: noteId,
             title: title,
-            thumnail: "",
+            thumnail: "하잉ㅎ 나 썸네일ㅎ",
             memo: "",
-            blockList: blockList
+            lyricList: blockList
         }
         // 로그인 유무 확인
-        if (userAtom.IsLoginAtom) {
+        if (isLogin) {
             const data = await saveNote(body)
-            if (noteId === null) {
-                setNoteId(data)
-            }
+            setNoteId(() => data)
+            console.log("DB에 저장~!", data)
+            // 저장 시간 받기
+        } else {
+            window.localStorage.setItem('note', JSON.stringify(body))
+            console.log("로컬에 저장~!")
         }
         // 로그인X -> localStorage 저장 후 로그인 물어보기
+
         // 로그인 하고 돌아오면 localStorage 데이터 불러오기
     } 
 
@@ -58,7 +75,7 @@ function BlockList() {
                         <div className="blockList" ref={provided.innerRef}>
                             <>
                                 {blockList.map((block, index) => (                             
-                                    <BlockItem key={block.id} block = {block} index={index} />
+                                    <BlockItem key={block.blockId} block = {block} index={index} />
                                 ))}
                                 {provided.placeholder}
                             </>
