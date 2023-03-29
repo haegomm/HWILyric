@@ -14,8 +14,9 @@ function BlockCreate() {
     }
 
     const onCreate = (): void => {
+        
         const newBlock: IBlockData = {
-            id: blockId,
+            blockId: blockId,
             type: blockType,
             lyrics: ""
         }
