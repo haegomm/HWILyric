@@ -1,0 +1,1 @@
+export const vinylColorDodge = require('./colordodge.png');

@@ -8,5 +8,5 @@ export const DataVisualizeStyle = styled.div`
 `
 
 export const DataVisualizeBlockStyle = styled.div`
-  width: 100vw;
+  width: 1000px
 `
