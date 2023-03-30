@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useRecoilState } from "recoil"
 import { blockListState, blockIdState } from "../../../atoms/noteAtoms"
+import { CreateBlockStyle } from "../../../styles/writeNoteStyle"
 import { ILyricBlockTypes } from "../../../types/writingType"
 
 function BlockCreate() {
@@ -25,8 +26,7 @@ function BlockCreate() {
     }
 
     return (
-        <div>
-            <div className="addBlockBox">
+        <CreateBlockStyle>
                 <select
                     onChange={selectBlockType}>
                     <option value={"Verse"}>Verse</option>
@@ -35,8 +35,7 @@ function BlockCreate() {
                     <option value={"Etc"}>Etc</option>
                 </select>
                 <button onClick={onCreate}> + </button>
-            </div>
-        </div>
+        </CreateBlockStyle>
     )
 }
 
