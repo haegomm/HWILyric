@@ -26,10 +26,6 @@ public class SimilarityController {
 
     @PostMapping("/similarity")
     public ResponseEntity<SimilarityRes> similarityCheck(@RequestBody SimilarityReq reqDto) throws JSchException {
-        SimilarityRes result = service.checkSimilarity(reqDto);
-        if(result!=null)
-            return new ResponseEntity<SimilarityRes>(result, HttpStatus.OK);
-
-        return new ResponseEntity<SimilarityRes>(result, HttpStatus.NO_CONTENT);
+        return new ResponseEntity<SimilarityRes>(service.checkSimilarity(reqDto), HttpStatus.OK);
     }
 }
