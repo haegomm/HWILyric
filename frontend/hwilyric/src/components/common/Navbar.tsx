@@ -1,9 +1,12 @@
 import { NavLink } from "react-router-dom"
 import { useRecoilValue } from "recoil"
+import { BsFillSunFill, BsFillMoonFill } from 'react-icons/bs';
 
-import { IsLoginAtom, userNicknameAtom }from "../../atoms/userAtom"
 
-function Navbar() {
+import { IsLoginAtom, userNicknameAtom } from "../../atoms/userAtom"
+import { ToggleBoxWrapper, ToggleBox, ToggleBoxLabel } from '../../styles/toggleButton'
+
+function Navbar({toggleDarkMode}: any) {
   const isLogin = useRecoilValue(IsLoginAtom)
   const nickname = useRecoilValue(userNicknameAtom)
   return (
@@ -21,6 +24,12 @@ function Navbar() {
           <NavLink to="/login">로그인</NavLink>
         )}
       </div>
+      <BsFillSunFill />
+      <ToggleBoxWrapper>
+          <ToggleBox id="checkbox" type="checkbox" onClick={toggleDarkMode} />
+          <ToggleBoxLabel htmlFor="checkbox" />
+      </ToggleBoxWrapper>
+      <BsFillMoonFill />
     </nav>
   )
 }
