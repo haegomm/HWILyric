@@ -1,6 +1,9 @@
 package com.holorok.hwilyric.works.note.controller;
 
 import com.holorok.hwilyric.works.note.domain.Note;
+import com.holorok.hwilyric.works.note.dto.AutoSaveRes;
+import com.holorok.hwilyric.works.note.dto.NoteReq;
+import com.holorok.hwilyric.works.note.dto.NoteRes;
 import com.holorok.hwilyric.works.note.service.NoteService;
 import com.holorok.hwilyric.user.domain.User;
 import io.swagger.annotations.Api;
@@ -23,51 +26,32 @@ public class NoteController {
     private static final String SUCCESS = "success";
     private static final String FAIL = "fail";
 
-    @PostMapping("/insert")
-    public ResponseEntity<String> addNote(@RequestBody Note note, HttpServletRequest httpServletRequest) {
+    @PostMapping("/save")
+    public ResponseEntity<AutoSaveRes> addNote(@RequestBody NoteReq note, HttpServletRequest httpServletRequest) {
         User user = (User) httpServletRequest.getAttribute("user");
+        AutoSaveRes newNote = noteService.save(note, user.getId());
 
-        Note newNote = noteService.insert(note, user.getId());
-        if(newNote == null)
-            return new ResponseEntity<>(FAIL, HttpStatus.NO_CONTENT);
-        return new ResponseEntity<>(newNote.getId(), HttpStatus.OK);
-        
+        return new ResponseEntity<>(newNote, HttpStatus.OK);
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<Note>> getNoteList(HttpServletRequest httpServletRequest) {
+    public ResponseEntity<List<NoteRes>> getNoteList(HttpServletRequest httpServletRequest) {
         User user = (User) httpServletRequest.getAttribute("user");
 
-        List<Note> noteList = noteService.selectAll(user.getId());
-
-        if(noteList == null)
-            return new ResponseEntity<>(new ArrayList<Note>(), HttpStatus.NO_CONTENT);
-        return new ResponseEntity<>(noteList, HttpStatus.OK);
+        return new ResponseEntity<>(noteService.selectAll(user.getId()), HttpStatus.OK);
     }
 
     @GetMapping("/detail")
-    public ResponseEntity<Note> getNoteDetail(@RequestParam String noteId) {
-        Note note = noteService.selectOne(noteId);
-        if(note==null)
-            return new ResponseEntity<>(new Note(), HttpStatus.NO_CONTENT);
+    public ResponseEntity<NoteRes> getNoteDetail(@RequestParam String noteId) {
+        NoteRes note = noteService.selectOne(noteId);
+
         return new ResponseEntity<>(note, HttpStatus.OK);
-    }
-
-    @PostMapping("/update")
-    public ResponseEntity<String> updateNote(@RequestBody Note note, HttpServletRequest httpServletRequest) {
-        User user = (User) httpServletRequest.getAttribute("user");
-
-        Note newNote = noteService.insert(note, user.getId());
-        if(newNote == null)
-            return new ResponseEntity<>(FAIL, HttpStatus.NO_CONTENT);
-        return new ResponseEntity<>(newNote.getId(), HttpStatus.OK);
     }
 
     @DeleteMapping
     public ResponseEntity<String> deleteNote(@RequestParam String noteId) {
-        if(noteService.delete(noteId))
-            return new ResponseEntity<>(SUCCESS, HttpStatus.NO_CONTENT);
-        return new ResponseEntity<>(FAIL, HttpStatus.NO_CONTENT);
+        noteService.delete(noteId);
+        return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
     }
 
 }

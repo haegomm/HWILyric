@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Lyric {
+    private String blockId;
     private String type;
     private String lyrics;
 }
