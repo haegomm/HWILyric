@@ -1,6 +1,6 @@
 import React from "react";
 import AnnualGenreChart from "./AnnualGenreChart";
-import { AnnualGenreDiv } from "../../styles/DataVisaulizeStyle";
+import { AnnualGenreDiv } from "../../../styles/DataVisaulizeStyle";
 
 function AnnualGenre(props: any) {
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import { AnnualReportDiv } from "../../styles/DataVisaulizeStyle";
+import { AnnualReportDiv } from "../../../styles/DataVisaulizeStyle";
 import AnnualGenre from "./AnnualGenreChart";
 import AnnualKeyword from "./AnnualKeyword";
 

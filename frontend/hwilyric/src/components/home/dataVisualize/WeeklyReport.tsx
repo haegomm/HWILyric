@@ -5,7 +5,7 @@ import {
   WeeklyReportDiv,
   WeeklyReportTitle,
   WeeklyReportSubtitle,
-} from "../../styles/DataVisaulizeStyle";
+} from "../../../styles/DataVisaulizeStyle";
 import AnnualGenreChart from "./AnnualGenreChart";
 import { WordCloud } from "./AnnualKeywordCloud";
 

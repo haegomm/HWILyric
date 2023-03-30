@@ -1,5 +1,5 @@
-import AnnualReport from "../components/dataVisualize/AnnualReport";
-import WeeklyReport from "../components/dataVisualize/WeeklyReport";
+import AnnualReport from "../components/home/dataVisualize/AnnualReport";
+import WeeklyReport from "../components/home/dataVisualize/WeeklyReport";
 import { DataVisualizePage } from "../styles/DataVisaulizeStyle";
 
 function DataVisualize() {
