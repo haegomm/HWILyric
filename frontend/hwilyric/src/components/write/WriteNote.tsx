@@ -1,19 +1,22 @@
 import BlockCreate from "../../components/write/note/NoteCreateBlock"
 import BlockList from "../../components/write/note/NoteBlockList"
 import NoteTitle from "../../components/write/note/NoteTitle"
-import { NoteBox } from "../../styles/lyricNoteStyle"
+import { NoteBox } from "../../styles/writeNoteStyle"
+import { WriteDivBox } from "../../styles/common/DivBox"
 
 function WriteNote() {
     return (
-        <NoteBox>
-            <div className="titleBox">
-                <NoteTitle />
-            </div>
-            <div className="BlocksBox">
-                <BlockList />
-                <BlockCreate />
-            </div>
-        </NoteBox>
+        <WriteDivBox>            
+            <NoteBox>
+                <div className="titleBox">
+                    <NoteTitle />
+                </div>
+                <div className="BlocksBox">
+                    <BlockList />
+                    <BlockCreate />
+                </div>
+            </NoteBox>
+        </WriteDivBox>
     )
 }
 
