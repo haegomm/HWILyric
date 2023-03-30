@@ -18,17 +18,13 @@ public class NoteReq {
     private String thumbnail;
     private String memo;
     private List<Lyric> lyricList;
-    private ZonedDateTime createdDate;
-    private ZonedDateTime updatedDate;
 
-    public NoteReq(String id, Long userId, String title, String thumbnail, String memo, List<Lyric> lyricList, ZonedDateTime createdDate, ZonedDateTime updatedDate) {
+    public NoteReq(String id, Long userId, String title, String thumbnail, String memo, List<Lyric> lyricList) {
         this.id = id;
         this.userId = userId;
         this.title = title;
         this.thumbnail = thumbnail;
         this.memo = memo;
         this.lyricList = lyricList;
-        this.createdDate = createdDate;
-        this.updatedDate = updatedDate;
     }
 }

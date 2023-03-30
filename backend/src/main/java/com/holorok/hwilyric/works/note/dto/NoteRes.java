@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -18,11 +19,11 @@ public class NoteRes {
     private String thumbnail;
     private String memo;
     private List<Lyric> lyricList;
-    private ZonedDateTime createdDate;
-    private ZonedDateTime updatedDate;
+    private Date createdDate;
+    private Date updatedDate;
 
     @Builder
-    public NoteRes(String id, String title, String thumbnail, String memo, List<Lyric> lyricList, ZonedDateTime createdDate, ZonedDateTime updatedDate) {
+    public NoteRes(String id, String title, String thumbnail, String memo, List<Lyric> lyricList, Date createdDate, Date updatedDate) {
         this.id = id;
         this.title = title;
         this.thumbnail = thumbnail;

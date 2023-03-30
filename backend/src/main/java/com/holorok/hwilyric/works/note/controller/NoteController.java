@@ -42,18 +42,16 @@ public class NoteController {
     }
 
     @GetMapping("/detail")
-    public ResponseEntity<Note> getNoteDetail(@RequestParam String noteId) {
-        Note note = noteService.selectOne(noteId);
-        if(note==null)
-            return new ResponseEntity<>(new Note(), HttpStatus.NO_CONTENT);
+    public ResponseEntity<NoteRes> getNoteDetail(@RequestParam String noteId) {
+        NoteRes note = noteService.selectOne(noteId);
+
         return new ResponseEntity<>(note, HttpStatus.OK);
     }
 
     @DeleteMapping
     public ResponseEntity<String> deleteNote(@RequestParam String noteId) {
-        if(noteService.delete(noteId))
-            return new ResponseEntity<>(SUCCESS, HttpStatus.NO_CONTENT);
-        return new ResponseEntity<>(FAIL, HttpStatus.NO_CONTENT);
+        noteService.delete(noteId);
+        return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
     }
 
 }

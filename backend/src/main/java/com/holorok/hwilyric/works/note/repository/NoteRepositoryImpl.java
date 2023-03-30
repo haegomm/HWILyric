@@ -1,13 +1,12 @@
 //package com.holorok.hwilyric.works.note.repository;
 //
 //import com.holorok.hwilyric.works.note.domain.Note;
-//import com.holorok.hwilyric.works.note.domain.QNote;
 //import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 //import org.springframework.data.mongodb.core.MongoOperations;
 //
 //import java.util.List;
 //
-//public class NoteRepositoryImpl extends QuerydslRepositorySupport implements NoteRepositoryWrapper {
+//public class NoteRepositoryImpl extends QuerydslRepositorySupport implements NoteRepository {
 //
 //    private static final QNote note = QNote.note;
 //

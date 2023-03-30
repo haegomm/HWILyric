@@ -3,6 +3,7 @@ package com.holorok.hwilyric.works.note.dto;
 import lombok.*;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
