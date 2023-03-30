@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+<<<<<<< HEAD
 // DataVisualizePage
 export const DataVisualizePage = styled.div`
   display: flex;
@@ -9,6 +10,8 @@ export const DataVisualizePage = styled.div`
 `;
 
 // WeeklyReport Component
+=======
+>>>>>>> 720f08a9b76022b8b6a90d1a292619d2e2a5452c
 export const WeeklyReportDiv = styled.div`
   width: 368px;
   height: 800px;
@@ -30,6 +33,7 @@ export const WeeklyReportSubtitle = styled.div`
   width: 256px;
   height: 248px;
 `;
+<<<<<<< HEAD
 
 // Annual Report Component
 
@@ -52,3 +56,5 @@ export const AnnualKeywordDiv = styled.div`
   width: 300px;
   height: 300px;
 `;
+=======
+>>>>>>> 720f08a9b76022b8b6a90d1a292619d2e2a5452c
