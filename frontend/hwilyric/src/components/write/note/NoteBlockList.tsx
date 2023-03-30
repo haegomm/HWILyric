@@ -6,6 +6,7 @@ import  { IsLoginAtom }  from "../../../atoms/userAtom"
 import { ILyricInfoTypes } from "../../../types/writingType"
 import { saveNote } from "../../../api/writingApi"
 import BlockItem from "./NoteBlockItem"
+import { BlockListStyle } from "../../../styles/writeNoteStyle"
 
 function BlockList() {
 
@@ -68,7 +69,7 @@ function BlockList() {
     } 
 
     return (
-        <div>
+        <BlockListStyle>
             <DragDropContext onDragEnd={onDragEnd}>
                 <Droppable droppableId="blockList">
                     {provided => (
@@ -84,7 +85,7 @@ function BlockList() {
                 </Droppable>
             </DragDropContext>
             <button onClick={onSaveBlockList}>저장</button>
-        </div>
+        </BlockListStyle>
     )
 }
 
