@@ -21,4 +21,6 @@ export const WeeklyReportSubtitle = styled.div`
   height: 248px;
 `;
 
+export const AnnualReportDiv = styled.div``;
+
 export const AnnualGenreDiv = styled.div``;
