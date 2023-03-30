@@ -2,6 +2,7 @@ import { useCallback, useRef } from "react"
 import { Draggable } from "react-beautiful-dnd"
 import { useRecoilState } from "recoil"
 import { blockListState } from "../../../atoms/noteAtoms"
+import { BlockItemStyle } from "../../../styles/writeNoteStyle"
 import { ILyricBlockTypes } from "../../../types/writingType"
 
 interface BlockItemProps {
@@ -47,14 +48,14 @@ function BlockItem({ block, index}: BlockItemProps) {
         if (ref === null || ref.current === null) {
             return
         }
-        ref.current.style.height = '80px'
+        ref.current.style.height = '30px'
         ref.current.style.height = ref.current.scrollHeight + 'px'
     }, [])
 
     return (
         <Draggable draggableId={block.blockId.toString()} index={index}>
             {(provided) => (
-                <div
+                <BlockItemStyle
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}>
@@ -74,7 +75,7 @@ function BlockItem({ block, index}: BlockItemProps) {
                         onInput={handleResizeHeight}
                     />
                     <button onClick={onDeleteBlock}>-</button>
-                </div>
+                </BlockItemStyle>
             )}
         </Draggable>
     )
