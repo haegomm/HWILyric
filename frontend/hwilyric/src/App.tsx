@@ -3,26 +3,23 @@ import { BrowserRouter } from "react-router-dom";
 import { Route, Routes } from "react-router";
 import { useRecoilValue } from "recoil";
 
-import './App.css';
-import Navbar from './components/common/Navbar';
-import Home from './pages/Home';
-import Write from './pages/Write';
-// import DataVisualize from './pages/DataVisualize';
-import Login from './pages/Login';
-import LoginKakao from './components/login/LoginKakao';
-import Signup from './pages/Signup';
-import Mypage from './pages/Mypage';
-import ProfileModification from './pages/ProfileModification';
-import HWILyric from './pages/Hwilyric';
-import { IsLoginAtom } from './atoms/userAtom';
-import userApi from './api/userApi';
-
 import "./App.css";
+import Navbar from "./components/common/Navbar";
+import Home from "./pages/Home";
+import Write from "./pages/Write";
+import Login from "./pages/Login";
+import LoginKakao from "./components/login/LoginKakao";
+import Signup from "./pages/Signup";
+import Mypage from "./pages/Mypage";
+import ProfileModification from "./pages/ProfileModification";
+import HWILyric from "./pages/Hwilyric";
+import { IsLoginAtom } from "./atoms/userAtom";
+import userApi from "./api/userApi";
+
 import DataVisualize from "./pages/DataVisualize";
-import userAtom from "./atoms/userAtom";
 
 function App() {
-  const isLogin = useRecoilValue(userAtom.IsLoginAtom);
+  const isLogin = useRecoilValue(IsLoginAtom);
 
   useEffect(() => {
     async function reissueToken() {
