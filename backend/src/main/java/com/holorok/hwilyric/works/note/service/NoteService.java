@@ -76,7 +76,7 @@ public class NoteService {
         List<NoteRes> result = new ArrayList<>();
         List<Note> noteList = noteRepository.findAllByUserId(userId);
 
-        if(noteList.size()<1)
+        if(noteList.isEmpty())
             throw new NotFoundException("당신... 노트를 하나도 작성하지 않았군");
 
         for(Note n: noteList) {
