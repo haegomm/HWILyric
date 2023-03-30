@@ -1,12 +1,14 @@
 package com.holorok.hwilyric.works.similarity.service;
 
 import com.holorok.hwilyric.common.SparkSqlManager;
+import com.holorok.hwilyric.exception.NotFoundException;
 import com.holorok.hwilyric.works.similarity.dto.LyricInfo;
 import com.holorok.hwilyric.works.similarity.dto.LyricPairDto;
 import com.jcraft.jsch.JSchException;
 import com.holorok.hwilyric.works.similarity.dto.SimilarityReq;
 import com.holorok.hwilyric.works.similarity.dto.SimilarityRes;
 import lombok.RequiredArgsConstructor;
+import org.apache.avro.generic.GenericData;
 import org.apache.commons.text.similarity.JaroWinklerSimilarity;
 import org.apache.spark.sql.*;
 import org.springframework.stereotype.Service;
@@ -41,10 +43,11 @@ public class SimilarityService {
             List<String> oneBlock = Arrays.asList(userLyricList[i].split("\n"));
 
             for(String oneLine : oneBlock) {//사용자가 입력한 가사 한 줄에 대해
-
+                //특수문자 제거
+//                String fixedLyric = oneLine.replaceAll("[@&#$%*$^,./]", "");
                 //임시로 유사한 가사와 해당 곡제목, 가수를 넣어둘 리스트 -> 나중에 정렬할 것
                 List<LyricInfo> similarLyrics = new ArrayList<>();
-                LyricPairDto lpd = new LyricPairDto(oneLine, new String[3], new String[3], new String[3]);
+                LyricPairDto lpd = new LyricPairDto(oneLine, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
                 for (int j=4, size=(int)dataset.count();j<size;j++) { //전체 가사를 대상으로 유사도 검사
                     //Spark에서 읽어온 데이터 꺼내오기
@@ -79,9 +82,9 @@ public class SimilarityService {
                     for (int k=0, ksize=similarLyrics.size();k<ksize;k++) {
                         if (k>2) break;
 
-                        lpd.getLyricList()[k] = similarLyrics.get(k).getLyric();
-                        lpd.getArtistList()[k] = similarLyrics.get(k).getArtist();
-                        lpd.getTitleList()[k] = similarLyrics.get(k).getTitle();
+                        lpd.getLyricList().add(similarLyrics.get(k).getLyric());
+                        lpd.getArtistList().add(similarLyrics.get(k).getArtist());
+                        lpd.getTitleList().add(similarLyrics.get(k).getTitle());
                     }
 
                     //저장한 dto를 리스트에 추가
@@ -89,6 +92,10 @@ public class SimilarityService {
                 }
             }
         }
+
+        if(result.getSimilarList().isEmpty())
+            throw new NotFoundException("유사한 가사가 없습니다. 특수문자가 있다면 제거하고 다시 시도해보세요!");
+
         return result;
     }
 }
