@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
-import reset from 'styled-reset';
+import { ThemeProvider } from 'styled-components'
 import { BrowserRouter } from "react-router-dom";
 import { Route, Routes } from "react-router";
 import { useRecoilValue } from "recoil";
 
+import './App.css'
+import { GlobalStyle } from "./styles/GlobalStyle"
 import { darkTheme, lightTheme } from './styles/theme';
 import Navbar from "./components/common/Navbar";
 import Home from "./pages/Home";
@@ -19,14 +20,6 @@ import { IsLoginAtom } from "./atoms/userAtom";
 import userApi from "./api/userApi";
 
 import DataVisualize from "./pages/DataVisualize";
-
-const GlobalStyle = createGlobalStyle`
-  ${reset}  
-  body {        
-    background-color: ${(props) => props.theme.bgColor};
-    color:${(props) => props.theme.textColor}
-  }  
-`;
 
 function App() {
   const isLogin = useRecoilValue(IsLoginAtom);
@@ -59,10 +52,10 @@ function App() {
       <GlobalStyle /> 
         <BrowserRouter>
           <div className="App">
-            <Navbar />
+          <Navbar toggleDarkMode={toggleDarkMode} />
             <Routes>
               <Route path="*" element={<HWILyric />} />
-              <Route path="/zslkdrj" element={<Home isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode}/>} />
+              <Route path="/zslkdrj" element={<Home />} />
               <Route path="/write/sdalkfjadslkfj" element={<Write />} />
               <Route path="/datavisualize" element={<DataVisualize />} />
               <Route path="/login/dlkfjsaldkfj" element={<Login />} />
