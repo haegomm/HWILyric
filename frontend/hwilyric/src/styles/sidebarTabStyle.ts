@@ -37,5 +37,5 @@ export const TabMenu = styled.ul`
 `;
 
 export const Desc = styled.div`
-text-align: center;
+    text-align: center;
 `;
