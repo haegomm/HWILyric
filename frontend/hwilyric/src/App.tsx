@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
+import reset from 'styled-reset';
 import { BrowserRouter } from "react-router-dom";
 import { Route, Routes } from "react-router";
 import { useRecoilValue } from "recoil";
 
-import "./App.css";
+import { darkTheme, lightTheme } from './styles/theme';
 import Navbar from "./components/common/Navbar";
 import Home from "./pages/Home";
 import Write from "./pages/Write";
@@ -18,8 +20,22 @@ import userApi from "./api/userApi";
 
 import DataVisualize from "./pages/DataVisualize";
 
+const GlobalStyle = createGlobalStyle`
+  ${reset}  
+  body {        
+    background-color: ${(props) => props.theme.bgColor};
+    color:${(props) => props.theme.textColor}
+  }  
+`;
+
 function App() {
   const isLogin = useRecoilValue(IsLoginAtom);
+
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode((prev) => !prev);
+  };
 
   useEffect(() => {
     async function reissueToken() {
@@ -39,25 +55,28 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Navbar />
-        <Routes>
-          <Route path="*" element={<HWILyric />} />
-          <Route path="/zslkdrj" element={<Home />} />
-          <Route path="/write/sdalkfjadslkfj" element={<Write />} />
-          <Route path="/datavisualize" element={<DataVisualize />} />
-          <Route path="/login/dlkfjsaldkfj" element={<Login />} />
-          <Route path="oauth2/code/kakao" element={<LoginKakao />} />
-          <Route path="/signup/dkfjdlksj" element={<Signup />} />
-          <Route path="/mypage/dsajhfawjehdg" element={<Mypage />} />
-          <Route
-            path="/profilemodification/sajhdgdjakhsd"
-            element={<ProfileModification />}
-          />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      <GlobalStyle /> 
+        <BrowserRouter>
+          <div className="App">
+            <Navbar />
+            <Routes>
+              <Route path="*" element={<HWILyric />} />
+              <Route path="/zslkdrj" element={<Home isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode}/>} />
+              <Route path="/write/sdalkfjadslkfj" element={<Write />} />
+              <Route path="/datavisualize" element={<DataVisualize />} />
+              <Route path="/login/dlkfjsaldkfj" element={<Login />} />
+              <Route path="oauth2/code/kakao" element={<LoginKakao />} />
+              <Route path="/signup/dkfjdlksj" element={<Signup />} />
+              <Route path="/mypage/dsajhfawjehdg" element={<Mypage />} />
+              <Route
+                path="/profilemodification/sajhdgdjakhsd"
+                element={<ProfileModification />}
+              />
+            </Routes>
+          </div>
+        </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
