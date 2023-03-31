@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import userApi from "../api/userApi";
+import { checkEmail, signup, checkNickname, verifyEmail } from "../api/userApi";
 import { ISignupTypes } from "../types/userType";
 import authValidation from "../features/validation";
 
@@ -39,7 +39,7 @@ function Signup() {
     const userInfoString = JSON.stringify(userInfo)
     formData.append('userInfo', new Blob([userInfoString], {type: 'application/json'}));
 
-    const message = await userApi.signup(formData)
+    const message = await signup(formData)
     console.log(formData)
     console.log(message)
 
@@ -56,7 +56,7 @@ function Signup() {
       authValidation(currentEmail, "email")
       ? setEmailFormError("")
       : setEmailFormError("올바르지 않은 이메일 형식입니다");
-      const message = await userApi.checkEmail(currentEmail)
+      const message = await checkEmail(currentEmail)
       if ((message === "success") || !currentEmail) {
         setEmailError("");
       } else {
@@ -70,7 +70,7 @@ function Signup() {
       authValidation(currentNickname, "nickname")
         ? setNicknameFormError("")
         : setNicknameFormError("2자 이상 8자 이하의 닉네임을 입력해주세요");
-      const message = await userApi.checkNickname(currentNickname)
+      const message = await checkNickname(currentNickname)
       if (message === "success") {
         setNicknameError("");
       } else {
@@ -80,7 +80,7 @@ function Signup() {
     };
     
     const onSendHandler = async (e: React.MouseEvent<HTMLDivElement>) => {
-      const code = await userApi.verifyEmail(Email)
+      const code = await verifyEmail(Email)
       setCode(code)
       console.log(code)
     }

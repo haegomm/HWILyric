@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSetRecoilState } from 'recoil';
 
-import userApi from "../../api/userApi";
+import { resetPassword } from "../../api/userApi";
 import authValidation from "../../features/validation";
 import { IsKnownPassword } from "../../atoms/userAtom";
 
@@ -22,7 +22,7 @@ function LoginForgetPassword() {
     e.preventDefault();
 
     const body = {email: Email}
-    const message = await userApi.resetPassword(body)
+    const message = await resetPassword(body)
     
     if (message === 'success') {
       console.log('일반회원')

@@ -14,29 +14,29 @@ import Mypage from "./pages/Mypage";
 import ProfileModification from "./pages/ProfileModification";
 import HWILyric from "./pages/Hwilyric";
 import { IsLoginAtom } from "./atoms/userAtom";
-import userApi from "./api/userApi";
+// import userApi from "./api/userApi";
 
 import DataVisualize from "./pages/DataVisualize";
 
 function App() {
   const isLogin = useRecoilValue(IsLoginAtom);
 
-  useEffect(() => {
-    async function reissueToken() {
-      const accessToken = await userApi.reissueToken();
-      if (accessToken !== null) {
-        console.log("토큰 재발급~~");
-        window.localStorage.setItem("accessToken", accessToken);
-      } else {
-        console.log("토큰재발급 실패ㅜㅜ");
-      }
-    }
-    setInterval(() => {
-      if (isLogin) {
-        reissueToken();
-      }
-    }, 300000);
-  }, []);
+  // useEffect(() => {
+  //   async function reissueToken() {
+  //     const accessToken = await userApi.reissueToken();
+  //     if (accessToken !== null) {
+  //       console.log("토큰 재발급~~");
+  //       window.localStorage.setItem("accessToken", accessToken);
+  //     } else {
+  //       console.log("토큰재발급 실패ㅜㅜ");
+  //     }
+  //   }
+  //   setInterval(() => {
+  //     if (isLogin) {
+  //       reissueToken();
+  //     }
+  //   }, 300000);
+  // }, []);
 
   return (
     <BrowserRouter>
