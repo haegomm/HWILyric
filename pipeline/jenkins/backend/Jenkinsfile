@@ -3,7 +3,6 @@ pipeline {
 
     tools {
         gradle 'gradle 7.6.1'
-        nodejs 'nodejs 18.13.0'
     }
 
     stages {
