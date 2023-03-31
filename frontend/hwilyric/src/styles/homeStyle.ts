@@ -3,18 +3,17 @@ import styled from 'styled-components';
 export const HomeContainer = styled.div`
 overflow: auto;
 `
-export const HomeDiv = styled.div`
-width:100%;
-white-space: nowrap;
-overflow: scroll;
-`
 
 export const HomeContent = styled.div`
+white-space: nowrap;
 display: flex;
-width:100%;
-overflow: scroll;
-scrollbar: hide;
-align-items: centerd;
+overflow-y: scroll;
+align-items: center;
+float: left
+`
+
+export const HomeDiv = styled.div`
+width: 320px
 `
 
 export const QuickView = styled.div`
@@ -23,5 +22,5 @@ height: 560px;
 `
 
 export const HomeImg = styled.img`
-width: 30vw
+height: 60vh
 `

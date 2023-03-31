@@ -8,6 +8,6 @@ export const DataVisualizeStyle = styled.div`
 `
 
 export const DataVisualizeBlockStyle = styled.div`
-  position:relative;
+  // position:relative;
   width: 1000px;
 `
