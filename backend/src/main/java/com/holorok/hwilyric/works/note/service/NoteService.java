@@ -1,16 +1,15 @@
 package com.holorok.hwilyric.works.note.service;
 
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.holorok.hwilyric.common.AwsService;
 import com.holorok.hwilyric.exception.NotFoundException;
 import com.holorok.hwilyric.works.note.dto.AutoSaveRes;
 import com.holorok.hwilyric.works.note.dto.NoteReq;
 import com.holorok.hwilyric.works.note.dto.NoteRes;
-import com.holorok.hwilyric.works.note.repository.NoteRepository;
 import com.holorok.hwilyric.works.note.domain.Note;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.holorok.hwilyric.works.note.repository.NoteRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
@@ -20,19 +19,26 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class NoteService {
 
-    private NoteRepository noteRepository;
+    private final NoteRepository noteRepository;
     private ZonedDateTimeWriteConverter timeWriter = new ZonedDateTimeWriteConverter();
     private ZonedDateTimeReadConverter timeReader = new ZonedDateTimeReadConverter();
-    public NoteService(NoteRepository noteRepository) {
-        this.noteRepository = noteRepository;
-    }
+    private final AwsService awsService;
 
     @Transactional
-    public AutoSaveRes save(NoteReq note, Long userId) {
+    public AutoSaveRes save(NoteReq note, Long userId, MultipartFile multipartFile) throws Exception {
 
         Optional<Note> findNote = noteRepository.findById(note.getId());
+
+        //기본 이미지
+        String thumbnailImg = "https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/thumbnail/default_thumbnail.png";
+
+        //사용자가 파일을 업로드한 경우
+        if(multipartFile != null) {
+            thumbnailImg = awsService.upload(multipartFile, "/thumbnail");
+        }
 
         Note savedNote;
 
@@ -42,7 +48,7 @@ public class NoteService {
                     .id(null)
                     .title(note.getTitle())
                     .userId(userId)
-                    .thumbnail(note.getThumbnail())
+                    .thumbnail(thumbnailImg)
                     .memo(note.getMemo())
                     .lyricList(note.getLyricList())
                     .createdDate(timeWriter.convert(ZonedDateTime.now()))
@@ -50,11 +56,16 @@ public class NoteService {
                     .build();
         } else { //업데이트일 경우
             Note foundNote = findNote.get();
+
+            //사용자가 파일을 업로드하지는 않았지만 이전에 썸네일을 업로드한 경우 -> 기본 이미지로 바뀌면 안됨
+            if(foundNote.getThumbnail().equals(note.getThumbnail()))
+                thumbnailImg = foundNote.getThumbnail();
+
             savedNote = Note.builder()
                     .id(note.getId())
                     .title(note.getTitle())
                     .userId(userId)
-                    .thumbnail(note.getThumbnail())
+                    .thumbnail(thumbnailImg)
                     .memo(note.getMemo())
                     .lyricList(note.getLyricList())
                     .createdDate(foundNote.getCreatedDate())
@@ -67,6 +78,7 @@ public class NoteService {
         AutoSaveRes res = AutoSaveRes.builder()
                 .id(savedNote.getId())
                 .updatedDate(timeReader.convert(savedNote.getUpdatedDate()))
+                .thumbnail(savedNote.getThumbnail())
                 .build();
 
         return res;

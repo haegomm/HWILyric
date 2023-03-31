@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,11 +29,11 @@ public class NoteController {
     private static final String FAIL = "fail";
 
     @PostMapping("/save")
-    public ResponseEntity<AutoSaveRes> addNote(@RequestBody NoteReq note, HttpServletRequest httpServletRequest) {
+    public ResponseEntity<AutoSaveRes> addNote(@Valid @RequestPart(value = "noteInfo") NoteReq note, @RequestPart(value = "thumbnail", required = false) MultipartFile multipartFile, HttpServletRequest httpServletRequest) throws Exception {
         User user = (User) httpServletRequest.getAttribute("user");
-        AutoSaveRes newNote = noteService.save(note, user.getId());
+        AutoSaveRes savedNote = noteService.save(note, user.getId(), multipartFile);
 
-        return new ResponseEntity<>(newNote, HttpStatus.OK);
+        return new ResponseEntity<>(savedNote, HttpStatus.OK);
     }
 
     @GetMapping("/list")
