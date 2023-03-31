@@ -6,8 +6,6 @@ import {
   WeeklyReportTitle,
   WeeklyReportSubtitle,
 } from "../../../styles/DataVisaulizeStyle";
-import AnnualGenreChart from "./AnnualGenreChart";
-import { WordCloud } from "./AnnualKeywordCloud";
 
 function WeeklyReport() {
   return (

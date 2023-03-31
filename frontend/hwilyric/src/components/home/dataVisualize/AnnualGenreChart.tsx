@@ -2,10 +2,16 @@ import React, { useState } from "react";
 import { Pie } from "react-chartjs-2";
 import { useSpring, animated } from "react-spring";
 import { ResponsivePie } from "@nivo/pie";
+import { getAllJSDocTagsOfKind } from "typescript";
+
+function myFunc(node: Object, event: Object) {
+  console.log(node, "!!!!!!!!!!!!!!!!!!!!", event);
+}
 
 function AnnualGenreChart(props: any) {
+  console.log(props);
   return (
-    <div style={{ width: "300px", height: "300px" }}>
+    <div style={{ width: "400px", height: "300px" }}>
       <ResponsivePie
         data={props.data}
         margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
@@ -14,6 +20,7 @@ function AnnualGenreChart(props: any) {
         activeOuterRadiusOffset={8}
         colors={{ scheme: "blue_purple" }}
         borderWidth={1}
+        sortByValue={true}
         borderColor={{
           from: "color",
           modifiers: [["darker", 0.2]],
@@ -27,26 +34,26 @@ function AnnualGenreChart(props: any) {
           from: "color",
           modifiers: [["darker", 2]],
         }}
-        defs={[
-          {
-            id: "dots",
-            type: "patternDots",
-            background: "inherit",
-            color: "rgba(255, 255, 255, 0.3)",
-            size: 4,
-            padding: 1,
-            stagger: true,
-          },
-          {
-            id: "lines",
-            type: "patternLines",
-            background: "inherit",
-            color: "rgba(255, 255, 255, 0.3)",
-            rotation: -45,
-            lineWidth: 6,
-            spacing: 10,
-          },
-        ]}
+        // defs={[
+        //   {
+        //     id: "dots",
+        //     type: "patternDots",
+        //     background: "inherit",
+        //     color: "rgba(255, 255, 255, 0.3)",
+        //     size: 4,
+        //     padding: 1,
+        //     stagger: true,
+        //   },
+        //   {
+        //     id: "lines",
+        //     type: "patternLines",
+        //     background: "inherit",
+        //     color: "rgba(255, 255, 255, 0.3)",
+        //     rotation: -45,
+        //     lineWidth: 6,
+        //     spacing: 10,
+        //   },
+        // ]}
         fill={[
           {
             match: {
@@ -97,31 +104,8 @@ function AnnualGenreChart(props: any) {
             id: "lines",
           },
         ]}
-        legends={[
-          {
-            anchor: "bottom",
-            direction: "row",
-            justify: false,
-            translateX: 0,
-            translateY: 56,
-            itemsSpacing: 0,
-            itemWidth: 100,
-            itemHeight: 18,
-            itemTextColor: "#999",
-            itemDirection: "left-to-right",
-            itemOpacity: 1,
-            symbolSize: 18,
-            symbolShape: "circle",
-            effects: [
-              {
-                on: "hover",
-                style: {
-                  itemTextColor: "#000",
-                },
-              },
-            ],
-          },
-        ]}
+        legends={[]}
+        onClick={myFunc}
       />
     </div>
   );
