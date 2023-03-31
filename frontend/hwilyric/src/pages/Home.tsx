@@ -7,6 +7,7 @@ import DataVisualizeBlock from '../components/home/dataVisualize/DataVisualizeBl
 import { IsLoginAtom } from '../atoms/userAtom';
 import HomeNotLoggedIn from '../components/home/HomeNotLoggedIn';
 import HomeCenter from '../components/home/HomeCenter';
+import { DataVisualizeBlockStyle, DataVisualizeStyle } from '../styles/dataVisualizeStyle';
 
 function Home() {
     const scrollRef = useHorizontalScroll();
@@ -20,7 +21,9 @@ function Home() {
                         : <HomeNotLoggedIn />
                     }
                     <HomeCenter />
-                    <DataVisualizeBlock />
+                    <DataVisualizeBlockStyle>
+                        <DataVisualizeBlock />
+                    </DataVisualizeBlockStyle>
                     <DataVisualizeBlock />
                     <DataVisualizeBlock />
                     <DataVisualizeBlock />

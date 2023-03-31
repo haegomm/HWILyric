@@ -36,7 +36,6 @@ function HomeQuickview() {
               key={lyric.id}
               // name={lyric}
             /> 
-
           ))}
         </div>
         : nullLyrics}

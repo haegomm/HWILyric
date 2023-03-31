@@ -4,15 +4,17 @@ export const HomeContainer = styled.div`
 overflow: auto;
 `
 export const HomeDiv = styled.div`
+width:100%;
 white-space: nowrap;
-// overflow: scroll;
+overflow: scroll;
 `
 
 export const HomeContent = styled.div`
 display: flex;
-overflow-y: scroll;
+width:100%;
+overflow: scroll;
 scrollbar: hide;
-align-items: center;
+align-items: centerd;
 `
 
 export const QuickView = styled.div`
