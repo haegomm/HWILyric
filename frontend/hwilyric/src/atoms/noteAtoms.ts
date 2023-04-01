@@ -37,3 +37,9 @@ export const blockListState = atom<ILyricBlockTypes[]>({
     default: [],
     effects_UNSTABLE: [persistAtom],
 })
+
+export const noteThumbnailFileState = atom<File | "">({
+    key: "noteThumbnailFileState",
+    default: "",
+    effects_UNSTABLE: [persistAtom],
+})
