@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from 'recoil';
 
-import userApi from "../../api/userApi";
+import { loginKakao } from "../../api/userApi";
 import { saveUserInfo } from "../../features/userInfo";
 import { IsLoginAtom, userNicknameAtom, userProfileImgAtom } from "../../atoms/userAtom";
 
@@ -21,7 +21,7 @@ function LoginKakao() {
   useEffect(() => {
     async function kakaoLogin() {
       if (!code) return;
-    const data = await userApi.loginKakao(code)
+    const data = await loginKakao(code)
     if (data !== null) {
       console.log('카카오 됏당')
       saveUserInfo(data)

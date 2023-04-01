@@ -17,7 +17,7 @@ import Mypage from "./pages/Mypage";
 import ProfileModification from "./pages/ProfileModification";
 import HWILyric from "./pages/Hwilyric";
 import { IsLoginAtom } from "./atoms/userAtom";
-import userApi from "./api/userApi";
+import { reissueToken } from "./api/userApi";
 
 import DataVisualize from "./pages/DataVisualize";
 
@@ -31,8 +31,8 @@ function App() {
   };
 
   useEffect(() => {
-    async function reissueToken() {
-      const accessToken = await userApi.reissueToken();
+    const issueToken = async () => {
+      const accessToken = await reissueToken();
       if (accessToken !== null) {
         console.log("토큰 재발급~~");
         window.localStorage.setItem("accessToken", accessToken);
@@ -42,7 +42,7 @@ function App() {
     }
     setInterval(() => {
       if (isLogin) {
-        reissueToken();
+        issueToken();
       }
     }, 300000);
   }, []);
