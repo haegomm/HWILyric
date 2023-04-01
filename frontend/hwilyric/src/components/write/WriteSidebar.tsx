@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Desc, TabMenu } from "../../styles/sidebarTabStyle"
+import { Desc, TabMenu } from "../../styles/writeSidebarStyle"
 import { SideBarBox } from "../../styles/writeSidebarStyle"
 import { WriteDivBox } from "../../styles/common/DivBox"
 import CheckSimilarity from "./sidebar/CheckSimilarity"
