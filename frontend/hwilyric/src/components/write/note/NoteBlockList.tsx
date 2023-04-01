@@ -63,7 +63,7 @@ function BlockList() {
         
         const formData = new FormData()
         const noteInfoString = JSON.stringify(noteInfo)
-        formData.append('userInfo', new Blob([noteInfoString], { type: 'application/json' }));
+        formData.append("noteInfo", new Blob([noteInfoString], { type: 'application/json' }));
         // if (thumbnailFile) {
         //     const blob = new Blob([thumbnailFile],  { type: thumbnailFile.type })
         //     formData.append("thumbnail", blob)

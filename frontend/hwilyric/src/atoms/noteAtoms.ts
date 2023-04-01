@@ -15,9 +15,9 @@ function getCurrentDateTime() {
     return Number(id);
 }
 
-export const noteIdState = atom<string | null>({
+export const noteIdState = atom<string>({
     key: "noteIdState",
-    default: null,
+    default: "",
     effects_UNSTABLE: [persistAtom],
 })
 

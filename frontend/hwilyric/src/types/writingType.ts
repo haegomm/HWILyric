@@ -9,7 +9,7 @@ export interface ILyricBlockTypes {
 }
 
 export interface ILyricInfoTypes {
-  id: string| null;
+  id: string;
   title: string;
   thumbnail: string;
   memo: string;
