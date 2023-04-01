@@ -34,11 +34,11 @@ public class AwsService {
 
         // S3에 업로드
         amazonS3Client.putObject(
-                new PutObjectRequest(bucket + directory, originalName, multipartFile.getInputStream(), objectMetaData)
+                new PutObjectRequest(bucket, directory + "/" + originalName, multipartFile.getInputStream(), objectMetaData)
                         .withCannedAcl(CannedAccessControlList.PublicRead)
         );
 
-        return amazonS3Client.getUrl(bucket, originalName).toString(); // 접근가능한 URL 가져오기
+        return amazonS3Client.getUrl(bucket, directory + "/" + originalName).toString(); // 접근가능한 URL 가져오기
     }
 
 }
