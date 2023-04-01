@@ -31,3 +31,8 @@ export interface IAnnualGenreChart {
 export interface IAnnualGenreRatio {
   [key: string]: IGenreRatio[];
 }
+
+export interface IWeeklyReportGenre {
+  name: string;
+  count: number;
+}

@@ -18,15 +18,31 @@ export const WeeklyReportDiv = styled.div`
 
 export const WeeklyReportTitle = styled.title`
   display: block;
-  width: 312px;
-  height: 152px;
+  width: 152px;
+  height: 40px;
   background-color: white;
+  font-size: 20px;
 `;
 
 export const WeeklyReportSubtitle = styled.div`
   display: block;
-  width: 256px;
-  height: 248px;
+  width: 168px;
+  height: 24px;
+  background-color: white;
+`;
+
+export const WeeklyReportGenreDiv = styled.div`
+  width: 300px;
+  height: 200px;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+`;
+
+export const WeeklyReportKeywordsDiv = styled.div`
+  width: 300px;
+  height: 200px;
   background-color: white;
 `;
 
