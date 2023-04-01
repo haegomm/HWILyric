@@ -15,3 +15,10 @@ export interface ILyricInfoTypes {
   memo: string;
   lyricList : ILyricBlockTypes[];
 }
+
+export interface ISimilarInfoTypes {
+  userLyric: string,
+  artistList: string[],
+  lyricList: string[],
+  titleList: string[],
+}

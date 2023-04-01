@@ -9,7 +9,6 @@ import BlockItem from "./NoteBlockItem"
 import { BlockListStyle } from "../../../styles/writeNoteStyle"
 import { SaveButton } from "../../../styles/common/ButtonStyle"
 import { memoState } from "../../../atoms/sidebarAtoms"
-import { type } from "os"
 
 function BlockList() {
 
@@ -74,7 +73,7 @@ function BlockList() {
         if (isLogin) {
             const res = await saveNote(formData)
             console.log(res)
-            // setNoteId(() => data)
+            setNoteId(() => res)
             // 저장 시간 받기
         } else {
             window.localStorage.setItem('note', JSON.stringify(formData))
