@@ -6,6 +6,8 @@ import  { IsLoginAtom }  from "../../../atoms/userAtom"
 import { ILyricInfoTypes } from "../../../types/writingType"
 import { saveNote } from "../../../api/writingApi"
 import BlockItem from "./NoteBlockItem"
+import { BlockListStyle } from "../../../styles/writeNoteStyle"
+import { SaveButton } from "../../../styles/common/ButtonStyle"
 
 function BlockList() {
 
@@ -68,23 +70,23 @@ function BlockList() {
     } 
 
     return (
-        <div>
-            <DragDropContext onDragEnd={onDragEnd}>
-                <Droppable droppableId="blockList">
-                    {provided => (
-                        <div className="blockList" ref={provided.innerRef}>
-                            <>
-                                {blockList.map((block, index) => (                             
-                                    <BlockItem key={block.blockId} block = {block} index={index} />
-                                ))}
-                                {provided.placeholder}
-                            </>
-                        </div>
-                    )}
-                </Droppable>
-            </DragDropContext>
-            <button onClick={onSaveBlockList}>저장</button>
-        </div>
+        <BlockListStyle>
+                <DragDropContext onDragEnd={onDragEnd}>
+                    <Droppable droppableId="blockList">
+                        {provided => (
+                            <div className="blockList" ref={provided.innerRef}>
+                                <>
+                                    {blockList.map((block, index) => (                             
+                                        <BlockItem key={block.blockId} block = {block} index={index} />
+                                    ))}
+                                    {provided.placeholder}
+                                </>
+                            </div>
+                        )}
+                    </Droppable>
+                </DragDropContext>
+            <SaveButton onClick={onSaveBlockList}>저장</SaveButton>
+        </BlockListStyle>
     )
 }
 

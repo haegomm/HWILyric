@@ -1,7 +1,9 @@
 import { useState } from "react"
+import { Desc, TabMenu } from "../../styles/writeSidebarStyle"
+import { SideBarBox } from "../../styles/writeSidebarStyle"
+import { WriteDivBox } from "../../styles/common/DivBox"
 import CheckSimilarity from "./sidebar/CheckSimilarity"
 import Memo from "./sidebar/Memo"
-import { TabMenu, Desc } from "../../styles/sidebarTabStyle"
 
 function WriteSidebar() {
 
@@ -19,19 +21,21 @@ function WriteSidebar() {
     }
 
     return (
-        <div>
-            <TabMenu>
-                {tabArr.map((el, index) => (
-                    <li className={index === currentTab ? "submenu focused" : "submenu"}
-                        onClick={() => selectTabHandler(index)}>{el.name}</li>
-                ))}
-            </TabMenu>
-            <Desc>
-                <div>
-                    {tabArr[currentTab].content}
-                </div>
-            </Desc>
-        </div>
+        <WriteDivBox>
+            <SideBarBox>
+                <TabMenu>
+                    {tabArr.map((el, index) => (
+                        <li className={index === currentTab ? "submenu focused" : "submenu"}
+                            onClick={() => selectTabHandler(index)}>{el.name}</li>
+                    ))}
+                </TabMenu>
+                <Desc>
+                    <div>
+                        {tabArr[currentTab].content}
+                    </div>
+                </Desc>
+            </SideBarBox>
+        </WriteDivBox>
     )
 }
 

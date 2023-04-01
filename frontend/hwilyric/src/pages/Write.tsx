@@ -1,12 +1,13 @@
+import { WriteBox } from "../styles/writeStyle"
 import WriteNote from "../components/write/WriteNote"
 import WriteSidebar from "../components/write/WriteSidebar"
 
 function Write() {
   return (
-    <div>
+    <WriteBox>
       <WriteSidebar />
       <WriteNote />
-    </div>
+    </WriteBox>
   )
 }
 
