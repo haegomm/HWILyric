@@ -1,7 +1,7 @@
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd"
 import { useCallback, useEffect } from "react"
 import { useRecoilState, useRecoilValue } from "recoil"
-import { blockListState, titleState, noteIdState, noteThumbnailFileState } from "../../../atoms/noteAtoms"
+import { blockListState, titleState, noteIdState, noteThumbnailFileState, noteThumbnailUrlState } from "../../../atoms/noteAtoms"
 import { IsLoginAtom }  from "../../../atoms/userAtom"
 import { ILyricInfoTypes } from "../../../types/writingType"
 import { saveNote } from "../../../api/writingApi"
@@ -19,6 +19,7 @@ function BlockList() {
     const isLogin = useRecoilValue(IsLoginAtom)
     const memo = useRecoilValue(memoState)
     const thumbnailFile = useRecoilValue(noteThumbnailFileState)
+    const noteThumbnailUrl = useRecoilValue(noteThumbnailUrlState)
 
     // useEffect(() => {
     //     const autoSaveNote = setInterval(() => {
@@ -54,6 +55,7 @@ function BlockList() {
         const noteInfo: ILyricInfoTypes = {
             id: noteId,
             title: title,
+            thumbnail: noteThumbnailUrl,
             memo: memo,
             lyricList: blockList
         }

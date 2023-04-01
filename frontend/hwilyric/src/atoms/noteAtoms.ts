@@ -43,3 +43,9 @@ export const noteThumbnailFileState = atom<File | "">({
     default: "",
     effects_UNSTABLE: [persistAtom],
 })
+
+export const noteThumbnailUrlState = atom<string>({
+    key: "noteThumbnailUrlState",
+    default: "",
+    effects_UNSTABLE: [persistAtom],
+})

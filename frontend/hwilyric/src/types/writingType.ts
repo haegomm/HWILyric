@@ -11,6 +11,7 @@ export interface ILyricBlockTypes {
 export interface ILyricInfoTypes {
   id: string| null;
   title: string;
+  thumbnail: string;
   memo: string;
   lyricList : ILyricBlockTypes[];
 }
