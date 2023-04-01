@@ -26,6 +26,7 @@ function WriteSidebar() {
                 <TabMenu>
                     {tabArr.map((el, index) => (
                         <li className={index === currentTab ? "submenu focused" : "submenu"}
+                            key={index}
                             onClick={() => selectTabHandler(index)}>{el.name}</li>
                     ))}
                 </TabMenu>

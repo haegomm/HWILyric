@@ -8,6 +8,7 @@ import { saveNote } from "../../../api/writingApi"
 import BlockItem from "./NoteBlockItem"
 import { BlockListStyle } from "../../../styles/writeNoteStyle"
 import { SaveButton } from "../../../styles/common/ButtonStyle"
+import { memoState } from "../../../atoms/sidebarAtoms"
 
 function BlockList() {
 
@@ -16,6 +17,7 @@ function BlockList() {
     const title = useRecoilValue(titleState)
 
     const isLogin = useRecoilValue(IsLoginAtom)
+    const memo = useRecoilValue(memoState)
     const thumbnailFile = useRecoilValue(noteThumbnailFileState)
 
     // useEffect(() => {
@@ -52,8 +54,7 @@ function BlockList() {
         const noteInfo: ILyricInfoTypes = {
             id: noteId,
             title: title,
-            thumnail: "하잉ㅎ 나 썸네일ㅎ",
-            memo: "",
+            memo: memo,
             lyricList: blockList
         }
         
