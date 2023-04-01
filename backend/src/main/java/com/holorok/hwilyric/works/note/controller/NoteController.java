@@ -9,6 +9,7 @@ import com.holorok.hwilyric.user.domain.User;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,7 +29,7 @@ public class NoteController {
     private static final String SUCCESS = "success";
     private static final String FAIL = "fail";
 
-    @PostMapping("/save")
+    @PostMapping(value = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<AutoSaveRes> addNote(@RequestPart(value = "noteInfo") NoteReq note, @RequestPart(value = "thumbnail", required = false) MultipartFile multipartFile, HttpServletRequest httpServletRequest) throws Exception {
         User user = (User) httpServletRequest.getAttribute("user");
         AutoSaveRes savedNote = noteService.save(note, user.getId(), multipartFile);

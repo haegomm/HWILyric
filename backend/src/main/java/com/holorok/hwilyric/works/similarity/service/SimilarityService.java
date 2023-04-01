@@ -29,7 +29,7 @@ public class SimilarityService {
         //유사도 검사 라이브러리 사용을 위한 객체
         JaroWinklerSimilarity js = new JaroWinklerSimilarity();
         //사용자가 입력한 가사가 한 줄씩 들어있는 배열
-        String[] userLyricList = reqDto.getUserLyricList();
+        String[] userLyricList = reqDto.getUserLyric();
         //db 및 테이블 설정
         Dataset<Row> dataset = ssm.selectTable("music_line");
         //Spark에서 데이터 읽어오기
