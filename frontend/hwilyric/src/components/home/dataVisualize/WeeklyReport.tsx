@@ -6,6 +6,7 @@ import {
   WeeklyReportTitle,
   WeeklyReportSubtitle,
 } from "../../../styles/DataVisaulizeStyle";
+import { weeklyNewSong } from "../../../api/visualizingApi";
 
 function WeeklyReport() {
   return (
