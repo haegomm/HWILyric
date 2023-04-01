@@ -8,13 +8,9 @@ function WriteNote() {
     return (
         <WriteDivBox>            
             <NoteBox>
-                <div className="titleBox">
-                    <NoteTitle />
-                </div>
-                <div className="BlocksBox">
-                    <BlockList />
-                    <BlockCreate />
-                </div>
+                <NoteTitle />
+                <BlockList />
+                <BlockCreate />
             </NoteBox>
         </WriteDivBox>
     )
