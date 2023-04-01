@@ -6,7 +6,7 @@ export const lightTheme = {
     accentColor: '#12cbef',
     blue: '#B0E3F9',
     violet: '#DEB3FB',
-    coral: 'FEC3B5',
+    coral: '#FEC3B5',
     pink: '#FBD5E0'
 };
 
