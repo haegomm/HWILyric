@@ -1,13 +1,15 @@
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd"
 import { useCallback, useEffect } from "react"
 import { useRecoilState, useRecoilValue } from "recoil"
-import { blockListState, titleState, noteIdState } from "../../../atoms/noteAtoms"
-import  { IsLoginAtom }  from "../../../atoms/userAtom"
+import { blockListState, titleState, noteIdState, noteThumbnailFileState, noteThumbnailUrlState } from "../../../atoms/noteAtoms"
+import { IsLoginAtom }  from "../../../atoms/userAtom"
 import { ILyricInfoTypes } from "../../../types/writingType"
 import { saveNote } from "../../../api/writingApi"
 import BlockItem from "./NoteBlockItem"
 import { BlockListStyle } from "../../../styles/writeNoteStyle"
 import { SaveButton } from "../../../styles/common/ButtonStyle"
+import { memoState } from "../../../atoms/sidebarAtoms"
+import { type } from "os"
 
 function BlockList() {
 
@@ -16,6 +18,9 @@ function BlockList() {
     const title = useRecoilValue(titleState)
 
     const isLogin = useRecoilValue(IsLoginAtom)
+    const memo = useRecoilValue(memoState)
+    const thumbnailFile = useRecoilValue(noteThumbnailFileState)
+    const noteThumbnailUrl = useRecoilValue(noteThumbnailUrlState)
 
     // useEffect(() => {
     //     const autoSaveNote = setInterval(() => {
@@ -46,22 +51,33 @@ function BlockList() {
         console.log(blockList)
     }, [blockList, setBlockList])
 
-    const onSaveBlockList = async() => {
-        const body: ILyricInfoTypes = {
+    const onSaveBlockList = async () => {
+        
+        const noteInfo: ILyricInfoTypes = {
             id: noteId,
             title: title,
-            thumnail: "하잉ㅎ 나 썸네일ㅎ",
-            memo: "",
+            thumbnail: noteThumbnailUrl,
+            memo: memo,
             lyricList: blockList
         }
+        
+        const formData = new FormData()
+        const noteInfoString = JSON.stringify(noteInfo)
+        formData.append("noteInfo", new Blob([noteInfoString], { type: 'application/json' }));
+        // if (thumbnailFile) {
+        //     const blob = new Blob([thumbnailFile],  { type: thumbnailFile.type })
+        //     formData.append("thumbnail", blob)
+        // }
+        formData.append("thumbnail", thumbnailFile)
+
         // 로그인 유무 확인
         if (isLogin) {
-            const data = await saveNote(body)
-            setNoteId(() => data)
-            console.log("DB에 저장~!", data)
+            const res = await saveNote(formData)
+            console.log(res)
+            // setNoteId(() => data)
             // 저장 시간 받기
         } else {
-            window.localStorage.setItem('note', JSON.stringify(body))
+            window.localStorage.setItem('note', JSON.stringify(formData))
             console.log("로컬에 저장~!")
         }
         // 로그인X -> localStorage 저장 후 로그인 물어보기

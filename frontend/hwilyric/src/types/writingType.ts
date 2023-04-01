@@ -9,9 +9,9 @@ export interface ILyricBlockTypes {
 }
 
 export interface ILyricInfoTypes {
-  id: string| null;
+  id: string;
   title: string;
-  thumnail: string;
+  thumbnail: string;
   memo: string;
   lyricList : ILyricBlockTypes[];
 }
