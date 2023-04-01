@@ -37,7 +37,7 @@ public class NoteService {
 
         //사용자가 파일을 업로드한 경우
         if(multipartFile != null) {
-            thumbnailImg = awsService.upload(multipartFile, "/thumbnail");
+            thumbnailImg = awsService.upload(multipartFile, "thumbnail");
         }
 
         Note savedNote;
@@ -89,7 +89,7 @@ public class NoteService {
         List<Note> noteList = noteRepository.findAllByUserId(userId);
 
         if(noteList.isEmpty())
-            throw new NotFoundException("당신... 노트를 하나도 작성하지 않았군");
+            throw new NotFoundException("작성한 노트가 없습니다.");
 
         for(Note n: noteList) {
             NoteRes res = NoteRes.builder()
@@ -111,7 +111,7 @@ public class NoteService {
     public NoteRes selectOne(String noteId) {
         Note findNote = noteRepository
                 .findById(noteId)
-                .orElseThrow(() -> new NotFoundException("그런 노트는 없다는데요"));
+                .orElseThrow(() -> new NotFoundException("잘못된 noteId 이거나 이미 삭제된 noteId 입니다."));
 
         NoteRes result = NoteRes.builder()
                 .id(findNote.getId())
@@ -130,7 +130,7 @@ public class NoteService {
     public boolean delete(String noteId) {
         Note findNote = noteRepository
                 .findById(noteId)
-                .orElseThrow(() -> new NotFoundException("이미 삭제된 노트일지도?"));
+                .orElseThrow(() -> new NotFoundException("이미 삭제된 노트입니다."));
 
         noteRepository.delete(findNote);
         return true;
