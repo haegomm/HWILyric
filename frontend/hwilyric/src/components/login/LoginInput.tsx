@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from 'recoil';
 
-import userApi from "../../api/userApi";
+import { login } from "../../api/userApi";
 import { ILoginTypes } from "../../types/userType";
 import { saveUserInfo } from "../../features/userInfo";
 import { IsLoginAtom, userNicknameAtom, userProfileImgAtom, IsKnownPassword } from "../../atoms/userAtom";
@@ -40,7 +40,7 @@ function LoginInput() {
       password: Password,
     };
 
-    const data = await userApi.login(body)
+    const data = await login(body)
     if (data !== null) {
       saveUserInfo(data)
       setIsLogin(true)

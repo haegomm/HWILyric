@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilValue } from 'recoil'
-import ScrollHorizontal from 'react-scroll-horizontal';
 import { getLyricList } from "../../api/writingApi";
 
 import { userNicknameAtom } from '../../atoms/userAtom'
 import { ILyricInfoTypes } from "../../types/writingType";
 import HomeQuickviewBlock from "./HomeQuickviewBlock";
+import { QuickView } from "../../styles/homeStyle";
 
 function HomeQuickview() {
   const nickname = useRecoilValue(userNicknameAtom)
@@ -26,9 +26,8 @@ function HomeQuickview() {
     userLyricList()
   }, [])
   return (
-    <div id='scroll-horizontal' style={{ height: `30em` }}>
+    <QuickView>
       <h3>{nickname}님의 작사노트</h3>
-      <div>
         {nullLyrics ? 
         <div>
           {lyrics.map((lyric:ILyricInfoTypes) => (
@@ -36,13 +35,10 @@ function HomeQuickview() {
               key={lyric.id}
               // name={lyric}
             /> 
-
           ))}
-
         </div>
         : nullLyrics}
-      </div>
-    </div>
+    </QuickView>
   )
 }
 
