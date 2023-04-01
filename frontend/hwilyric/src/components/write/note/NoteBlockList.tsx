@@ -9,6 +9,7 @@ import BlockItem from "./NoteBlockItem"
 import { BlockListStyle } from "../../../styles/writeNoteStyle"
 import { SaveButton } from "../../../styles/common/ButtonStyle"
 import { memoState } from "../../../atoms/sidebarAtoms"
+import { type } from "os"
 
 function BlockList() {
 
@@ -62,7 +63,11 @@ function BlockList() {
         
         const formData = new FormData()
         const noteInfoString = JSON.stringify(noteInfo)
-        formData.append('userInfo', new Blob([noteInfoString], {type: 'application/json'}));
+        formData.append('userInfo', new Blob([noteInfoString], { type: 'application/json' }));
+        // if (thumbnailFile) {
+        //     const blob = new Blob([thumbnailFile],  { type: thumbnailFile.type })
+        //     formData.append("thumbnail", blob)
+        // }
         formData.append("thumbnail", thumbnailFile)
 
         // 로그인 유무 확인
