@@ -1,9 +1,9 @@
 import React from 'react'
-import { LyricListBodyItemDiv, LyricListHeader } from '../../styles/mypageStyle'
+import { LyricListBodyItemDiv } from '../../styles/mypageStyle'
 
-function MyPageListHeader() {
+function MyPageLyricListItem() {
   return (
-    <LyricListHeader>
+    <div>
       <LyricListBodyItemDiv width='200px' />
       <LyricListBodyItemDiv width='440px'>
         제목
@@ -15,8 +15,8 @@ function MyPageListHeader() {
         최종시작일
       </LyricListBodyItemDiv>
       <LyricListBodyItemDiv width='160px' />
-    </LyricListHeader>
+    </div>
   )
 }
 
-export default MyPageListHeader
+export default MyPageLyricListItem

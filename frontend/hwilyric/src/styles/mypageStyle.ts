@@ -21,19 +21,25 @@ export const ArrowImage = styled.img`
   width: 16px;
   `
 
+export const LyricThumbnail = styled.img`
+  width: 168px;
+`
+
 export const LyricListHeader = styled.div`
   display: flex;
 
 `
 
 export const LyricListBody = styled.div`
-
+  display: flex;
 `
 
 export const LyricListBodyItem = styled.div`
 
 `
-
-export const LyricListBodyItemDiv = styled.div`
-  width: ${(props) => (props.width:Number)};
+interface divWidth{
+  width: string;
+}
+export const LyricListBodyItemDiv = styled.div<divWidth>`
+  width: ${(props) => (props.width) ? (props.width) : '60px'};
 `

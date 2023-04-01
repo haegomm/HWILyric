@@ -15,7 +15,6 @@ function MyPageProfile() {
   const setIsLogin = useSetRecoilState(IsLoginAtom)
   const Nickname = useRecoilValue(userNicknameAtom);
   const ProfileImgUrl = useRecoilValue(userProfileImgAtom);
-  const setCategory = useSetRecoilState(lyricCategoryAtom)
 
   const onProfileHandler = (e: React.MouseEvent<HTMLDivElement>) => {
     navigate('/profilemodification/sajhdgdjakhsd')

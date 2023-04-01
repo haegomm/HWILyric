@@ -28,7 +28,6 @@ function HomeQuickview() {
   return (
     <QuickView>
       <h3>{nickname}님의 작사노트</h3>
-      <div>
         {nullLyrics ? 
         <div>
           {lyrics.map((lyric:ILyricInfoTypes) => (
@@ -39,7 +38,6 @@ function HomeQuickview() {
           ))}
         </div>
         : nullLyrics}
-      </div>
     </QuickView>
   )
 }
