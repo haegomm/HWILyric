@@ -62,10 +62,10 @@ function BlockItem({ block, index}: BlockItemProps) {
                     <select
                         defaultValue={block.type}
                         onChange={onEditBlockType}>
-                        <option value={"Verse"}>Verse</option>
-                        <option value={"Bridge"}>Bridge</option>
-                        <option value={"Hook"}>Hook</option>
-                        <option value={"Etc"}>Etc</option>
+                        <option value={"verse"}>verse</option>
+                        <option value={"bridge"}>bridge</option>
+                        <option value={"hook"}>hook</option>
+                        <option value={"etc"}>etc</option>
                     </select>
                     <textarea
                         className="writeLyric"
