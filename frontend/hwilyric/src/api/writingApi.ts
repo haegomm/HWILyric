@@ -4,7 +4,7 @@ import { axios, fileAxios } from './https'
 // 자동저장
 export async function saveNote(body: ILyricInfoTypes) {
   try {
-      const res = await axios.post(`api/notes/insert`, body)
+      const res = await fileAxios.post(`api/notes/save`, body)
       const data = res.data
       console.log("저장 성공!",data)
       return data

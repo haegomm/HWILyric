@@ -16,11 +16,11 @@ function MyPageProfile() {
   const Nickname = useRecoilValue(userNicknameAtom);
   const ProfileImgUrl = useRecoilValue(userProfileImgAtom);
 
-  const onProfileHandler = (e: React.MouseEvent<HTMLDivElement>) => {
-    navigate('/profilemodification/sajhdgdjakhsd')
+  const onProfileHandler = (e: React.MouseEvent<HTMLSpanElement>) => {
+    navigate('/profilemodification')
   }
 
-  const onLogoutHandler = async(e: React.MouseEvent<HTMLDivElement>) => {
+  const onLogoutHandler = async(e: React.MouseEvent<HTMLSpanElement>) => {
     const message = await logout()
       deleteUserInfo()
       setIsLogin(false)
@@ -32,12 +32,12 @@ function MyPageProfile() {
     <MyPageProfileDiv>
       <MyProfileImage src={ProfileImgUrl} />
       <span>{Nickname}님</span>
-      <div onClick={onProfileHandler}>
+      <span onClick={onProfileHandler}>
         회원정보관리
-      </div>
-      <div onClick={onLogoutHandler}>
+      </span>
+      <span onClick={onLogoutHandler}>
           로그아웃
-      </div>
+      </span>
       <MyPageDropbox />
     </MyPageProfileDiv>
   )

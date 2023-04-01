@@ -24,7 +24,7 @@ function MyPageFilterList() {
       }
     }
     getMyLyrics()
-  }, [])
+  }, [currentCategory])
 
   return (
     <LyricListBody>

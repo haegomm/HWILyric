@@ -1,20 +1,32 @@
 import styled, { css } from "styled-components";
 
 export const MyPageContainer = styled.div`
-
+  padding: 0 10% 0 10%;
 `
 
 export const MyPageProfileDiv = styled.div`
   display: flex;
   justify-content: space-between;
+  height: 160 px;
+  align-items: flex-end;
 `
 
-export const DropboxDiv =styled.div`
-  width: 72px;
+export const DropboxSelect =styled.select`
+border: none;
+width: 64px;
+...
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+...
+`
+
+export const DropboxOption =styled.option`
+  border: none;
 `
 
 export const MyProfileImage = styled.img`
-  width: 128px;
+  width: 88px;
 `
 
 export const ArrowImage = styled.img`
@@ -22,11 +34,14 @@ export const ArrowImage = styled.img`
   `
 
 export const LyricThumbnail = styled.img`
-  width: 168px;
+  width: 8vw;
 `
 
 export const LyricListHeader = styled.div`
   display: flex;
+  height: 80px;
+  align-items: flex-end;
+  border-bottom: 1px black solid;
 
 `
 

@@ -65,6 +65,7 @@ export async function login(body: ILoginTypes) {
   try{
     const res = await axios.post('api/auth/guests/login', body)
     const data = res.data
+    console.log(data)
     return data
   } catch(err) {
     console.log('로그인 안됐단다')
