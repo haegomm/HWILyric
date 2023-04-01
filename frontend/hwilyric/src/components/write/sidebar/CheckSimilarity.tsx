@@ -2,6 +2,7 @@ import { useRecoilValue } from "recoil"
 import { blockListState } from "../../../atoms/noteAtoms"
 import { ISimilarityTypes } from "../../../types/writingType"
 import { checkSimilarity } from "../../../api/writingApi"
+import { CheckButton } from "../../../styles/common/ButtonStyle"
 
 function CheckSimilarity() {
     
@@ -14,9 +15,9 @@ function CheckSimilarity() {
 
     const onCheck = async () => {
         const lyrics = await getUserLyrics()
-
+        console.log(lyrics)
         const body: ISimilarityTypes = {
-            userLyricList: lyrics
+            userLyric: lyrics
         }
         console.log("유사도 검사해줘~!", body)
         
@@ -26,7 +27,7 @@ function CheckSimilarity() {
     
     return (
         <div>
-            <button onClick={onCheck}>유사도 검사하기</button>
+            <CheckButton onClick={onCheck}>유사도 검사하기</CheckButton>
         </div>
     )
 }
