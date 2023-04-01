@@ -29,7 +29,7 @@ public class NoteController {
     private static final String FAIL = "fail";
 
     @PostMapping("/save")
-    public ResponseEntity<AutoSaveRes> addNote(@Valid @RequestPart(value = "noteInfo") NoteReq note, @RequestPart(value = "thumbnail", required = false) MultipartFile multipartFile, HttpServletRequest httpServletRequest) throws Exception {
+    public ResponseEntity<AutoSaveRes> addNote(@RequestPart(value = "noteInfo") NoteReq note, @RequestPart(value = "thumbnail", required = false) MultipartFile multipartFile, HttpServletRequest httpServletRequest) throws Exception {
         User user = (User) httpServletRequest.getAttribute("user");
         AutoSaveRes savedNote = noteService.save(note, user.getId(), multipartFile);
 
