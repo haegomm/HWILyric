@@ -1,4 +1,39 @@
-import styled from 'styled-components';
+import styled, { css } from "styled-components"; 
+
+export const SideBarBox = styled.div`
+    width: 440px;
+`
+
+export const MemoBox = styled.textarea`
+    width: 20vw;
+    height: 28vh;
+    margin: 0;
+    padding: 0;
+    border: 1px solid;
+    resize : none;
+    font-size: 16px;
+    background-color: transparent;
+    :focus {
+        outline: none;
+}
+`
+
+export const PlayButton = styled.button`
+    width: 40px;
+    height: 40px;
+    margin: 10px;    
+    background: linear-gradient(#B0E3F9, #DEB3FB, #FEC3B5, #FBD5E0);
+    border-radius: 50%;
+`
+
+export const PlayerBox = styled.div`
+    display: flex;
+`
+
+export const PlayerVideoBox = styled.div`
+    width: 96px;
+    height: 96px;
+`
 
 export const TabMenu = styled.ul`
     // background-color: #dcdcdc;
@@ -37,5 +72,5 @@ export const TabMenu = styled.ul`
 `;
 
 export const Desc = styled.div`
-text-align: center;
+    text-align: center;
 `;

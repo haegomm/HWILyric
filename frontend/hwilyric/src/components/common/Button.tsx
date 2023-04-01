@@ -1,7 +1,8 @@
+import { Button } from "../../styles/common/ButtonStyle"
+
 function Botton() {
   return (
-      <div>
-      </div>
+      <Button>공통 버튼</Button>
   )
 }
 

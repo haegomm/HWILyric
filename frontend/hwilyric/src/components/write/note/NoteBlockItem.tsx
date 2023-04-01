@@ -2,6 +2,7 @@ import { useCallback, useRef } from "react"
 import { Draggable } from "react-beautiful-dnd"
 import { useRecoilState } from "recoil"
 import { blockListState } from "../../../atoms/noteAtoms"
+import { BlockItemStyle } from "../../../styles/writeNoteStyle"
 import { ILyricBlockTypes } from "../../../types/writingType"
 
 interface BlockItemProps {
@@ -47,24 +48,24 @@ function BlockItem({ block, index}: BlockItemProps) {
         if (ref === null || ref.current === null) {
             return
         }
-        ref.current.style.height = '80px'
+        ref.current.style.height = '30px'
         ref.current.style.height = ref.current.scrollHeight + 'px'
     }, [])
 
     return (
         <Draggable draggableId={block.blockId.toString()} index={index}>
             {(provided) => (
-                <div
+                <BlockItemStyle
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}>
                     <select
                         defaultValue={block.type}
                         onChange={onEditBlockType}>
-                        <option value={"Verse"}>Verse</option>
-                        <option value={"Bridge"}>Bridge</option>
-                        <option value={"Hook"}>Hook</option>
-                        <option value={"Etc"}>Etc</option>
+                        <option value={"verse"}>verse</option>
+                        <option value={"bridge"}>bridge</option>
+                        <option value={"hook"}>hook</option>
+                        <option value={"etc"}>etc</option>
                     </select>
                     <textarea
                         className="writeLyric"
@@ -74,7 +75,7 @@ function BlockItem({ block, index}: BlockItemProps) {
                         onInput={handleResizeHeight}
                     />
                     <button onClick={onDeleteBlock}>-</button>
-                </div>
+                </BlockItemStyle>
             )}
         </Draggable>
     )
