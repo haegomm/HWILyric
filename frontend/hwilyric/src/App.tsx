@@ -5,8 +5,8 @@ import { Route, Routes } from "react-router";
 import { useRecoilValue } from "recoil";
 
 import './App.css'
-import { GlobalStyle } from "./styles/GlobalStyle"
-import { darkTheme, lightTheme } from './styles/theme';
+import { GlobalStyle } from "./theme/GlobalStyle"
+import { darkTheme, lightTheme } from './theme/theme';
 import Navbar from "./components/common/Navbar";
 import Home from "./pages/Home";
 import Write from "./pages/Write";
@@ -48,28 +48,26 @@ function App() {
   }, []);
 
   return (
-    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-      <GlobalStyle /> 
-        <BrowserRouter>
-          <div className="App">
-          <Navbar toggleDarkMode={toggleDarkMode} />
-            <Routes>
-              <Route path="*" element={<HWILyric />} />
-              <Route path="/zslkdrj" element={<Home />} />
-              <Route path="/write/sdalkfjadslkfj" element={<Write />} />
-              <Route path="/datavisualize" element={<DataVisualize />} />
-              <Route path="/login/dlkfjsaldkfj" element={<Login />} />
-              <Route path="oauth2/code/kakao" element={<LoginKakao />} />
-              <Route path="/signup/dkfjdlksj" element={<Signup />} />
-              <Route path="/mypage/dsajhfawjehdg" element={<Mypage />} />
-              <Route
-                path="/profilemodification/sajhdgdjakhsd"
-                element={<ProfileModification />}
-              />
-            </Routes>
-          </div>
-        </BrowserRouter>
-    </ThemeProvider>
+    <div className="App">
+      <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+        <GlobalStyle /> 
+          <BrowserRouter>
+            <Navbar toggleDarkMode={toggleDarkMode} />
+              <Routes>
+                <Route path="*" element={<HWILyric />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/write" element={<Write />} />
+                <Route path="/datavisualize" element={<DataVisualize />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="oauth2/code/kakao" element={<LoginKakao />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/mypage" element={<Mypage />} />
+                <Route path="/profilemodification" element={<ProfileModification />}
+                />
+              </Routes>
+          </BrowserRouter>
+      </ThemeProvider>
+    </div>
   );
 }
 
