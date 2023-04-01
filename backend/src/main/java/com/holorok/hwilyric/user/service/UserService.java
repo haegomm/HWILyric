@@ -26,7 +26,7 @@ public class UserService {
     private final AwsService awsService;
 
     private static final String NOT_FOUND_USER = "존재하지 않는 사용자입니다.";
-    private static final String PROFILE = "/profile";
+    private static final String PROFILE = "profile";
 
 
     // 이메일 중복체크

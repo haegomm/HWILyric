@@ -1,5 +1,6 @@
 package com.holorok.hwilyric.works.keyword.service;
 
+import com.google.common.primitives.Floats;
 import com.holorok.hwilyric.works.keyword.repository.KeywordRepository;
 import com.holorok.hwilyric.exception.NotFoundException;
 import kr.co.shineware.nlp.komoran.constant.DEFAULT_MODEL;
@@ -13,21 +14,39 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FSDataOutputStream;
+import org.apache.hadoop.mapreduce.lib.input.KeyValueTextInputFormat;
+import org.apache.hadoop.shaded.org.apache.commons.collections.KeyValue;
+import org.apache.hadoop.shaded.org.checkerframework.checker.units.qual.K;
 import org.apache.spark.SparkConf;
+import org.apache.spark.SparkContext;
+import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.input.PortableDataStream;
+import org.apache.spark.ml.feature.Word2Vec;
+import org.apache.spark.ml.linalg.Vector;
+//import org.apache.spark.mllib.feature.Word2Vec;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
+//import org.deeplearning4j.models.word2vec.Word2Vec;
 import org.deeplearning4j.models.embeddings.loader.WordVectorSerializer;
-import org.deeplearning4j.models.word2vec.Word2Vec;
+//import org.apache.spark.mllib.feature.Word2VecModel;
+import org.apache.spark.ml.feature.Word2VecModel;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import scala.Tuple2;
+import scala.collection.JavaConverters;
+import scala.collection.Seq;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.net.URI;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+import static org.nd4j.autodiff.listeners.profiler.data.Phase.V;
 
 @Slf4j
 @Service
@@ -51,133 +70,17 @@ public class KeywordService {
         return randomList;
     }
 
+    private static scala.collection.immutable.Map<String, float[]> toScalaImmutableMap(Map<String, float[]> pFromMap) {
+        final List<Tuple2<String, float[]>> list = pFromMap.entrySet().stream()
+                .map(e -> Tuple2.apply(e.getKey(), e.getValue()))
+                .collect(Collectors.toList());
+        Seq<Tuple2<String, float[]>> scalaSeq = JavaConverters.asScalaBufferConverter(list).asScala().toSeq();
+        return (scala.collection.immutable.Map<String, float[]>) scala.collection.immutable.Map$.MODULE$.apply(scalaSeq);
+    }
+
     // 유사 키워드 조회
-    public List<String> getSimilarKeyword(String word) throws NotFoundException {
+    public List<String> getSimilarKeyword(String word) throws NotFoundException, IOException, ClassNotFoundException {
 
-        long startTime = System.nanoTime();
-//        SparkConf sparkConf = new SparkConf()
-//                .setAppName("Word2Vec")
-//                .setMaster("local[*]");
-//
-//        // Spark 세션 빌더
-//        SparkSession builder = SparkSession.builder()
-//                .config(sparkConf)
-//                .appName("SparkWorkerConnection").getOrCreate();
-//        JavaSparkContext sparkContext = new JavaSparkContext(builder.sparkContext());
-
-//        String filePath = "hdfs://52.78.193.66:9868/user/hadoop/example.txt";
-
-        // hadoop의 configuration을 생성
-        Configuration config = new Configuration();
-//        config.addTags("StrictHostKeyChecking", "no");
-//        config.put("StrictHostKeyChecking", "no");
-//
-//        Path filenamePath = new Path(filePath);
-//
-//        // config를 HDFS로 parse
-//        FileSystem fs = filenamePath.getFileSystem(config);
-//
-//        // filenamePath file을 읽어들임
-//        FSDataInputStream fout = fs.open(filenamePath);
-//        String msgIn = fout.readUTF();
-//
-//        System.out.println(msgIn);
-//
-//        fout.close();
-//        fs.close();
-
-//        SparkConf conf = new SparkConf().setAppName("HadoopTextFileReader").setMaster("local");
-//        JavaSparkContext sc = new JavaSparkContext(conf);
-//        JavaRDD<String> textFile = sc.textFile(filePath);
-//        textFile.foreach(line -> System.out.println("하둡에서 읽어온 데이터 : {}"+line));
-//        sc.close();
-
-
-//        Komoran komoran = new Komoran(DEFAULT_MODEL.FULL);
-//
-//        // 한글 추출
-//        String hangulRegex = "[가-힣]+"; // 가-힣: 모든 한글 글자
-//        Pattern hangulPattern = Pattern.compile(hangulRegex); // 정규표현식 컴파일
-//        Matcher hangulMatcher = hangulPattern.matcher(word); // 문자열에서 패턴과 일치하는 문자열 찾기
-//
-//        StringBuilder hangul = new StringBuilder();
-//        while (hangulMatcher.find()) {
-//            hangul.append(hangulMatcher.group() + " ");
-//        }
-//        log.debug("한글만 추출한 거 : {}", hangul.toString());
-//
-//        // 영어 추출
-//        String englishRegex = "[a-zA-Z]+"; // a-z, A-Z: 모든 영어 글자
-//        Pattern englishPattern = Pattern.compile(englishRegex);
-//        Matcher englishMatcher = englishPattern.matcher(word);
-//
-//        List<String> english = new ArrayList<>();
-//        while (englishMatcher.find()) {
-//            english.add(englishMatcher.group());
-//        }
-//        log.debug("영어만 추출한 거 : {}", english.toString());
-//
-//        Collection<String> hangulList = new ArrayList<>();
-//
-//        // 사용자가 한글을 입력한 경우
-//        if(hangul.length()>0) {
-//            KomoranResult komoranResult = komoran.analyze(hangul.toString());
-//
-//            // 한글 토큰화
-//            List<Token> tokenList = komoranResult.getTokenList();
-//            log.debug("토큰화 된 리스트 : {}", tokenList.toString());
-//            List<String> similarList = new ArrayList<>();
-//            for (Token token : tokenList) {
-//                // NNP : 고유명사, NNG : 일반명사, NR : 수사
-//                if (token.getPos().equals("NNP") || token.getPos().equals("NNG") || token.getPos().equals("NR")) {
-//                    log.debug("추출된 명사 단어 : {}", token.getMorph());
-//                    similarList.add(token.getMorph());
-//                }
-//            }
-//            // 한글 Word2Vec 모델 저장 경로
-//            File hangulModel = new File("C:/Users/SSAFY/PycharmProjects/pythonProject/jjtest");
-//
-//            // hangulModel 로드
-//            Word2Vec hanModel = WordVectorSerializer.readWord2VecModel(hangulModel);
-//
-//            // 인풋 데이터와 유사한 단어 20개 리스트
-//            hangulList = hanModel.wordsNearest(similarList.get(0), 20);
-//        }
-//
-//        Collection<String> englishList = new ArrayList<>();
-//
-//        if(!english.isEmpty()){
-//            // 영어 Word2Vec 모델 저장 경로
-//            File googleModel = new File("C:/Users/SSAFY/PycharmProjects/pythonProject/GoogleNews-vectors-negative300.bin");
-//
-//            // googleModel 로드
-//            Word2Vec engModel = WordVectorSerializer.readWord2VecModel(googleModel);
-//
-//            // 인풋 데이터와 유사한 단어 20개 리스트
-//            englishList = engModel.wordsNearest(english.get(0), 20);
-//        }
-//
-//        List<String> resultList = new ArrayList<>();
-//
-//        if(!hangulList.isEmpty()) {
-//            for (String hangulWord : hangulList) {
-//                resultList.add(hangulWord);
-//            }
-//        }
-//        if(!englishList.isEmpty()) {
-//            for (String englighWord : englishList) {
-//                resultList.add(englighWord);
-//            }
-//        }
-//        log.debug("유사 키워드 뽑아봄 : {}", resultList.toString());
-//
-//        long endTime = System.nanoTime();
-//
-//        sparkContext.stop();
-//
-//        log.debug("코드 실행 시간 : {} ms", (endTime - startTime)/1000000);
-//
-//        return resultList;
         return null;
     }
 
