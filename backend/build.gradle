@@ -119,8 +119,8 @@ dependencies {
     implementation group: 'org.deeplearning4j', name: 'deeplearning4j-core', version: '1.0.0-M2'
 
     // spark mllib
-    compileOnly group: 'org.apache.spark', name: 'spark-mllib_2.12', version: '3.2.1'
-    implementation group: 'org.apache.spark', name: 'spark-core_2.12', version: '3.2.1'
+//    compileOnly group: 'org.apache.spark', name: 'spark-mllib_2.12', version: '3.2.1'
+//    implementation group: 'org.apache.spark', name: 'spark-core_2.12', version: '3.2.1'
 
 }
 
