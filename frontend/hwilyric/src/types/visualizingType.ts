@@ -44,7 +44,7 @@ export interface IAnnualGenresChart {
   songs: string[];
 }
 
-export interface IWeeklyReportGenre {
+export interface IWeeklyReportKeyword {
   name: string;
   count: number;
 }
