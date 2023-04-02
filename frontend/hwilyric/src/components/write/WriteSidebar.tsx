@@ -2,19 +2,19 @@ import { useState } from "react"
 import { Desc, TabMenu } from "../../styles/writeSidebarStyle"
 import { SideBarBox } from "../../styles/writeSidebarStyle"
 import { WriteDivBox } from "../../styles/common/DivBox"
-import CheckSimilarity from "./sidebar/CheckSimilarity"
-import Memo from "./sidebar/Memo"
-import Thumbnail from "./sidebar/Thumbnail"
+import SidebaarReferenceTab from "./SidebarReferenceTab"
+import SidebarCheckSimilarityTab from "./SidebarCheckSimilarityTab"
+
 
 function WriteSidebar() {
 
     const [currentTab, setCurrentTab] = useState(0)
 
     const tabArr = [
-        { name: '레퍼런스', content: <Thumbnail />},
+        { name: '레퍼런스', content: <SidebaarReferenceTab /> },
         { name: '키워드 추천', content: '키워드 추천 탭~!' },
         { name: '내 가사', content: '내 가사 탭~!' },
-        { name: '유사도 측정', content: <CheckSimilarity /> },
+        { name: '유사도 측정', content: <SidebarCheckSimilarityTab /> },
     ]
 
     const selectTabHandler = (index: number) => {
