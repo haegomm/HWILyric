@@ -4,10 +4,10 @@ import { ArrowImage, DropboxDiv } from "../../../styles/mypageStyle";
 import { downArrow, upArrow } from "../../../assets/mypage/arrow";
 
 interface SimilarItemProps {
-    similar: ISimilarInfoTypes
+    similar?: ISimilarInfoTypes
 }
 
-function SimilarItem({ similar }: SimilarItemProps) {
+function SimilarItem({ similar }: SimilarItemProps):JSX.Element {
 
     const [isOpen, setIsOpen] = useState(false)
     
@@ -15,34 +15,38 @@ function SimilarItem({ similar }: SimilarItemProps) {
         setIsOpen(!isOpen)
     }
 
-    return (
-        <div>
-            <DropboxDiv>
-                <div
-                className={`select-box ${isOpen ? 'open' : ''}`}
-                onClick={onDropHandler}>
-                    {similar.userLyric}
-                    {isOpen ? 
-                    <ArrowImage src={upArrow} />
-                    : <ArrowImage src={downArrow} />
-                    }
-                </div>
-                { isOpen && (
-                    <div className="similarLyric-drop">
-                    {similar.lyricList.map((similarLyric, index) => (
-                        <div
-                        className="similarLyric-item"
-                        key="index">
-                            {similarLyric}
-                            {similar.titleList[index]}
-                            {similar.artistList[index]}
-                        </div>
-                    ))}
+    if (!similar) {
+        return (<></>)
+    } else {
+        return (
+            <div>
+                <DropboxDiv>
+                    <div
+                    className={`select-box ${isOpen ? 'open' : ''}`}
+                    onClick={onDropHandler}>
+                        {similar.userLyric}
+                        {isOpen ? 
+                        <ArrowImage src={upArrow} />
+                        : <ArrowImage src={downArrow} />
+                        }
                     </div>
-                )}
-        </DropboxDiv>
-    </div>
-    )
+                    { isOpen && (
+                        <div className="similarLyric-drop">
+                        {similar.lyricList.map((similarLyric, index) => (
+                            <div
+                            className="similarLyric-item"
+                            key="index">
+                                {similarLyric}
+                                {similar.titleList[index]}
+                                {similar.artistList[index]}
+                            </div>
+                        ))}
+                        </div>
+                    )}
+            </DropboxDiv>
+        </div>
+        )
+    }
 }
 
 export default SimilarItem
