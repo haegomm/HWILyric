@@ -41,25 +41,6 @@ const data = [
   },
 ];
 
-// const CustomXAxisTick = (props: any) => {
-//   const { x, y, payload } = props;
-//   return (
-//     <g transform={`translate(${x},${y})`}>
-//       <text
-//         x={0}
-//         y={0}
-//         dy={16}
-//         textAnchor="end"
-//         fontSize={8} // 글자 크기 조절
-//         fill="#666" // 글자 색상
-//         transform="rotate(-35)"
-//       >
-//         {payload.value}
-//       </text>
-//     </g>
-//   );
-// };
-
 const CustomXAxisTick = (props: any) => {
   const { x, y, payload } = props;
   return (
