@@ -23,11 +23,10 @@ axios.interceptors.response.use(
     if (error.response && error.response.status) {
       if (error.response.status === 401) {
         deleteUserInfo()
-        window.location.replace("/login/dlkfjsaldkfj");
         alert("로그인이 필요합니다.");
-        // console.log('여기까진 왔다')
+        console.log('강종')
+        window.location.replace("/login");
         // ForcedLogout()
-        alert("로그인이 필요합니다.");
         return new Promise(() => {});
       } else {
         return Promise.reject(error);
@@ -59,7 +58,7 @@ fileAxios.interceptors.response.use(
         // console.log('여기까진 왔다')
         deleteUserInfo()
         alert("로그인이 필요합니다.");
-        window.location.replace("/login/dlkfjsaldkfj");
+        window.location.replace("/login");
         // ForcedLogout()
         // const logout = ForcedLogout()
         console.log('여기도 돼')

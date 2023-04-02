@@ -12,7 +12,7 @@ function MyPageListHeader() {
         작업시작일
       </LyricListBodyItemDiv>
       <LyricListBodyItemDiv width='10vw'>
-        최종시작일
+        최종작업일
       </LyricListBodyItemDiv>
       <LyricListBodyItemDiv width='10vw' />
     </LyricListHeader>

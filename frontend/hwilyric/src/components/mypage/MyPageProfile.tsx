@@ -29,6 +29,7 @@ function MyPageProfile() {
 
 
   return (
+    <div>
     <MyPageProfileDiv>
       <MyProfileImage src={ProfileImgUrl} />
       <span>{Nickname}님</span>
@@ -38,8 +39,9 @@ function MyPageProfile() {
       <span onClick={onLogoutHandler}>
           로그아웃
       </span>
-      <MyPageDropbox />
     </MyPageProfileDiv>
+      <MyPageDropbox />
+    </div>
   )
 }
 

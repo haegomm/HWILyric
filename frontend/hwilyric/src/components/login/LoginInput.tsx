@@ -5,8 +5,9 @@ import { useSetRecoilState } from 'recoil';
 import { login } from "../../api/userApi";
 import { ILoginTypes } from "../../types/userType";
 import { saveUserInfo } from "../../features/userInfo";
-import { IsLoginAtom, userNicknameAtom, userProfileImgAtom, IsKnownPassword } from "../../atoms/userAtom";
+import { IsLoginAtom, userNicknameAtom, userProfileImgAtom, IsKnownPassword, userLyricsAtom } from "../../atoms/userAtom";
 import socailLoginButton from "../../assets/socialLogin/socialLoginButton";
+import { getLyricList } from "../../api/writingApi";
 
 function LoginInput() {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ function LoginInput() {
   const setIsLogin = useSetRecoilState(IsLoginAtom)
   const setNickname = useSetRecoilState(userNicknameAtom)
   const setProfileImg = useSetRecoilState(userProfileImgAtom)
+  const setUserLyrics = useSetRecoilState(userLyricsAtom)
   const setIsKnownPassword = useSetRecoilState(IsKnownPassword)
 
   const onEmailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,6 +52,17 @@ function LoginInput() {
     } else {
       alert('로그인 실패ㅜ;')
     }
+
+    const lyricList = await getLyricList()
+      if (lyricList !== '') {
+        setUserLyrics(lyricList)
+        console.log('가사리스트', lyricList)
+      } else {
+        console.log('')
+        // setNullLyrics('새로운 곡을 작사해보세요')
+      }
+
+
   };
 
 

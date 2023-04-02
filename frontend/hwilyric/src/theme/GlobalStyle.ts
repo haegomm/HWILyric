@@ -9,8 +9,7 @@ export const GlobalStyle = createGlobalStyle`
         color:${(props) => props.theme.textColor};
         }
     div {
-        paddig: 0px;
-        overflow: scroll;
+        padding: 0px;
         scrollbar-width: none;
         -ms-overflow-style: none;
         &::-webkit-scrollbar {

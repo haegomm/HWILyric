@@ -22,6 +22,7 @@ import { reissueToken } from "./api/userApi";
 import DataVisualize from "./pages/DataVisualize";
 import PrivateRoute from "./features/router";
 import { AppDiv } from "./styles/common/AppStyle";
+import { Reset } from "styled-reset";
 
 function App() {
   const isLogin = useRecoilValue(IsLoginAtom);
@@ -34,6 +35,7 @@ function App() {
 
   useEffect(() => {
     const issueToken = async () => {
+      console.log('토큰 한번 받아본다')
       const accessToken = await reissueToken();
       if (accessToken !== null) {
         console.log("토큰 재발급~~");
@@ -46,7 +48,7 @@ function App() {
       if (isLogin) {
         issueToken();
       }
-    }, 300000);
+    }, 900000);
   }, []);
 
   return (
