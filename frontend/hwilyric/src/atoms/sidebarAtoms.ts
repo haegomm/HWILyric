@@ -8,3 +8,9 @@ export const memoState = atom<string>({
     default: "",
     effects_UNSTABLE: [persistAtom],
 })
+
+export const sidebarCategoryAtom = atom<string>({
+    key: 'sidbarCategoty',
+    default: '',
+  });
+  
