@@ -13,10 +13,8 @@ function MyPageLyricList() {
   async function getMyLyrics() {
     const lyricList = await getLyricList()
     if (lyricList !== null) {
-      // sortByDate(lyricList)
       const sortedLyrics = lyricList.slice(0).sort((a: IGetILyricInfoTypes, b: IGetILyricInfoTypes) => {
         return new Date(b.updatedDate).valueOf() - new Date(a.updatedDate).valueOf();})
-      console.log('소팅', sortedLyrics)
       setMyLyrics(sortedLyrics)
     } else {
       console.log('')

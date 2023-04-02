@@ -4,6 +4,7 @@ import { SideBarBox } from "../../styles/writeSidebarStyle"
 import { WriteDivBox } from "../../styles/common/DivBox"
 import SidebaarReferenceTab from "./SidebarReferenceTab"
 import SidebarCheckSimilarityTab from "./SidebarCheckSimilarityTab"
+import SidebarMyLyrics from "./sidebar/SidebarMyLyrics"
 
 
 function WriteSidebar() {
@@ -13,7 +14,7 @@ function WriteSidebar() {
     const tabArr = [
         { name: '레퍼런스', content: <SidebaarReferenceTab /> },
         { name: '키워드 추천', content: '키워드 추천 탭~!' },
-        { name: '내 가사', content: '내 가사 탭~!' },
+        { name: '내 가사', content: <SidebarMyLyrics /> },
         { name: '유사도 측정', content: <SidebarCheckSimilarityTab /> },
     ]
 

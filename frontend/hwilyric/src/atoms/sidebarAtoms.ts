@@ -10,6 +10,11 @@ export const memoState = atom<string>({
     effects_UNSTABLE: [persistAtom],
 })
 
+export const sidebarCategoryAtom = atom<string>({
+    key: 'sidbarCategoty',
+    default: '',
+  });
+  
 export const similarListState = atom<ISimilarInfoTypes[]>({
     key: "similarListState",
     default: [],
