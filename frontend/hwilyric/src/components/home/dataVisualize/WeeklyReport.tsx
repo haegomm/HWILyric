@@ -22,30 +22,33 @@ const todayString = yyyyMMdd(today); // 오늘 날짜의 문자열 표현
 const weekAgoString = yyyyMMdd(weekAgo); // 일주일 전 날짜의 문자열 표현
 
 function WeeklyReport() {
-  const keywordData = [];
-  const genresData = [];
+  const keywordData: any[] = [];
+  const genresData: any[] = [];
   const getData = async () => {
     const data = await weeklyNewSong({
       startDate: todayString,
       endDate: weekAgoString,
     });
-    for (const i of data.genres) {
-      genresData.push(i);
-    }
-    for (const i of data.keywords) {
-      keywordData.push(i);
+    if (data.genres) {
+      for (const i of data.genres) {
+        genresData.push(i);
+      }
+      for (const i of data.keywords) {
+        keywordData.push(i);
+      }
     }
   };
+  getData();
   return (
     <WeeklyReportDiv>
       <div></div>
       <WeeklyReportTitle>주간 리포트</WeeklyReportTitle>
       <div></div>
       <WeeklyReportSubtitle>최근 인기 키워드</WeeklyReportSubtitle>
-      <WeeklyReportKeyword />
+      <WeeklyReportKeyword data={keywordData} />
       <div></div>
       <WeeklyReportSubtitle>주간 신곡 인기 장르</WeeklyReportSubtitle>
-      <WeeklyReportGenre />
+      <WeeklyReportGenre data={genresData} />
     </WeeklyReportDiv>
   );
 }
