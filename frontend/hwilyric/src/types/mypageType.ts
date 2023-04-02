@@ -6,11 +6,17 @@ export interface ICategoryTypes {
 }
 
 export interface IGetILyricInfoTypes {
-  id: string| null;
+  id: string| undefined;
   title: string;
   thumbnail: string;
   memo: string;
   lyricList : ILyricBlockTypes[];
   createdDate: string;
   updatedDate: string;
+}
+
+export interface IFilteringLyricTypes {
+  blockId: string;
+  lyrics: string;
+  type: string;
 }

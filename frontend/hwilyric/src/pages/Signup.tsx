@@ -45,7 +45,7 @@ function Signup() {
 
     if (message === "success") {
       alert('가입성공!')
-      navigate("/login/dlkfjsaldkfj");
+      navigate("/login");
     } else {
       alert("가입에 실패하였습니다. 다시 시도해주세요");
     }
