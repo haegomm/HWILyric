@@ -41,17 +41,20 @@ export const WeeklyReportSubtitle = styled.p`
   align-items: center;
 `;
 
-export const WeeklyReportGenreDiv = styled.div`
+export const WeeklyReportKeywordsDiv = styled.div`
   width: 312px;
-  height: 144px;
+  height: 200px;
   display: flex;
   justify-content: space-around;
   flex-direction: column;
 `;
 
-export const WeeklyReportKeywordsDiv = styled.div`
-  width: 252px;
-  height: 240px;
+export const WeeklyReportGenreDiv = styled.div`
+  width: 312px;
+  height: 244px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 `;
 
 export const AnnualReportDiv = styled.div`
