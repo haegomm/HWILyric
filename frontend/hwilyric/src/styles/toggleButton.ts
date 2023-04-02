@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const ToggleBoxWrapper = styled.div`
     position: relative;
+    margin: 0 5px;
 `;
 
 export const ToggleBoxLabel = styled.label`
@@ -43,4 +44,5 @@ export const ToggleBox = styled.input`
         transition: 0.2s;
         }
     }
+    margin: 0px;
 `;
