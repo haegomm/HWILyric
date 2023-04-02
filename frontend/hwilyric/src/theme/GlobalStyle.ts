@@ -16,5 +16,8 @@ export const GlobalStyle = createGlobalStyle`
         width: 0px;
         background: transparent;
     }
+    .main-logo {
+        content:url(${(props) => props.theme.logoUrl});
+    }
     }
 `;
