@@ -22,11 +22,6 @@ export const userProfileImgAtom = atom<string>({
   effects_UNSTABLE: [persistAtom],
 });
 
-export const userLyricsAtom = atom<[IGetILyricInfoTypes]|null>({
-  key: 'myLyrics',
-  default: null,
-  effects_UNSTABLE: [persistAtom],
-});
 
 export const userPasswordAtom = atom<string>({
   key: 'password',

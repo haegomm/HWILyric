@@ -15,10 +15,6 @@ function MyPageFilterList() {
 
   const currentCategory = useRecoilValue(lyricCategoryAtom)
 
-  function categoryFilter(element:ILyricBlockTypes){
-    return element.type === currentCategory;
-  }
-
   async function getMyLyrics() {
     const lyricList = await getLyricList()
     if (lyricList !== null) {
@@ -53,7 +49,7 @@ function MyPageFilterList() {
 
   return (
     <LyricListBody>
-{nullLyrics === '' ?
+      {nullLyrics === '' ?
             <div>
             {myLyrics.map((myLyric:IGetILyricInfoTypes) => (
               myLyric.lyricList.map((lyricCtgr: ILyricBlockTypes) => {

@@ -5,12 +5,10 @@ import { IGetILyricInfoTypes } from '../../types/mypageType'
 import { lightDelete, lightModify, lightView } from '../../assets/mypage/myButtons'
 import { deleteNote } from '../../api/deleteApit'
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import { userLyricsAtom } from '../../atoms/userAtom'
 
 function MyPageLyricList() {
   const [myLyrics, setMyLyrics] = useState([])
   const [nullLyrics, setNullLyrics] = useState('')
-  const [userLyrics, setUserLyrics] = useRecoilState(userLyricsAtom)
       
   async function getMyLyrics() {
     const lyricList = await getLyricList()
