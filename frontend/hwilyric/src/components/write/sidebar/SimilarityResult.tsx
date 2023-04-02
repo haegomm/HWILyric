@@ -1,17 +1,15 @@
 import { useRecoilValue } from "recoil"
-import { similarListState } from "../../../atoms/sidebarAtoms"
-
+import { similarListLengthState } from "../../../atoms/sidebarAtoms"
 
 function SimilarityResult() {
 
-    const similarList = useRecoilValue(similarListState)
-    const similarListNum = similarList.length
+    const similarListLength = useRecoilValue(similarListLengthState)    
 
     return (
         <div>
-            {similarListNum > 0 ? (
+            {similarListLength > 0 ? (
             <div>
-                <p>유사한 가사가 {similarListNum}개 있습니다.</p>
+                <p>유사한 가사가 {similarListLength}개 있습니다.</p>
                 <p>표절에 주의하세요!</p>
             </div>
             ) : (
