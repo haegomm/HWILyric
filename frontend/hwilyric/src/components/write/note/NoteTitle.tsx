@@ -10,7 +10,6 @@ function NoteTitle() {
     const handleChangeTitle = () => {
         if (titleInput.current) {
             setWTitle(titleInput.current.value)
-            console.log("제목이 뭐야?", title )
         }
     }
 
