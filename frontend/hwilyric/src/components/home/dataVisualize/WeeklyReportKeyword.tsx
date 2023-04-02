@@ -20,7 +20,7 @@ function WeeklyReportKeyword(props: any) {
   // 장르 데이터를 그룹화하여 3개씩 나누기
   const groupedData = [];
   for (let i = 0; i < 6; i += 3) {
-    const mydata = props.data[0] ? props.data : data;
+    const mydata = props.data ? props.data : data;
     groupedData.push(mydata.slice(i, i + 3));
   }
 

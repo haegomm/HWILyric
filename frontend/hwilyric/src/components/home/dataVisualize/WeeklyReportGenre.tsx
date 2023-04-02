@@ -44,11 +44,7 @@ const data = [
 function WeeklyReportGenre(props: any) {
   return (
     <WeeklyReportKeywordsDiv>
-      <BarChart
-        width={252}
-        height={240}
-        data={props.data[0] ? props.data : data}
-      >
+      <BarChart width={252} height={240} data={props.data ? props.data : data}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" hide={true} />
         <YAxis hide={true} />
