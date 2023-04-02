@@ -15,7 +15,7 @@ function Mypage() {
       <MyPageContainer>
         <MyPageProfile />
         <MyPageListHeader />
-        {(Category.state === '') ? 
+        {(Category === '') ? 
           <MyPageLyricList />
           : <MyPageFilterList />
         }

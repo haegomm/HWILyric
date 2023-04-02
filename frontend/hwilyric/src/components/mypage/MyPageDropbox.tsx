@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil';
 import { downArrow, upArrow } from "../../assets/mypage/arrow";
 
 import { lyricCategoryAtom } from '../../atoms/mypageAtom';
-import { ArrowImage, DropboxDiv } from "../../styles/mypageStyle";
+import { ArrowImage, DropboxSelect, DropboxOption } from "../../styles/mypageStyle";
 import { ICategoryTypes } from "../../types/mypageType";
 
 function MyPageDropbox() {
@@ -18,42 +18,34 @@ function MyPageDropbox() {
     { name: 'etc', state: 'etc'},
   ];
   
-  const onDropHandler = (e: React.MouseEvent<HTMLDivElement>) => {
+  const onDropHandler = (e: React.MouseEvent<HTMLSelectElement>) => {
     setIsOpen(!isOpen)
   }
 
-  function onCategoryHandler(currentCtgr:ICategoryTypes, e: React.MouseEvent<HTMLDivElement>) {
+  const onCategoryHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const currentCtgr = e.target.value
     setCategory(currentCtgr)
-    setIsOpen(!isOpen)
+    console.log(currentCtgr)
   }
+
+  // function onCategoryHandler(currentCtgr:ICategoryTypes, e: React.MouseEvent<HTMLOptionElement>) {
+  //   setCategory(currentCtgr)
+  //   setIsOpen(!isOpen)
+  //   console.log(currentCtgr)
+  // }
 
   return (
-    <DropboxDiv>
-      <div
-      className={`select-box ${isOpen ? 'open' : ''}`}
-      onClick={onDropHandler}>
-        {category.name}
-        {isOpen ? 
-          <ArrowImage src={upArrow} />
-          : <ArrowImage src={downArrow} />
-        }
-      </div>
-      { isOpen && (
-        <div className="category-drop">
-          {lyricCategoryList.map((ctgr) => (
-            <div
-            className="categry-item"
-            key="ctgr.state"
-            onClick={(e) => onCategoryHandler(ctgr, e)}
-            >
+        <DropboxSelect onChange={onCategoryHandler}>
+          {lyricCategoryList.map((ctgr, index) => (
+              <DropboxOption
+              key={index}
+              value={ctgr.state}
+              // name={ctgr.name}
+              >
               {ctgr.name}
-            </div>
+            </DropboxOption>
           ))}
-        </div>
-      )
-
-      }
-    </DropboxDiv>
+        </DropboxSelect>
   )
 }
 
