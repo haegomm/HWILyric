@@ -15,6 +15,7 @@ export const similarListState = atom<ISimilarInfoTypes[]>({
     default: [],
 })
 
-// export const similarItemState = atom<>({
-
-// })
+export const similarListLengthState = atom<number>({
+    key: "similarListLengthState",
+    default: 0,
+})
