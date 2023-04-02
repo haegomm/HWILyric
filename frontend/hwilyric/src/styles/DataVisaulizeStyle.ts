@@ -12,6 +12,16 @@ export const WeeklyReportDiv = styled.div`
   align-items: center;
   width: 368px;
   height: 800px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-image: linear-gradient(
+      to right bottom,
+      #ace5f8,
+      #e6b2fd,
+      #fdbfb4,
+      #fbd1dd
+    )
+    1;
 `;
 
 export const WeeklyReportTitle = styled.title`
@@ -49,21 +59,48 @@ export const AnnualReportDiv = styled.div`
   height: 800px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
+`;
+
+export const AnnualReportTitle = styled.title`
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-item: center;
 `;
 
 export const AnnualGenreDiv = styled.div`
   width: 420px;
-  height: 320px;
+  height: 380px;
   display: flex;
   justify-content: space-around;
   flex-direction: column;
   align-items: center;
+  border-style: solid;
+  border-width: 2px 2px 2px 2px;
+  border-image: linear-gradient(
+      to right top,
+      #b0e3f9,
+      #deb3fb,
+      #fec3b5,
+      #fbd5e0
+    )
+    2;
 `;
 
 export const TotalTrendDiv = styled.div`
   width: 1352px;
   height: 800px;
+  border-style: solid;
+  border-width: 2px 2px 2px 2px;
+  border-image: linear-gradient(
+      to right top,
+      #b0e3f9,
+      #deb3fb,
+      #fec3b5,
+      #fbd5e0
+    )
+    2;
 `;
 
 export const AnnualKeywordDiv = styled.div`
@@ -72,15 +109,25 @@ export const AnnualKeywordDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-style: solid;
+  border-width: 2px 2px 2px 2px;
+  border-image: linear-gradient(
+      to right top,
+      #b0e3f9,
+      #deb3fb,
+      #fec3b5,
+      #fbd5e0
+    )
+    2;
 `;
 
-export const WeeklyGenreLineDiv = styled.div`
+export const WeeklyKeywordLineDiv = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
 `;
 
-export const WeeklyGenreBlockP = styled.p`
+export const WeeklyKeywordBlockP = styled.p`
   width: 88px;
   height: 32px;
   display: flex;
@@ -88,6 +135,7 @@ export const WeeklyGenreBlockP = styled.p`
   justify-content: center;
   align-items: center;
   font-size: 15px;
+  background-color: ${(props) => props.color};
 `;
 
 export const AnnualGenreSongDiv = styled.div`
@@ -97,5 +145,5 @@ export const AnnualGenreSongDiv = styled.div`
   align-items: center;
   font-size: 20px;
   width: 420px;
-  height: 70px;
+  height: 60px;
 `;
