@@ -6,7 +6,6 @@ import {
 } from "../../../types/visualizingType";
 import { annualNowAtom } from "../../../atoms/visualizingAtoms";
 import { useRecoilValue } from "recoil";
-import axios from "axios";
 import { annualData } from "../../../api/visualizingApi";
 
 const options: IAnnaulKeywordOptions = {
