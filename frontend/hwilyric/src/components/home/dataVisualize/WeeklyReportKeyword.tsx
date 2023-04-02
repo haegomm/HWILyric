@@ -2,7 +2,7 @@ import React from "react";
 import {
   WeeklyKeywordBlockP,
   WeeklyKeywordLineDiv,
-  WeeklyReportGenreDiv,
+  WeeklyReportKeywordsDiv,
 } from "../../../styles/DataVisaulizeStyle";
 import { IWeeklyReportKeyword } from "../../../types/visualizingType";
 
@@ -27,7 +27,7 @@ function WeeklyReportKeyword(props: any) {
   }
   let colorNum = -1;
   return (
-    <WeeklyReportGenreDiv>
+    <WeeklyReportKeywordsDiv>
       {groupedData.map((group) => {
         return (
           <WeeklyKeywordLineDiv>
@@ -42,7 +42,7 @@ function WeeklyReportKeyword(props: any) {
           </WeeklyKeywordLineDiv>
         );
       })}
-    </WeeklyReportGenreDiv>
+    </WeeklyReportKeywordsDiv>
   );
 }
 
