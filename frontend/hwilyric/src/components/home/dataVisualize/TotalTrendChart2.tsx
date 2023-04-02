@@ -16,10 +16,10 @@ function TotalTrendChart2(props: any) {
   const [annualnow, setAnnualnow] = useRecoilState(annualNowAtom);
   return (
     <AreaChart
-      width={1352}
-      height={700}
+      width={1344}
+      height={792}
       data={totalTrendData.genres}
-      margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+      margin={{ top: 10, right: 10, left: 10, bottom: 10 }}
       onClick={(event) => {
         if (event.activeLabel) {
           setAnnualnow(event.activeLabel);
@@ -28,8 +28,8 @@ function TotalTrendChart2(props: any) {
     >
       <defs>
         <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-          <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+          <stop offset="5%" stopColor="#81E47F" stopOpacity={0.2} />
+          <stop offset="95%" stopColor="#96BCF2" stopOpacity={0.8} />
         </linearGradient>
       </defs>
       <XAxis dataKey="annual" />
@@ -58,7 +58,7 @@ function TotalTrendChart2(props: any) {
       <Area
         type="monotone"
         dataKey="ratio"
-        stroke="#8884d8"
+        stroke="none"
         fillOpacity={1}
         fill="url(#colorUv)"
       />
