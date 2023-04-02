@@ -8,7 +8,7 @@ function BlockCreate() {
     const [ blockList, setBlockList ] = useRecoilState<ILyricBlockTypes[]>(blockListState)
     const [ blockId, setBlockId ] = useRecoilState<number>(blockIdState)
 
-    const [ blockType, setBlockType ] = useState<string>("Verse")
+    const [ blockType, setBlockType ] = useState<string>("verse")
 
     const selectBlockType = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setBlockType(event.target.value)

@@ -5,6 +5,7 @@ import { similarListState, similarListLengthState } from "../../../atoms/sidebar
 import { ISimilarityTypes } from "../../../types/writingType"
 import { checkSimilarity } from "../../../api/writingApi"
 import { CheckButton } from "../../../styles/common/ButtonStyle"
+import { SimilarListBox } from "../../../styles/writeSidebarStyle"
 
 function CheckSimilarity() {
     
@@ -26,24 +27,24 @@ function CheckSimilarity() {
         console.log("유사도 검사해줘~!", body)
         
         const data = await checkSimilarity(body)
-        // setSimilarList(data.similarList)
+        setSimilarList(data.similarList)
         // console.log("뭘 받았니?", data.similarList)
         setSimilarListLength(data.similarList.length)
         return data
     }
     
     return (
-        <div>
+        <>
             <CheckButton onClick={onCheck}>유사도 검사하기</CheckButton>
             {(similarList) ? (
-                <>
+                <SimilarListBox>
                     {similarList.map((similar, index) => (                             
                         <SimilarItem key={index} similar = {similar} />
                     ))}
-                </>
+                </SimilarListBox>
             ) : (<></>)
             }
-        </div>
+        </>
     )
 }
 

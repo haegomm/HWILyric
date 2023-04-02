@@ -1,12 +1,13 @@
 import { useRecoilValue } from "recoil"
 import { similarListLengthState } from "../../../atoms/sidebarAtoms"
+import { SimilarInform } from "../../../styles/writeSidebarStyle";
 
 function SimilarityResult() {
 
     const similarListLength = useRecoilValue(similarListLengthState)    
 
     return (
-        <div>
+        <SimilarInform>
             {similarListLength > 0 ? (
             <div>
                 <p>유사한 가사가 {similarListLength}개 있습니다.</p>
@@ -18,7 +19,7 @@ function SimilarityResult() {
                 <p>특수문자가 있다면 제거하고 다시 시도해보세요!</p>
             </div>
             )}
-        </div>
+        </SimilarInform>
         );
     }
             

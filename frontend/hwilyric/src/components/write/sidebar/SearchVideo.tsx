@@ -2,6 +2,8 @@ import axios from "axios"
 import { useState } from "react"
 import { useSetRecoilState } from "recoil"
 import { PlayVideoId } from "../../../atoms/youtubeVideoAtoms";
+import { SearchBoxStyle, SearchInput, SearchResultItem, SearchResultList } from "../../../styles/writeSidebarStyle";
+import { SearchButton } from "../../../styles/common/ButtonStyle";
 
 
 function SearchVideo() {
@@ -9,7 +11,7 @@ function SearchVideo() {
     const [results, setResults] = useState<any[]>([]);
     const setVideoId = useSetRecoilState(PlayVideoId)
     
-  
+    
     const handleSearch = async () => {
       try {
         const response = await axios.get(
@@ -19,36 +21,49 @@ function SearchVideo() {
               part: "snippet",
               q: query,
               type: "video",
-              maxResults: 1,
+              maxResults: 10,
               key: process.env.REACT_APP_YOUTUBE_API_KEY,
             },
           }
-        );
-        setResults(response.data.items);
-        console.log(response)
-        console.log(results)
+        )
+        
+        const items = response.data.items.map((item: any) => {
+          const { id, snippet } = item
+          // const title = snippet.title.replace(/[^\w\s]/gi, "");
+          const title = snippet.title.replace(/[^\uAC00-\uD7AF\u1100-\u11FF\u3130-\u318F]/g, " ")
+          const thumbnail = snippet.thumbnails.default.url
+          return { id, title, thumbnail }
+        });
+
+          setResults(() => items)
+          console.log(response)
+        console.log(items)
       } catch (error) {
-        console.error(error);
+        console.error(error)
       }
     };
   
-  const handleGetVideoId = (params: string) => {
-    setVideoId(params)
-    console.log(params)
-    }  
+  const handleGetVideoId = (videoId: string) => {
+    setVideoId(videoId)
+    console.log(videoId)
+    }
   
     return (
       <div>
-        <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} />
-        <button onClick={handleSearch}>Search</button>
-        {results.map((result) => (
-          <div key={result.id.videoId}>
-            <div>
-              <h3 onClick={(e)=>{handleGetVideoId(result.id.videoId)}}>{result.snippet.title}</h3>
-              <img src={result.snippet.thumbnails.default.url} alt="thumnail" />
+        <SearchBoxStyle>
+          <SearchInput type="text" value={query} onChange={(e) => setQuery(e.target.value)} />
+          <SearchButton onClick={handleSearch}>Search</SearchButton>
+        </SearchBoxStyle>
+        <SearchResultList>
+          {results.map((result) => (
+            <div key={result.id.videoId}>
+              <SearchResultItem>
+                <img src={result.thumbnail} alt="thumnail" />
+                <p onClick={(e)=>{handleGetVideoId(result.id.videoId)}}>{result.title}</p>
+              </SearchResultItem>
             </div>
-          </div>
-        ))}
+          ))}
+        </SearchResultList>
       </div>
     );
 }

@@ -30,3 +30,11 @@ export const CheckButton = styled.button`
     ${ButtonCss("12vw", "8vh")};
     // font-weight: 400;
 `
+
+export const SearchButton = styled.button`
+    border: none;
+    background-color: none;
+    :hover {
+        border: none;
+    }
+`

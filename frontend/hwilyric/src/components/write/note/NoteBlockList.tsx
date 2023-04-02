@@ -9,8 +9,10 @@ import BlockItem from "./NoteBlockItem"
 import { BlockListStyle } from "../../../styles/writeNoteStyle"
 import { SaveButton } from "../../../styles/common/ButtonStyle"
 import { memoState } from "../../../atoms/sidebarAtoms"
+import { useNavigate } from "react-router-dom"
 
 function BlockList() {
+    const navigate = useNavigate();
 
     const [blockList, setBlockList] = useRecoilState(blockListState)
     const [noteId, setNoteId] = useRecoilState(noteIdState)
@@ -78,11 +80,13 @@ function BlockList() {
         } else {
             window.localStorage.setItem('note', JSON.stringify(formData))
             console.log("로컬에 저장~!")
+            // 로그인X -> localStorage 저장 후 로그인 물어보기
+            if (window.confirm("로그인이 필요합니다. 로그인 하시겠습니까?")) {
+                navigate("/login")
+            }
+            // 로그인 하고 돌아오면 localStorage 데이터 불러오기
         }
-        // 로그인X -> localStorage 저장 후 로그인 물어보기
-
-        // 로그인 하고 돌아오면 localStorage 데이터 불러오기
-    } 
+    }
 
     return (
         <BlockListStyle>
