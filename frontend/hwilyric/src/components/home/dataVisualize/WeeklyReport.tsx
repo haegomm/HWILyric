@@ -41,12 +41,9 @@ function WeeklyReport() {
   getData();
   return (
     <WeeklyReportDiv>
-      <div></div>
       <WeeklyReportTitle>주간 리포트</WeeklyReportTitle>
-      <div></div>
       <WeeklyReportSubtitle>최근 인기 키워드</WeeklyReportSubtitle>
       <WeeklyReportKeyword data={keywordData} />
-      <div></div>
       <WeeklyReportSubtitle>주간 신곡 인기 장르</WeeklyReportSubtitle>
       <WeeklyReportGenre data={genresData} />
     </WeeklyReportDiv>
