@@ -1,12 +1,10 @@
 import { NavLink } from "react-router-dom"
 import { useRecoilValue } from "recoil"
 import { BsFillSunFill, BsFillMoonFill } from 'react-icons/bs';
-
-
 import { IsLoginAtom, userNicknameAtom } from "../../atoms/userAtom"
 import { ToggleBoxWrapper, ToggleBox, ToggleBoxLabel } from '../../styles/toggleButton'
 import { NavBox, NavMenu, DarkModeBox } from "../../styles/common/NavbarStyle";
-import logoImage from "../../assets/home/logoImage";
+
 
 function Navbar({toggleDarkMode}: any) {
   const isLogin = useRecoilValue(IsLoginAtom)
@@ -14,7 +12,7 @@ function Navbar({toggleDarkMode}: any) {
   return (
     <nav>
       <NavBox>
-        <NavLink to="*"  style={{ textDecoration: "none" }}><img src={logoImage}></img></NavLink>
+        <NavLink to="*"  style={{ textDecoration: "none" }}><img className="main-logo"></img></NavLink>
         <NavMenu>
           <DarkModeBox>
             <BsFillSunFill  style={{color: "#ffd700"}}/>
