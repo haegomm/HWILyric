@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
-import { IconImage, LyricListBody, LyricListBodyItem, LyricListBodyItemContent, LyricListBodyItemDiv, LyricThumbnail } from '../../styles/mypageStyle'
+import { IconImage, LyricListBody, LyricListBodyItem, LyricListBodyItemContent, LyricListBodyItemDiv, LyricText, LyricThumbnail } from '../../styles/mypageStyle'
 import { getLyricList } from '../../api/writingApi'
 import { IFilteringLyricTypes, IGetILyricInfoTypes } from '../../types/mypageType'
 import { lyricCategoryAtom } from '../../atoms/mypageAtom'
@@ -20,7 +20,6 @@ function MyPageFilterList() {
     if (lyricList !== null) {
       const sortedLyrics = lyricList.slice(0).sort((a: IGetILyricInfoTypes, b: IGetILyricInfoTypes) => {
         return new Date(b.updatedDate).valueOf() - new Date(a.updatedDate).valueOf();})
-        console.log('소팅', sortedLyrics)
         setMyLyrics(sortedLyrics)
     } else {
       console.log('')
@@ -59,10 +58,13 @@ function MyPageFilterList() {
                       <LyricListBodyItemDiv width='10vw'>
                         <LyricThumbnail src={myLyric.thumbnail} />
                       </LyricListBodyItemDiv>
-                      <LyricListBodyItemContent>                                 
-                          <p>{myLyric.title}</p>
-                          <br/>
-                          <p>{lyricCtgr.lyrics}</p>
+                      <LyricListBodyItemContent>
+                        <LyricText width='16vw'>
+                          {myLyric.title}
+                        </LyricText>                                 
+                        <LyricText width='18vw'>
+                          {lyricCtgr.lyrics}
+                        </LyricText>
                       </LyricListBodyItemContent>
                       <LyricListBodyItemDiv width='10vw'>
                         {myLyric.createdDate.substring(0, 10)}

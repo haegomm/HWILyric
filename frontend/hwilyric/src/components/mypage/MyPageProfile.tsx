@@ -6,7 +6,7 @@ import { logout } from '../../api/userApi';
 import { IsLoginAtom, userNicknameAtom, userProfileImgAtom } from '../../atoms/userAtom'
 import { lyricCategoryAtom } from '../../atoms/mypageAtom';
 import { deleteUserInfo } from '../../features/userInfo';
-import { MyPageProfileDiv, MyProfileImage } from '../../styles/mypageStyle';
+import { DropboxDiv, LyricListBodyItemDiv, MyPageProfileDiv, MyProfileImage } from '../../styles/mypageStyle';
 import MyPageDropbox from './MyPageDropbox';
 
 function MyPageProfile() {
@@ -30,17 +30,20 @@ function MyPageProfile() {
 
   return (
     <div>
-    <MyPageProfileDiv>
-      <MyProfileImage src={ProfileImgUrl} />
-      <span>{Nickname}님</span>
-      <span onClick={onProfileHandler}>
-        회원정보관리
-      </span>
-      <span onClick={onLogoutHandler}>
-          로그아웃
-      </span>
-    </MyPageProfileDiv>
-      <MyPageDropbox />
+      <MyPageProfileDiv>
+        <MyProfileImage src={ProfileImgUrl} />
+        <span>{Nickname}님</span>
+        <span onClick={onProfileHandler}>
+          회원정보관리
+        </span>
+        <span onClick={onLogoutHandler}>
+            로그아웃
+        </span>
+        <LyricListBodyItemDiv width='25vw' />
+      </MyPageProfileDiv>
+      <DropboxDiv>
+        <MyPageDropbox />
+      </DropboxDiv>
     </div>
   )
 }
