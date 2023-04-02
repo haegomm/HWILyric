@@ -1,51 +1,61 @@
 import React from "react";
-import { WeeklyReportGenreDiv } from "../../../styles/DataVisaulizeStyle";
-import { IWeeklyReportGenre } from "../../../types/visualizingType";
+import { WeeklyReportKeywordsDiv } from "../../../styles/DataVisaulizeStyle";
+import {
+  BarChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  Bar,
+} from "recharts";
+
+const data = [
+  {
+    name: "Page A",
+    count: 4000,
+  },
+  {
+    name: "Page B",
+    count: 3000,
+  },
+  {
+    name: "Page C",
+    count: 2000,
+  },
+  {
+    name: "Page D",
+    count: 2780,
+  },
+  {
+    name: "Page E",
+    count: 1890,
+  },
+  {
+    name: "Page F",
+    count: 2390,
+  },
+  {
+    name: "Page G",
+    count: 3490,
+  },
+];
 
 function WeeklyReportGenre(props: any) {
-  // const data = props.data
-  const data: IWeeklyReportGenre[] = [
-    { name: "장르1", count: 1 },
-    { name: "장르2", count: 2 },
-    { name: "장르3", count: 3 },
-    { name: "장르4", count: 4 },
-    { name: "장르5", count: 5 },
-    { name: "장르6", count: 6 },
-  ];
-
-  // 장르 데이터를 그룹화하여 3개씩 나누기
-  const groupedData = [];
-  for (let i = 0; i < 6; i += 3) {
-    groupedData.push(data.slice(i, i + 3));
-  }
-
   return (
-    <WeeklyReportGenreDiv>
-      {groupedData.map((group) => {
-        return (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-around",
-            }}
-          >
-            {group.map((genreData) => {
-              return (
-                <div
-                  style={{
-                    background: "red",
-                    width: "50px",
-                    height: "30px",
-                  }}
-                >
-                  {genreData.name}
-                </div>
-              );
-            })}
-          </div>
-        );
-      })}
-    </WeeklyReportGenreDiv>
+    <WeeklyReportKeywordsDiv>
+      <BarChart
+        width={252}
+        height={240}
+        data={props.data[0] ? props.data : data}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" hide={true} />
+        <YAxis hide={true} />
+        <Tooltip />
+        <Bar dataKey="count" fill="#8884d8" />
+      </BarChart>
+    </WeeklyReportKeywordsDiv>
   );
 }
 

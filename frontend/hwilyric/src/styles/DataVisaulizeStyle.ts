@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const DataVisualizePage = styled.div`
   display: flex;
   justify-content: space-around;
-  background-color: pink;
 `;
 
 export const WeeklyReportDiv = styled.div`
@@ -13,43 +12,41 @@ export const WeeklyReportDiv = styled.div`
   align-items: center;
   width: 368px;
   height: 800px;
-  background-color: blue;
 `;
 
 export const WeeklyReportTitle = styled.title`
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 152px;
   height: 40px;
-  background-color: white;
-  font-size: 20px;
+  font-size: 32px;
 `;
 
-export const WeeklyReportSubtitle = styled.div`
-  display: block;
+export const WeeklyReportSubtitle = styled.p`
+  display: flex;
   width: 168px;
   height: 24px;
-  background-color: white;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const WeeklyReportGenreDiv = styled.div`
-  width: 300px;
-  height: 200px;
-  background-color: white;
+  width: 312px;
+  height: 144px;
   display: flex;
   justify-content: space-around;
   flex-direction: column;
 `;
 
 export const WeeklyReportKeywordsDiv = styled.div`
-  width: 300px;
-  height: 200px;
-  background-color: white;
+  width: 252px;
+  height: 240px;
 `;
 
 export const AnnualReportDiv = styled.div`
   width: 420px;
   height: 800px;
-  background-color: purple;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -58,9 +55,9 @@ export const AnnualReportDiv = styled.div`
 export const AnnualGenreDiv = styled.div`
   width: 420px;
   height: 320px;
-  background-color: red;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  flex-direction: column;
   align-items: center;
 `;
 
@@ -71,9 +68,34 @@ export const TotalTrendDiv = styled.div`
 
 export const AnnualKeywordDiv = styled.div`
   width: 420px;
-  heigth: 392px;
-  background-color: red;
+  height: 392px;
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const WeeklyGenreLineDiv = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+export const WeeklyGenreBlockP = styled.p`
+  width: 88px;
+  height: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+`;
+
+export const AnnualGenreSongDiv = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  font-size: 20px;
+  width: 420px;
+  height: 70px;
 `;

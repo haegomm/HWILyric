@@ -3,21 +3,25 @@ import { Pie } from "react-chartjs-2";
 import { useSpring, animated } from "react-spring";
 import { ResponsivePie } from "@nivo/pie";
 import { getAllJSDocTagsOfKind } from "typescript";
-
-function myFunc(node: Object, event: Object) {
-  console.log(node, "!!!!!!!!!!!!!!!!!!!!", event);
-}
+import { useSetRecoilState } from "recoil";
+import { annualNowSongAtom } from "../../../atoms/visualizingAtoms";
+import { annualGenreRatioSongAtom } from "../../../atoms/visualizingGenreAtom";
 
 function AnnualGenreChart(props: any) {
-  console.log(props);
+  const setAnnualnowSong = useSetRecoilState(annualNowSongAtom);
+  function myFunc(node: any, event: Object) {
+    if (node) {
+      setAnnualnowSong(node.id);
+    }
+  }
   return (
     <div style={{ width: "400px", height: "300px" }}>
       <ResponsivePie
         data={props.data}
-        margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+        margin={{ top: 10 }}
         padAngle={0.7}
         cornerRadius={3}
-        activeOuterRadiusOffset={8}
+        activeOuterRadiusOffset={0}
         colors={{ scheme: "blue_purple" }}
         borderWidth={1}
         sortByValue={true}

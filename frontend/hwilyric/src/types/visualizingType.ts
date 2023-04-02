@@ -1,6 +1,6 @@
 export interface INewSongTypes {
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
 }
 
 export interface IAnnualGenreChartData {
@@ -12,27 +12,43 @@ export interface IAnnualGenreChartData {
 export interface IAnnaulKeywordOptions {
   rotations: number;
   rotationAngles: [number, number];
+  fontSizes: [number, number];
 }
 
 export interface IAnnualKeywordData {
-  text: string;
-  value: number;
+  word: string;
+  count: number;
 }
 
-interface IGenreRatio {
+export interface IGenreRatio {
+  annual?: number;
   name: string;
   ratio: number;
 }
 
+interface IGenreRatioSong extends IGenreRatio {
+  songs: [];
+}
+
 export interface IAnnualGenreChart {
-  genres?: IGenreRatio[];
+  genres: IGenreRatio[];
 }
 
 export interface IAnnualGenreRatio {
-  [key: string]: IGenreRatio[];
+  [key: string]: IAnnualGenresChart[];
+}
+
+export interface IAnnualGenresChart {
+  name: string;
+  ratio: number;
+  songs: string[];
 }
 
 export interface IWeeklyReportGenre {
   name: string;
   count: number;
+}
+
+export interface IAnnualKeywordCloud {
+  [key: string]: IAnnualKeywordData[];
 }

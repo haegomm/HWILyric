@@ -25,7 +25,7 @@ export async function annualGenre() {
   }
 }
 
-export async function annualData(years: Date) {
+export async function annualData(years: string) {
   try {
     const res = await axios.get(`api/trend/annual/${years}`);
     const data = res.data;

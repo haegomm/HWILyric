@@ -3,6 +3,8 @@ import { AnnualReportDiv } from "../../../styles/DataVisaulizeStyle";
 import AnnualGenre from "./AnnualGenre";
 import AnnualKeyword from "./AnnualKeyword";
 import { IAnnualGenreChartData } from "../../../types/visualizingType";
+import { useRecoilValue } from "recoil";
+import { annualNowAtom } from "../../../atoms/visualizingAtoms";
 
 const data: IAnnualGenreChartData[] = [
   {
@@ -33,10 +35,11 @@ const data: IAnnualGenreChartData[] = [
 ];
 
 function AnnualReport() {
+  const annualnow = useRecoilValue(annualNowAtom);
   return (
     <AnnualReportDiv>
-      <AnnualGenre data={data}></AnnualGenre>
-      <AnnualKeyword></AnnualKeyword>
+      <AnnualGenre data={data} annualnow={annualnow}></AnnualGenre>
+      <AnnualKeyword annualnow={annualnow}></AnnualKeyword>
     </AnnualReportDiv>
   );
 }
