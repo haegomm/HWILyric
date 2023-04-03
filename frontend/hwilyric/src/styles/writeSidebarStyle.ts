@@ -4,6 +4,7 @@ import { SearchButton } from "../styles/common/ButtonStyle";
 const sideWidth = 440;
 const sideMargin = 20;
 const borderWidth = 2;
+const inputPadding = 5;
 
 export const SideBarBox = styled.div`
     width: ${sideWidth}px;
@@ -106,8 +107,6 @@ export const SearchBoxStyle = styled.div`
     margin: 10px auto;
 `
 
-const inputPadding = 5;
-
 export const SearchInput = styled.input`
     border: none;
     width: 100%;
@@ -116,7 +115,7 @@ export const SearchInput = styled.input`
     :focus {
         outline: none;
     }
-    padding: ${inputPadding/2}px ${inputPadding}px;
+    padding: ${inputPadding/2}px ${inputPadding*3}px;
 `
 
 export const SearchIconButton = styled(SearchButton)`
@@ -143,14 +142,26 @@ export const PlayerVideoBox = styled.div`
 `
 
 export const SearchResultList = styled.div`
-    width: ${sideWidth - sideMargin};
-    height: 30vh;
+    width: ${sideWidth - sideMargin}px;
     margin: 0 auto;
     overflow: scroll;
 `
 
+const itemHeight = 50;
 export const SearchResultItem = styled.div`
     display: flex;
-    width: ${sideWidth - sideMargin};
+    height:${itemHeight}px;
+    width: ${sideWidth - sideMargin}px;
+    overflow: hidden;
     margin: 0 auto;
+    :hover {
+        background-color: rgba(0,0,0,0.2);
+        color: white;
+    }
+`
+export const SearchResultItemText = styled.p`
+    width: 100%;
+    text-align: left;
+    padding: 0 10px;
+    line-height: ${itemHeight}px;
 `
