@@ -36,7 +36,7 @@ JONGSUNG_LIST = ['', 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', '�
 if __name__ == '__main__':
     req_word = os.environ.get("word")
     CHECKLENGTH = os.environ.get("checkLength")
-    JACCARD_LIST = os.environ.get("checkjaccard").split()
+    JACCARD_LIST = os.environ.get("checkJaccard").split()
 
     string_result, string_jaccard_set = decomposition(req_word)
 
