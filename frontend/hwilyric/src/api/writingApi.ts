@@ -58,3 +58,14 @@ export async function getLyricList() {
     return null
   }
 }
+
+export async function getRandomdWord() {
+  try{
+    const res = await axios.get('api/keywords/random')
+    const wordList = res.data
+    return wordList
+  } catch(err) {
+    console.log('랜덤키워드 안나옴')
+    return null
+  }
+}
