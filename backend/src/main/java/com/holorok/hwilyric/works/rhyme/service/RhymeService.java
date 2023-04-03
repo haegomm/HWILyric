@@ -2,6 +2,7 @@ package com.holorok.hwilyric.works.rhyme.service;
 
 
 import com.holorok.hwilyric.common.SparkSqlManager;
+import com.holorok.hwilyric.exception.InvalidInputException;
 import com.holorok.hwilyric.exception.NotFoundException;
 import com.jcraft.jsch.JSchException;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
 import java.util.*;
+import java.util.regex.Pattern;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +21,14 @@ import java.util.*;
 public class RhymeService {
     private final SparkSqlManager ssm;
     public List<String> getRhymeKeyword(String word) throws NotFoundException, JSchException, IOException {
-        Dataset<Row> dataset = ssm.selectTableRhyme("music_rhyme");
+        Dataset<Row> dataset;
+
+        if(Pattern.matches("^[가-힣]*$",word))
+            dataset = ssm.selectTableRhyme("music_rhyme").where("is_hangul = true");
+        else if((Pattern.matches("^[a-zA-Z]*$",word)))
+            dataset = ssm.selectTableRhyme("music_rhyme").where("is_hangul = false");
+        else
+            throw new InvalidInputException();
 
         String[] checkJaccard = dataset.collectAsList().stream()
                 .map(row -> row.mkString(","))
@@ -34,7 +43,20 @@ public class RhymeService {
         Map<String, String> env = processBuilder.environment();
         env.put("word", word);
         env.put("checkLength", checkLength);
-        env.put("checkJaccard", String.join(" ", checkJaccard));
+        int cnt=0;
+        for(int i=0,size=Integer.parseInt(checkLength);i<size;i+=(size/10)) {
+            StringBuilder sb = new StringBuilder();
+            for(int j=i,jsize=i+(size/10);j<jsize;j++) {
+                if(j>=size)
+                    break;
+                sb.append(checkJaccard[j]).append(" ");
+            }
+            String str = "checkJaccard"+cnt;
+            env.put(str,sb.toString());
+            cnt++;
+        }
+        env.put("count", ""+cnt);
+//        env.put("checkJaccard", String.join(" ", checkJaccard));
 
         List<String> rhymeList = new ArrayList<>();
         try {
