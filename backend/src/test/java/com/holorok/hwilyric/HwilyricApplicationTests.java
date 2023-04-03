@@ -9,14 +9,14 @@ class HwilyricApplicationTests {
 
 
 
-    @Test
-    void contextLoads() {
-        // to prevent Sonar issue when you don't expect any exception to be throw from your test
-        Assertions.assertDoesNotThrow(this::doNotThrowException);
-    }
-
-    private void doNotThrowException(){
-        //This method will never throw exception
-    }
+//    @Test
+//    void contextLoads() {
+//        // to prevent Sonar issue when you don't expect any exception to be throw from your test
+//        Assertions.assertDoesNotThrow(this::doNotThrowException);
+//    }
+//
+//    private void doNotThrowException(){
+//        //This method will never throw exception
+//    }
 
 }

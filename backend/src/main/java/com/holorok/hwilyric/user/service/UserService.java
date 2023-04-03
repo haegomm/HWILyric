@@ -1,9 +1,6 @@
 package com.holorok.hwilyric.user.service;
 
-import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.CannedAccessControlList;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.holorok.hwilyric.common.AwsService;
 import com.holorok.hwilyric.user.dto.*;
 import com.holorok.hwilyric.user.repository.UserRepository;
 import com.holorok.hwilyric.exception.DuplicateException;
@@ -11,7 +8,6 @@ import com.holorok.hwilyric.exception.NotFoundException;
 import com.holorok.hwilyric.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,14 +21,12 @@ import org.springframework.web.multipart.MultipartFile;
 // 만약 데이터를 insert 하거나 update 하는 등 DB에 변경사항이 생겨야 하는 메서드의 경우 46번 줄에 있는 주석 참고해주세요!
 public class UserService {
 
-    @Value("${cloud.aws.s3.bucket}")
-    private String bucket; // S3 버킷 이름
-
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final AmazonS3Client amazonS3Client;
+    private final AwsService awsService;
 
     private static final String NOT_FOUND_USER = "존재하지 않는 사용자입니다.";
+    private static final String PROFILE = "profile";
 
 
     // 이메일 중복체크
@@ -66,7 +60,7 @@ public class UserService {
         // 만약 사용자가 프사를 업로드 한 경우
         if (multipartFile != null) {
             log.debug("프사가 null이 아니네!!");
-            profileImg = upload(multipartFile); // 프로필 이미지 업로드
+            profileImg = awsService.upload(multipartFile, PROFILE); // 프로필 이미지 업로드
         }
 
         // 사용자 비밀번호 암호화
@@ -134,7 +128,7 @@ public class UserService {
         // 만약 사용자가 프사를 수정한 경우
         if (multipartFile!=null) {
             log.debug("프사 수정했네!");
-            profileImg = upload(multipartFile); // 프로필 이미지 업로드
+            profileImg = awsService.upload(multipartFile, PROFILE); // 프로필 이미지 업로드
         }
 
         user.updateUser(nickname, profileImg);
@@ -154,25 +148,6 @@ public class UserService {
             user.updatePassword(password);
         }
 
-    }
-
-    // S3에 파일 업로드
-    public String upload(MultipartFile multipartFile) throws Exception {
-
-        String originalName = multipartFile.getOriginalFilename(); // 파일 이름
-        long size = multipartFile.getSize(); // 파일 크기
-
-        ObjectMetadata objectMetaData = new ObjectMetadata();
-        objectMetaData.setContentType(multipartFile.getContentType());
-        objectMetaData.setContentLength(size);
-
-        // S3에 업로드
-        amazonS3Client.putObject(
-                new PutObjectRequest(bucket + "/profile", originalName, multipartFile.getInputStream(), objectMetaData)
-                        .withCannedAcl(CannedAccessControlList.PublicRead)
-        );
-
-        return amazonS3Client.getUrl(bucket, originalName).toString(); // 접근가능한 URL 가져오기
     }
 
 }

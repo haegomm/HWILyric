@@ -1,8 +1,15 @@
+buildscript {
+    ext {
+        queryDslVersion = "5.0.0"
+    }
+}
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.9'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
     id "org.sonarqube" version "3.4.0.2513"
+    id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
 }
 
 group = 'com.holorok'
@@ -63,9 +70,11 @@ dependencies {
     // QueryDSL 라이브러리
     implementation 'com.querydsl:querydsl-core'
     // QueryDSL JPA 라이브러리
-    implementation 'com.querydsl:querydsl-jpa'
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+    // QueryDSL 추가
+    implementation 'com.querydsl:querydsl-apt'
     // QueryDSL 관련된 쿼리 타입(QClass)을 생성할 때 필요한 라이브러리로, annotationProcessor을 사용하여 추가
-    annotationProcessor("com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa")
+    annotationProcessor("com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
     // java.lang.NoClassDefFoundError(javax.annotation.Entity) 발생 시 추가
     annotationProcessor('jakarta.persistence:jakarta.persistence-api')
     // java.lang.NoClassDefFoundError(javax.annotation.Generated) 발생 시 추가
@@ -109,10 +118,30 @@ dependencies {
     implementation group: 'org.nd4j', name: 'nd4j-native-platform', version: '1.0.0-M2'
     implementation group: 'org.deeplearning4j', name: 'deeplearning4j-core', version: '1.0.0-M2'
 
+    // spark mllib
+//    compileOnly group: 'org.apache.spark', name: 'spark-mllib_2.12', version: '3.2.1'
+//    implementation group: 'org.apache.spark', name: 'spark-core_2.12', version: '3.2.1'
+
 }
 
 // Querydsl 설정부
-def generated = 'src/main/generated'
+def generated = "$buildDir/generated/querydsl"
+
+querydsl {
+    springDataMongo = true
+    library = "com.querydsl:querydsl-apt"
+    jpa = false
+    querydslSourcesDir = generated
+}
+
+
+configurations {
+    querydsl.extendsFrom compileClasspath
+}
+
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
+}
 
 // gradle clean 시에 QClass 디렉토리 삭제
 clean {
