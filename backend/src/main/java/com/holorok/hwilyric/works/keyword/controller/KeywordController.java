@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +42,15 @@ public class KeywordController {
         List<String> similarList = keywordService.getSimilarKeyword(word);
 
         return new ResponseEntity<>(similarList, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "주제 추천")
+    @GetMapping(value = "/topics")
+    public ResponseEntity<List<String>> getTopicList() throws NotFoundException {
+
+        List<String> topicList = keywordService.getTopicList();
+
+        return new ResponseEntity<>(topicList, HttpStatus.OK);
     }
 
 }
