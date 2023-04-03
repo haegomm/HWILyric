@@ -14,5 +14,5 @@ public interface NewlyTrendRepository extends JpaRepository<NewlyTrend, Long> {
     List<NewlyTrend> findByReleasedDateBetween(Date startDate, Date endDate);
 
     @Query(value = "select n.keywords from newly_trend n where n.released_date between :startDate and :endDate order by rand() limit :num", nativeQuery = true)
-    List<String> findByKeywordsDateBetween(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("num") int num);
+    String findByKeywordsDateBetween(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("num") int num);
 }
