@@ -1,5 +1,6 @@
 package com.holorok.hwilyric.works.keyword.service;
 
+import com.holorok.hwilyric.trend.repository.NewlyTrendRepository;
 import com.holorok.hwilyric.works.keyword.repository.KeywordRepository;
 import com.holorok.hwilyric.exception.NotFoundException;
 import kr.co.shineware.nlp.komoran.constant.DEFAULT_MODEL;
@@ -17,6 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,6 +31,7 @@ import java.util.regex.Pattern;
 public class KeywordService {
 
     private final KeywordRepository keywordRepository;
+    private final NewlyTrendRepository newlyTrendRepository;
 
     // 랜덤 키워드 불러오기
     public List<String> getRandomKeyword() {
@@ -153,6 +157,22 @@ public class KeywordService {
         // 랜덤 키워드 추출
         List<String> topicList = keywordRepository.findRandomWord("랜덤", true, 5);
 
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+
+        Calendar calendar = Calendar.getInstance();
+        Date endDate = calendar.getTime();
+        calendar.add(Calendar.DATE, -7);
+        Date startDate = calendar.getTime();
+
+        String realEndDate = simpleDateFormat.format(endDate);
+
+        String realStartDate = simpleDateFormat.format(startDate);
+
+        List<String> keywordList = newlyTrendRepository.findByKeywordsDateBetween(realStartDate, realEndDate, 5);
+
+        for(String keyword : keywordList){
+            topicList.add(keyword);
+        }
 
         return topicList;
     }
