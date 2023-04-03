@@ -7,7 +7,8 @@ export const lightTheme = {
     blue: '#B0E3F9',
     violet: '#DEB3FB',
     coral: '#FEC3B5',
-    pink: '#FBD5E0'
+    pink: '#FBD5E0',
+    logoUrl: 'image/light-logo.png'
 };
 
 export const darkTheme = {
@@ -17,7 +18,8 @@ export const darkTheme = {
     purple: '#8A1C70',
     violet: '#572681',
     paleViolet: '#E8AFFD',
-    pink: '#EC4884'
+    pink: '#EC4884',
+    logoUrl: 'image/dark-logo.png'
 };
 
 export const theme = {

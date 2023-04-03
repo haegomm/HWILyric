@@ -1,5 +1,6 @@
 import { atom } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
+import { IGetILyricInfoTypes } from '../types/mypageType';
 
 const { persistAtom } = recoilPersist();
 
@@ -20,6 +21,7 @@ export const userProfileImgAtom = atom<string>({
   default: '',
   effects_UNSTABLE: [persistAtom],
 });
+
 
 export const userPasswordAtom = atom<string>({
   key: 'password',

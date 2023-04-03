@@ -6,7 +6,7 @@ import { logout } from '../../api/userApi';
 import { IsLoginAtom, userNicknameAtom, userProfileImgAtom } from '../../atoms/userAtom'
 import { lyricCategoryAtom } from '../../atoms/mypageAtom';
 import { deleteUserInfo } from '../../features/userInfo';
-import { MyPageProfileDiv, MyProfileImage } from '../../styles/mypageStyle';
+import { DropboxDiv, LyricListBodyItemDiv, MyPageProfileDiv, MyProfileImage } from '../../styles/mypageStyle';
 import MyPageDropbox from './MyPageDropbox';
 
 function MyPageProfile() {
@@ -16,11 +16,11 @@ function MyPageProfile() {
   const Nickname = useRecoilValue(userNicknameAtom);
   const ProfileImgUrl = useRecoilValue(userProfileImgAtom);
 
-  const onProfileHandler = (e: React.MouseEvent<HTMLDivElement>) => {
-    navigate('/profilemodification/sajhdgdjakhsd')
+  const onProfileHandler = (e: React.MouseEvent<HTMLSpanElement>) => {
+    navigate('/profilemodification')
   }
 
-  const onLogoutHandler = async(e: React.MouseEvent<HTMLDivElement>) => {
+  const onLogoutHandler = async(e: React.MouseEvent<HTMLSpanElement>) => {
     const message = await logout()
       deleteUserInfo()
       setIsLogin(false)
@@ -29,17 +29,22 @@ function MyPageProfile() {
 
 
   return (
-    <MyPageProfileDiv>
-      <MyProfileImage src={ProfileImgUrl} />
-      <span>{Nickname}님</span>
-      <div onClick={onProfileHandler}>
-        회원정보관리
-      </div>
-      <div onClick={onLogoutHandler}>
-          로그아웃
-      </div>
-      <MyPageDropbox />
-    </MyPageProfileDiv>
+    <div>
+      <MyPageProfileDiv>
+        <MyProfileImage src={ProfileImgUrl} />
+        <span>{Nickname}님</span>
+        <span onClick={onProfileHandler}>
+          회원정보관리
+        </span>
+        <span onClick={onLogoutHandler}>
+            로그아웃
+        </span>
+        <LyricListBodyItemDiv width='25vw' />
+      </MyPageProfileDiv>
+      <DropboxDiv>
+        <MyPageDropbox />
+      </DropboxDiv>
+    </div>
   )
 }
 

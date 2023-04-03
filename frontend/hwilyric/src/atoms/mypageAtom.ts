@@ -1,7 +1,13 @@
 import { atom } from 'recoil';
 import { ICategoryTypes } from '../types/mypageType';
+import { IGetILyricInfoTypes } from '../types/mypageType';
 
-export const lyricCategoryAtom = atom<ICategoryTypes>({
+export const lyricCategoryAtom = atom<string>({
   key: 'categoty',
-  default: {name: '전체', state: ''},
+  default: '',
 });
+
+export const myLyrics = atom<IGetILyricInfoTypes[]|null>({
+  key: 'myLyrics',
+  default: null,
+})

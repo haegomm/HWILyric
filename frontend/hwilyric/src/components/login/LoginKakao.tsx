@@ -28,7 +28,7 @@ function LoginKakao() {
       setIsLogin(true)
       setNickname(data.nickname)
       setProfileImg(data.profileImg)
-      navigate("/zslkdrj");
+      navigate("/home");
     } else {
       console.log('로그인 실패ㅜ;')
     } 

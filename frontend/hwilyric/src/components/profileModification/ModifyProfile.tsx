@@ -70,7 +70,7 @@ function ModifyProfile() {
       setNickname(data.nickname)
       setProfileImg(data.profileImg)
       alert('수정성공!')
-      navigate("/mypage/dsajhfawjehdg");
+      navigate("/mypage");
     } else {
       alert("수정에 실패하였습니다. 다시 시도해주세요");
     }

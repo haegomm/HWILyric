@@ -15,9 +15,9 @@ function getCurrentDateTime() {
     return Number(id);
 }
 
-export const noteIdState = atom<string | null>({
+export const noteIdState = atom<string>({
     key: "noteIdState",
-    default: null,
+    default: "",
     effects_UNSTABLE: [persistAtom],
 })
 
@@ -35,5 +35,17 @@ export const blockIdState = atom<number>({
 export const blockListState = atom<ILyricBlockTypes[]>({
     key: 'blockListState',
     default: [],
+    effects_UNSTABLE: [persistAtom],
+})
+
+export const noteThumbnailFileState = atom<File | "">({
+    key: "noteThumbnailFileState",
+    default: "",
+    effects_UNSTABLE: [persistAtom],
+})
+
+export const noteThumbnailUrlState = atom<string>({
+    key: "noteThumbnailUrlState",
+    default: "",
     effects_UNSTABLE: [persistAtom],
 })

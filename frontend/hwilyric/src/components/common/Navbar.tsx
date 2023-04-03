@@ -1,11 +1,10 @@
 import { NavLink } from "react-router-dom"
 import { useRecoilValue } from "recoil"
 import { BsFillSunFill, BsFillMoonFill } from 'react-icons/bs';
-
-
 import { IsLoginAtom, userNicknameAtom } from "../../atoms/userAtom"
 import { ToggleBoxWrapper, ToggleBox, ToggleBoxLabel } from '../../styles/toggleButton'
-import { NavBox, NavMenu } from "../../styles/common/NavbarStyle";
+import { NavBox, NavMenu, DarkModeBox } from "../../styles/common/NavbarStyle";
+
 
 function Navbar({toggleDarkMode}: any) {
   const isLogin = useRecoilValue(IsLoginAtom)
@@ -13,10 +12,16 @@ function Navbar({toggleDarkMode}: any) {
   return (
     <nav>
       <NavBox>
+        <NavLink to="*"  style={{ textDecoration: "none" }}><img className="main-logo"></img></NavLink>
         <NavMenu>
-          <div>
-              <NavLink to="*"  style={{ textDecoration: "none" }}>홈으로</NavLink>
-            </div>
+          <DarkModeBox>
+            <BsFillSunFill  style={{color: "#ffd700"}}/>
+            <ToggleBoxWrapper>
+                <ToggleBox id="checkbox" type="checkbox" onClick={toggleDarkMode} />
+                <ToggleBoxLabel htmlFor="checkbox" />
+            </ToggleBoxWrapper>
+            <BsFillMoonFill style={{color: "003458"}}/>  
+          </DarkModeBox>
           <div>
             <NavLink to="/write"  style={{ textDecoration: "none" }}>작사하기</NavLink>
           </div>
@@ -28,12 +33,7 @@ function Navbar({toggleDarkMode}: any) {
                 )}
           </div>
         </NavMenu>
-        <BsFillSunFill />
-        <ToggleBoxWrapper>
-            <ToggleBox id="checkbox" type="checkbox" onClick={toggleDarkMode} />
-            <ToggleBoxLabel htmlFor="checkbox" />
-        </ToggleBoxWrapper>
-        <BsFillMoonFill />
+        
       </NavBox>
     </nav>
   )

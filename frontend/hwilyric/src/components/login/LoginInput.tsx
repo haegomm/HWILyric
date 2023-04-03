@@ -46,7 +46,7 @@ function LoginInput() {
       setIsLogin(true)
       setNickname(data.nickname)
       setProfileImg(data.profileImg)
-      navigate("/zslkdrj");
+      navigate("/home");
     } else {
       alert('로그인 실패ㅜ;')
     }
@@ -84,7 +84,7 @@ function LoginInput() {
       </form>
       <div className="idMessage">아직 아이디가 없으신가요?</div>
       <div className="bottomButton">
-        <Link to="/signup/dkfjdlksj">
+        <Link to="/signup">
           <div className="normalSignUpButton">가입하기</div>
         </Link>
         <a href={KAKAO_REQUEST}>

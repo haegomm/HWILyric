@@ -9,12 +9,15 @@ export const GlobalStyle = createGlobalStyle`
         color:${(props) => props.theme.textColor};
         }
     div {
-        paddig: 0px;
+        padding: 0px;
         scrollbar-width: none;
         -ms-overflow-style: none;
         &::-webkit-scrollbar {
         width: 0px;
         background: transparent;
+    }
+    .main-logo {
+        content:url(${(props) => props.theme.logoUrl});
     }
     }
 `;
