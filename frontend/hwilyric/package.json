@@ -5,6 +5,7 @@
   "dependencies": {
     "@nivo/core": "^0.80.0",
     "@nivo/pie": "^0.80.0",
+    "@nivo/stream": "^0.80.0",
     "@react-spring/types": "^9.7.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -35,6 +36,7 @@
     "react-spring": "^9.7.1",
     "react-wordcloud": "^1.2.7",
     "react-youtube": "^10.1.0",
+    "recharts": "^2.5.0",
     "recoil": "^0.7.6",
     "recoil-persist": "^4.2.0",
     "styled-components": "^5.3.6",
