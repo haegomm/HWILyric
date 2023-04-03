@@ -34,7 +34,7 @@ public class RhymeService {
         Map<String, String> env = processBuilder.environment();
         env.put("word", word);
         env.put("checkLength", checkLength);
-        env.put("checkjaccard", String.join(" ", checkJaccard));
+        env.put("checkJaccard", String.join(" ", checkJaccard));
 
         List<String> rhymeList = new ArrayList<>();
         try {
