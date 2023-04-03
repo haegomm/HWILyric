@@ -1,53 +1,45 @@
 import React from "react";
 import { AnnualReportDiv } from "../../../styles/DataVisaulizeStyle";
-import AnnualGenre from "./AnnualGenreChart";
+import AnnualGenre from "./AnnualGenre";
 import AnnualKeyword from "./AnnualKeyword";
+import { IAnnualGenreChartData } from "../../../types/visualizingType";
+import { useRecoilValue } from "recoil";
+import { annualNowAtom } from "../../../atoms/visualizingAtoms";
 
-interface DataObject {
-  id: string;
-  label: string;
-  value: number;
-  color: string;
-}
-
-const data: DataObject[] = [
+const data: IAnnualGenreChartData[] = [
   {
     id: "haskell",
     label: "haskell",
     value: 135,
-    color: "hsl(293, 70%, 50%)",
   },
   {
     id: "lisp",
     label: "lisp",
     value: 175,
-    color: "hsl(344, 70%, 50%)",
   },
   {
     id: "stylus",
     label: "stylus",
     value: 376,
-    color: "hsl(276, 70%, 50%)",
   },
   {
     id: "javascript",
     label: "javascript",
     value: 127,
-    color: "hsl(10, 70%, 50%)",
   },
   {
     id: "scala",
     label: "scala",
     value: 135,
-    color: "hsl(57, 70%, 50%)",
   },
 ];
 
 function AnnualReport() {
+  const annualnow = useRecoilValue(annualNowAtom);
   return (
     <AnnualReportDiv>
-      <AnnualGenre data={data}></AnnualGenre>
-      <AnnualKeyword></AnnualKeyword>
+      <AnnualGenre data={data} annualnow={annualnow}></AnnualGenre>
+      <AnnualKeyword annualnow={annualnow}></AnnualKeyword>
     </AnnualReportDiv>
   );
 }
