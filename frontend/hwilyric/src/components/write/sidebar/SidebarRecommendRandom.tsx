@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { getRandomdWord } from '../../../api/writingApi';
 import { async } from 'q';
-
-
+import { IconImage } from '../../../styles/mypageStyle';
+import { lightRefresh } from '../../../assets/icon/myButtons';
+import { RandomHeader, RecommendBody, WordContainer, WordItem } from '../../../styles/recommendStyle';
 
 function SidebarRecommendRandom() {
   const [wordList, setWordList] = useState([]);
@@ -11,6 +12,7 @@ function SidebarRecommendRandom() {
   async function refreshRandomWord() {
     const randomList = await getRandomdWord()
     if (randomList !== null) {
+      console.log(randomList)
       setWordList(randomList)
       setRandomError('')
     } else {
@@ -21,11 +23,22 @@ function SidebarRecommendRandom() {
     refreshRandomWord()
   }, [])
   
-  const onRefreshHandler =async (e: React.MouseEvent<HTMLImageElement>) => {
+  const onRefreshHandler = async (e: React.MouseEvent<HTMLImageElement>) => {
     refreshRandomWord()   
   }
   return (
-    <div>SidebarRecommendRandom</div>
+    <RecommendBody>
+      <RandomHeader>
+        <span>랜덤 키워드</span>
+        <IconImage src={lightRefresh} onClick={onRefreshHandler}/>
+      </RandomHeader>
+      <WordContainer>
+        {wordList.map((word:string) => (
+          <WordItem>{word}</WordItem>
+        ))}
+      </WordContainer>
+      <p>{randomError}</p>
+    </RecommendBody>
   )
 }
 

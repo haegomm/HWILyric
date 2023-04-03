@@ -6,7 +6,7 @@ import { getLyricList } from '../../api/writingApi'
 import { IFilteringLyricTypes, IGetILyricInfoTypes } from '../../types/mypageType'
 import { lyricCategoryAtom } from '../../atoms/mypageAtom'
 import { deleteNote } from '../../api/deleteApit'
-import { lightDelete, lightModify, lightView } from '../../assets/mypage/myButtons'
+import { lightDelete, lightModify, lightView } from '../../assets/icon/myButtons'
 import { ILyricBlockTypes } from '../../types/writingType'
 
 function MyPageFilterList() {

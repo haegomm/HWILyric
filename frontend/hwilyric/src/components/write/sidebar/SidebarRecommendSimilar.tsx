@@ -3,12 +3,12 @@ import { RandomHeader, RecommendBody, WordContainer, WordItem } from '../../../s
 import { useRecoilValue } from 'recoil'
 import { keywordListAtom } from '../../../atoms/sidebarAtoms'
 
-function SidebarRecommendRhyme() {
+function SidebarRecommendSimilar() {
   const wordList = useRecoilValue(keywordListAtom)
   return (
     <RecommendBody>
       <RandomHeader>
-        <span>라임 키워드</span>
+        <span>유사 키워드</span>
       </RandomHeader>
       <WordContainer>
         {wordList.map((word:string) => (
@@ -19,4 +19,4 @@ function SidebarRecommendRhyme() {
   )
 }
 
-export default SidebarRecommendRhyme
+export default SidebarRecommendSimilar

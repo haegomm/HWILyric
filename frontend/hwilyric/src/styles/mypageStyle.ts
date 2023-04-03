@@ -48,6 +48,7 @@ export const ArrowImage = styled.img`
   `
 
 export const IconImage = styled.img`
+  border: 0px;
   width: 20px;
   margin: 0 2px 0 2px;
   cursor: pointer;

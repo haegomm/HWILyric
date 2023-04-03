@@ -25,18 +25,6 @@ export async function checkSimilarity(body: ISimilarityTypes) {
   }
 }
 
-export async function randomKeyword() {
-  try{
-    const res = await axios.get('api/keywords/random')
-    const data = res.data
-    return data
-  } catch(err) {
-    console.log('랜덤 키워드 못 받았단다')
-    console.log(err)
-    return err
-  }
-}
-
 export async function similarKeyword(word: String) {
   try{
     const res = await axios.get(`api/keywords/similarity/${word}`)
@@ -44,6 +32,17 @@ export async function similarKeyword(word: String) {
     return data
   } catch(err) {
     console.log('유사 키워드 못 받았단다')
+    return null
+  }
+}
+
+export async function rhymeKeyword(word: String) {
+  try{
+    const res = await axios.get(`api/keywords/rhyme/${word}`)
+    const data = res.data
+    return data
+  } catch(err) {
+    console.log('라임 키워드 못 받았단다')
     return null
   }
 }

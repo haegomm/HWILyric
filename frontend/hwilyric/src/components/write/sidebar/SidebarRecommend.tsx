@@ -1,13 +1,22 @@
 import React from 'react'
-import SidebarRecommendKeword from './SidebarRecommendKeword'
+import SidebarRecommendSimilar from './SidebarRecommendSimilar'
 import SidebarRecommendRhyme from './SidebarRecommendRhyme'
 import SidebarRecommendRandom from './SidebarRecommendRandom'
+import { useRecoilValue } from 'recoil'
+import { getErrorMessageAtom, keywordModeAtom } from '../../../atoms/sidebarAtoms'
+import SidebarRecommendHeader from './SidebarRecommendHeader'
 
 function SidebarRecommend() {
+  const keywordMode = useRecoilValue(keywordModeAtom)
+  const errorMessage = useRecoilValue(getErrorMessageAtom)
+
   return (
     <div>
-      <SidebarRecommendKeword />
-      <SidebarRecommendRhyme />
+      <SidebarRecommendHeader />
+      {(keywordMode === 'similar') ? 
+      <SidebarRecommendSimilar />
+      : <SidebarRecommendRhyme />}
+      <p>{errorMessage}</p>
       <SidebarRecommendRandom />
     </div>
   )
