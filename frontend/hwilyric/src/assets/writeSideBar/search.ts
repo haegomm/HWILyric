@@ -1,0 +1,1 @@
+export const SearchIcon = require('./search-icon.png');

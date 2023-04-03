@@ -1,43 +1,25 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { useSetRecoilState } from 'recoil';
-import userApi from "../api/userApi";
+import { useRecoilValue } from "recoil";
 
-import userAtom from "../atoms/userAtom";
-import { deleteUserInfo } from "../components/login/userInfo";
+import MyPageLyricList from "../components/mypage/MyPageLyricList";
+import MyPageProfile from "../components/mypage/MyPageProfile";
+import { lyricCategoryAtom } from "../atoms/mypageAtom"; 
+import MyPageFilterList from "../components/mypage/MyPageFilterList";
+import { MyPageContainer } from "../styles/mypageStyle";
+import MyPageListHeader from "../components/mypage/MyPageListHeader";
 
 function Mypage() {
-  const navigate = useNavigate();
+  const Category = useRecoilValue(lyricCategoryAtom)
 
-  const setIsLogin = useSetRecoilState(userAtom.IsLoginAtom)
-  const setNickname = useSetRecoilState(userAtom.userNicknameAtom)
-  const setProfileImg = useSetRecoilState(userAtom.userProfileImgAtom)
-
-  const onProfileHandler = (e: React.MouseEvent<HTMLDivElement>) => {
-    navigate('/profilemodification/sajhdgdjakhsd')
-  }
-  const onLogoutHandler = async(e: React.MouseEvent<HTMLDivElement>) => {
-    const message = await userApi.logout()
-    // if (message === 'success') {
-      deleteUserInfo()
-      setIsLogin(false)
-      setNickname('')
-      setProfileImg('')
-      navigate("/");
-    // } else {
-    //   alert('로그아웃 실패ㅜ;')
-    // }
-  }
   return (
-      <div>
-        <h1>마이페이지 입니다.</h1>
-        <div onClick={onProfileHandler}>
-          회원정보관리
-        </div>
-        <div onClick={onLogoutHandler}>
-          로그아웃
-        </div>
-      </div>
+      <MyPageContainer>
+        <MyPageProfile />
+        <MyPageListHeader />
+        {(Category === '') ? 
+          <MyPageLyricList />
+          : <MyPageFilterList />
+        }
+      </MyPageContainer>
   )
 }
 

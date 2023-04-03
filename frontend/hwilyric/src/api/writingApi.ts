@@ -1,19 +1,31 @@
 import { ISimilarityTypes } from '../types/writingType'
 import { axios, fileAxios } from './https'
 
-async function checkSimilarity(userLyricList: ISimilarityTypes) {
-  try{
-    const res = await axios.post('api/similarity', userLyricList)
-    const data = res.data
-    return data
+// 자동저장
+export async function saveNote(formData: FormData) {
+  try {
+      const res = await fileAxios.post(`api/notes/save`, formData)
+      const data = res.data
+      console.log("저장 성공!",data)
+      return data
   } catch(err) {
-    console.log('유사도 검사 안됐단다')
-    console.log(err)
-    return err
+      console.log("저장 안돼ㅠ", err)
   }
 }
 
-async function randomKeyword() {
+// 유사도 검사
+export async function checkSimilarity(body: ISimilarityTypes) {
+  try {
+      const res = await axios.post(`api/similarity`, body)
+      const data = res.data
+      console.log("췤췤 성공", data)
+      return data
+  } catch (err) {
+      console.log("췤췤 실패", err)
+  }
+}
+
+export async function randomKeyword() {
   try{
     const res = await axios.get('api/keywords/random')
     const data = res.data
@@ -25,7 +37,7 @@ async function randomKeyword() {
   }
 }
 
-async function similarKeyword(word: String) {
+export async function similarKeyword(word: String) {
   try{
     const res = await axios.get(`api/keywords/similarity/${word}`)
     const data = res.data
@@ -36,7 +48,7 @@ async function similarKeyword(word: String) {
   }
 }
 
-async function lyricList() {
+export async function getLyricList() {
   try{
     const res = await axios.get('api/notes/list')
     const data = res.data
@@ -47,11 +59,13 @@ async function lyricList() {
   }
 }
 
-const writingApi = {
-  checkSimilarity,
-  randomKeyword,
-  similarKeyword,
-  lyricList,
+export async function getRandomdWord() {
+  try{
+    const res = await axios.get('api/keywords/random')
+    const wordList = res.data
+    return wordList
+  } catch(err) {
+    console.log('랜덤키워드 안나옴')
+    return null
+  }
 }
-
-export default writingApi

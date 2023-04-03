@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import userApi from "../../api/userApi";
-import authValidation from "../signup/validation";
+import { modifyPassword } from "../../api/userApi";
+import authValidation from "../../features/validation";
 
 function ModifyPassword() {
   const navigate = useNavigate();
@@ -28,11 +28,11 @@ function ModifyPassword() {
 
   const onSavePasswordHandler = async(e: React.MouseEvent<HTMLButtonElement>) => {
     const body = {password: Password}
-    const message = await userApi.modifyPassword(body)
+    const message = await modifyPassword(body)
 
     if (message === 'success') {
       alert('비밀번호 변경이 완료되었습니다')
-      navigate("/mypage/dsajhfawjehdg");
+      navigate("/mypage");
     } else {
       alert('비밀번호 변경이 실패했습니다. 다시 시도해주세요')
     }

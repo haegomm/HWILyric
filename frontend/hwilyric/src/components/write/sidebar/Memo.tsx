@@ -1,5 +1,6 @@
 import { useRecoilState } from "recoil"
 import { memoState } from "../../../atoms/sidebarAtoms"
+import { MemoBox } from "../../../styles/writeSidebarStyle"
 
 function Memo() {
     
@@ -12,7 +13,7 @@ function Memo() {
 
     return (
         <div>
-            <textarea
+            <MemoBox
                 className="writeLyric"
                 value={memo}
                 onChange={onEditMemo}

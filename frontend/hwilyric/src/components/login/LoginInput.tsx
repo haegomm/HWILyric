@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from 'recoil';
 
-import userApi from "../../api/userApi";
+import { login } from "../../api/userApi";
 import { ILoginTypes } from "../../types/userType";
-import { saveUserInfo } from "./userInfo";
-import userAtom from "../../atoms/userAtom";
+import { saveUserInfo } from "../../features/userInfo";
+import { IsLoginAtom, userNicknameAtom, userProfileImgAtom, IsKnownPassword } from "../../atoms/userAtom";
 import socailLoginButton from "../../assets/socialLogin/socialLoginButton";
 
 function LoginInput() {
@@ -18,10 +18,10 @@ function LoginInput() {
 
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  const setIsLogin = useSetRecoilState(userAtom.IsLoginAtom)
-  const setNickname = useSetRecoilState(userAtom.userNicknameAtom)
-  const setProfileImg = useSetRecoilState(userAtom.userProfileImgAtom)
-  const setIsKnownPassword = useSetRecoilState(userAtom.IsKnownPassword)
+  const setIsLogin = useSetRecoilState(IsLoginAtom)
+  const setNickname = useSetRecoilState(userNicknameAtom)
+  const setProfileImg = useSetRecoilState(userProfileImgAtom)
+  const setIsKnownPassword = useSetRecoilState(IsKnownPassword)
 
   const onEmailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.currentTarget.value);
@@ -40,13 +40,13 @@ function LoginInput() {
       password: Password,
     };
 
-    const data = await userApi.login(body)
+    const data = await login(body)
     if (data !== null) {
       saveUserInfo(data)
       setIsLogin(true)
       setNickname(data.nickname)
       setProfileImg(data.profileImg)
-      navigate("/zslkdrj");
+      navigate("/home");
     } else {
       alert('로그인 실패ㅜ;')
     }
@@ -84,7 +84,7 @@ function LoginInput() {
       </form>
       <div className="idMessage">아직 아이디가 없으신가요?</div>
       <div className="bottomButton">
-        <Link to="/signup/dkfjdlksj">
+        <Link to="/signup">
           <div className="normalSignUpButton">가입하기</div>
         </Link>
         <a href={KAKAO_REQUEST}>

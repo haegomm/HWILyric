@@ -1,7 +1,7 @@
 import { ILoginTypes } from '../types/userType'
 import { axios, fileAxios } from './https'
 
-async function checkEmail(email:string) {
+export async function checkEmail(email:string) {
   try{
     const res = await axios.get(`api/auth/guests/email/${email}`)
     const message = res.data.message
@@ -13,7 +13,7 @@ async function checkEmail(email:string) {
   }
 }
 
-async function checkNickname(nickname:string) {
+export async function checkNickname(nickname:string) {
   try{
     const res = await axios.get(`api/auth/guests/nickname/${nickname}`)
     const message = res.data.message
@@ -25,7 +25,7 @@ async function checkNickname(nickname:string) {
   }
 }
 
-async function verifyEmail(email:string) {
+export async function verifyEmail(email:string) {
   try{
     const res = await axios.get(`api/auth/guests/check/${email}`)
     const code = res.data.code
@@ -36,7 +36,7 @@ async function verifyEmail(email:string) {
   }
 }
 
-async function signup(formData:FormData) {
+export async function signup(formData:FormData) {
   console.log(formData)
   try{
     const res = await fileAxios.post('api/auth/guests', formData)
@@ -48,7 +48,7 @@ async function signup(formData:FormData) {
   }
 }
 
-async function loginKakao(code: string) {
+export async function loginKakao(code: string) {
   try{
     const res = await axios.get(`api/auth/guests/kakao/${code}`);
     const data = res.data
@@ -61,10 +61,11 @@ async function loginKakao(code: string) {
   
 }
 
-async function login(body: ILoginTypes) {
+export async function login(body: ILoginTypes) {
   try{
     const res = await axios.post('api/auth/guests/login', body)
     const data = res.data
+    console.log(data)
     return data
   } catch(err) {
     console.log('로그인 안됐단다')
@@ -72,7 +73,7 @@ async function login(body: ILoginTypes) {
   }
 }
 
-async function resetPassword(email: object) {
+export async function resetPassword(email: object) {
   try{
     const res = await axios.patch('api/auth/guests/password', email)
     const message = res.data.message
@@ -83,7 +84,7 @@ async function resetPassword(email: object) {
   }
 }
 
-async function checkPassword(password: object) {
+export async function checkPassword(password: object) {
   try{
     const res = await axios.post('api/auth/users/password', password)
     const message = res.data.message
@@ -94,7 +95,7 @@ async function checkPassword(password: object) {
   }
 }
 
-async function modifyPassword(password: object) {
+export async function modifyPassword(password: object) {
   try{
     const res = await axios.patch('api/auth/users/password', password)
     const message = res.data.message
@@ -105,7 +106,7 @@ async function modifyPassword(password: object) {
   }
 }
 
-async function modifyProfile(formData: FormData) {
+export async function modifyProfile(formData: FormData) {
   try{
     const res = await fileAxios.patch('api/auth/users/profile', formData)
     const data = res.data
@@ -116,7 +117,7 @@ async function modifyProfile(formData: FormData) {
   }
 }
 
-async function reissueToken() {
+export async function reissueToken() {
   try{
     const res = await axios.get('api/auth/users/access-token')
     const accessToken = res.data.accessToken 
@@ -127,7 +128,7 @@ async function reissueToken() {
   }
 }
 
-async function logout() {
+export async function logout() {
   try{
     const res = await axios.get('api/auth/users/logout')
     const message = res.data.message
@@ -137,20 +138,3 @@ async function logout() {
     return null
   }
 }
-
-const userApi = {
-  checkEmail,
-  checkNickname,
-  checkPassword,
-  verifyEmail,
-  signup,
-  loginKakao,
-  login,
-  resetPassword,
-  modifyPassword,
-  modifyProfile,
-  reissueToken,
-  logout,
-}
-
-export default userApi

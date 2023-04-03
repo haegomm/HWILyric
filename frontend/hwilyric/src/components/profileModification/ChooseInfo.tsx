@@ -1,10 +1,10 @@
 import React from 'react'
 import { useSetRecoilState } from 'recoil';
-import userAtom from '../../atoms/userAtom';
+import { selectModification } from '../../atoms/userAtom';
 
-import { getUserInfo } from '../login/userInfo'
+import { getUserInfo } from '../../features/userInfo'
 function ChooseInfo() {
-  const setSelectModificationPage = useSetRecoilState(userAtom.selectModificationPage)
+  const setSelectModificationPage = useSetRecoilState(selectModification)
 
   const onModifyingProfileHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     setSelectModificationPage('profile')

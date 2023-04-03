@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilValue } from 'recoil'
-import writingApi from "../../api/writingApi";
+import { getLyricList } from "../../api/writingApi";
 
-import userAtom from '../../atoms/userAtom'
+import { userNicknameAtom } from '../../atoms/userAtom'
 import { ILyricInfoTypes } from "../../types/writingType";
 import HomeQuickviewBlock from "./HomeQuickviewBlock";
+import { QuickView } from "../../styles/homeStyle";
 
 function HomeQuickview() {
-  const nickname = useRecoilValue(userAtom.userNicknameAtom)
+  const nickname = useRecoilValue(userNicknameAtom)
   const [lyrics, setLyrics] = useState([])
   const [nullLyrics, setNullLyrics] = useState('')
   
   useEffect(()  => {
-    async function getLyricList() {
-      const lyricList = await writingApi.lyricList()
+    async function userLyricList() {
+      const lyricList = await getLyricList()
       if (lyricList !== null) {
         setLyrics(lyricList)
         console.log('세팅완')        
@@ -22,12 +23,11 @@ function HomeQuickview() {
         setNullLyrics('새로운 곡을 작사해보세요')
       }
     }
-    getLyricList()
+    userLyricList()
   }, [])
   return (
-    <div>
+    <QuickView>
       <h3>{nickname}님의 작사노트</h3>
-      <div>
         {nullLyrics ? 
         <div>
           {lyrics.map((lyric:ILyricInfoTypes) => (
@@ -35,13 +35,10 @@ function HomeQuickview() {
               key={lyric.id}
               // name={lyric}
             /> 
-
           ))}
-
         </div>
         : nullLyrics}
-      </div>
-    </div>
+    </QuickView>
   )
 }
 
