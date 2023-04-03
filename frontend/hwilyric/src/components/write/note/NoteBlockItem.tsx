@@ -4,11 +4,23 @@ import { useRecoilState } from "recoil"
 import { blockListState } from "../../../atoms/noteAtoms"
 import { BlockItemStyle } from "../../../styles/writeNoteStyle"
 import { ILyricBlockTypes } from "../../../types/writingType"
+import styled from "styled-components"
 
 interface BlockItemProps {
     block: ILyricBlockTypes
     index: number
 }
+
+interface IContainer {
+    isDragging: boolean;
+}
+
+const Container = styled.div<IContainer>`
+    padding: 8px;
+    margin-bottom: 8px;
+    background-color: ${(props) => (props.isDragging ? "lightgreen" : "white")};
+`;
+
 
 function BlockItem({ block, index}: BlockItemProps) {
 
@@ -54,28 +66,31 @@ function BlockItem({ block, index}: BlockItemProps) {
 
     return (
         <Draggable draggableId={block.blockId.toString()} index={index}>
-            {(provided) => (
-                <BlockItemStyle
+            {(provided, snapshot) => (
+                <Container
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
-                    ref={provided.innerRef}>
-                    <select
-                        defaultValue={block.type}
-                        onChange={onEditBlockType}>
-                        <option value={"verse"}>verse</option>
-                        <option value={"bridge"}>bridge</option>
-                        <option value={"hook"}>hook</option>
-                        <option value={"etc"}>etc</option>
-                    </select>
-                    <textarea
-                        className="writeLyric"
-                        value={block.lyrics}
-                        ref={ref}
-                        onChange={onEditLyrics}
-                        onInput={handleResizeHeight}
-                    />
-                    <button onClick={onDeleteBlock}>-</button>
-                </BlockItemStyle>
+                    ref={provided.innerRef}
+                    isDragging={snapshot.isDragging}>
+                    <BlockItemStyle>
+                        <select
+                            defaultValue={block.type}
+                            onChange={onEditBlockType}>
+                            <option value={"verse"}>verse</option>
+                            <option value={"bridge"}>bridge</option>
+                            <option value={"hook"}>hook</option>
+                            <option value={"etc"}>etc</option>
+                        </select>
+                        <textarea
+                            className="writeLyric"
+                            value={block.lyrics}
+                            ref={ref}
+                            onChange={onEditLyrics}
+                            onInput={handleResizeHeight}
+                        />
+                        <button onClick={onDeleteBlock}>-</button>
+                    </BlockItemStyle>
+                </Container>
             )}
         </Draggable>
     )
