@@ -33,6 +33,8 @@ public class KeywordService {
     private final KeywordRepository keywordRepository;
     private final NewlyTrendRepository newlyTrendRepository;
 
+    private static Random random = new Random();
+
     // 랜덤 키워드 불러오기
     public List<String> getRandomKeyword() {
         String random = "랜덤";
@@ -168,10 +170,17 @@ public class KeywordService {
 
         String realStartDate = simpleDateFormat.format(startDate);
 
-        List<String> keywordList = newlyTrendRepository.findByKeywordsDateBetween(realStartDate, realEndDate, 5);
+        String keywordList = newlyTrendRepository.findByKeywordsDateBetween(realStartDate, realEndDate, 1);
+        String[] keywordArray = keywordList.split(",");
 
-        for(String keyword : keywordList){
-            topicList.add(keyword);
+        int count = 0;
+
+        while (count<5){
+            String word = keywordArray[random.nextInt(keywordArray.length)];
+            if(!topicList.contains(word)){
+                topicList.add(word);
+                count++;
+            }
         }
 
         return topicList;
