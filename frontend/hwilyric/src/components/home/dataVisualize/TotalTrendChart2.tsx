@@ -10,6 +10,8 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { annualNowAtom, totalTrendAtom } from "../../../atoms/visualizingAtoms";
+import { lightTheme } from "../../../theme/theme";
+import { useTheme } from "styled-components";
 
 const CustomXAxisTick = (props: any) => {
   const { x, y, payload } = props;
@@ -33,6 +35,7 @@ const CustomXAxisTick = (props: any) => {
 function TotalTrendChart2(props: any) {
   const totalTrendData = useRecoilValue(totalTrendAtom);
   const [annualnow, setAnnualnow] = useRecoilState(annualNowAtom);
+  const theme = useTheme();
   return (
     <AreaChart
       width={1344}
@@ -49,6 +52,10 @@ function TotalTrendChart2(props: any) {
         <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
           <stop offset="5%" stopColor="#81E47F" stopOpacity={0.2} />
           <stop offset="95%" stopColor="#96BCF2" stopOpacity={0.8} />
+        </linearGradient>
+        <linearGradient id="darkcolorUv" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="5%" stopColor="#81E47F" stopOpacity={0.9} />
+          <stop offset="95%" stopColor="#96BCF2" stopOpacity={1} />
         </linearGradient>
       </defs>
       <XAxis dataKey="annual" tick={<CustomXAxisTick />} interval={0} />
@@ -79,7 +86,7 @@ function TotalTrendChart2(props: any) {
         dataKey="ratio"
         stroke="none"
         fillOpacity={1}
-        fill="url(#colorUv)"
+        fill={theme === lightTheme ? "url(#colorUv)" : "url(#darkcolorUv)"}
       />
     </AreaChart>
   );

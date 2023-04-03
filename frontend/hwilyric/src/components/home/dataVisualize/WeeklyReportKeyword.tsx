@@ -1,4 +1,5 @@
 import React from "react";
+import { useTheme } from "styled-components";
 import {
   WeeklyKeywordBlockP,
   WeeklyKeywordLineDiv,
@@ -18,6 +19,7 @@ function WeeklyReportKeyword(props: any) {
   ];
 
   const keywordBlockColors = ["#B0E3F9", "#DEB3FB", "#FEC3B5", "#FBD5E0"];
+  const theme = useTheme();
 
   // 키워드 데이터를 그룹화하여 3개씩 나누기
   const groupedData = [];
@@ -34,7 +36,10 @@ function WeeklyReportKeyword(props: any) {
             {group.map((genreData: any) => {
               colorNum++;
               return (
-                <WeeklyKeywordBlockP color={keywordBlockColors[colorNum % 4]}>
+                <WeeklyKeywordBlockP
+                  color={keywordBlockColors[colorNum % 4]}
+                  theme={theme}
+                >
                   {genreData.name}
                 </WeeklyKeywordBlockP>
               );
