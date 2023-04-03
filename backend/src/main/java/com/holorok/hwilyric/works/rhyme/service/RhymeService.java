@@ -69,7 +69,7 @@ public class RhymeService {
             }
 
             // 파이썬 스크립트의 출력을 읽어옵니다.
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream(), "euc-kr"));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream(), "utf-8"));
             String line;
 
             while ((line = reader.readLine()) != null) {
