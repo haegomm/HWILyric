@@ -1,16 +1,24 @@
 export interface ISimilarityTypes {
-  userLyricList: [string];
+  userLyric: string[];
 }
 
 export interface ILyricBlockTypes {
+  blockId: number;
   type: string;
-  lyrics: string;
+  lyrics?: string;
 }
 
 export interface ILyricInfoTypes {
-  id: string;   
-  title: string;    
-  thumnail: string;
+  id: string;
+  title: string;
+  thumbnail: string;
   memo: string;
-  lyricList: [ILyricBlockTypes]
+  lyricList : ILyricBlockTypes[];
+}
+
+export interface ISimilarInfoTypes {
+  userLyric: string,
+  artistList: string[],
+  lyricList: string[],
+  titleList: string[],
 }

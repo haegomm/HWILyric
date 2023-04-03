@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
-import authValidation from "../signup/validation";
-import userApi from "../../api/userApi";
+import authValidation from "../../features/validation";
+import { checkNickname, modifyProfile } from "../../api/userApi";
 import { IModifyTypes } from "../../types/userType";
-import userAtom from "../../atoms/userAtom";
+import { userNicknameAtom, userProfileImgAtom } from "../../atoms/userAtom";
 
 
 
 function ModifyProfile() {
   const navigate = useNavigate();
 
-  const [nickname, setNickname] = useRecoilState(userAtom.userNicknameAtom)
-  const setProfileImg = useSetRecoilState(userAtom.userProfileImgAtom)
+  const [nickname, setNickname] = useRecoilState(userNicknameAtom)
+  const setProfileImg = useSetRecoilState(userProfileImgAtom)
   
   const [newNickname, setNewNickname] = useState(nickname);
   const [nicknameError, setNicknameError] = useState("");
@@ -27,7 +27,7 @@ function ModifyProfile() {
     authValidation(currentNickname, "nickname")
       ? setNicknameFormError("")
       : setNicknameFormError("2자 이상 8자 이하의 닉네임을 입력해주세요");
-    const message = await userApi.checkNickname(currentNickname)
+    const message = await checkNickname(currentNickname)
     if (message === "success") {
       setNicknameError("");
     } else {
@@ -63,14 +63,14 @@ function ModifyProfile() {
     const userInfoString = JSON.stringify(userInfo)
     formData.append('userInfo', new Blob([userInfoString], {type: 'application/json'}));
 
-    const data = await userApi.modifyProfile(formData)
+    const data = await modifyProfile(formData)
     console.log(data)
 
     if (data !== null) {
       setNickname(data.nickname)
       setProfileImg(data.profileImg)
       alert('수정성공!')
-      navigate("/mypage/dsajhfawjehdg");
+      navigate("/mypage");
     } else {
       alert("수정에 실패하였습니다. 다시 시도해주세요");
     }

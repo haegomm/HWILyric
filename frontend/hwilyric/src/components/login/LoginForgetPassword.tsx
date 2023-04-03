@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useSetRecoilState } from 'recoil';
 
-import userApi from "../../api/userApi";
-import authValidation from "../signup/validation";
-import userAtom from "../../atoms/userAtom";
+import { resetPassword } from "../../api/userApi";
+import authValidation from "../../features/validation";
+import { IsKnownPassword } from "../../atoms/userAtom";
 
 function LoginForgetPassword() {
   const [Email, setEmail] = useState("");
   const [emailFormError, setEmailFormError] = useState("");
-  const setIsKnownPassword = useSetRecoilState(userAtom.IsKnownPassword)
+  const setIsKnownPassword = useSetRecoilState(IsKnownPassword)
 
   const onEmailHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentEmail = e.currentTarget.value;
@@ -22,7 +22,7 @@ function LoginForgetPassword() {
     e.preventDefault();
 
     const body = {email: Email}
-    const message = await userApi.resetPassword(body)
+    const message = await resetPassword(body)
     
     if (message === 'success') {
       console.log('일반회원')

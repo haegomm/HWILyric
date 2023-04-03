@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useSetRecoilState } from 'recoil';
-import userApi from '../../api/userApi';
-import userAtom from '../../atoms/userAtom';
+import { checkPassword } from '../../api/userApi';
+import { selectModification } from '../../atoms/userAtom';
 
 function CheckPassword() {
-  const setSelectModificationPage = useSetRecoilState(userAtom.selectModificationPage)
+  const setSelectModificationPage = useSetRecoilState(selectModification)
   const [Password, setPassword] = useState('')
 
   const onPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -12,7 +12,7 @@ function CheckPassword() {
   }
 
   const onCheckingPasswordHandler = async(e: React.MouseEvent<HTMLButtonElement>) => {
-    const message = await userApi.checkPassword({password: Password})
+    const message = await checkPassword({password: Password})
     if (message === 'success') {
       setSelectModificationPage('modifyPassword')
     } else {
