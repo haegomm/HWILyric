@@ -78,7 +78,6 @@ public class SparkSqlManager {
                 .option("user", db_name)
                 .option("password", db_pw)
                 .option("dbtable", table)
-//                .load();
                 .load().select("segment");
 
 
