@@ -1,15 +1,20 @@
-import styled, { css } from "styled-components"; 
+import styled from "styled-components"; 
+import { SearchButton } from "../styles/common/ButtonStyle";
+
+const sideWidth = 440;
+const sideMargin = 20;
+const borderWidth = 2;
 
 export const SideBarBox = styled.div`
-    width: 440px;
+    width: ${sideWidth}px;
 `
 
 export const MemoBox = styled.textarea`
-    width: 20vw;
+    width: ${sideWidth-sideMargin}px;
     height: 28vh;
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
-    border: 1px solid;
+    border: ${borderWidth}px solid;
     resize : none;
     font-size: 16px;
     background-color: transparent;
@@ -83,28 +88,41 @@ export const SimilarLyricSubInfo = styled.span`
 `
 
 export const SimilarInform = styled.div`
-    // whidth: 8vw;
+    // width: 8vw;
     // height: 5vh;
     // border: dashed;
 `
 
 export const SearchBoxStyle = styled.div`
-    whidth: 30px;
+    width: ${sideWidth - sideMargin}px;
     height: 4vh;
     justify-content: center;
-    border: 2px solid;
+    border: 2px solid transparent;
     border-radius: 50px;
-    border: 2px solid;
-    background-color: none;
-    border-image: linear-gradient(-45deg, #fbfcb9be, #ffcdf3aa, #65d3ffaa);
-    border-image-slice: 1;
+    background-image: linear-gradient(-45deg, #fbfcb9be, #ffcdf3aa, #65d3ffaa);
+    background-origin: border-box;
+    background-clip: border-box;
+    position: relative;
+    margin: 10px auto;
 `
+
+const inputPadding = 5;
 
 export const SearchInput = styled.input`
     border: none;
-    background-color: none;
-    :hover {
-        border: none;
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    :focus {
+        outline: none;
+    }
+    padding: ${inputPadding/2}px ${inputPadding}px;
+`
+
+export const SearchIconButton = styled(SearchButton)`
+    position: absolute;
+    top: ${inputPadding/2}px;
+    right: ${inputPadding*3}px;
 `
 
 export const PlayButton = styled.button`
@@ -125,10 +143,14 @@ export const PlayerVideoBox = styled.div`
 `
 
 export const SearchResultList = styled.div`
-    width: 25vw;
+    width: ${sideWidth - sideMargin};
     height: 30vh;
+    margin: 0 auto;
+    overflow: scroll;
 `
 
 export const SearchResultItem = styled.div`
     display: flex;
+    width: ${sideWidth - sideMargin};
+    margin: 0 auto;
 `

@@ -2,8 +2,8 @@ import axios from "axios"
 import { useState } from "react"
 import { useSetRecoilState } from "recoil"
 import { PlayVideoId } from "../../../atoms/youtubeVideoAtoms";
-import { SearchBoxStyle, SearchInput, SearchResultItem, SearchResultList } from "../../../styles/writeSidebarStyle";
-import { SearchButton } from "../../../styles/common/ButtonStyle";
+import { SearchBoxStyle, SearchInput, SearchResultItem, SearchResultList, SearchIconButton } from "../../../styles/writeSidebarStyle";
+import {SearchIcon} from "../../../assets/writeSideBar/search";
 
 
 function SearchVideo() {
@@ -47,12 +47,14 @@ function SearchVideo() {
     setVideoId(videoId)
     console.log(videoId)
     }
+
+
   
     return (
       <div>
         <SearchBoxStyle>
-          <SearchInput type="text" value={query} onChange={(e) => setQuery(e.target.value)} />
-          <SearchButton onClick={handleSearch}>Search</SearchButton>
+          <SearchInput type="text" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="노래를 검색해보세요" />
+          <SearchIconButton onClick={handleSearch}><img style={{width:"3vh", height: "3vh"}} src={SearchIcon} /></SearchIconButton>
         </SearchBoxStyle>
         <SearchResultList>
           {results.map((result) => (
