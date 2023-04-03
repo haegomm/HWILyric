@@ -147,4 +147,14 @@ public class KeywordService {
 //        return null;
     }
 
+    // 주제 추천
+    public List<String> getTopicList() throws NotFoundException {
+
+        // 랜덤 키워드 추출
+        List<String> topicList = keywordRepository.findRandomWord("랜덤", true, 5);
+
+
+        return topicList;
+    }
+
 }
