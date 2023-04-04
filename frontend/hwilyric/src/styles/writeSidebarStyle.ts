@@ -8,40 +8,11 @@ const inputPadding = 5;
 const mainGradientColor = 'linear-gradient(to right, #fbfcb9be, #ffcdf3aa, #65d3ffaa)';
 const sideBarVH = 80;
 
-
+// 전체 사이드바
 export const SideBarBox = styled.div`
     width: ${sideWidth}px;
 `
-
-const BoxCSS = () => css`
-    width: ${sideWidth-sideMargin}px;
-    height: 20vh;
-    padding: ${inputPadding}px;
-    margin: 5px auto;
-`
-
-export const ThumbnailBox = styled.div`
-    ${BoxCSS()};
-`
-
-export const MemoBox = styled.textarea`
-    ${BoxCSS()};
-    border: ${borderWidth}px solid transparent;
-    border-image: ${mainGradientColor};
-    border-image-slice: 1;
-    resize : none;
-    font-size: 16px;
-    background-color: transparent;
-    :focus {
-        outline: none;
-    }
-    padding: 10px 20px;
-`
-
-export const SearchBox = styled.div`
-    ${BoxCSS()};
-`
-
+// 탭
 export const TabMenu = styled.ul`
     // background-color: #dcdcdc;
     // color: rgb(232, 234, 237);
@@ -112,16 +83,89 @@ export const SimilarInform = styled.div`
     // border: dashed;
 `
 
+const BoxCSS = () => css`
+    width: ${sideWidth-sideMargin}px;
+    height: 20vh;
+    padding: ${inputPadding}px;
+    margin: 0px auto;
+    margin-bottom: 15px;
+`
+// 썸네일
+export const ThumbnailBox = styled.div`
+    ${BoxCSS()};
+    height: 20vh;
+    display: flex;
+    justify-content: space-between;
+
+`
+
+export const ThumbnailImage = styled.img`
+    width: 60%;
+    height: 95%;
+    object-fit: contain;
+`
+
+export const ThumbnailUploadDiv = styled.div`
+    width: 20%;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+    // padding-bottom: 10px;
+`
+
+export const ThumbnailLabel = styled.label`
+    width: 60px;
+    height: 30px;
+    border: ${borderWidth}px solid transparent;
+    border-image: ${mainGradientColor};
+    border-image-slice: 1;
+    line-height: 30px;
+    :hover {
+        border: none;
+        transition: 0.7s;
+        background: ${mainGradientColor};
+    }
+`
+
+export const ThumbnailInput = styled.input`
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip:rect(0,0,0,0);
+    border: 0;
+`
+// 메모
+export const MemoBox = styled.textarea`
+    ${BoxCSS()};
+    border: ${borderWidth}px solid transparent;
+    border-image: ${mainGradientColor};
+    border-image-slice: 1;
+    resize : none;
+    font-size: 16px;
+    background-color: transparent;
+    :focus {
+        outline: none;
+    }
+    padding: 10px 20px;
+`
+// 유튜브 검색
+export const SearchBox = styled.div`
+    ${BoxCSS()};
+`
 export const SearchBoxStyle = styled.div`
     height: 4vh;
     justify-content: center;
-    border: 2px solid transparent;
+    border: ${borderWidth}px solid transparent;
     border-radius: 50px;
     background-image: ${mainGradientColor};
     background-origin: border-box;
     background-clip: border-box;
     position: relative;
-    margin: 10px auto;
+    margin: 0px auto;
+    margin-bottom: 10px;
 `
 
 export const SearchInput = styled.input`
