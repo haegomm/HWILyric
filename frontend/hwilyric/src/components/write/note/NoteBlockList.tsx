@@ -2,10 +2,8 @@ import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd"
 import { useCallback } from "react"
 import { useRecoilState } from "recoil"
 import { blockListState } from "../../../atoms/noteAtoms"
-import NoteSave from "./NoteSave"
 import BlockItem from "./NoteBlockItem"
-import { BlockListStyle, SaveDivBox } from "../../../styles/writeNoteStyle"
-import { SaveButton } from "../../../styles/common/ButtonStyle"
+import { BlockListStyle } from "../../../styles/writeNoteStyle"
 
 function BlockList() {
 
@@ -42,25 +40,22 @@ function BlockList() {
 
 
     return (
-        <BlockListStyle>
-                <DragDropContext onDragEnd={onDragEnd}>
-                    <Droppable droppableId="blockList">
-                        {provided => (
-                            <div className="blockList" ref={provided.innerRef}>
-                                <>
-                                    {blockList.map((block, index) => (                             
-                                        <BlockItem key={block.blockId} block = {block} index={index} />
-                                    ))}
-                                    {provided.placeholder}
-                                </>
-                            </div>
-                        )}
-                    </Droppable>
+        <>
+            <DragDropContext onDragEnd={onDragEnd}>
+                <Droppable droppableId="blockList">
+                    {provided => (
+                        <BlockListStyle className="blockList" ref={provided.innerRef}>
+                            <>
+                                {blockList.map((block, index) => (                             
+                                    <BlockItem key={block.blockId} block = {block} index={index} />
+                                ))}
+                                {provided.placeholder}
+                            </>
+                        </BlockListStyle>
+                    )}
+                </Droppable>
             </DragDropContext>
-            <SaveDivBox>
-                <SaveButton onClick={NoteSave}>저장</SaveButton>
-            </SaveDivBox>
-        </BlockListStyle>
+        </>
     )
 }
 

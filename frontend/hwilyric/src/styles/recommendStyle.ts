@@ -5,7 +5,8 @@ export const RecommendContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 5% 0 5%;
+  justify-content: center;
+  margin: 10% 5% 0 5%;
   height: 40wh;
 `
 
@@ -14,7 +15,8 @@ export const RecommendBody = styled.div`
   height: 20vh;
   display: flex;
   flex-direction: column;
-  margin: 0 5% 0 5%;
+  justify-content: center;
+  margin: 5% 5% 0 5%;
 `
 
 export const RecommendHeader = styled.div`

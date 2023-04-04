@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components"; 
 import { SearchButton } from "../styles/common/ButtonStyle";
 
-const sideWidth = 440;
-const sideMargin = 20;
+const sideWidth = 30;
+const sideMargin = 4;
 const borderWidth = 2;
 const inputPadding = 5;
 const mainGradientColor = 'linear-gradient(to right, #fbfcb9be, #ffcdf3aa, #65d3ffaa)';
@@ -10,42 +10,32 @@ const sideBarVH = 80;
 
 // 전체 사이드바
 export const SideBarBox = styled.div`
-    width: ${sideWidth}px;
+    margin: 0px;
+    width: ${sideWidth}vw;
 `
 // 탭
 export const TabMenu = styled.ul`
-    // background-color: #dcdcdc;
-    // color: rgb(232, 234, 237);
-    background-color: FFFFFF;
-    color: 636161
+    color: 636161;
     font-weight: bold;
     display: flex;
-    flex-direction: row;
     align-items: center;
+    justify-content: space-evenly;
     list-style: none;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin-bottom: 5%;
+    margin-top: 5%;
 
     .submenu {
         display: flex;
-        /* justify-content: space-between;
-        width: 380px;
-        heigth: 30px; */
-        width: calc(100% /3);
         justify-content: center;
-        padding: 10px;
         font-size: 15px;
-        transition: 0.5s;
-        // border-radius: 10px 10px 0px 0px;
+        transition: 0.4s;
     }
 
     .focused {
-        // background-color: rgb(255,255,255);
         color: rgb(222,179,251);
     }
 
     & div.desc {
-        text-align: center;
     }
 `;
 
@@ -55,53 +45,61 @@ export const Desc = styled.div`
 
 export const SimilarListBox = styled.div`
     margin: 2vw;
-    height: 30vh;
-    align-items: center;
+    height: 34vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    overflow: auto;
 `
     
 export const SimilarUserLyric = styled.div`
-    // margin: 2vw;
-    font-size: 3vh;
-`
+    font-size: 16px;
+    margin-bottom: 2%;
+    // overflow: auto;
+    `
     
-export const SimilarLyricInfo = styled.div`
-    display: block;
-    margin: 1vw;
-    overflow: scroll;
+    export const SimilarLyricInfo = styled.div`
+    // overflow: auto;
+    margin: 2vh;
 `
 
 export const SimilarLyricSubInfo = styled.span`
     display: flex;
-    margin: 1vw;
     justify-content: flex-end;
-    font-size: 0.8vw;
+    font-size: 10px;
 `
 
 export const SimilarInform = styled.div`
-    // width: 8vw;
-    // height: 5vh;
-    // border: dashed;
+    border: 1px dashed;
+    width: 70%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & > div {
+        margin: 3%;
+    }
 `
 
 const BoxCSS = () => css`
-    width: ${sideWidth-sideMargin}px;
-    height: 20vh;
+    width: ${sideWidth-sideMargin}vw;
+    height: 26vh;
     padding: ${inputPadding}px;
     margin: 0px auto;
-    margin-bottom: 15px;
+    margin-bottom: 4vh;
 `
 // 썸네일
 export const ThumbnailBox = styled.div`
     ${BoxCSS()};
-    height: 20vh;
+    margin-bottom: 4%;
+    height: 10vh;
     display: flex;
     justify-content: space-between;
 
 `
 
 export const ThumbnailImage = styled.img`
-    width: 60%;
-    height: 95%;
+    height: 100%;
     object-fit: contain;
 `
 
@@ -154,6 +152,8 @@ export const MemoBox = styled.textarea`
 // 유튜브 검색
 export const SearchBox = styled.div`
     ${BoxCSS()};
+    align-content: center;
+    justify-content: center;
 `
 export const SearchBoxStyle = styled.div`
     height: 4vh;
@@ -165,7 +165,7 @@ export const SearchBoxStyle = styled.div`
     background-clip: border-box;
     position: relative;
     margin: 0px auto;
-    margin-bottom: 10px;
+    margin-bottom: 5%;
 `
 
 export const SearchInput = styled.input`
@@ -183,24 +183,26 @@ export const SearchIconButton = styled(SearchButton)`
     width: 20px;
     height: 20px;
     position: absolute;
-    top: ${inputPadding/2}px;
-    right: ${inputPadding*3}px;
+    top: ${inputPadding/2}%;
+    right: ${inputPadding}%;
 `
 
 export const SearchResultList = styled.div`
-    width: ${sideWidth - sideMargin}px;
+    width: ${sideWidth}vw;
     height: 20vh;
     margin: 0 auto;
+    padding: 0;
     overflow: scroll;
 `
 
-const itemHeight = 50;
+const itemHeight = 10;
 export const SearchResultItem = styled.div`
     display: flex;
-    height:${itemHeight}px;
-    width: ${sideWidth - sideMargin}px;
+    justify-content: center;
+    height:${itemHeight}vh;
+    width: 24vw;
+    margin-bottom: 2%;
     overflow: hidden;
-    margin: 0 auto;
     :hover {
         background-color: rgba(0,0,0,0.2);
         color: white;
@@ -209,6 +211,6 @@ export const SearchResultItem = styled.div`
 export const SearchResultItemText = styled.p`
     width: 100%;
     text-align: left;
-    padding: 0 10px;
-    line-height: ${itemHeight}px;
+    padding: 0 0 0 4%;
+    line-height: ${itemHeight}vh;
 `
