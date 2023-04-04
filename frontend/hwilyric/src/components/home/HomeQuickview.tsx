@@ -49,9 +49,9 @@ function HomeQuickview() {
         {(nullLyrics === '') ? 
         <div>
           {myLyrics.map((lyric:ILyricInfoTypes) => (
-            <QuickViewBlock key={lyric.id} width='100%' onClick={onModifyHandler}>
+            <QuickViewBlock key={lyric.id} id={lyric.id} width='100%' onClick={onModifyHandler}>
               <QuickViewBlockImg src={lyric.thumbnail} />
-              <QuickViewBlock width='76%'>
+              <QuickViewBlock width='100%'>
                 <p>{lyric.title}</p>
               </QuickViewBlock>
             </QuickViewBlock>

@@ -73,3 +73,13 @@ export async function getRandomdWord() {
     return null
   }
 }
+
+export async function recommendTopic() {
+  try{
+    const res = await axios.get('api/keywords/topics')
+    const wordList = res.data
+    return wordList
+  } catch(err) {
+    return null
+  }
+}
