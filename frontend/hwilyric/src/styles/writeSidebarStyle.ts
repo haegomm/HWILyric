@@ -5,6 +5,7 @@ const sideWidth = 440;
 const sideMargin = 20;
 const borderWidth = 2;
 const inputPadding = 5;
+const mainGradientColor = 'linear-gradient(to right, #fbfcb9be, #ffcdf3aa, #65d3ffaa)';
 
 export const SideBarBox = styled.div`
     width: ${sideWidth}px;
@@ -14,8 +15,10 @@ export const MemoBox = styled.textarea`
     width: ${sideWidth-sideMargin}px;
     height: 28vh;
     margin: 0 auto;
-    padding: 0;
-    border: ${borderWidth}px solid;
+    padding: ${inputPadding};
+    border: ${borderWidth}px solid transparent;
+    border-image: ${mainGradientColor};
+    border-image-slice: 1;
     resize : none;
     font-size: 16px;
     background-color: transparent;
@@ -100,7 +103,7 @@ export const SearchBoxStyle = styled.div`
     justify-content: center;
     border: 2px solid transparent;
     border-radius: 50px;
-    background-image: linear-gradient(-45deg, #fbfcb9be, #ffcdf3aa, #65d3ffaa);
+    background-image: ${mainGradientColor};
     background-origin: border-box;
     background-clip: border-box;
     position: relative;
