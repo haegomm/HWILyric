@@ -4,7 +4,7 @@ import { lightTheme } from "../theme/theme";
 export const DataVisualizePage = styled.div`
   display: flex;
   justify-content: space-around;
-  width: 2912px;
+  width: 2600px;
 `;
 
 export const WeeklyReportDiv = styled.div`
