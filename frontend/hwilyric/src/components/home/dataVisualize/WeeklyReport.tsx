@@ -1,4 +1,3 @@
-import React from "react";
 import WeeklyReportKeyword from "./WeeklyReportKeyword";
 import WeeklyReportGenre from "./WeeklyReportGenre";
 import {
@@ -7,7 +6,6 @@ import {
   WeeklyReportSubtitle,
 } from "../../../styles/DataVisaulizeStyle";
 import { weeklyNewSong } from "../../../api/visualizingApi";
-import axios from "axios";
 import { useState, useEffect } from "react";
 const today = new Date();
 const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);

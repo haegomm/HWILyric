@@ -1,175 +1,84 @@
-import React from "react";
-import { ResponsiveStream } from "@nivo/stream";
+import { AreaChart, XAxis, YAxis, Area, Tooltip } from "recharts";
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import { annualNowAtom, totalTrendAtom } from "../../../atoms/visualizingAtoms";
+import { lightTheme } from "../../../theme/theme";
+import { useTheme } from "styled-components";
 
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
-// website examples showcase many properties,
-// you'll often use just a few of them.
-
-const data = [
-  {
-    Raoul: 88,
-    Josiane: 161,
-    Marcel: 191,
-    René: 77,
-    Paul: 78,
-    Jacques: 55,
-  },
-  {
-    Raoul: 44,
-    Josiane: 91,
-    Marcel: 148,
-    René: 50,
-    Paul: 23,
-    Jacques: 66,
-  },
-  {
-    Raoul: 171,
-    Josiane: 10,
-    Marcel: 177,
-    René: 27,
-    Paul: 192,
-    Jacques: 11,
-  },
-  {
-    Raoul: 60,
-    Josiane: 30,
-    Marcel: 135,
-    René: 93,
-    Paul: 89,
-    Jacques: 37,
-  },
-  {
-    Raoul: 186,
-    Josiane: 161,
-    Marcel: 200,
-    René: 151,
-    Paul: 121,
-    Jacques: 101,
-  },
-  {
-    Raoul: 50,
-    Josiane: 149,
-    Marcel: 172,
-    René: 59,
-    Paul: 143,
-    Jacques: 100,
-  },
-  {
-    Raoul: 132,
-    Josiane: 139,
-    Marcel: 147,
-    René: 146,
-    Paul: 161,
-    Jacques: 59,
-  },
-  {
-    Raoul: 71,
-    Josiane: 118,
-    Marcel: 179,
-    René: 193,
-    Paul: 11,
-    Jacques: 95,
-  },
-  {
-    Raoul: 69,
-    Josiane: 37,
-    Marcel: 127,
-    René: 60,
-    Paul: 22,
-    Jacques: 171,
-  },
-];
-
-function TotalTrendChart() {
+const CustomXAxisTick = (props: any) => {
+  const { x, y, payload } = props;
   return (
-    <div style={{ width: "1344px", height: "800px" }}>
-      <ResponsiveStream
-        data={data}
-        keys={["Raoul", "Josiane", "Marcel", "René", "Paul", "Jacques"]}
-        margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-        axisTop={null}
-        axisRight={null}
-        axisBottom={{
-          // orient: 'bottom',
-          tickSize: 5,
-          tickPadding: 5,
-          tickRotation: 0,
-          legend: "",
-          legendOffset: 36,
-        }}
-        axisLeft={null}
-        enableGridX={true}
-        enableGridY={false}
-        curve="basis"
-        offsetType="none"
-        colors={{ scheme: "blues" }}
-        fillOpacity={0.75}
-        borderColor={{ theme: "background" }}
-        defs={[
-          {
-            id: "dots",
-            type: "patternDots",
-            background: "inherit",
-            color: "#2c998f",
-            size: 4,
-            padding: 2,
-            stagger: true,
-          },
-          {
-            id: "squares",
-            type: "patternSquares",
-            background: "inherit",
-            color: "#e4c912",
-            size: 6,
-            padding: 2,
-            stagger: true,
-          },
-        ]}
-        fill={[
-          {
-            match: {
-              id: "Paul",
-            },
-            id: "dots",
-          },
-          {
-            match: {
-              id: "Marcel",
-            },
-            id: "squares",
-          },
-        ]}
-        dotSize={8}
-        dotColor={{ from: "color" }}
-        dotBorderWidth={2}
-        dotBorderColor={{
-          from: "color",
-          modifiers: [["darker", 0.7]],
-        }}
-        legends={[
-          {
-            anchor: "bottom-right",
-            direction: "column",
-            translateX: 100,
-            itemWidth: 80,
-            itemHeight: 20,
-            itemTextColor: "#999999",
-            symbolSize: 12,
-            symbolShape: "circle",
-            effects: [
-              {
-                on: "hover",
-                style: {
-                  itemTextColor: "#000000",
-                },
-              },
-            ],
-          },
-        ]}
+    <g transform={`translate(${x},${y})`}>
+      <text
+        x={0}
+        y={0}
+        dy={16}
+        textAnchor="end"
+        fontSize={10} // 글자 크기 조절
+        fill="#666" // 글자 색상
+        transform="rotate(-35)"
+      >
+        {payload.value}
+      </text>
+    </g>
+  );
+};
+
+function TotalTrendChart(props: any) {
+  const totalTrendData = useRecoilValue(totalTrendAtom);
+  const setAnnualnow = useSetRecoilState(annualNowAtom);
+  const theme = useTheme();
+  return (
+    <AreaChart
+      width={1344}
+      height={792}
+      data={totalTrendData.genres}
+      margin={{ top: 10, right: 10, left: 20, bottom: 10 }}
+      onClick={(event) => {
+        if (event.activeLabel) {
+          setAnnualnow(event.activeLabel);
+        }
+      }}
+    >
+      <defs>
+        <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="5%" stopColor="#81E47F" stopOpacity={0.2} />
+          <stop offset="95%" stopColor="#96BCF2" stopOpacity={0.8} />
+        </linearGradient>
+        <linearGradient id="darkcolorUv" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="5%" stopColor="#81E47F" stopOpacity={0.9} />
+          <stop offset="95%" stopColor="#96BCF2" stopOpacity={1} />
+        </linearGradient>
+      </defs>
+      <XAxis dataKey="annual" tick={<CustomXAxisTick />} interval={0} />
+      <YAxis
+        type="number"
+        hide={true}
+        domain={[0, "dataMax"]}
+        dataKey="ratio"
+        tick={false}
       />
-    </div>
+      <Tooltip
+        content={({ active, payload, label }) => {
+          if (active && payload && payload.length) {
+            const data = payload[0].payload;
+            return (
+              <div className="custom-tooltip">
+                <p>{data.name}</p>
+                <p>비율: {Math.round(data.ratio * 100)}%</p>
+              </div>
+            );
+          }
+          return null;
+        }}
+      />
+      <Area
+        type="monotone"
+        dataKey="ratio"
+        stroke="none"
+        fillOpacity={1}
+        fill={theme === lightTheme ? "url(#colorUv)" : "url(#darkcolorUv)"}
+      />
+    </AreaChart>
   );
 }
 
