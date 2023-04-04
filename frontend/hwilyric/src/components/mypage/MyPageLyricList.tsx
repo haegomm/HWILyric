@@ -2,13 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { IconImage, LyricListBody, LyricListBodyItem, LyricListBodyItemDiv, LyricThumbnail } from '../../styles/mypageStyle'
 import { getLyricList } from '../../api/writingApi'
 import { IGetILyricInfoTypes } from '../../types/mypageType'
-import { lightDelete, lightModify, lightView } from '../../assets/mypage/myButtons'
+import { lightDelete, lightModify, lightView } from '../../assets/icon/myButtons'
 import { deleteNote } from '../../api/deleteApit'
 import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useNavigate } from 'react-router-dom'
+import { isModifyingAtom } from '../../atoms/mypageAtom'
 
 function MyPageLyricList() {
+  const navigate = useNavigate();
   const [myLyrics, setMyLyrics] = useState([])
   const [nullLyrics, setNullLyrics] = useState('')
+  const setIsModifying = useSetRecoilState(isModifyingAtom)
       
   async function getMyLyrics() {
     const lyricList = await getLyricList()
@@ -25,6 +29,12 @@ function MyPageLyricList() {
   useEffect(() => {
     getMyLyrics()
   }, [])
+
+  const onModifyHandler = (e: React.MouseEvent<HTMLImageElement>) => {
+    const noteId = e.currentTarget.id
+    navigate(`/modify/${noteId}`)
+    setIsModifying(true)
+  }
 
   const onDeleteHandler = async (e: React.MouseEvent<HTMLImageElement>) => {
     if (window.confirm(`${e.currentTarget.alt}을(를) 삭제하시겠습니까?`)) {
@@ -61,7 +71,7 @@ function MyPageLyricList() {
                 </LyricListBodyItemDiv>
                 <LyricListBodyItemDiv width='10vw'>
                   <IconImage src={lightView} id={myLyric.id} onClick={onDeleteHandler}/>
-                  <IconImage src={lightModify} id={myLyric.id} onClick={onDeleteHandler}/>
+                  <IconImage src={lightModify} id={myLyric.id} onClick={onModifyHandler}/>
                   <IconImage src={lightDelete} id={myLyric.id} alt={myLyric.title} onClick={onDeleteHandler}/>
                 </LyricListBodyItemDiv>
               </LyricListBodyItem>

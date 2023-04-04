@@ -1,8 +1,10 @@
 import styled from "styled-components";
+import { lightTheme } from "../theme/theme";
 
 export const DataVisualizePage = styled.div`
   display: flex;
   justify-content: space-around;
+  width: 2912px;
 `;
 
 export const WeeklyReportDiv = styled.div`
@@ -89,6 +91,12 @@ export const AnnualGenreDiv = styled.div`
       #fbd5e0
     )
     2;
+  & path {
+    opacity: ${(props) => (props.theme === lightTheme ? "1" : "0.7")};
+  }
+  & div {
+    background: "#636161";
+  }
 `;
 
 export const TotalTrendDiv = styled.div`
@@ -106,11 +114,16 @@ export const TotalTrendDiv = styled.div`
     2;
 `;
 
+// & path {
+//   opacity: ${(props) => (props.theme === lightTheme ? "0.2" : "1")};
+// }
+
 export const AnnualKeywordDiv = styled.div`
   width: 420px;
   height: 392px;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+  flex-direction: column;
   align-items: center;
   border-style: solid;
   border-width: 2px 2px 2px 2px;
@@ -139,6 +152,7 @@ export const WeeklyKeywordBlockP = styled.p`
   align-items: center;
   font-size: 15px;
   background-color: ${(props) => props.color};
+  opacity: ${(props) => (props.theme === lightTheme ? "1" : "0.7")};
 `;
 
 export const AnnualGenreSongDiv = styled.div`

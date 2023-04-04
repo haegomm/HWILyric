@@ -22,7 +22,6 @@ import { reissueToken } from "./api/userApi";
 import DataVisualize from "./pages/DataVisualize";
 import PrivateRoute from "./features/router";
 import { AppDiv } from "./styles/common/AppStyle";
-import { Reset } from "styled-reset";
 
 function App() {
   const isLogin = useRecoilValue(IsLoginAtom);
@@ -62,6 +61,7 @@ function App() {
                 <Route path="*" element={<HWILyric />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/write" element={<Write />} />
+                <Route path="/modify/:id" element={<Write />} />
                 <Route path="/datavisualize" element={<DataVisualize />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="oauth2/code/kakao" element={<LoginKakao />} />

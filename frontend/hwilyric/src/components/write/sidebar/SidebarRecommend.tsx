@@ -1,15 +1,23 @@
 import React from 'react'
-import SidebarRecommendKeword from './SidebarRecommendKeword'
+import SidebarRecommendSimilar from './SidebarRecommendSimilar'
 import SidebarRecommendRhyme from './SidebarRecommendRhyme'
 import SidebarRecommendRandom from './SidebarRecommendRandom'
+import { useRecoilValue } from 'recoil'
+import { getErrorMessageAtom, keywordModeAtom } from '../../../atoms/sidebarAtoms'
+import SidebarRecommendHeader from './SidebarRecommendHeader'
+import { RecommendBody, RecommendContent } from '../../../styles/recommendStyle'
 
 function SidebarRecommend() {
+  const keywordMode = useRecoilValue(keywordModeAtom)
+
   return (
-    <div>
-      <SidebarRecommendKeword />
-      <SidebarRecommendRhyme />
+    <RecommendContent>
+      <SidebarRecommendHeader />
+      {(keywordMode === 'similar') ? 
+      <SidebarRecommendSimilar />
+      : <SidebarRecommendRhyme />}
       <SidebarRecommendRandom />
-    </div>
+    </RecommendContent>
   )
 }
 

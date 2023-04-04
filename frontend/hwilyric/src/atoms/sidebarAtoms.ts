@@ -29,3 +29,18 @@ export const checkLoadingState = atom<boolean>({
     key: "checkLoadingState",
     default: false,
 })
+
+export const keywordModeAtom = atom<string>({
+    key: 'kewordMode',
+    default: 'similar',
+})
+
+export const keywordListAtom = atom<[]>({
+    key: 'keywordList',
+    default: []
+})
+
+export const getErrorMessageAtom = atom<string>({
+    key: 'getErrorMessage',
+    default: '키워드를 검색해주세요'
+})

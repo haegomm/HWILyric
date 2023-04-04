@@ -66,6 +66,24 @@ public class SparkSqlManager {
         return dataset;
     }
 
+    public Dataset<Row> selectTableRhyme(String table) throws JSchException {
+        createSession();
+
+        //db 및 테이블 설정
+        Dataset<Row> dataset = sparkSession
+                .read()
+                .format("jdbc")
+                .option("driver", db_driver)
+                .option("url", db_url)
+                .option("user", db_name)
+                .option("password", db_pw)
+                .option("dbtable", table)
+                .load().select("segment");
+
+
+        return dataset;
+    }
+
 
 
 

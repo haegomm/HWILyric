@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from 'recoil';
-import { downArrow, upArrow } from "../../assets/mypage/arrow";
+import { downArrow, upArrow } from "../../assets/icon/arrow";
 
 import { lyricCategoryAtom } from '../../atoms/mypageAtom';
 import { ArrowImage, DropboxSelect, DropboxOption } from "../../styles/mypageStyle";

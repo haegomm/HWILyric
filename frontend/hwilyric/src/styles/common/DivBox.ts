@@ -5,7 +5,7 @@ const ColorDivBoxCss = (margin?: string) => css`
     background-color: none;
     border-image: linear-gradient(to right, #fbfcb9be, #ffcdf3aa, #65d3ffaa);
     border-image-slice: 1;
-    margin: ${margin}
+    margin: ${margin};
 `
 
 export const WriteNoteDivBox = styled.div`

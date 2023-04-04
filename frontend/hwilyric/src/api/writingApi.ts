@@ -13,6 +13,15 @@ export async function saveNote(formData: FormData) {
   }
 }
 
+export async function getLyricInfo(noteId: string|undefined) {
+  try {
+    const res = await axios.get(`api/notes/detail?noteId=${noteId}`)
+    const data = res.data
+    return data
+  } catch(err) {
+  }
+}
+
 // 유사도 검사
 export async function checkSimilarity(body: ISimilarityTypes) {
   try {
@@ -25,25 +34,22 @@ export async function checkSimilarity(body: ISimilarityTypes) {
   }
 }
 
-export async function randomKeyword() {
-  try{
-    const res = await axios.get('api/keywords/random')
-    const data = res.data
-    return data
-  } catch(err) {
-    console.log('랜덤 키워드 못 받았단다')
-    console.log(err)
-    return err
-  }
-}
-
 export async function similarKeyword(word: String) {
   try{
     const res = await axios.get(`api/keywords/similarity/${word}`)
     const data = res.data
     return data
   } catch(err) {
-    console.log('유사 키워드 못 받았단다')
+    return null
+  }
+}
+
+export async function rhymeKeyword(word: String) {
+  try{
+    const res = await axios.get(`api/keywords/rhyme/${word}`)
+    const data = res.data
+    return data
+  } catch(err) {
     return null
   }
 }
@@ -54,7 +60,6 @@ export async function getLyricList() {
     const data = res.data
     return data
   } catch(err) {
-    console.log('리스트 못 받았단다')
     return null
   }
 }
@@ -65,7 +70,6 @@ export async function getRandomdWord() {
     const wordList = res.data
     return wordList
   } catch(err) {
-    console.log('랜덤키워드 안나옴')
     return null
   }
 }

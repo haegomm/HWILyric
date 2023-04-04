@@ -9,6 +9,7 @@ import {
   annualNowSongAtom,
 } from "../../../atoms/visualizingAtoms";
 import AnnualGenreSongs from "./AnnualGenreSongs";
+import { useTheme } from "styled-components";
 
 function AnnualGenre(props: any) {
   const annualnow = useRecoilValue(annualNowAtom);
@@ -21,8 +22,9 @@ function AnnualGenre(props: any) {
     songData = { ...songData, [i.name]: i.songs };
   }
   setAnnualNowSong(chartData[0].id);
+  const theme = useTheme();
   return (
-    <AnnualGenreDiv>
+    <AnnualGenreDiv theme={theme}>
       <AnnualGenreChart data={chartData}></AnnualGenreChart>
       <AnnualGenreSongs data={songData}></AnnualGenreSongs>
     </AnnualGenreDiv>

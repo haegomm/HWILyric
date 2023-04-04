@@ -65,9 +65,9 @@ function WeeklyReportGenre(props: any) {
     <WeeklyReportGenreDiv>
       <BarChart
         width={304}
-        height={240}
+        height={264}
         data={props.data.length !== 0 ? props.data : data}
-        margin={{ top: 10, bottom: 10, left: 20, right: 20 }}
+        margin={{ top: 10, bottom: 30, left: 20, right: 20 }}
         barCategoryGap={20}
       >
         <defs>

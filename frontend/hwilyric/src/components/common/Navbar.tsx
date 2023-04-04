@@ -1,14 +1,17 @@
 import { NavLink } from "react-router-dom"
-import { useRecoilValue } from "recoil"
+import { useRecoilValue, useResetRecoilState } from "recoil"
 import { BsFillSunFill, BsFillMoonFill } from 'react-icons/bs';
 import { IsLoginAtom, userNicknameAtom } from "../../atoms/userAtom"
 import { ToggleBoxWrapper, ToggleBox, ToggleBoxLabel } from '../../styles/toggleButton'
 import { NavBox, NavMenu, DarkModeBox } from "../../styles/common/NavbarStyle";
+import { isModifyingAtom } from "../../atoms/mypageAtom";
 
 
 function Navbar({toggleDarkMode}: any) {
   const isLogin = useRecoilValue(IsLoginAtom)
   const nickname = useRecoilValue(userNicknameAtom)
+  const isModifying = useResetRecoilState(isModifyingAtom)
+
   return (
     <nav>
       <NavBox>
@@ -23,7 +26,7 @@ function Navbar({toggleDarkMode}: any) {
             <BsFillMoonFill style={{color: "003458"}}/>  
           </DarkModeBox>
           <div>
-            <NavLink to="/write"  style={{ textDecoration: "none" }}>작사하기</NavLink>
+            <NavLink to="/write"  style={{ textDecoration: "none" }} onClick={isModifying}>작사하기</NavLink>
           </div>
           <div>
             {isLogin ? (
