@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
 
 const NoteBoxInfo = (height? : string) => css`
-    width: 55vw;
+    display: block;
+    align-items : center;
     height: ${height};
     background-clolor: none;
     margin: 0;
@@ -45,11 +46,10 @@ export const TitleDivBox = styled.div`
 export const BlockListStyle = styled.div`
     ${NoteBoxInfo("70%")};
     ${NoteBorderBottom};
+    overflow: scroll;
 `
 
 export const CreateBlockStyle = styled.div`
-    display: flex;
-    align-items : center;
     ${NoteBoxInfo("10%")};
     ${NoteBorderBottom}
     & > select {
@@ -68,17 +68,29 @@ export const CreateBlockStyle = styled.div`
         color: #C8C8C8;
 `
 
+export const DeleteButtonBox = styled.div`
+    divplay: flex;
+    align-items : center;
+    justify-content: center;
+    width: 1%;
+    & > button {
+        font-size: 2vw;
+        display: none;
+    }
+`
+
 export const BlockItemStyle =  styled.div<{ height: number }>`
-    display: flex;
     ${NoteBoxInfo("")};
+    display: flex;
+    justify-content: space-between;
     background-clolor: none;
     align-items : center;
+    width: 90%;
+    margin: 2% 0 2% 0;
     height: ${({ height }) => height}px;
     & > select {
         border: none;
-        margin: 0 0 0 3%;
         font-size: 18px;
-        text-align: center;
         :focus{
             outline: none;
         }
@@ -87,7 +99,7 @@ export const BlockItemStyle =  styled.div<{ height: number }>`
         width: 50%;
         border: none;
         resize : none;
-        margin: 1% 0 0 5%;
+        margin: 2vh 0 0 0;
         line-height: 18px;
         font-size: 16px;
         scrollbar-width: none;
@@ -97,24 +109,18 @@ export const BlockItemStyle =  styled.div<{ height: number }>`
         :focus {
         }
     }
-`
 
-export const DeleteButtonBox = styled.div`
-    width: 10%;
-    height: 10%;
     &:hover {
-        & > button {
-            display: block;
-            ${NoteCreateDeleteButton};
-            &:hover {
-            // color: white;
+        ${DeleteButtonBox} {
+            & > button {
+                display: block;
             }
         }
-        }
-    & > button {
-        display: none;
-        ${NoteCreateDeleteButton};
-}
+
+`
+
+export const SaveDivBox = styled.div`
+    align-items : center;
 `
 
 export const PlayerBox = styled.div`
