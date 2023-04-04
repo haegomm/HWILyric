@@ -31,6 +31,9 @@ function AnnualKeywordCloud() {
   useEffect(() => {
     getData();
   }, [annualnow]);
+  if (keywords[0].text === "") {
+    return <div>Loading...</div>;
+  }
   return (
     <div style={{ width: "420px", height: "288px" }}>
       <ReactWordcloud
