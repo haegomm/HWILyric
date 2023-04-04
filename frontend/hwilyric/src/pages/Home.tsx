@@ -14,24 +14,24 @@ function Home() {
     const isLogin = useRecoilValue(IsLoginAtom);
     return (
         <HomeContainer ref={scrollRef}>
-                <HomeContent>
-                    <HomeDiv>
+            <HomeContent>
+                <HomeDiv>
                     {isLogin ? 
                         <HomeQuickview />
                         : <HomeNotLoggedIn />
                     }
-                    </HomeDiv>
-                    <HomeCenter />
-                    <DataVisualizeBlockStyle>
-                        <DataVisualizeBlock />
-                    </DataVisualizeBlockStyle>
-                    <DataVisualizeBlockStyle>
-                        <DataVisualizeBlock />
-                    </DataVisualizeBlockStyle>
-                    <DataVisualizeBlockStyle>
-                        <DataVisualizeBlock />
-                    </DataVisualizeBlockStyle>
-                </HomeContent>
+                </HomeDiv>
+                <HomeCenter />
+                <DataVisualizeBlockStyle>
+                    <DataVisualizeBlock />
+                </DataVisualizeBlockStyle>
+                <DataVisualizeBlockStyle>
+                    <DataVisualizeBlock />
+                </DataVisualizeBlockStyle>
+                <DataVisualizeBlockStyle>
+                    <DataVisualizeBlock />
+                </DataVisualizeBlockStyle>
+            </HomeContent>
         </HomeContainer>        
     )
 }
