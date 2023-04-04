@@ -27,13 +27,13 @@ export const HomeContent = styled.div`
 `
 
 export const HomeDiv = styled.div`
-  width: 30vw;
+  width: 28vw;
 `
 
 export const QuickView = styled.div`
   height: 70vh;
   width: 20vw;
-  margin: 0 5vw;
+  margin: 0 4vw;
   padding: 0 16px;
   display: flex;
   flex-direction: column;
@@ -126,6 +126,7 @@ export const HomeCenterContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 60vh;
 `
 
 export const HomeCenterWord = styled.div`
