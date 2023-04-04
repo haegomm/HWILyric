@@ -1,4 +1,3 @@
-import React from "react";
 import { AnnualKeywordDiv } from "../../../styles/DataVisaulizeStyle";
 import AnnualKeywordCloud from "./AnnualKeywordCloud";
 import { useRecoilValue } from "recoil";

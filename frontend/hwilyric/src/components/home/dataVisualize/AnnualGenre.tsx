@@ -1,5 +1,3 @@
-import React from "react";
-import AnnualGenreChart2 from "./AnnualGenreChart2";
 import AnnualGenreChart from "./AnnualGenreChart";
 import { AnnualGenreDiv } from "../../../styles/DataVisaulizeStyle";
 import { useRecoilValue, useSetRecoilState } from "recoil";

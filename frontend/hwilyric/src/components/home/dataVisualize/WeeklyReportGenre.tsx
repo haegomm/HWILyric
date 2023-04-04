@@ -1,45 +1,5 @@
-import React from "react";
 import { WeeklyReportGenreDiv } from "../../../styles/DataVisaulizeStyle";
-import {
-  BarChart,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  Bar,
-} from "recharts";
-
-const data = [
-  {
-    name: "Page A",
-    count: 4000,
-  },
-  {
-    name: "Page B",
-    count: 3000,
-  },
-  {
-    name: "Page C",
-    count: 2000,
-  },
-  {
-    name: "Page D",
-    count: 2780,
-  },
-  {
-    name: "Page E",
-    count: 1890,
-  },
-  {
-    name: "Page F",
-    count: 2390,
-  },
-  {
-    name: "Page G",
-    count: 3490,
-  },
-];
+import { BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Bar } from "recharts";
 
 const CustomXAxisTick = (props: any) => {
   const { x, y, payload } = props;
@@ -66,7 +26,7 @@ function WeeklyReportGenre(props: any) {
       <BarChart
         width={304}
         height={264}
-        data={props.data.length !== 0 ? props.data : data}
+        data={props.data.length !== 0 ? props.data : []}
         margin={{ top: 10, bottom: 30, left: 20, right: 20 }}
         barCategoryGap={20}
       >
