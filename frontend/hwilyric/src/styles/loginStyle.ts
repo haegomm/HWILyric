@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { lightTheme } from "../theme/theme";
+
 export const LoginBoxDiv = styled.div`
   display: flex;
   justify-content: center;
@@ -7,7 +9,7 @@ export const LoginBoxDiv = styled.div`
   align-items: center;
   position: relative;
   height: 656px;
-  width: 30vw;
+  width: ${(560 / 1920) * 100}vw;
   border-radius: 0px;
   border-style: solid;
   border-width: 1px 1px 1px 1px;
@@ -34,7 +36,7 @@ export const LoginTitleH1 = styled.h1`
 `;
 
 export const LoginTitleBackground = styled.div`
-  background: white;
+  background: ${(props) => (props.theme === lightTheme ? "white" : "#191B1F")};
   position: absolute;
   width: 144px;
   height: 48px;
@@ -48,14 +50,23 @@ export const LoginForm = styled.form`
   display: flex;
   justify-content: space-around;
   flex-direction: column;
+  align-items: center;
 `;
 
 export const LoginInputI = styled.input`
-  width: 100%;
+  width: ${(288 / 1920) * 100}vw;
+  height: 30px;
   border-top: 0;
   border-right: 0;
   border-left: 0;
-  border-image: linear-gradient(
+  border-image: #636161
+  outline: none;
+  padding: 5px;
+  transform: scale(1);
+  transition: transform 0.2s ease-in-out;
+
+  &:focus {
+    border-image: linear-gradient(
       to right bottom,
       #ace5f8,
       #e6b2fd,
@@ -63,24 +74,32 @@ export const LoginInputI = styled.input`
       #fbd1dd
     )
     2;
+    outline: none;
+    transform: scale(1.05);
+    transition: transform 0.2s ease-in-out;
+  }
 `;
 
 export const LoginEmailDiv = styled.div`
-  background: blue;
   width: 20vw;
 
   display: flex;
+  justify-content: center;
 `;
 
 export const LoginPasswordDiv = styled.div`
-  background: green;
+  width: 20vw;
+
+  display: flex;
+  justify-content: center;
 `;
 
 export const LoginForgotPWDiv = styled.div`
-  background: purple;
-  width:128px;
-  height:12px
-  font-size:12px;
+  background: yellow;
+  width: ${(128 / 1920) * 100}vw;
+  height: 12px;
+  font-size: 10px;
+  margin-left: auto;
 `;
 
 export const LoginButtonBoxDiv = styled.div`

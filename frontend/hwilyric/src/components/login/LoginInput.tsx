@@ -30,6 +30,8 @@ import {
   LoginTitleBackground,
 } from "../../styles/loginStyle";
 
+import { useTheme } from "styled-components";
+
 function LoginInput() {
   const navigate = useNavigate();
 
@@ -74,9 +76,11 @@ function LoginInput() {
     }
   };
 
+  const theme = useTheme();
+
   return (
     <LoginBoxDiv>
-      <LoginTitleBackground />
+      <LoginTitleBackground theme={theme} />
       <LoginTitleH1 className="loginTitle">로그인</LoginTitleH1>
       <LoginForm onSubmit={onSubmitHandler}>
         <LoginEmailDiv>
