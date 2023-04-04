@@ -22,7 +22,6 @@ import { reissueToken } from "./api/userApi";
 import DataVisualize from "./pages/DataVisualize";
 import PrivateRoute from "./features/router";
 import { AppDiv } from "./styles/common/AppStyle";
-import LyricModitication from "./pages/LyricModitication";
 
 function App() {
   const isLogin = useRecoilValue(IsLoginAtom);
