@@ -37,7 +37,7 @@ export const TabMenu = styled.ul`
     flex-direction: row;
     align-items: center;
     list-style: none;
-    margin-bottom: 7rem;
+    margin-bottom: 10px;
     margin-top: 10px;
 
     .submenu {
