@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ButtonBox, RecommendBody, RecommendButton, SearchboxDiv, SearchboxInput } from '../../../styles/recommendStyle'
+import { ButtonBox, RecommendBody, RecommendButton, RecommendHeader, SearchButton, SearchboxForm, SearchboxInput } from '../../../styles/recommendStyle'
 import { IconImage } from '../../../styles/mypageStyle'
 import { SearchIcon } from '../../../assets/writeSideBar/search'
 import { useRecoilState, useSetRecoilState } from 'recoil'
@@ -7,6 +7,7 @@ import { getErrorMessageAtom, keywordListAtom, keywordModeAtom } from '../../../
 import { rhymeKeyword, similarKeyword } from '../../../api/writingApi'
 
 function SidebarRecommendHeader() {
+  const [searchKeyword, setSearchKeyword] = useState('')
   const [keywordMode, setKeywordMode] = useRecoilState(keywordModeAtom)
   const setWordList = useSetRecoilState(keywordListAtom)
   const setErrorMessage = useSetRecoilState(getErrorMessageAtom)
@@ -35,13 +36,18 @@ function SidebarRecommendHeader() {
     }
   }
 
+  const onSearchwordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputWord = e.currentTarget.value;
+    setSearchKeyword(inputWord)
+  }
+
   const onSearchHandler = async (e:React.MouseEvent<HTMLFormElement>) => {
-    const searchWord = e.currentTarget.value
-    console.log('검색어는',searchWord)
+    e.preventDefault();
+    console.log('검색어는', searchKeyword)
     if (keywordMode === 'similar') {
-      getSimilar(searchWord)
+      getSimilar(searchKeyword)
     } else {
-      getRhyme(searchWord)
+      getRhyme(searchKeyword)
     }
   }
 
@@ -53,20 +59,18 @@ function SidebarRecommendHeader() {
   };
   
   return (
-    <RecommendBody>
+    <RecommendHeader>
       <ButtonBox>
         <RecommendButton type='button' value='similar' onClick={onModeHandler}>유사</RecommendButton>
         <RecommendButton type='button' value='rhyme' onClick={onModeHandler}>라임</RecommendButton>
       </ButtonBox>
-      <SearchboxDiv>
-        <form onSubmit={onSearchHandler}>
-          <SearchboxInput type='text' placeholder='검색어를 입력하세요'/>
-          <button>
+      <SearchboxForm onSubmit={onSearchHandler}>
+          <SearchboxInput type="text" placeholder='검색어를 입력하세요' onChange={onSearchwordHandler}/>
+          <SearchButton type='submit'>
             <IconImage src={SearchIcon} />
-          </button>
-        </form>
-      </SearchboxDiv>
-    </RecommendBody>
+          </SearchButton>
+      </SearchboxForm>
+    </RecommendHeader>
   )
 }
 

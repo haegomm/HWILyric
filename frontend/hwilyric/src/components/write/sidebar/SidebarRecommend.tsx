@@ -5,20 +5,19 @@ import SidebarRecommendRandom from './SidebarRecommendRandom'
 import { useRecoilValue } from 'recoil'
 import { getErrorMessageAtom, keywordModeAtom } from '../../../atoms/sidebarAtoms'
 import SidebarRecommendHeader from './SidebarRecommendHeader'
+import { RecommendBody, RecommendContent } from '../../../styles/recommendStyle'
 
 function SidebarRecommend() {
   const keywordMode = useRecoilValue(keywordModeAtom)
-  const errorMessage = useRecoilValue(getErrorMessageAtom)
 
   return (
-    <div>
+    <RecommendContent>
       <SidebarRecommendHeader />
       {(keywordMode === 'similar') ? 
       <SidebarRecommendSimilar />
       : <SidebarRecommendRhyme />}
-      <p>{errorMessage}</p>
       <SidebarRecommendRandom />
-    </div>
+    </RecommendContent>
   )
 }
 

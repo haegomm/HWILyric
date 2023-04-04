@@ -12,7 +12,6 @@ function SidebarRecommendRandom() {
   async function refreshRandomWord() {
     const randomList = await getRandomdWord()
     if (randomList !== null) {
-      console.log(randomList)
       setWordList(randomList)
       setRandomError('')
     } else {
@@ -34,7 +33,7 @@ function SidebarRecommendRandom() {
       </RandomHeader>
       <WordContainer>
         {wordList.map((word:string) => (
-          <WordItem>{word}</WordItem>
+          <WordItem key={word}>{word}</WordItem>
         ))}
       </WordContainer>
       <p>{randomError}</p>

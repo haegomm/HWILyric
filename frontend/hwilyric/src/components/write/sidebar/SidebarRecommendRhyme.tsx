@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { RandomHeader, RecommendBody, WordContainer, WordItem } from '../../../styles/recommendStyle'
-import { useRecoilValue } from 'recoil'
-import { keywordListAtom } from '../../../atoms/sidebarAtoms'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { getErrorMessageAtom, keywordListAtom } from '../../../atoms/sidebarAtoms'
 
 function SidebarRecommendRhyme() {
-  const wordList = useRecoilValue(keywordListAtom)
+  const [wordList, setWordList] = useRecoilState(keywordListAtom)
+  const errorMessage = useRecoilValue(getErrorMessageAtom)
+
+  useEffect(() => {
+    setWordList([])
+  }, [])
+
   return (
     <RecommendBody>
       <RandomHeader>
@@ -12,8 +18,9 @@ function SidebarRecommendRhyme() {
       </RandomHeader>
       <WordContainer>
         {wordList.map((word:string) => (
-          <WordItem>{word}</WordItem>
+          <WordItem key={word}>{word}</WordItem>
         ))}
+        <p>{errorMessage}</p>
       </WordContainer>
     </RecommendBody>
   )
