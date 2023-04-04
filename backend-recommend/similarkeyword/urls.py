@@ -5,5 +5,5 @@ from .views import KeywordList
 
 app_name='similarkeyword'
 urlpatterns = [
-    path('similarity/<str:word>', KeywordList.get)
+    path('keywords/similarity/<str:word>', KeywordList.get)
 ]

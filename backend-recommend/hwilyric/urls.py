@@ -20,5 +20,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('recommend/keywords/', include('similarkeyword.urls'), name='similarkeyword'),
+    path('recommend/', include('similarkeyword.urls'), name='similarkeyword'),
 ]
