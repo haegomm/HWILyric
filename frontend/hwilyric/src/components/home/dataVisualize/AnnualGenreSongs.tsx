@@ -1,11 +1,5 @@
-import React, { useState } from "react";
-import { Pie } from "react-chartjs-2";
-import { useSpring, animated } from "react-spring";
-import { ResponsivePie } from "@nivo/pie";
-import { getAllJSDocTagsOfKind } from "typescript";
 import { useRecoilValue } from "recoil";
 import { annualNowSongAtom } from "../../../atoms/visualizingAtoms";
-import { annualGenreRatioSongAtom } from "../../../atoms/visualizingGenreAtom";
 import { AnnualGenreSongDiv } from "../../../styles/DataVisaulizeStyle";
 
 function AnnualGenreSongs(props: any) {
@@ -13,7 +7,7 @@ function AnnualGenreSongs(props: any) {
   return (
     <AnnualGenreSongDiv>
       {props.data[annualnowsong].map((song: any) => (
-        <div>{song}</div>
+        <div key={song}>{song}</div>
       ))}
     </AnnualGenreSongDiv>
   );

@@ -34,7 +34,7 @@ function BlockCreate() {
                     <option value={"hook"}>hook</option>
                     <option value={"etc"}>etc</option>
                 </select>
-                <button onClick={onCreate} style={{fontSize: 15}}>여기를 눌려서 블록을 추가해보세요</button>
+                <button onClick={onCreate} style={{fontSize: 15}}>여기를 눌러서 블록을 추가해보세요</button>
         </CreateBlockStyle>
     )
 }

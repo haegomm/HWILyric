@@ -1,4 +1,4 @@
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue } from "recoil";
 
 import { useHorizontalScroll } from '../features/useHorizontalScroll';
 import { HomeContainer, HomeDiv, HomeContent, HomeTrapezoid } from '../styles/homeStyle';
@@ -10,6 +10,14 @@ import HomeCenter from '../components/home/HomeCenter';
 import { DataVisualizeBlockStyle, DataVisualizeStyle } from '../styles/dataVisualizeStyle';
 import { lightBackground } from '../assets/icon/profileDefault';
 import { lightTrape } from '../assets/icon/myButtons';
+import {
+  DataVisualizeBlockStyle,
+  DataVisualizeStyle,
+} from "../styles/dataVisualizeStyle";
+import { DataVisualizePage } from "../styles/DataVisaulizeStyle";
+import WeeklyReport from "../components/home/dataVisualize/WeeklyReport";
+import TotalTrend from "../components/home/dataVisualize/TotalTrend";
+import AnnualReport from "../components/home/dataVisualize/AnnualReport";
 
 function Home() {
     const scrollRef = useHorizontalScroll();
@@ -25,18 +33,14 @@ function Home() {
                     }
                 </HomeDiv>
                 <HomeCenter />
-                <DataVisualizeBlockStyle>
-                    <DataVisualizeBlock />
-                </DataVisualizeBlockStyle>
-                <DataVisualizeBlockStyle>
-                    <DataVisualizeBlock />
-                </DataVisualizeBlockStyle>
-                <DataVisualizeBlockStyle>
-                    <DataVisualizeBlock />
-                </DataVisualizeBlockStyle>
+                <DataVisualizePage>
+                  <WeeklyReport />
+                  <TotalTrend />
+                  <AnnualReport />
+                </DataVisualizePage>
             </HomeContent>
         </HomeContainer>        
     )
 }
 
-export default Home
+export default Home;

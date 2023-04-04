@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import ReactWordcloud from "react-wordcloud";
-import {
-  IAnnaulKeywordOptions,
-  IAnnualKeywordData,
-} from "../../../types/visualizingType";
+import { IAnnaulKeywordOptions } from "../../../types/visualizingType";
 import { annualNowAtom } from "../../../atoms/visualizingAtoms";
 import { useRecoilValue } from "recoil";
 import { annualData } from "../../../api/visualizingApi";
-import axios from "axios";
-import { getDatasetAtEvent } from "react-chartjs-2";
 
 const options: IAnnaulKeywordOptions = {
   rotations: 2,

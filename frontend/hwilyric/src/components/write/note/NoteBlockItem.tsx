@@ -17,8 +17,7 @@ interface IContainer {
 }
 
 const Container = styled.div<IContainer>`
-    padding: 8px;
-    margin-bottom: 8px;
+    display: flex;
     background-color: ${(props) => (props.isDragging ? "lightgreen" : "")};
 `;
 

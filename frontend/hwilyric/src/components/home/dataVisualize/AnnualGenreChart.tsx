@@ -1,14 +1,9 @@
-import React, { useState } from "react";
-import { Pie } from "react-chartjs-2";
-import { useSpring, animated } from "react-spring";
 import { ResponsivePie } from "@nivo/pie";
-import { getAllJSDocTagsOfKind } from "typescript";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import {
   annualNowAtom,
   annualNowSongAtom,
 } from "../../../atoms/visualizingAtoms";
-import { annualGenreRatioSongAtom } from "../../../atoms/visualizingGenreAtom";
 import { AnnualReportTitle } from "../../../styles/DataVisaulizeStyle";
 import { useTheme } from "styled-components";
 import { lightTheme } from "../../../theme/theme";
