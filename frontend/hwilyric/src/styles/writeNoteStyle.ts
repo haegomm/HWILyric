@@ -124,20 +124,37 @@ export const SaveDivBox = styled.div`
 `
 
 export const PlayerBox = styled.div`
+    ${NoteBoxInfo("10%")}
     display: flex;
-    ${NoteBoxInfo("5%")}
     
 `
 
 export const PlayerVideoBox = styled.div`
-    width: 96px;
-    height: 96px;
+    width: 15%;
+    height: 100%;
+`
+
+export const PlayerProgressBox = styled.div`
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+`
+
+export const PlayerButtonBox = styled.div`
+    width: 15%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 
 export const PlayButton = styled.button`
     width: 40px;
-    height: 40px;
-    margin: 10px;    
+    height: 40px;  
     background: linear-gradient(#B0E3F9, #DEB3FB, #FEC3B5, #FBD5E0);
     border-radius: 50%;
 `
