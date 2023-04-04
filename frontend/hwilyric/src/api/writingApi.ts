@@ -17,10 +17,8 @@ export async function getLyricInfo(noteId: string|undefined) {
   try {
     const res = await axios.get(`api/notes/detail?noteId=${noteId}`)
     const data = res.data
-    console.log('조회 성공!', data)
     return data
   } catch(err) {
-    console.log('조회실패ㅜ')
   }
 }
 
@@ -42,7 +40,6 @@ export async function similarKeyword(word: String) {
     const data = res.data
     return data
   } catch(err) {
-    console.log('유사 키워드 못 받았단다')
     return null
   }
 }
@@ -53,7 +50,6 @@ export async function rhymeKeyword(word: String) {
     const data = res.data
     return data
   } catch(err) {
-    console.log('라임 키워드 못 받았단다')
     return null
   }
 }
@@ -64,7 +60,6 @@ export async function getLyricList() {
     const data = res.data
     return data
   } catch(err) {
-    console.log('리스트 못 받았단다')
     return null
   }
 }
@@ -75,7 +70,6 @@ export async function getRandomdWord() {
     const wordList = res.data
     return wordList
   } catch(err) {
-    console.log('랜덤키워드 안나옴')
     return null
   }
 }

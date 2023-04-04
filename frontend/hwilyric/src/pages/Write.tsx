@@ -28,7 +28,6 @@ function Write() {
     if (isLogin) {
       const LyricInfo = await getLyricInfo(noteId)
       if (LyricInfo !== null) {
-        console.log('불러왔다!',LyricInfo)
         if (LyricInfo !== undefined) {
           setNoteId(LyricInfo.id)
           setTitle(LyricInfo.title)
