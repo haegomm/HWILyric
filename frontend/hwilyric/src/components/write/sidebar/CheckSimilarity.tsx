@@ -1,7 +1,7 @@
 import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil"
 import SimilarItem from "./SimilarItem"
 import { blockListState } from "../../../atoms/noteAtoms"
-import { similarListState, similarListLengthState } from "../../../atoms/sidebarAtoms"
+import { similarListState, similarListLengthState, checkLoadingState } from "../../../atoms/sidebarAtoms"
 import { ISimilarityTypes } from "../../../types/writingType"
 import { checkSimilarity } from "../../../api/writingApi"
 import { CheckButton } from "../../../styles/common/ButtonStyle"
@@ -12,6 +12,7 @@ function CheckSimilarity() {
     const blockList = useRecoilValue(blockListState)
     const [similarList, setSimilarList] = useRecoilState(similarListState)
     const setSimilarListLength = useSetRecoilState(similarListLengthState)
+    const setCheckLoadingState = useSetRecoilState(checkLoadingState)
 
     const getUserLyrics = () => {
         const lyrics = blockList.filter(block => block.lyrics !== null).map((block => block.lyrics!))
@@ -19,6 +20,7 @@ function CheckSimilarity() {
     }
 
     const onCheck = async () => {
+        setCheckLoadingState(true)
         const lyrics = await getUserLyrics()
         console.log(lyrics)
         const body: ISimilarityTypes = {
@@ -28,8 +30,8 @@ function CheckSimilarity() {
         
         const data = await checkSimilarity(body)
         setSimilarList(data.similarList)
-        // console.log("뭘 받았니?", data.similarList)
         setSimilarListLength(data.similarList.length)
+        await setCheckLoadingState(false)
         return data
     }
     

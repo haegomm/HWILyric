@@ -25,6 +25,11 @@ export const similarListLengthState = atom<number>({
     default: 0,
 })
 
+export const checkLoadingState = atom<boolean>({
+    key: "checkLoadingState",
+    default: false,
+})
+
 export const keywordModeAtom = atom<string>({
     key: 'kewordMode',
     default: 'similar',
