@@ -1,4 +1,4 @@
-import styled from "styled-components"; 
+import styled, { css } from "styled-components"; 
 import { SearchButton } from "../styles/common/ButtonStyle";
 
 const sideWidth = 440;
@@ -6,16 +6,26 @@ const sideMargin = 20;
 const borderWidth = 2;
 const inputPadding = 5;
 const mainGradientColor = 'linear-gradient(to right, #fbfcb9be, #ffcdf3aa, #65d3ffaa)';
+const sideBarVH = 80;
+
 
 export const SideBarBox = styled.div`
     width: ${sideWidth}px;
 `
 
-export const MemoBox = styled.textarea`
+const BoxCSS = () => css`
     width: ${sideWidth-sideMargin}px;
-    height: 28vh;
-    margin: 0 auto;
-    padding: ${inputPadding};
+    height: 20vh;
+    padding: ${inputPadding}px;
+    margin: 10px auto;
+`
+
+export const ThumbnailBox = styled.div`
+    ${BoxCSS()};
+`
+
+export const MemoBox = styled.textarea`
+    ${BoxCSS()};
     border: ${borderWidth}px solid transparent;
     border-image: ${mainGradientColor};
     border-image-slice: 1;
@@ -24,7 +34,12 @@ export const MemoBox = styled.textarea`
     background-color: transparent;
     :focus {
         outline: none;
-}
+    }
+    padding: 10px 20px;
+`
+
+export const SearchBox = styled.div`
+    ${BoxCSS()};
 `
 
 export const TabMenu = styled.ul`
@@ -122,6 +137,8 @@ export const SearchInput = styled.input`
 `
 
 export const SearchIconButton = styled(SearchButton)`
+    width: 20px;
+    height: 20px;
     position: absolute;
     top: ${inputPadding/2}px;
     right: ${inputPadding*3}px;
