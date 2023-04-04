@@ -98,6 +98,7 @@ export const HomeProfileImg = styled.img`
   height: 100%;
   object-fit: cover;
   z-index: 10;
+  cursor: pointer;
 `
 
 export const HomeProfileBackground = styled.img`

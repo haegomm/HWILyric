@@ -4,16 +4,23 @@ import { vinylColorDodge } from '../../assets/home/vinyl'
 import { useRecoilValue } from 'recoil'
 import { IsLoginAtom, userProfileImgAtom } from '../../atoms/userAtom'
 import { defaultImg, lightBackground } from '../../assets/icon/profileDefault'
+import { useNavigate } from 'react-router'
 
 function HomeCenterImg() {
+  const navigate = useNavigate();
+
   const isLogin = useRecoilValue(IsLoginAtom)
   const profileImgUrl = useRecoilValue(userProfileImgAtom)
+  
+  const onNavigateHandler = (e: React.MouseEvent<HTMLImageElement>) => {
+    navigate('/mypage')
+  }
   return (
     <HomeCenterImgContainer>
       <HomeImg src={vinylColorDodge} />
       <HomeProfileImgBox>
         {isLogin ? 
-          <HomeProfileImg src={profileImgUrl} />
+          <HomeProfileImg src={profileImgUrl} onClick={onNavigateHandler}/>
           :
           <HomeProfileImg src={defaultImg} />
         }
