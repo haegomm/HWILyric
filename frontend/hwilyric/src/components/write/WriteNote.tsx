@@ -10,30 +10,6 @@ import { blockListState, noteIdState, noteThumbnailFileState, noteThumbnailUrlSt
 import { memoState } from "../../atoms/sidebarAtoms"
 
 function WriteNote() {
-
-    const isLogin = useRecoilValue(IsLoginAtom)
-
-    const blockListReset = useResetRecoilState(blockListState)
-    const noteIdReset = useResetRecoilState(noteIdState)
-    const titleReset = useResetRecoilState(titleState)
-
-    const memoReset = useResetRecoilState(memoState)
-    const thumbnailFileReset = useResetRecoilState(noteThumbnailFileState)
-    const noteThumbnailUrlReset = useResetRecoilState(noteThumbnailUrlState)
-
-    useEffect(() => {
-        if (isLogin) {
-            localStorage.removeItem('note')
-            blockListReset()
-            noteIdReset()
-            titleReset()
-            memoReset()
-            thumbnailFileReset()
-            noteThumbnailUrlReset()
-        }
-      }, [])
-    
-
     return (
         <WriteDivBox>            
             <NoteBox>

@@ -13,6 +13,17 @@ export async function saveNote(formData: FormData) {
   }
 }
 
+export async function getLyricInfo(noteId: string|undefined) {
+  try {
+    const res = await axios.get(`api/notes/detail?noteId=${noteId}`)
+    const data = res.data
+    console.log('조회 성공!', data)
+    return data
+  } catch(err) {
+    console.log('조회실패ㅜ')
+  }
+}
+
 // 유사도 검사
 export async function checkSimilarity(body: ISimilarityTypes) {
   try {

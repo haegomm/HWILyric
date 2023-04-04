@@ -7,7 +7,7 @@ export const lyricCategoryAtom = atom<string>({
   default: '',
 });
 
-export const myLyrics = atom<IGetILyricInfoTypes[]|null>({
-  key: 'myLyrics',
-  default: null,
+export const isModifyingAtom = atom<boolean>({
+  key: 'isModifying',
+  default: false,
 })
