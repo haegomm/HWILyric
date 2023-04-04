@@ -2,7 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import { useRecoilState, useSetRecoilState } from "recoil"
 import { PlayVideoId } from "../../../atoms/youtubeVideoAtoms";
-import { SearchBoxStyle, SearchInput, SearchResultItem, SearchResultList, SearchIconButton, SearchResultItemText } from "../../../styles/writeSidebarStyle";
+import { SearchBox, SearchBoxStyle, SearchInput, SearchResultItem, SearchResultList, SearchIconButton, SearchResultItemText } from "../../../styles/writeSidebarStyle";
 import {SearchIcon} from "../../../assets/writeSideBar/search";
 import MusicBar from "../MusicBar";
 
@@ -50,7 +50,7 @@ function SearchVideo() {
 
   
     return (
-      <div>
+      <SearchBox>
         <SearchBoxStyle>
           <SearchInput type="text" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="노래를 검색해보세요" onKeyDown={(e) => {if (e.key === 'Enter') {handleSearch()}}}/>
           <SearchIconButton onClick={handleSearch}><img style={{width:"3vh", height: "3vh"}} src={SearchIcon} /></SearchIconButton>
@@ -58,13 +58,13 @@ function SearchVideo() {
         <SearchResultList>
           {results.map((result) => (
               <SearchResultItem key={result.id.videoId}>
-                <img src={result.thumbnail} alt="thumbnail" />
+                <img src={result.thumbnail} alt="thumbnail"/>
                 <SearchResultItemText onClick={(e)=>{handleGetVideoId(result.id.videoId)}}>{result.title}</SearchResultItemText>
                 { (videoId === result.id.videoId) ? <MusicBar></MusicBar> :<></> }
               </SearchResultItem>
           ))}
         </SearchResultList>
-      </div>
+      </SearchBox>
     );
 }
   
