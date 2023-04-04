@@ -22,8 +22,6 @@ export const Button = styled.button`
 export const SaveButton = styled.button`
     ${ButtonCss("5vw", "4vh")};
     position: absolute;
-    left: 88%;
-    top: 85%;
 `
 
 export const CheckButton = styled.button`

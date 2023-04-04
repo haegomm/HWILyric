@@ -9,10 +9,12 @@ const ColorDivBoxCss = (margin?: string) => css`
 `
 
 export const WriteNoteDivBox = styled.div`
+    width: 50vw;
     ${ColorDivBoxCss("0 0 0 0")}
     display: relative;
 `
 
 export const WriteSidebarDivBox = styled.div`
+    width: 30vw;
     ${ColorDivBoxCss("0 5vw 0 0")}
 `
