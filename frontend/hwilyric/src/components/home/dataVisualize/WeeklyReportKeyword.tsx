@@ -23,8 +23,8 @@ function WeeklyReportKeyword(props: any) {
 
   // 키워드 데이터를 그룹화하여 3개씩 나누기
   const groupedData = [];
+  const mydata = props.data.length !== 0 ? props.data : data;
   for (let i = 0; i < 6; i += 3) {
-    const mydata = props.data.length !== 0 ? props.data : data;
     groupedData.push(mydata.slice(i, i + 3));
   }
   let colorNum = -1;
@@ -33,14 +33,14 @@ function WeeklyReportKeyword(props: any) {
       {groupedData.map((group) => {
         return (
           <WeeklyKeywordLineDiv>
-            {group.map((genreData: any) => {
+            {group.map((keywordData: any) => {
               colorNum++;
               return (
                 <WeeklyKeywordBlockP
                   color={keywordBlockColors[colorNum % 4]}
                   theme={theme}
                 >
-                  {genreData.name}
+                  {keywordData}
                 </WeeklyKeywordBlockP>
               );
             })}

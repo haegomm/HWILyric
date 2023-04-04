@@ -66,7 +66,6 @@ function TotalTrendChart2(props: any) {
         dataKey="ratio"
         tick={false}
       />
-      <CartesianGrid strokeDasharray="3 3" />
       <Tooltip
         content={({ active, payload, label }) => {
           if (active && payload && payload.length) {
