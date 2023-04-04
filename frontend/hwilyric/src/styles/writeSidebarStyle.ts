@@ -17,7 +17,7 @@ const BoxCSS = () => css`
     width: ${sideWidth-sideMargin}px;
     height: 20vh;
     padding: ${inputPadding}px;
-    margin: 10px auto;
+    margin: 5px auto;
 `
 
 export const ThumbnailBox = styled.div`
@@ -113,7 +113,6 @@ export const SimilarInform = styled.div`
 `
 
 export const SearchBoxStyle = styled.div`
-    width: ${sideWidth - sideMargin}px;
     height: 4vh;
     justify-content: center;
     border: 2px solid transparent;
@@ -163,6 +162,7 @@ export const PlayerVideoBox = styled.div`
 
 export const SearchResultList = styled.div`
     width: ${sideWidth - sideMargin}px;
+    height: 20vh;
     margin: 0 auto;
     overflow: scroll;
 `
