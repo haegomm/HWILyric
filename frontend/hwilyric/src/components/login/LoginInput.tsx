@@ -30,6 +30,7 @@ import {
   LoginTitleBackground,
   LoginKakaoImg,
   LoginSignUpWrapper,
+  LoginPasswordBox,
 } from "../../styles/loginStyle";
 
 import { useTheme } from "styled-components";
@@ -93,17 +94,19 @@ function LoginInput() {
             onChange={onEmailHandler}
           />
         </LoginEmailDiv>
-        <LoginPasswordDiv>
-          <LoginInputI
-            type="password"
-            placeholder="비밀번호"
-            className="inputPassword"
-            onChange={onPasswordHandler}
-          />
-        </LoginPasswordDiv>
-        <LoginForgotPWDiv onClick={onLoginPageHandler}>
-          비밀번호를 잊으셨나요?
-        </LoginForgotPWDiv>
+        <LoginPasswordBox>
+          <LoginPasswordDiv>
+            <LoginInputI
+              type="password"
+              placeholder="비밀번호"
+              className="inputPassword"
+              onChange={onPasswordHandler}
+            />
+          </LoginPasswordDiv>
+          <LoginForgotPWDiv onClick={onLoginPageHandler}>
+            비밀번호를 잊으셨나요?
+          </LoginForgotPWDiv>
+        </LoginPasswordBox>
         <LoginButtonBoxDiv>
           <LoginButton type="submit">로그인</LoginButton>
         </LoginButtonBoxDiv>

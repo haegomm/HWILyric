@@ -46,7 +46,7 @@ export const LoginTitleBackground = styled.div`
 
 export const LoginForm = styled.form`
   height: 240px;
-  width: 288px;
+  width: ${(288 / 1920) * 100}vw;
   display: flex;
   justify-content: space-around;
   flex-direction: column;
@@ -81,24 +81,25 @@ export const LoginInputI = styled.input`
 `;
 
 export const LoginEmailDiv = styled.div`
-  width: 20vw;
+  width: ${(288 / 1920) * 100}vw;
 
   display: flex;
   justify-content: center;
 `;
 
 export const LoginPasswordDiv = styled.div`
-  width: 20vw;
+  width: ${(288 / 1920) * 100}vw;
 
   display: flex;
   justify-content: center;
 `;
 
 export const LoginForgotPWDiv = styled.div`
-  width: ${(128 / 1920) * 100}vw;
+  width: ${(288 / 1920) * 100}vw;
+
   height: 12px;
   font-size: 10px;
-  margin-left: auto;
+  text-align: right;
 `;
 
 export const LoginButtonBoxDiv = styled.div``;
@@ -136,7 +137,7 @@ export const LoginSignUpDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 15px;
+  border-radius: 5px;
   background: #fbd5e0;
   text-decoration: none;
 `;
@@ -159,4 +160,12 @@ export const LoginSignUpWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   flex-direction: column;
+`;
+
+export const LoginPasswordBox = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  height: 60px;
+  width: ${(288 / 1920) * 100}vw;
 `;
