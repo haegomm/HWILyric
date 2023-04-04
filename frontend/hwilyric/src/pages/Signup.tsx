@@ -201,8 +201,6 @@ function Signup() {
           <span className="passwordCheckError">{confirmPasswordError}</span>
           <input type={"file"} onChange={onProfileImgHandler}/>
           <img
-              // className={classes.hiddenImg}
-              // ref=
               src={profileImageUrl}
               alt="profileImg"
             />

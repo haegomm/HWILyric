@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { IconImage, LyricListBody, LyricListBodyItem, LyricListBodyItemDiv, LyricThumbnail } from '../../styles/mypageStyle'
 import { getLyricList } from '../../api/writingApi'
 import { IGetILyricInfoTypes } from '../../types/mypageType'
-import { lightDelete, lightModify, lightView } from '../../assets/mypage/myButtons'
+import { lightDelete, lightModify, lightView } from '../../assets/icon/myButtons'
 import { deleteNote } from '../../api/deleteApit'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
