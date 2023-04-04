@@ -41,7 +41,7 @@ text-align: center;
 ` 
 
 export const WordItem = styled.div`
-  margin: 4px 4% 4px 4%
+  margin: 4px 4% 4px 4%;
 `
 
 export const ButtonBox = styled.div`

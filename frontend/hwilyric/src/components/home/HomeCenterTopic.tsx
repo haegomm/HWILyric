@@ -3,6 +3,7 @@ import { recommendTopic } from '../../api/writingApi';
 import { RandomHeader, RecommendBody, WordContainer, WordItem } from '../../styles/recommendStyle';
 import { IconImage } from '../../styles/mypageStyle';
 import { lightRefresh } from '../../assets/icon/myButtons';
+import { HeaderP, HomeCenterWord, HomeWordItem, TopicHeader } from '../../styles/homeStyle';
 
 function HomeCenterTopic() {
   const [wordList, setWordList] = useState([]);
@@ -25,18 +26,18 @@ function HomeCenterTopic() {
     refreshRandomWord()   
   }
   return (
-    <RecommendBody>
-      <RandomHeader>
-        <span>휘리릭 추천 주제</span>
+    <HomeCenterWord>
+      <TopicHeader>
+        <HeaderP>휘리릭 추천 주제</HeaderP>
         <IconImage src={lightRefresh} onClick={onRefreshHandler}/>
-      </RandomHeader>
+      </TopicHeader>
       <WordContainer>
         {wordList.map((word:string) => (
-          <WordItem key={word}>{word}</WordItem>
+          <HomeWordItem key={word}>{word}</HomeWordItem>
         ))}
       </WordContainer>
       <p>{randomError}</p>
-    </RecommendBody>
+    </HomeCenterWord>
   )
 }
 

@@ -1,14 +1,15 @@
 import React from 'react'
 import HomeCenterTopic from './HomeCenterTopic'
 import HomeCenterImg from './HomeCenterImg'
+import { HomeCenterContainer } from '../../styles/homeStyle'
 
 function HomeCenter() {
 
   return (
-    <div>
+    <HomeCenterContainer>
       <HomeCenterImg />
       <HomeCenterTopic />
-    </div>
+    </HomeCenterContainer>
   )
 }
 

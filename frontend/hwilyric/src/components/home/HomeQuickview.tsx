@@ -5,7 +5,7 @@ import { getLyricList } from "../../api/writingApi";
 import { userNicknameAtom } from '../../atoms/userAtom'
 import { ILyricInfoTypes } from "../../types/writingType";
 import HomeQuickviewBlock from "./HomeQuickviewBlock";
-import { QuickView, QuickViewBlock, QuickViewBlockImg } from "../../styles/homeStyle";
+import { QuickView, QuickViewBlock, QuickViewBlockCover, QuickViewBlockImg, QuickViewBlockItem, QuickViewBody, QuickviewHeader, QuickviewHeaderSpan } from "../../styles/homeStyle";
 import { IGetILyricInfoTypes } from "../../types/mypageType";
 import { useNavigate } from "react-router-dom";
 import { isModifyingAtom } from "../../atoms/mypageAtom";
@@ -45,18 +45,25 @@ function HomeQuickview() {
 
   return (
     <QuickView>
-      <h3>{nickname}님의 작사노트</h3>
+      <QuickviewHeader>
+        <QuickviewHeaderSpan>{nickname}</QuickviewHeaderSpan>
+        <span>님의 작사노트</span>
+      </QuickviewHeader>
         {(nullLyrics === '') ? 
-        <div>
+        <QuickViewBody>
           {myLyrics.map((lyric:ILyricInfoTypes) => (
-            <QuickViewBlock key={lyric.id} id={lyric.id} width='100%' onClick={onModifyHandler}>
-              <QuickViewBlockImg src={lyric.thumbnail} />
-              <QuickViewBlock width='100%'>
+            <QuickViewBlock key={lyric.id} id={lyric.id} width='17vw' onClick={onModifyHandler}>
+              <QuickViewBlockItem width='3vw'>
+                <QuickViewBlockCover>
+                  <QuickViewBlockImg src={lyric.thumbnail} />
+                </QuickViewBlockCover>
+              </QuickViewBlockItem>
+              <QuickViewBlockItem width='10vw'>
                 <p>{lyric.title}</p>
-              </QuickViewBlock>
+              </QuickViewBlockItem>
             </QuickViewBlock>
           ))}
-        </div>
+        </QuickViewBody>
         : nullLyrics}
     </QuickView>
   )
