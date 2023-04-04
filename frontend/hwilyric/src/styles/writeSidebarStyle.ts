@@ -1,26 +1,45 @@
-import styled from "styled-components"; 
+import styled, { css } from "styled-components"; 
 import { SearchButton } from "../styles/common/ButtonStyle";
 
 const sideWidth = 440;
 const sideMargin = 20;
 const borderWidth = 2;
+const inputPadding = 5;
+const mainGradientColor = 'linear-gradient(to right, #fbfcb9be, #ffcdf3aa, #65d3ffaa)';
+const sideBarVH = 80;
+
 
 export const SideBarBox = styled.div`
     width: ${sideWidth}px;
 `
 
-export const MemoBox = styled.textarea`
+const BoxCSS = () => css`
     width: ${sideWidth-sideMargin}px;
-    height: 28vh;
-    margin: 0 auto;
-    padding: 0;
-    border: ${borderWidth}px solid;
+    height: 20vh;
+    padding: ${inputPadding}px;
+    margin: 5px auto;
+`
+
+export const ThumbnailBox = styled.div`
+    ${BoxCSS()};
+`
+
+export const MemoBox = styled.textarea`
+    ${BoxCSS()};
+    border: ${borderWidth}px solid transparent;
+    border-image: ${mainGradientColor};
+    border-image-slice: 1;
     resize : none;
     font-size: 16px;
     background-color: transparent;
     :focus {
         outline: none;
-}
+    }
+    padding: 10px 20px;
+`
+
+export const SearchBox = styled.div`
+    ${BoxCSS()};
 `
 
 export const TabMenu = styled.ul`
@@ -33,7 +52,7 @@ export const TabMenu = styled.ul`
     flex-direction: row;
     align-items: center;
     list-style: none;
-    margin-bottom: 7rem;
+    margin-bottom: 10px;
     margin-top: 10px;
 
     .submenu {
@@ -94,19 +113,16 @@ export const SimilarInform = styled.div`
 `
 
 export const SearchBoxStyle = styled.div`
-    width: ${sideWidth - sideMargin}px;
     height: 4vh;
     justify-content: center;
     border: 2px solid transparent;
     border-radius: 50px;
-    background-image: linear-gradient(-45deg, #fbfcb9be, #ffcdf3aa, #65d3ffaa);
+    background-image: ${mainGradientColor};
     background-origin: border-box;
     background-clip: border-box;
     position: relative;
     margin: 10px auto;
 `
-
-const inputPadding = 5;
 
 export const SearchInput = styled.input`
     border: none;
@@ -116,10 +132,12 @@ export const SearchInput = styled.input`
     :focus {
         outline: none;
     }
-    padding: ${inputPadding/2}px ${inputPadding}px;
+    padding: ${inputPadding/2}px ${inputPadding*3}px;
 `
 
 export const SearchIconButton = styled(SearchButton)`
+    width: 20px;
+    height: 20px;
     position: absolute;
     top: ${inputPadding/2}px;
     right: ${inputPadding*3}px;
@@ -143,14 +161,27 @@ export const PlayerVideoBox = styled.div`
 `
 
 export const SearchResultList = styled.div`
-    width: ${sideWidth - sideMargin};
-    height: 30vh;
+    width: ${sideWidth - sideMargin}px;
+    height: 20vh;
     margin: 0 auto;
     overflow: scroll;
 `
 
+const itemHeight = 50;
 export const SearchResultItem = styled.div`
     display: flex;
-    width: ${sideWidth - sideMargin};
+    height:${itemHeight}px;
+    width: ${sideWidth - sideMargin}px;
+    overflow: hidden;
     margin: 0 auto;
+    :hover {
+        background-color: rgba(0,0,0,0.2);
+        color: white;
+    }
+`
+export const SearchResultItemText = styled.p`
+    width: 100%;
+    text-align: left;
+    padding: 0 10px;
+    line-height: ${itemHeight}px;
 `

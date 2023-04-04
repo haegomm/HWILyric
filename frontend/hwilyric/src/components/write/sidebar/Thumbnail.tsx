@@ -1,6 +1,6 @@
 import { useSetRecoilState, useRecoilState } from "recoil";
 import { noteThumbnailFileState, noteThumbnailUrlState } from "../../../atoms/noteAtoms";
-
+import {ThumbnailBox} from "../../../styles/writeSidebarStyle"
 
 function Thumbnail() {
     
@@ -19,10 +19,10 @@ function Thumbnail() {
         }
     }
     return (
-        <div>
-        <input type={"file"} onChange={onThumbnailImgHandler}/>
-        <img src={thumbnailImageUrl} alt="profileImg"/>
-        </div>
+        <ThumbnailBox>
+            <input type={"file"} onChange={onThumbnailImgHandler}/>
+            <img src={thumbnailImageUrl} alt="profileImg"/>
+        </ThumbnailBox>
     )
 }
 
