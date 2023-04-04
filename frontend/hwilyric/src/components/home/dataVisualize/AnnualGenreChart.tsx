@@ -10,6 +10,8 @@ import {
 } from "../../../atoms/visualizingAtoms";
 import { annualGenreRatioSongAtom } from "../../../atoms/visualizingGenreAtom";
 import { AnnualReportTitle } from "../../../styles/DataVisaulizeStyle";
+import { useTheme } from "styled-components";
+import { lightTheme } from "../../../theme/theme";
 
 function AnnualGenreChart(props: any) {
   const annualnow = useRecoilValue(annualNowAtom);
@@ -19,6 +21,8 @@ function AnnualGenreChart(props: any) {
       setAnnualnowSong(node.id);
     }
   }
+  const theme = useTheme();
+
   return (
     <div style={{ width: "232px", height: "240px" }}>
       <AnnualReportTitle>{annualnow}년대 인기 장르</AnnualReportTitle>
@@ -28,7 +32,9 @@ function AnnualGenreChart(props: any) {
         padAngle={0.7}
         cornerRadius={3}
         activeOuterRadiusOffset={0}
-        colors={{ scheme: "blue_purple" }}
+        colors={{
+          scheme: theme === lightTheme ? "blue_purple" : "purples",
+        }}
         borderWidth={1}
         sortByValue={true}
         borderColor={{
@@ -99,6 +105,39 @@ function AnnualGenreChart(props: any) {
         ]}
         legends={[]}
         onClick={myFunc}
+        tooltip={({ datum }) => (
+          <div
+            style={{
+              background: "white",
+              color: "black",
+              fontSize: "inherit",
+              borderRadius: "2px",
+              boxShadow: "rgba(0, 0, 0, 0.25) 0px 1px 2px; padding: 5px 9px",
+            }}
+          >
+            <div
+              style={{
+                whiteSpace: "pre",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <span
+                style={{
+                  display: "block",
+                  width: "12px",
+                  height: "12px",
+                  background: "rgb(239, 237, 245)",
+                  marginRight: "7px",
+                }}
+              ></span>
+              <span>
+                {datum.label} :{" "}
+                <strong>{Math.round(datum.value * 100)}%</strong>
+              </span>
+            </div>
+          </div>
+        )}
       />
     </div>
   );
