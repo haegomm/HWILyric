@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { ISimilarInfoTypes } from "../../../types/writingType"
 import { ArrowImage } from "../../../styles/mypageStyle";
-import { downArrow, upArrow } from "../../../assets/mypage/arrow";
+import { downArrow, upArrow } from "../../../assets/icon/arrow";
 import { SimilarLyricInfo, SimilarLyricSubInfo, SimilarUserLyric } from "../../../styles/writeSidebarStyle";
 
 interface SimilarItemProps {
