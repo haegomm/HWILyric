@@ -8,6 +8,11 @@ const ColorDivBoxCss = (margin?: string) => css`
     margin: ${margin}
 `
 
-export const WriteDivBox = styled.div`
-    ${ColorDivBoxCss("0 0 0 5vw")}
+export const WriteNoteDivBox = styled.div`
+    ${ColorDivBoxCss("0 0 0 0")}
+    display: relative;
+`
+
+export const WriteSidebarDivBox = styled.div`
+    ${ColorDivBoxCss("0 5vw 0 0")}
 `

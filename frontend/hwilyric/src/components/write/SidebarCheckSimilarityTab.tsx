@@ -13,7 +13,7 @@ function SidebarCheckSimilarityTab() {
         <div>
             <CheckSimilarity />
             <SimilarItem />
-            {(similarListLength > 0) ? (<SimilarityResult />) : (<></>) }
+            {(similarListLength > 0 ? <SimilarityResult /> : <></>)}
         </div>
     )
 }

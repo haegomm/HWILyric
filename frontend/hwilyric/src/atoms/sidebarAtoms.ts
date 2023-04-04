@@ -24,3 +24,8 @@ export const similarListLengthState = atom<number>({
     key: "similarListLengthState",
     default: 0,
 })
+
+export const checkLoadingState = atom<boolean>({
+    key: "checkLoadingState",
+    default: false,
+})

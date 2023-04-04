@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Desc, TabMenu } from "../../styles/writeSidebarStyle"
 import { SideBarBox } from "../../styles/writeSidebarStyle"
-import { WriteDivBox } from "../../styles/common/DivBox"
+import { WriteSidebarDivBox } from "../../styles/common/DivBox"
 import SidebaarReferenceTab from "./SidebarReferenceTab"
 import SidebarCheckSimilarityTab from "./SidebarCheckSimilarityTab"
 import SidebarMyLyrics from "./sidebar/SidebarMyLyrics"
@@ -24,7 +24,7 @@ function WriteSidebar() {
     }
 
     return (
-        <WriteDivBox>
+        <WriteSidebarDivBox>
             <SideBarBox>
                 <TabMenu>
                     {tabArr.map((el, index) => (
@@ -39,7 +39,7 @@ function WriteSidebar() {
                     </div>
                 </Desc>
             </SideBarBox>
-        </WriteDivBox>
+        </WriteSidebarDivBox>
     )
 }
 

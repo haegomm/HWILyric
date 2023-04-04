@@ -1,6 +1,6 @@
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd"
 import { useCallback, useEffect } from "react"
-import { useRecoilState, useRecoilValue } from "recoil"
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 import { blockListState, titleState, noteIdState, noteThumbnailFileState, noteThumbnailUrlState } from "../../../atoms/noteAtoms"
 import { IsLoginAtom }  from "../../../atoms/userAtom"
 import { ILyricInfoTypes } from "../../../types/writingType"
@@ -22,6 +22,7 @@ function BlockList() {
     const memo = useRecoilValue(memoState)
     const thumbnailFile = useRecoilValue(noteThumbnailFileState)
     const noteThumbnailUrl = useRecoilValue(noteThumbnailUrlState)
+    const setThumbnailImageUrl = useSetRecoilState(noteThumbnailUrlState)
 
     // useEffect(() => {
     //     const autoSaveNote = setInterval(() => {
@@ -76,6 +77,8 @@ function BlockList() {
             const res = await saveNote(formData)
             console.log(res)
             setNoteId(() => res)
+            setThumbnailImageUrl(res.thumbnail)
+
             // 저장 시간 받기
         } else {
             window.localStorage.setItem('note', JSON.stringify(formData))

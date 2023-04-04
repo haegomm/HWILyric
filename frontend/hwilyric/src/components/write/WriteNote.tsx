@@ -3,11 +3,12 @@ import BlockList from "../../components/write/note/NoteBlockList"
 import NoteTitle from "../../components/write/note/NoteTitle"
 import { IsLoginAtom }  from "../../atoms/userAtom"
 import { NoteBox } from "../../styles/writeNoteStyle"
-import { WriteDivBox } from "../../styles/common/DivBox"
+import { WriteNoteDivBox } from "../../styles/common/DivBox"
 import { useEffect } from "react"
 import { useRecoilValue, useResetRecoilState } from "recoil"
 import { blockListState, noteIdState, noteThumbnailFileState, noteThumbnailUrlState, titleState } from "../../atoms/noteAtoms"
 import { memoState } from "../../atoms/sidebarAtoms"
+import VideoPlayer from "./sidebar/VideoPlayer"
 
 function WriteNote() {
 
@@ -31,17 +32,16 @@ function WriteNote() {
             thumbnailFileReset()
             noteThumbnailUrlReset()
         }
-      }, [])
+    }, [])
     
 
     return (
-        <WriteDivBox>            
-            <NoteBox>
-                <NoteTitle />
-                <BlockList />
-                <BlockCreate />
-            </NoteBox>
-        </WriteDivBox>
+        <WriteNoteDivBox>           
+            <NoteTitle />
+            <BlockList />
+            <BlockCreate />
+            <VideoPlayer />
+        </WriteNoteDivBox>
     )
 }
 

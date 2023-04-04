@@ -3,6 +3,9 @@ import { ISimilarInfoTypes } from "../../../types/writingType"
 import { ArrowImage } from "../../../styles/mypageStyle";
 import { downArrow, upArrow } from "../../../assets/mypage/arrow";
 import { SimilarLyricInfo, SimilarLyricSubInfo, SimilarUserLyric } from "../../../styles/writeSidebarStyle";
+import { LightLodaing } from "../../../assets/writeSideBar/search"
+import { checkLoadingState } from "../../../atoms/sidebarAtoms";
+import { useRecoilValue } from "recoil";
 
 interface SimilarItemProps {
     similar?: ISimilarInfoTypes
@@ -11,13 +14,19 @@ interface SimilarItemProps {
 function SimilarItem({ similar }: SimilarItemProps):JSX.Element {
 
     const [isOpen, setIsOpen] = useState(false)
+    const checkLoading = useRecoilValue(checkLoadingState)
     
     const onDropHandler = (e: React.MouseEvent<HTMLDivElement>) => {
         setIsOpen(!isOpen)
     }
 
     if (!similar) {
-        return (<></>)
+        if (checkLoading) {
+            return (<img src={LightLodaing} style={{ width: '5vw' }} alt="no result" />)
+        }
+        return (
+            <div></div>
+        )
     } else {
         return (
             <div>
