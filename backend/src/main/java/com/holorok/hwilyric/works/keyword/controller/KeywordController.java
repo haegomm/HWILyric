@@ -35,14 +35,14 @@ public class KeywordController {
         return new ResponseEntity<>(randomList, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "유사 키워드 조회")
-    @GetMapping(value = "/similarity/{word}", produces = "application/json;charset=utf-8")
-    public ResponseEntity<List<String>> getSimilarKeyword(@PathVariable("word") String word) throws NotFoundException, IOException, ClassNotFoundException {
-
-        List<String> similarList = keywordService.getSimilarKeyword(word);
-
-        return new ResponseEntity<>(similarList, HttpStatus.OK);
-    }
+//    @ApiOperation(value = "유사 키워드 조회")
+//    @GetMapping(value = "/similarity/{word}", produces = "application/json;charset=utf-8")
+//    public ResponseEntity<List<String>> getSimilarKeyword(@PathVariable("word") String word) throws NotFoundException, IOException, ClassNotFoundException {
+//
+//        List<String> similarList = keywordService.getSimilarKeyword(word);
+//
+//        return new ResponseEntity<>(similarList, HttpStatus.OK);
+//    }
 
     @ApiOperation(value = "주제 추천")
     @GetMapping(value = "/topics")
