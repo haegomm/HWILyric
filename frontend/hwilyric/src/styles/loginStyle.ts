@@ -4,7 +4,7 @@ import { lightTheme } from "../theme/theme";
 
 export const LoginBoxDiv = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-direction: column;
   align-items: center;
   position: relative;
@@ -95,31 +95,68 @@ export const LoginPasswordDiv = styled.div`
 `;
 
 export const LoginForgotPWDiv = styled.div`
-  background: yellow;
   width: ${(128 / 1920) * 100}vw;
   height: 12px;
   font-size: 10px;
   margin-left: auto;
 `;
 
-export const LoginButtonBoxDiv = styled.div`
-  background: yellow;
-`;
+export const LoginButtonBoxDiv = styled.div``;
 
 export const LoginButton = styled.button`
-  background: black;
+  width: ${(96 / 1920) * 100}vw;
+  height: 32px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-image: linear-gradient(
+      to right bottom,
+      #ace5f8,
+      #e6b2fd,
+      #fdbfb4,
+      #fbd1dd
+    )
+    3;
 `;
 
 export const LoginNoIdDiv = styled.div`
-  background: pink;
+  font-size: 20px;
+  width: ${(300 / 1920) * 100}vw;
+  display: flex;
+  justify-content: center;
 `;
 
 export const LoginSignUpBoxDiv = styled.div`
-  background: red;
+  display: flex;
+  justify-content: space-around;
 `;
 
 export const LoginSignUpDiv = styled.div`
-  background: blue;
+  width: ${(96 / 1920) * 100}vw;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  background: #fbd5e0;
+  text-decoration: none;
 `;
 
-export const LoginKakaoA = styled.a``;
+export const LoginKakaoA = styled.a`
+  width: ${(96 / 1920) * 100}vw;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const LoginKakaoImg = styled.img`
+  width: ${(96 / 1920) * 100}vw;
+  height: 48px;
+`;
+
+export const LoginSignUpWrapper = styled.div`
+  height: 144px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+`;

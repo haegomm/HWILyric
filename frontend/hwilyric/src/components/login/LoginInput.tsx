@@ -28,6 +28,8 @@ import {
   LoginKakaoA,
   LoginInputI,
   LoginTitleBackground,
+  LoginKakaoImg,
+  LoginSignUpWrapper,
 } from "../../styles/loginStyle";
 
 import { useTheme } from "styled-components";
@@ -106,15 +108,24 @@ function LoginInput() {
           <LoginButton type="submit">로그인</LoginButton>
         </LoginButtonBoxDiv>
       </LoginForm>
-      <LoginNoIdDiv>아직 아이디가 없으신가요?</LoginNoIdDiv>
-      <LoginSignUpBoxDiv>
-        <Link to="/signup">
-          <LoginSignUpDiv>가입하기</LoginSignUpDiv>
-        </Link>
-        <LoginKakaoA href={KAKAO_REQUEST}>
-          <img src={socailLoginButton} className="kakaoSignUpButton" alt="" />
-        </LoginKakaoA>
-      </LoginSignUpBoxDiv>
+      <LoginSignUpWrapper>
+        <LoginNoIdDiv>아직 아이디가 없으신가요?</LoginNoIdDiv>
+        <LoginSignUpBoxDiv>
+          <Link
+            to="/signup"
+            style={{ textDecoration: "none", color: "#636161" }}
+          >
+            <LoginSignUpDiv>가입하기</LoginSignUpDiv>
+          </Link>
+          <LoginKakaoA href={KAKAO_REQUEST}>
+            <LoginKakaoImg
+              src={socailLoginButton}
+              className="kakaoSignUpButton"
+              alt=""
+            />
+          </LoginKakaoA>
+        </LoginSignUpBoxDiv>
+      </LoginSignUpWrapper>
     </LoginBoxDiv>
   );
 }
