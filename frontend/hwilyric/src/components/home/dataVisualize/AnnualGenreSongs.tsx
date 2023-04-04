@@ -7,7 +7,7 @@ function AnnualGenreSongs(props: any) {
   return (
     <AnnualGenreSongDiv>
       {props.data[annualnowsong].map((song: any) => (
-        <div>{song}</div>
+        <div key={song}>{song}</div>
       ))}
     </AnnualGenreSongDiv>
   );
