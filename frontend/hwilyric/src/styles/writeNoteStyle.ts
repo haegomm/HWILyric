@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
+import reset from 'styled-reset';
 
 const NoteBoxInfo = (height? : string) => css`
-    display: block;
     align-items : center;
     height: ${height};
     background-clolor: none;
@@ -44,14 +44,26 @@ export const TitleDivBox = styled.div`
 `
 
 export const BlockListStyle = styled.div`
-    ${NoteBoxInfo("70%")};
-    ${NoteBorderBottom};
-    overflow: scroll;
+    ${NoteBoxInfo("60%")};
+    margin: 1% 0 1% 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #DEB3FB;
+        border-radius: 10px;
+        background-clip: padding-box;
+        border: 2px solid transparent;
+    }
 `
 
 export const CreateBlockStyle = styled.div`
     ${NoteBoxInfo("10%")};
     ${NoteBorderBottom}
+    display: flex;
+    align-items: center;
     & > select {
         border: none;
         background-color: transparent;
@@ -64,7 +76,6 @@ export const CreateBlockStyle = styled.div`
     }
     & > button {
         ${NoteCreateDeleteButton};
-        font-size: 14px;
         color: #C8C8C8;
 `
 
@@ -73,6 +84,7 @@ export const DeleteButtonBox = styled.div`
     align-items : center;
     justify-content: center;
     width: 1%;
+    margin: 1%;
     & > button {
         font-size: 2vw;
         display: none;
@@ -96,17 +108,19 @@ export const BlockItemStyle =  styled.div<{ height: number }>`
         }
     }
     & > textarea {
-        width: 50%;
+        width: 60%;
         border: none;
         resize : none;
-        margin: 2vh 0 0 0;
-        line-height: 18px;
+        margin: 2% 8% 0 4% ;
+        line-height: 20px;
         font-size: 16px;
         scrollbar-width: none;
         ::-webkit-scrollbar {
             display: none;
         }
         :focus {
+            outline: none;
+            border-bottom: 1px outset;
         }
     }
 
@@ -120,7 +134,15 @@ export const BlockItemStyle =  styled.div<{ height: number }>`
 `
 
 export const SaveDivBox = styled.div`
-    align-items : center;
+    ${reset}
+    ${NoteBoxInfo("8%")};
+    ${NoteBorderBottom};
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    & > button {
+        margin-right: 1%;
+    }
 `
 
 export const PlayerBox = styled.div`

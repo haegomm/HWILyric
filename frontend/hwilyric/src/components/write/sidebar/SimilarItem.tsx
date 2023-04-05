@@ -22,22 +22,22 @@ function SimilarItem({ similar }: SimilarItemProps):JSX.Element {
 
     if (!similar) {
         if (checkLoading) {
-            return (<img src={LightLodaing} style={{ width: '5vw' }} alt="no result" />)
+            return (<img src={LightLodaing} style={{ margin: '0px', width: '5vw' }} alt="no result" />)
         }
         return (
             <div></div>
         )
     } else {
         return (
-            <div>
-                    <SimilarUserLyric
+            <>
+                <SimilarUserLyric
                     className={`select-box ${isOpen ? 'open' : ''}`}
                     onClick={onDropHandler}>
                         {similar.userLyric}&nbsp;
                         {isOpen ? 
                         <ArrowImage src={upArrow} />
                         : <ArrowImage src={downArrow} />
-                        }
+                    }
                     </SimilarUserLyric>
                     { isOpen && (
                         <div className="similarLyric-drop">
@@ -54,9 +54,9 @@ function SimilarItem({ similar }: SimilarItemProps):JSX.Element {
                         ))}
                         </div>
                     )}
-        </div>
-        )
+                </>
+            )
+        }
     }
-}
 
 export default SimilarItem

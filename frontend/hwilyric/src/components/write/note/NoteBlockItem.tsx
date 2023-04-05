@@ -18,6 +18,7 @@ interface IContainer {
 
 const Container = styled.div<IContainer>`
     display: flex;
+    justify-content: space-evenly;
     background-color: ${(props) => (props.isDragging ? "lightgreen" : "")};
 `;
 
@@ -76,7 +77,8 @@ function BlockItem({ block, index}: BlockItemProps) {
                     isDragging={snapshot.isDragging}>
                     <BlockItemStyle height={height}>
                         <DeleteButtonBox>
-                            <button onClick={onDeleteBlock}>-</button>
+                            <button onClick={onDeleteBlock} style={{
+                                width: '100%', height: '100%'}}>-</button>
                         </DeleteButtonBox>
                         <select
                             defaultValue={block.type}
@@ -93,7 +95,7 @@ function BlockItem({ block, index}: BlockItemProps) {
                             onChange={onEditLyrics}
                             onInput={handleResizeHeight}
                         />
-                        <img src={HamburgerButton} alt="hamburgerButton" />
+                        <img src={HamburgerButton} style={{width: '1vw'}} alt="hamburgerButton" />
                     </BlockItemStyle>
                 </Container>
             )}

@@ -1,6 +1,7 @@
 import { atom } from "recoil"
 import { recoilPersist } from 'recoil-persist';
 import { ILyricBlockTypes } from "../types/writingType"
+import { Default_thumbnail_1 } from "../assets/writeSideBar/search"
 
 const { persistAtom } = recoilPersist();
 
@@ -40,12 +41,12 @@ export const blockListState = atom<ILyricBlockTypes[]>({
 
 export const noteThumbnailFileState = atom<File | "">({
     key: "noteThumbnailFileState",
-    default: "",
+    default: Default_thumbnail_1,
     effects_UNSTABLE: [persistAtom],
 })
 
 export const noteThumbnailUrlState = atom<string>({
     key: "noteThumbnailUrlState",
-    default: "",
+    default: Default_thumbnail_1,
     effects_UNSTABLE: [persistAtom],
 })
