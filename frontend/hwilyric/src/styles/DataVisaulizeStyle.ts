@@ -4,7 +4,7 @@ import { lightTheme } from "../theme/theme";
 export const DataVisualizePage = styled.div`
   display: flex;
   justify-content: space-around;
-  width: 1900px;
+  width: 2400px;
 `;
 
 export const WeeklyReportDiv = styled.div`
@@ -49,6 +49,7 @@ export const WeeklyReportKeywordsDiv = styled.div`
   display: flex;
   justify-content: space-around;
   flex-direction: column;
+  padding: 10px;
 `;
 
 export const WeeklyReportGenreDiv = styled.div`
@@ -60,8 +61,8 @@ export const WeeklyReportGenreDiv = styled.div`
 `;
 
 export const AnnualReportDiv = styled.div`
-  width: 420px;
-  height: 600px;
+  width: ${(420 / 1920) * 100}vw;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -79,7 +80,7 @@ export const AnnualGenreDiv = styled.div`
   height: 38vh;
   display: flex;
   justify-content: space-around;
-  // flex-direction: column;
+  flex-direction: column;
   align-items: center;
   border-style: solid;
   border-width: 2px 2px 2px 2px;
@@ -100,7 +101,7 @@ export const AnnualGenreDiv = styled.div`
 `;
 
 export const TotalTrendDiv = styled.div`
-  width: ${(1144 / 1920) * 100}vw;
+  width: ${(1248 / 1920) * 100}vw;
   height: 80vh;
   padding-top: 100px;
   display: flex;
@@ -144,7 +145,7 @@ export const AnnualKeywordDiv = styled.div`
 
 export const WeeklyKeywordLineDiv = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
 `;
 
@@ -162,10 +163,10 @@ export const WeeklyKeywordBlockP = styled.p`
 
 export const AnnualGenreSongDiv = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-direction: column;
   align-items: center;
-  font-size: 20px;
+  font-size: 10px;
   width: 420px;
-  height: 60px;
+  height: 25px;
 `;
