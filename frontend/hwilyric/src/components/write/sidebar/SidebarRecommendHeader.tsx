@@ -61,19 +61,15 @@ function SidebarRecommendHeader() {
   return (
     <RecommendHeader>
       <ButtonBox>
-        {/* { (keywordMode === 'similar') ? (
+        { (keywordMode === 'similar') ? (
         <RecommendSelectButton type='button' value='similar' onClick={onModeHandler}>유사</RecommendSelectButton>
-        // <RecommendButton type='button' value='rhyme' onClick={onModeHandler}>라임</RecommendButton>
         ) : (
           <RecommendButton type='button' value='similar' onClick={onModeHandler}>유사</RecommendButton>
-          // <RecommendSelectButton type='button' value='rhyme' onClick={onModeHandler}>라임</RecommendSelectButton>
         )
-      } */}
+      }
       { (keywordMode === 'similar') ? (
-        // <RecommendSelectButton type='button' value='similar' onClick={onModeHandler}>유사</RecommendSelectButton>
         <RecommendButton type='button' value='rhyme' onClick={onModeHandler}>라임</RecommendButton>
         ) : (
-          // <RecommendButton type='button' value='similar' onClick={onModeHandler}>유사</RecommendButton>
           <RecommendSelectButton type='button' value='rhyme' onClick={onModeHandler}>라임</RecommendSelectButton>
         )
       }
