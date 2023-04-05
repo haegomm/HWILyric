@@ -6,7 +6,6 @@ import { ISimilarityTypes } from "../../../types/writingType"
 import { checkSimilarity } from "../../../api/writingApi"
 import { CheckButton } from "../../../styles/common/ButtonStyle"
 import { SimilarListBox } from "../../../styles/writeSidebarStyle"
-import { AxiosError } from "axios"
 
 function CheckSimilarity() {
     

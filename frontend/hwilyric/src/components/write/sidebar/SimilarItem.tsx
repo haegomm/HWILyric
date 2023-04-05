@@ -11,7 +11,7 @@ interface SimilarItemProps {
     similar?: ISimilarInfoTypes
 }
 
-function SimilarItem({ similar }: SimilarItemProps):JSX.Element {
+function SimilarItem({ similar }: SimilarItemProps): JSX.Element {    
 
     const [isOpen, setIsOpen] = useState(false)
     const checkLoading = useRecoilValue(checkLoadingState)
@@ -25,7 +25,8 @@ function SimilarItem({ similar }: SimilarItemProps):JSX.Element {
             return (<img src={LightLodaing} style={{ margin: '0px', width: '5vw' }} alt="no result" />)
         }
         return (
-            <div></div>
+            <>
+            </>
         )
     } else {
         return (

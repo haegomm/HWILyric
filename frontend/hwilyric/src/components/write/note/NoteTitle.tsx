@@ -26,7 +26,7 @@ function NoteTitle() {
             placeholder={"무제"}
             onChange={handleChangeTitle}
           />
-      {(noteId) ? <p style={{fontSize: 12}}>{ updateTime }</p> : (<></>)}
+      {(noteId) ? <p style={{fontSize: 12}}>최근 저장일: { updateTime }</p> : (<></>)}
       </TitleDivBox>
       </>
     )
