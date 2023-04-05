@@ -50,20 +50,23 @@ function SearchVideo() {
 
   
     return (
-      <SearchBox>
-        <SearchBoxStyle>
-          <SearchInput type="text" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="노래를 검색해보세요" onKeyDown={(e) => {if (e.key === 'Enter') {handleSearch()}}}/>
-          <SearchIconButton onClick={handleSearch}><img style={{width:"3vh", height: "3vh"}} src={SearchIcon} /></SearchIconButton>
+      <SearchBox className="SearchBox">
+        <SearchBoxStyle className="SearchBoxStyle">
+          <SearchInput className="SearchInput" type="text" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="노래를 검색해보세요" onKeyDown={(e) => {if (e.key === 'Enter') {handleSearch()}}}/>
+          <SearchIconButton className="SearchIconButton" onClick={handleSearch}>
+            <img style={{ width: "3vh", height: "3vh" }} src={SearchIcon} />
+          </SearchIconButton>
         </SearchBoxStyle>
-        <SearchResultList>
-          {results.map((result) => (
-              <SearchResultItem key={result.id.videoId}>
-                <img src={result.thumbnail} alt="thumbnail"/>
-                <SearchResultItemText onClick={(e)=>{handleGetVideoId(result.id.videoId)}}>{result.title}</SearchResultItemText>
-                { (videoId === result.id.videoId) ? <MusicBar></MusicBar> :<></> }
+        {results ? (
+          <SearchResultList className="SearchResultList">
+            {results.map((result) => (
+              <SearchResultItem className="SearchResultItem" key={result.id.videoId}>
+                <img src={result.thumbnail} alt="thumbnail" />
+                <SearchResultItemText onClick={(e) => { handleGetVideoId(result.id.videoId) }} style={{ fontSize: "12px" }}>{result.title}</SearchResultItemText>
+                {(videoId === result.id.videoId) ? <MusicBar></MusicBar> : <></>}
               </SearchResultItem>
-          ))}
-        </SearchResultList>
+            ))}
+          </SearchResultList>) : <></>}
       </SearchBox>
     );
 }

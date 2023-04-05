@@ -26,7 +26,7 @@ export const SaveButton = styled.button`
 
 export const CheckButton = styled.button`
     ${ButtonCss("12vw", "8vh")};
-    // font-weight: 400;
+    margin-top: 5%;
 `
 
 export const SearchButton = styled.button`

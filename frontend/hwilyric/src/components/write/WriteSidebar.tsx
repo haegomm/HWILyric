@@ -24,16 +24,16 @@ function WriteSidebar() {
     }
 
     return (
-        <WriteSidebarDivBox>
-            <SideBarBox>
-                <TabMenu>
+        <WriteSidebarDivBox className="WriteSidebarDivBox">
+            <SideBarBox className="SideBarBox">
+                <TabMenu className="TabMenu">
                     {tabArr.map((el, index) => (
                         <li className={index === currentTab ? "submenu focused" : "submenu"}
                             key={index}
                             onClick={() => selectTabHandler(index)}>{el.name}</li>
                     ))}
                 </TabMenu>
-                <Desc>
+                <Desc className="Desc">
                     <div>
                         {tabArr[currentTab].content}
                     </div>
