@@ -86,8 +86,8 @@ function VideoPlayer() {
         <PlayerVideoBox>
           <YouTube
             opts={{
-              width: "70",
-              height: "70",
+              width: "60",
+              height: "60",
               playerVars: {
                 rel: 0,
                 modestbranding: 1
