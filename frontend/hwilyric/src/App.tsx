@@ -58,8 +58,8 @@ function App() {
             <Navbar toggleDarkMode={toggleDarkMode} />
             <AppDiv>
               <Routes>
-                <Route path="*" element={<HWILyric />} />
-                <Route path="/home" element={<Home />} />
+                <Route index element={<Home />} />
+                <Route path="/*" element={<Home />} />
                 <Route path="/write" element={<Write />} />
                 <Route path="/modify/:id" element={<Write />} />
                 <Route path="/datavisualize" element={<DataVisualize />} />
