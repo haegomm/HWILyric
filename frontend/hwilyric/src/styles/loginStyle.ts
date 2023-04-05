@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { lightTheme } from "../theme/theme";
+import { ButtonCss } from "./common/ButtonStyle";
 
 export const LoginBoxDiv = styled.div`
   display: flex;
@@ -104,20 +105,10 @@ export const LoginForgotPWDiv = styled.div`
 
 export const LoginButtonBoxDiv = styled.div``;
 
-export const LoginButton = styled.button`
-  width: ${(96 / 1920) * 100}vw;
-  height: 32px;
-  border-style: solid;
-  border-width: 1px 1px 1px 1px;
-  border-image: linear-gradient(
-      to right bottom,
-      #ace5f8,
-      #e6b2fd,
-      #fdbfb4,
-      #fbd1dd
-    )
-    3;
-`;
+export const LoginButton = styled.button`${ButtonCss("5vw", "32px")}`;
+
+export const ProfileModificationButton = styled.button`${ButtonCss("8vw", "6vh")}`;
+
 
 export const LoginNoIdDiv = styled.div`
   font-size: 20px;
@@ -132,8 +123,8 @@ export const LoginSignUpBoxDiv = styled.div`
 `;
 
 export const LoginSignUpDiv = styled.div`
-  width: ${(96 / 1920) * 100}vw;
-  height: 48px;
+  width: 6vw;
+  height: 6vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -143,16 +134,17 @@ export const LoginSignUpDiv = styled.div`
 `;
 
 export const LoginKakaoA = styled.a`
-  width: ${(96 / 1920) * 100}vw;
-  height: 48px;
+  width: 6vw;
+  height: 6vh;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 export const LoginKakaoImg = styled.img`
-  width: ${(96 / 1920) * 100}vw;
-  height: 48px;
+  max-width: 100%;
+  max-height: 100%;
+
 `;
 
 export const LoginSignUpWrapper = styled.div`
