@@ -1,17 +1,14 @@
 import json
-import time
 
 import nltk
 import numpy as np
-from django.core.handlers.wsgi import WSGIRequest
 from django.http import JsonResponse, HttpResponse
 from gensim.models import KeyedVectors
 from konlpy.tag import Okt
-from pyspark.sql import SparkSession
 from rest_framework.renderers import JSONRenderer
 from rest_framework.views import APIView
 
-from .models import HangulModel  # User 모델 불러오기
+from .models import HangulModel
 from .serializers import HangulModelSerializer
 
 nltk.download('stopwords')
