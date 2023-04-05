@@ -48,7 +48,7 @@ export const SimilarListBox = styled.div`
     height: 34vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     overflow: auto;
 `
     
@@ -59,8 +59,16 @@ export const SimilarUserLyric = styled.div`
     `
     
     export const SimilarLyricInfo = styled.div`
-    // overflow: auto;
-    margin: 2vh;
+        margin: 2vh;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-evenly;
+        align-items: center;
+        border-radius: 10px;
+
+}
+
 `
 
 export const SimilarLyricSubInfo = styled.span`
@@ -70,7 +78,8 @@ export const SimilarLyricSubInfo = styled.span`
 `
 
 export const SimilarInform = styled.div`
-    border: 1px dashed;
+    border: 2px dashed ${props => props.theme.accentColor['2']};
+    border-radius: 10px;
     width: 70%;
     margin: auto;
     display: flex;
