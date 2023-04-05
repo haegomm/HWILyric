@@ -1,32 +1,22 @@
-import asyncio
 import json
-import re
-
-import pymysql as pymysql
-from django.db import connections
-from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse, Http404
-from rest_framework.renderers import JSONRenderer
-from rest_framework.views import APIView
-from rest_framework.response import Response
-
-
-from .models import User, HangulModel, EnglishModel  # User 모델 불러오기
-from .serializers import UserSerializer, HangulModelSerializer
-
-import numpy as np
-from gensim.models import KeyedVectors
-from konlpy.tag import Okt
+import time
 
 import nltk
+import numpy as np
+from django.core.handlers.wsgi import WSGIRequest
+from django.http import JsonResponse, HttpResponse
+from gensim.models import KeyedVectors
+from konlpy.tag import Okt
+from pyspark.sql import SparkSession
+from rest_framework.renderers import JSONRenderer
+from rest_framework.views import APIView
+
+from .models import HangulModel  # User 모델 불러오기
+from .serializers import HangulModelSerializer
+
 nltk.download('stopwords')
 nltk.download('punkt')
 nltk.download('averaged_perceptron_tagger')
-
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-from nltk.tag import pos_tag
-
 
 
 # Create your views here.
@@ -105,15 +95,13 @@ class KeywordList(APIView):
                 if(ko_word[1] in ["Adjective", "Noun", "Verb"]): # 형용사, 명사, 동사인 것만 고른다.
                     word_temp.append(ko_word[0])
 
-        print("testtest")
         try:
             list = kv.most_similar(word_temp[0])
         except KeyError:
             return JsonResponse({"message": "일치하는 키워드가 없습니다."}, status=404)
-        print("test2test2")
         answer = []
         for word in list:
             answer.append(word[0])
-        print(answer)
 
-        return JsonResponse({"keywords" : answer}, status=200)
+        results = json.dumps(answer)
+        return HttpResponse(results,  content_type="application/json")
