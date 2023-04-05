@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { ThemeProvider } from 'styled-components'
 import { BrowserRouter } from "react-router-dom";
 import { Route, Routes } from "react-router";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 
 import './App.css'
 import { GlobalStyle } from "./theme/GlobalStyle"
@@ -22,12 +22,13 @@ import { reissueToken } from "./api/userApi";
 import DataVisualize from "./pages/DataVisualize";
 import PrivateRoute from "./features/router";
 import { AppDiv } from "./styles/common/AppStyle";
+import { isDarkModeState } from "./atoms/noteAtoms";
 
 function App() {
 
   const isLogin = useRecoilValue(IsLoginAtom);
 
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useRecoilState(isDarkModeState);
 
   const toggleDarkMode = () => {
     setIsDarkMode((prev) => !prev);

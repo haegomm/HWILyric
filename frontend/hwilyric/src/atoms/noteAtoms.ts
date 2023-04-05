@@ -72,3 +72,9 @@ export const saveTimeSelector = selector({
         return convertedDate
     }
 })
+
+export const isDarkModeState = atom<boolean>({
+    key: "isDarkModeState",
+    default: false,
+    effects_UNSTABLE: [persistAtom],
+})
