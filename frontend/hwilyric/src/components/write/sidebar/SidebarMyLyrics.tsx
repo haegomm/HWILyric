@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { IGetILyricInfoTypes } from '../../../types/mypageType'
 import { ILyricBlockTypes } from '../../../types/writingType'
 import { LyricListBodyItem, LyricListBodyItemDiv, LyricText } from '../../../styles/mypageStyle'
@@ -9,6 +10,8 @@ import { IsLoginAtom } from '../../../atoms/userAtom'
 import { MyLyricBody, MyLyricListBodyItemContent, MyLyricThumbnail } from '../../../styles/MyLyricStyle'
 import { sidebarCategoryAtom } from '../../../atoms/sidebarAtoms'
 import SidebarMyLyricsSelect from './SidebarMyLyricsSelect'
+import { LoginRecButton, NotLoggedInDiv } from '../../../styles/recommendStyle'
+import { Button, SaveButton } from '../../../styles/common/ButtonStyle'
 
 function SidebarMyLyrics() {
   const [myLyrics, setMyLyrics] = useState([])
@@ -71,10 +74,14 @@ function SidebarMyLyrics() {
         }
       </div>
     </div> ) : (
-      <div>
+      <NotLoggedInDiv>
         <p>로그인하지 않으셨어요!</p>
+        <br/>
         <p>로그인하고 더 많은 기능을 이용해보세요</p>
-      </div>)
+        <Link to="/login">
+          <LoginRecButton>로그인</LoginRecButton>
+        </Link>
+      </NotLoggedInDiv>)
     }
     </MyLyricBody>
   )
