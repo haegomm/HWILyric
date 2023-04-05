@@ -25,8 +25,6 @@ import { AppDiv } from "./styles/common/AppStyle";
 
 function App() {
 
-  RouteChangeTracker()
-
   const isLogin = useRecoilValue(IsLoginAtom);
 
   const [isDarkMode, setIsDarkMode] = useState(false);
