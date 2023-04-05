@@ -38,7 +38,7 @@ public class MailService {
 
         String msg = "";
         msg += "<div style='margin: 0 auto; width: 70%; text-align: center; border: solid 1px gray;'>";
-        msg += "<img style='width: 100%' src='https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/thumbnail/default_thumbnail.png'/>"; // 해당 경로는 S3에 올린 후 변경 예정
+        msg += "<img style='width: 100%' src='https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/thumbnail/default_thumbnail.png'/>";
         msg += BR;
         msg += BR;
         msg += "<h2>인증코드 안내 이메일 입니다.</h2>";
@@ -91,7 +91,7 @@ public class MailService {
         }
         String msg = "";
         msg += "<div style='margin: 0 auto; width: 70%; text-align: center; border: solid 1px gray;'>";
-        msg += "<img style='width: 100%' src='https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/thumbnail/default_thumbnail.png'/>"; // 해당 경로는 S3에 올린 후 변경 예정
+        msg += "<img style='width: 100%' src='https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/thumbnail/default_thumbnail.png'/>";
         msg += BR;
         msg += BR;
         msg += "<h1>임시 비밀번호 안내 이메일 입니다.</h1>";
