@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, HangulModel
+from .models import User, HangulModel, EnglishModel
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -10,4 +10,9 @@ class UserSerializer(serializers.ModelSerializer):
 class HangulModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = HangulModel
+        fields = ("word", "vector_data")
+
+class EnglishModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EnglishModel
         fields = ("word", "vector_data")

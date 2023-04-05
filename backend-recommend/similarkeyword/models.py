@@ -27,8 +27,10 @@ class HangulModel(models.Model):
         managed = False
         db_table = 'hangul_model'
 
-    def get_word(self, obj):
-        return obj.word
+class EnglishModel(models.Model):
+    word = models.CharField(max_length=255, db_comment='단어')
+    vector_data = models.TextField(blank=True, null=True, db_comment='벡터데이터')
 
-    def get_vector_data(self, obj):
-        return np.frombuffer(obj.vector_data, dtype=np.float64).tolist()
+    class Meta:
+        managed = False
+        db_table = 'english_model'
