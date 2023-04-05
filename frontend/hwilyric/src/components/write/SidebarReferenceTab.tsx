@@ -4,7 +4,7 @@ import Thumbnail from "./sidebar/Thumbnail"
 
 function SidebarReferenceTab() {
     return (
-        <div>
+        <div style={{margin: '0px', display: 'block', justifyContent: 'center', alignItems: 'center'}}>
             <Thumbnail />
             <Memo />
             <SearchVideo />

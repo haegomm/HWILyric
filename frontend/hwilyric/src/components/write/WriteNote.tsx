@@ -2,13 +2,13 @@ import BlockCreate from "../../components/write/note/NoteCreateBlock"
 import BlockList from "../../components/write/note/NoteBlockList"
 import NoteTitle from "../../components/write/note/NoteTitle"
 import { IsLoginAtom }  from "../../atoms/userAtom"
-import { NoteBox } from "../../styles/writeNoteStyle"
 import { WriteNoteDivBox } from "../../styles/common/DivBox"
 import { useEffect } from "react"
 import { useRecoilValue, useResetRecoilState } from "recoil"
 import { blockListState, noteIdState, noteThumbnailFileState, noteThumbnailUrlState, titleState } from "../../atoms/noteAtoms"
 import { memoState } from "../../atoms/sidebarAtoms"
 import VideoPlayer from "./sidebar/VideoPlayer"
+import NoteSave from "./note/NoteSave"
 
 function WriteNote() {
 
@@ -39,6 +39,7 @@ function WriteNote() {
         <WriteNoteDivBox>           
             <NoteTitle />
             <BlockList />
+            <NoteSave />
             <BlockCreate />
             <VideoPlayer />
         </WriteNoteDivBox>
