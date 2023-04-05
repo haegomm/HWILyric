@@ -101,7 +101,7 @@ const BoxCSS = () => css`
 export const ThumbnailBox = styled.div`
     ${BoxCSS()};
     margin-bottom: 4%;
-    height: 10vh;
+    height: 15vh;
     display: flex;
     justify-content: space-between;
 
@@ -117,11 +117,10 @@ export const ThumbnailUploadDiv = styled.div`
     display: flex;
     align-items: end;
     justify-content: end;
-    // padding-bottom: 10px;
 `
 
 export const ThumbnailLabel = styled.label`
-    width: 60px;
+    width: 80px;
     height: 30px;
     border: ${borderWidth}px solid transparent;
     border-image: ${mainGradientColor};
@@ -214,6 +213,7 @@ export const SearchResultItem = styled.div`
     :hover {
         background-color: rgba(0,0,0,0.2);
         color: white;
+        cursor: pointer;
     }
 `
 export const SearchResultItemText = styled.p`
