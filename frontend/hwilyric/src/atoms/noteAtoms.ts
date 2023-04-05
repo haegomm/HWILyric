@@ -1,7 +1,7 @@
 import { atom, selector } from "recoil"
 import { recoilPersist } from 'recoil-persist';
 import { ILyricBlockTypes } from "../types/writingType"
-import { Default_thumbnail_1 } from "../assets/writeSideBar/search"
+import { Default_thumbnail_1 } from "../assets/writeSideBar/writeImg"
 
 const { persistAtom } = recoilPersist();
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ButtonBox, RecommendBody, RecommendButton, RecommendHeader, RecommendSelectButton, SearchButton, SearchboxForm, SearchboxInput } from '../../../styles/recommendStyle'
 import { IconImage } from '../../../styles/mypageStyle'
-import { SearchIcon } from '../../../assets/writeSideBar/search'
+import { SearchIcon } from '../../../assets/writeSideBar/writeImg'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import { getErrorMessageAtom, keywordListAtom, keywordModeAtom } from '../../../atoms/sidebarAtoms'
 import { rhymeKeyword, similarKeyword } from '../../../api/writingApi'

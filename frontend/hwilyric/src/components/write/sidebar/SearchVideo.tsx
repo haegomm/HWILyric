@@ -3,7 +3,7 @@ import { useState } from "react"
 import { useRecoilState, useSetRecoilState } from "recoil"
 import { PlayVideoId } from "../../../atoms/youtubeVideoAtoms";
 import { SearchBox, SearchBoxStyle, SearchInput, SearchResultItem, SearchResultList, SearchIconButton, SearchResultItemText } from "../../../styles/writeSidebarStyle";
-import {SearchIcon} from "../../../assets/writeSideBar/search";
+import {SearchIcon} from "../../../assets/writeSideBar/writeImg";
 import MusicBar from "../MusicBar";
 
 

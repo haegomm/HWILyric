@@ -166,8 +166,10 @@ export const PlayerProgressBox = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: flex-end;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     padding: 0 10px;
 `
 

@@ -127,12 +127,23 @@ export const ThumbnailUploadDiv = styled.div`
 export const ThumbnailLabel = styled.label`
     width: 80px;
     height: 30px;
-    border: ${borderWidth}px solid transparent;
-    ${BorderColor};
-    line-height: 30px;
+    display: felx;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid;
+    background-color: none;
+    border-image: linear-gradient(to right,
+        ${props => props.theme.accentColor['1']}, 
+        ${props => props.theme.accentColor['2']}, 
+        ${props => props.theme.accentColor['4']});
+    border-image-slice: 1;
     :hover {
-        transition: 0.7s;
-        background: ${mainGradientColor};
+        border: none;
+        font-weight: bold;
+        color: white;
+        background: linear-gradient(45deg, ${props => props.theme.accentColor['1']}, 
+        ${props => props.theme.accentColor['2']},
+        ${props => props.theme.accentColor['4']});
     }
 `
 
@@ -165,14 +176,16 @@ export const SearchBox = styled.div`
     align-content: center;
     justify-content: center;
     `
-export const SearchBoxStyle = styled.div`
+    export const SearchBoxStyle = styled.div`
     height: 4vh;
     justify-content: center;
-    border: ${borderWidth}px solid;
+    background-color: none;
+    border: ${borderWidth}px solid ;
     border-radius: 50px;
-    border-image: ${mainGradientColor};
-    background-clip: border-box;
-    background-origin: border-box;
+    border-image: linear-gradient(to right,
+        ${props => props.theme.accentColor['1']}, 
+        ${props => props.theme.accentColor['2']}, 
+        ${props => props.theme.accentColor['4']});
     border-image-slice: 1;
     position: relative;
     margin: 0px auto;
