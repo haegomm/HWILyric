@@ -4,10 +4,24 @@ import { RandomHeader, RecommendBody, WordContainer, WordItem } from '../../styl
 import { IconImage } from '../../styles/mypageStyle';
 import { lightRefresh } from '../../assets/icon/myButtons';
 import { HeaderP, HomeCenterWord, HomeWordItem, TopicHeader } from '../../styles/homeStyle';
+import { useResetRecoilState, useSetRecoilState } from 'recoil';
+import { isModifyingAtom } from '../../atoms/mypageAtom';
+import { blockListState, noteIdState, noteThumbnailFileState, noteThumbnailUrlState, titleState } from '../../atoms/noteAtoms';
+import { memoState } from '../../atoms/sidebarAtoms';
+import { useNavigate } from 'react-router-dom';
 
 function HomeCenterTopic() {
   const [wordList, setWordList] = useState([]);
   const [randomError, setRandomError] = useState('');
+  const isModifying = useSetRecoilState(isModifyingAtom);
+  const setTitle = useSetRecoilState(titleState);
+  const resetNoteId = useResetRecoilState(noteIdState);
+  const resetBlockList = useResetRecoilState(blockListState);
+  const resetMemo = useResetRecoilState(memoState)
+  const resetThumbnail = useResetRecoilState(noteThumbnailUrlState)
+  const resetThumbnailFile = useResetRecoilState(noteThumbnailFileState)
+
+  const navigate = useNavigate()
 
   async function refreshRandomWord() {
     const randomList = await recommendTopic()
@@ -25,6 +39,18 @@ function HomeCenterTopic() {
   const onRefreshHandler = async (e: React.MouseEvent<HTMLImageElement>) => {
     refreshRandomWord()   
   }
+
+  const onRecommendHandler = (e: React.MouseEvent<HTMLDivElement>) => {
+    const word = e.currentTarget.id
+    isModifying(true)
+    setTitle(word)
+    resetNoteId()
+    resetBlockList()
+    resetMemo()
+    resetThumbnail()
+    resetThumbnailFile()
+    navigate('/write')
+  }
   return (
     <HomeCenterWord>
       <TopicHeader>
@@ -33,7 +59,7 @@ function HomeCenterTopic() {
       </TopicHeader>
       <WordContainer>
         {wordList.map((word:string) => (
-          <HomeWordItem key={word}>{word}</HomeWordItem>
+          <HomeWordItem key={word} id={word} onClick={onRecommendHandler}>{word}</HomeWordItem>
         ))}
       </WordContainer>
       <p>{randomError}</p>
