@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useSetRecoilState, useRecoilState } from "recoil";
 import { noteThumbnailFileState, noteThumbnailUrlState } from "../../../atoms/noteAtoms";
 import {ThumbnailBox, ThumbnailInput, ThumbnailImage, ThumbnailLabel, ThumbnailUploadDiv} from "../../../styles/writeSidebarStyle"
+import { ProfileImageDiv, ProfileImageImg } from "../../../styles/common/ProfileImageStyle";
 
 function Thumbnail() {
     
@@ -24,10 +25,13 @@ function Thumbnail() {
 
     return (
         <ThumbnailBox className="ThumbnailBox">
-            <ThumbnailImage className="ThumbnailImage" src={thumbnailImageUrl} alt="thumbnail"/>
+            <ProfileImageDiv width="50%" height="100%" borderRadius="0" style={{position
+            :'relative'}}>
+                <ProfileImageImg className="ThumbnailImage" src={thumbnailImageUrl} alt="thumbnail" />
+            </ProfileImageDiv>
             <ThumbnailUploadDiv>
                 <ThumbnailLabel className="ThumbnailLabel" htmlFor="thumbnail">업로드</ThumbnailLabel>
-                <ThumbnailInput className="ThumbnailInput" id="thumbnail" ref={inputRef} type={"file"} onChange={onThumbnailImgHandler}/>
+                <ThumbnailInput className="ThumbnailInput" id="thumbnail" ref={inputRef} type={"file"} onChange={onThumbnailImgHandler} accept="image/gif, image/jpeg, image/png"/>
             </ThumbnailUploadDiv>
         </ThumbnailBox>
     )
