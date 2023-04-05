@@ -15,9 +15,17 @@ function AnnualGenre(props: any) {
   const data = useRecoilValue(annualGenreRatioSongAtom);
   const chartData = [];
   let songData = {};
+  let cnt = 0;
+  let ratioRemain = 1;
   for (const i of data[annualnow]) {
     chartData.push({ id: i.name, label: i.name, value: i.ratio });
     songData = { ...songData, [i.name]: i.songs };
+    ratioRemain -= i.ratio;
+    cnt++;
+    if (cnt == 5) {
+      chartData.push({ id: "기타", label: "기타", value: ratioRemain });
+      break;
+    }
   }
   setAnnualNowSong(chartData[0].id);
   const theme = useTheme();

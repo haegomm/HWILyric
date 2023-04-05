@@ -42,11 +42,11 @@ function AnnualKeywordCloud() {
     return <div>Loading...</div>;
   }
   return (
-    <div style={{ width: "420px", height: "288px" }}>
+    <div style={{ width: "420px", height: "240px" }}>
       <ReactWordcloud
         words={keywords}
-        minSize={[420, 288]}
-        size={[420, 288]}
+        minSize={[420, 240]}
+        size={[420, 240]}
         options={options}
       />
     </div>

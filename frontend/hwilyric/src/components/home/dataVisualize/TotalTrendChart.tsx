@@ -74,18 +74,46 @@ const sortTooltip = (a: any, b: any) => {
   return b.value - a.value; // value 기준으로 내림차순 정렬
 };
 
+const selectedGenres = [
+  "발라드",
+  "댄스",
+  "성인가요/트로트",
+  "포크/블루스",
+  "록/메탈",
+  "랩/힙합",
+  "annual",
+];
+
+const selectedGenres2 = [
+  "발라드",
+  "댄스",
+  "성인가요/트로트",
+  "포크/블루스",
+  "록/메탈",
+  "랩/힙합",
+];
+
 function TotalTrendChart(props: any) {
   const totalTrendData = useRecoilValue(totalTrendAtom);
   const setAnnualnow = useSetRecoilState(annualNowAtom);
   const theme = useTheme();
   let colorNum = 0;
+  let chartData = [];
+  for (const i of totalTrendData.genres) {
+    const annualObj = Object.fromEntries(
+      Object.entries(i).filter(([key, value]) => selectedGenres.includes(key))
+    );
+    chartData.push(annualObj);
+  }
+
+  console.log(chartData);
 
   return (
     <AreaChart
-      width={1200}
-      height={500}
-      data={totalTrendData.genres}
-      margin={{ top: 10, right: 10, left: 20, bottom: 10 }}
+      width={1000}
+      height={600}
+      data={chartData}
+      margin={{ top: 5, right: 10, left: 20, bottom: 60 }}
       onClick={(event) => {
         if (event) {
           const annual: any = event.activeLabel;
@@ -96,7 +124,7 @@ function TotalTrendChart(props: any) {
       }}
     >
       <defs>
-        {genres.map((genre) => {
+        {selectedGenres2.map((genre) => {
           const color1 = colorArr[colorNum % 10][0];
           const color2 = colorArr[colorNum % 10][1];
           colorNum++;
@@ -128,7 +156,7 @@ function TotalTrendChart(props: any) {
           );
         })}
       </defs>
-      <XAxis dataKey="annual" tick={<CustomXAxisTick />} interval={0} />
+      <XAxis dataKey="annual" tick={<CustomXAxisTick />} interval={9} />
       <YAxis type="number" hide={true} domain={[0, "dataMax"]} tick={false} />
       <Tooltip
         content={({ active, payload, label }) => {
@@ -161,8 +189,8 @@ function TotalTrendChart(props: any) {
           }
         }}
       />
-      <Legend layout="vertical" align="left" verticalAlign="top" />
-      {genres.map((genre) => {
+      <Legend layout="vertical" align="left" verticalAlign="middle" />
+      {selectedGenres2.map((genre) => {
         return (
           <Area
             key={`Area-${genre}`}
