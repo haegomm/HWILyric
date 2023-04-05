@@ -9,19 +9,13 @@ export const LoginBoxDiv = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  height: 656px;
-  width: ${(560 / 1920) * 100}vw;
+  height: auto;
+  padding: 150px 100px 80px 100px;
+  width: auto;
   border-radius: 0px;
   border-style: solid;
   border-width: 1px 1px 1px 1px;
-  border-image: linear-gradient(
-      to right bottom,
-      #ace5f8,
-      #e6b2fd,
-      #fdbfb4,
-      #fbd1dd
-    )
-    1;
+  border-image: linear-gradient(to right bottom, #ace5f8, #e6b2fd, #fdbfb4, #fbd1dd) 1;
 `;
 
 export const LoginTitleH1 = styled.h1`
@@ -105,10 +99,13 @@ export const LoginForgotPWDiv = styled.div`
 
 export const LoginButtonBoxDiv = styled.div``;
 
-export const LoginButton = styled.button`${ButtonCss("5vw", "32px")}`;
+export const LoginButton = styled.button`
+  ${ButtonCss("5vw", "32px")}
+`;
 
-export const ProfileModificationButton = styled.button`${ButtonCss("8vw", "6vh")}`;
-
+export const ProfileModificationButton = styled.button`
+  ${ButtonCss("8vw", "6vh")}
+`;
 
 export const LoginNoIdDiv = styled.div`
   font-size: 20px;
@@ -144,7 +141,6 @@ export const LoginKakaoA = styled.a`
 export const LoginKakaoImg = styled.img`
   max-width: 100%;
   max-height: 100%;
-
 `;
 
 export const LoginSignUpWrapper = styled.div`
@@ -181,4 +177,8 @@ export const PWFindTitleH1 = styled.h1`
   background: linear-gradient(to right, #ace5f8, #e6b2fd);
   background-clip: text;
   -webkit-background-clip: text;
+`;
+
+export const PWFindButton = styled.button`
+  ${ButtonCss("10vw", "6vh")}
 `;
