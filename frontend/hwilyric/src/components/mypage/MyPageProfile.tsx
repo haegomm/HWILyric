@@ -8,6 +8,8 @@ import { lyricCategoryAtom } from '../../atoms/mypageAtom';
 import { deleteUserInfo } from '../../features/userInfo';
 import { DropboxDiv, LyricListBodyItemDiv, MyPageProfileDiv, MyProfileImage } from '../../styles/mypageStyle';
 import MyPageDropbox from './MyPageDropbox';
+import { ProfileImageDiv, ProfileImageImg } from '../../styles/common/ProfileImageStyle';
+import ProfileImage from '../common/ProfileImage';
 
 function MyPageProfile() {
   const navigate = useNavigate();
@@ -31,7 +33,9 @@ function MyPageProfile() {
   return (
     <div>
       <MyPageProfileDiv>
-        <MyProfileImage src={ProfileImgUrl} />
+        <ProfileImageDiv width='88px' height='88px' borderRadius='70%'>
+          <ProfileImageImg src={ProfileImgUrl} />
+        </ProfileImageDiv>
         <span>{Nickname}님</span>
         <span onClick={onProfileHandler}>
           회원정보관리
