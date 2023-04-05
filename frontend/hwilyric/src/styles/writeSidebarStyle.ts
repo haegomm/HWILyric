@@ -119,7 +119,6 @@ export const ThumbnailLabel = styled.label`
     border-image-slice: 1;
     line-height: 30px;
     :hover {
-        border: none;
         transition: 0.7s;
         background: ${mainGradientColor};
     }
