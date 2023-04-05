@@ -9,10 +9,12 @@ import { blockListState, noteIdState, noteThumbnailFileState, noteThumbnailUrlSt
 import { memoState } from "../../atoms/sidebarAtoms"
 import VideoPlayer from "./sidebar/VideoPlayer"
 import NoteSave from "./note/NoteSave"
+import { isTempAtom } from "../../atoms/mypageAtom"
 
 function WriteNote() {
 
     const isLogin = useRecoilValue(IsLoginAtom)
+    const isTemp = useRecoilValue(isTempAtom)
 
     const blockListReset = useResetRecoilState(blockListState)
     const noteIdReset = useResetRecoilState(noteIdState)
@@ -23,7 +25,7 @@ function WriteNote() {
     const noteThumbnailUrlReset = useResetRecoilState(noteThumbnailUrlState)
 
     useEffect(() => {
-        if (isLogin) {
+        if (isLogin && !isTemp) {
             localStorage.removeItem('note')
             blockListReset()
             noteIdReset()

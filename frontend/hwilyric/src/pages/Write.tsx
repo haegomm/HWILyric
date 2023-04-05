@@ -4,17 +4,20 @@ import WriteNote from "../components/write/WriteNote"
 import WriteSidebar from "../components/write/WriteSidebar"
 import { useParams } from "react-router-dom"
 import { getLyricInfo } from '../api/writingApi'
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 import { blockListState, noteIdState, noteThumbnailFileState, noteThumbnailUrlState, titleState } from '../atoms/noteAtoms'
 import { memoState } from '../atoms/sidebarAtoms'
 import { IsLoginAtom } from '../atoms/userAtom'
-import { isModifyingAtom } from '../atoms/mypageAtom'
+import { isModifyingAtom, isTempAtom } from '../atoms/mypageAtom'
 
 function Write() {
   const params = useParams();
 
   const isLogin = useRecoilValue(IsLoginAtom)
   const isModifying = useRecoilValue(isModifyingAtom)
+  const [isTemp, setIsTemp] = useRecoilState(isTempAtom)
+
+  const title = useRecoilValue(titleState)
 
   const setNoteId = useSetRecoilState(noteIdState)
   const setTitle = useSetRecoilState(titleState)
@@ -26,8 +29,8 @@ function Write() {
 
   async function modifyInfo(noteId: string|undefined) {
     if (isLogin) {
-      const LyricInfo = await getLyricInfo(noteId)
-      if (LyricInfo !== null) {
+      if (isModifying) {
+        const LyricInfo = await getLyricInfo(noteId)
         if (LyricInfo !== undefined) {
           setNoteId(LyricInfo.id)
           setTitle(LyricInfo.title)
@@ -35,6 +38,11 @@ function Write() {
           setMemo(LyricInfo.memo)
           setThumbnail(LyricInfo.thumbnail)
         } else {
+          console.log('추천주제는 여기 아냐?')
+          setTitle(title)
+        } 
+      } else {
+        if (!isTemp) {
           localStorage.removeItem('note')
           setNoteId('')
           setTitle('무제')
@@ -42,8 +50,11 @@ function Write() {
           setMemo('')
           setThumbnail('')
           resetThumbnailFile()
+          console.log((localStorage.getItem('note')))
+        } else {
+          console.log('임시저장 후 로그인은 여기 아냐?')
         }
-      } 
+      }
     }
   }
 
