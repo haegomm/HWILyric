@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ButtonBox, RecommendBody, RecommendButton, RecommendHeader, SearchButton, SearchboxForm, SearchboxInput } from '../../../styles/recommendStyle'
+import { ButtonBox, RecommendBody, RecommendButton, RecommendHeader, RecommendSelectButton, SearchButton, SearchboxForm, SearchboxInput } from '../../../styles/recommendStyle'
 import { IconImage } from '../../../styles/mypageStyle'
 import { SearchIcon } from '../../../assets/writeSideBar/search'
 import { useRecoilState, useSetRecoilState } from 'recoil'
@@ -61,8 +61,22 @@ function SidebarRecommendHeader() {
   return (
     <RecommendHeader>
       <ButtonBox>
-        <RecommendButton type='button' value='similar' onClick={onModeHandler}>유사</RecommendButton>
+        { (keywordMode === 'similar') ? (
+        <RecommendSelectButton type='button' value='similar' onClick={onModeHandler}>유사</RecommendSelectButton>
+        // <RecommendButton type='button' value='rhyme' onClick={onModeHandler}>라임</RecommendButton>
+        ) : (
+          <RecommendButton type='button' value='similar' onClick={onModeHandler}>유사</RecommendButton>
+          // <RecommendSelectButton type='button' value='rhyme' onClick={onModeHandler}>라임</RecommendSelectButton>
+        )
+      }
+      { (keywordMode === 'similar') ? (
+        // <RecommendSelectButton type='button' value='similar' onClick={onModeHandler}>유사</RecommendSelectButton>
         <RecommendButton type='button' value='rhyme' onClick={onModeHandler}>라임</RecommendButton>
+        ) : (
+          // <RecommendButton type='button' value='similar' onClick={onModeHandler}>유사</RecommendButton>
+          <RecommendSelectButton type='button' value='rhyme' onClick={onModeHandler}>라임</RecommendSelectButton>
+        )
+      }
       </ButtonBox>
       <SearchboxForm onSubmit={onSearchHandler}>
           <SearchboxInput type="text" placeholder='검색어를 입력하세요' onChange={onSearchwordHandler}/>
