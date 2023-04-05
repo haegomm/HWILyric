@@ -82,8 +82,8 @@ function TotalTrendChart(props: any) {
 
   return (
     <AreaChart
-      width={920}
-      height={536}
+      width={1200}
+      height={500}
       data={totalTrendData.genres}
       margin={{ top: 10, right: 10, left: 20, bottom: 10 }}
       onClick={(event) => {
