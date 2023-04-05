@@ -16,7 +16,6 @@ export const SideBarBox = styled.div`
 // 탭
 export const TabMenu = styled.ul`
     color: 636161;
-    font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -28,10 +27,11 @@ export const TabMenu = styled.ul`
         display: flex;
         justify-content: center;
         font-size: 15px;
-        transition: 0.4s;
+        transition: 0.1s;
     }
 
     .focused {
+        font-weight: bold;
         color: rgb(222,179,251);
     }
 

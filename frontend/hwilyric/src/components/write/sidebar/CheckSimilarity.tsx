@@ -1,4 +1,4 @@
-import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil"
+import { useRecoilValue, useRecoilState, useSetRecoilState, useResetRecoilState } from "recoil"
 import SimilarItem from "./SimilarItem"
 import { blockListState } from "../../../atoms/noteAtoms"
 import { similarListState, similarListLengthState, checkLoadingState } from "../../../atoms/sidebarAtoms"
@@ -6,6 +6,7 @@ import { ISimilarityTypes } from "../../../types/writingType"
 import { checkSimilarity } from "../../../api/writingApi"
 import { CheckButton } from "../../../styles/common/ButtonStyle"
 import { SimilarListBox } from "../../../styles/writeSidebarStyle"
+import { AxiosError } from "axios"
 
 function CheckSimilarity() {
     
@@ -14,25 +15,34 @@ function CheckSimilarity() {
     const setSimilarListLength = useSetRecoilState(similarListLengthState)
     const setCheckLoadingState = useSetRecoilState(checkLoadingState)
 
+    const resetCheckLoading = useResetRecoilState(checkLoadingState)
+    const resetSimilarList = useResetRecoilState(similarListState)
+    const resetSimilarListLength = useResetRecoilState(similarListLengthState)
+
     const getUserLyrics = () => {
         const lyrics = blockList.filter(block => block.lyrics !== null).map((block => block.lyrics!))
         return lyrics
     }
 
     const onCheck = async () => {
+        resetCheckLoading()
+        resetSimilarList()
+        resetSimilarListLength()
         setCheckLoadingState(true)
         const lyrics = await getUserLyrics()
-        console.log(lyrics)
         const body: ISimilarityTypes = {
             userLyric: lyrics
+        }      
+        try {
+            const data = await checkSimilarity(body);
+            setSimilarList(data.similarList);
+            setSimilarListLength(data.similarList.length);
+            await setCheckLoadingState(false);
+            return data;
+        } catch (err: any) {
+            alert("유사한 가사가 없습니다. 특수문자가 있다면 제거하고 다시 시도해보세요!")
+            await setCheckLoadingState(false);
         }
-        console.log("유사도 검사해줘~!", body)
-        
-        const data = await checkSimilarity(body)
-        setSimilarList(data.similarList)
-        setSimilarListLength(data.similarList.length)
-        await setCheckLoadingState(false)
-        return data
     }
     
     return (

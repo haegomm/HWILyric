@@ -8,16 +8,6 @@ import { BlockListStyle } from "../../../styles/writeNoteStyle"
 function BlockList() {
 
     const [blockList, setBlockList] = useRecoilState(blockListState)
-
-    // useEffect(() => {
-    //     const autoSaveNote = setInterval(() => {
-    //         onSaveBlockList()
-    //   }, 180000)
-    
-    //   return () => {
-    //     clearInterval(autoSaveNote)
-    //   }
-    // }, [])
     
 
     const onDragEnd = useCallback((result: DropResult) => {
