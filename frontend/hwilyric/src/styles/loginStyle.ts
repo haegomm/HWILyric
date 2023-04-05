@@ -169,3 +169,24 @@ export const LoginPasswordBox = styled.div`
   height: 60px;
   width: ${(288 / 1920) * 100}vw;
 `;
+
+export const PWFindTitleBackground = styled.div`
+  background: ${(props) => (props.theme === lightTheme ? "white" : "#191B1F")};
+  position: absolute;
+  width: 144px;
+  height: 48px;
+  top: -24px;
+  z-index: 1;
+`;
+
+export const PWFindTitleH1 = styled.h1`
+  position: absolute;
+  top: -24px;
+  font-size: 48px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0);
+  z-index: 1;
+  background: linear-gradient(to right, #ace5f8, #e6b2fd);
+  background-clip: text;
+  -webkit-background-clip: text;
+`;
