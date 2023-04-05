@@ -1,3 +1,4 @@
+import numpy as np
 from django.db import models
 
 # Create your models here.
@@ -18,11 +19,18 @@ class User(models.Model):
         managed = False
         db_table = 'user'
 
-# class Model(models.Model):
-#     id = models.BigAutoField(primary_key=True, db_comment='아이디')
-#     word = models.CharField(max_length=255, db_comment='단어')
-#     vector_data = models.TextField(blank=True, null=True, db_comment='벡터데이터')
-#
-#     class Meta:
-#         managed = False
-#         db_table = 'model'
+class HangulModel(models.Model):
+    word = models.CharField(max_length=255, db_comment='단어')
+    vector_data = models.TextField(blank=True, null=True, db_comment='벡터데이터')
+
+    class Meta:
+        managed = False
+        db_table = 'hangul_model'
+
+class EnglishModel(models.Model):
+    word = models.CharField(max_length=255, db_comment='단어')
+    vector_data = models.TextField(blank=True, null=True, db_comment='벡터데이터')
+
+    class Meta:
+        managed = False
+        db_table = 'english_model'
