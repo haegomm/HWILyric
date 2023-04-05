@@ -1,4 +1,4 @@
-import { atom } from "recoil"
+import { atom, selector } from "recoil"
 import { recoilPersist } from 'recoil-persist';
 import { ILyricBlockTypes } from "../types/writingType"
 import { Default_thumbnail_1 } from "../assets/writeSideBar/search"
@@ -49,4 +49,26 @@ export const noteThumbnailUrlState = atom<string>({
     key: "noteThumbnailUrlState",
     default: Default_thumbnail_1,
     effects_UNSTABLE: [persistAtom],
+})
+
+export const saveTimeState = atom<string>({
+    key: "saveTimeState",
+    default: ""
+})
+
+export const saveTimeSelector = selector({
+    key: "saveTimeSelector",
+    get: ({ get }) => {
+        const originalDate = get(saveTimeState);
+        const convertedDate = new Date(originalDate).toLocaleString('ko-KR', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour12: true,
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric'
+        })
+        return convertedDate
+    }
 })

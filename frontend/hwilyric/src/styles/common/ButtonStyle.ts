@@ -6,12 +6,19 @@ export const ButtonCss = (width?: string, height?: string) => css`
     font-size: 16px;
     border: 2px solid;
     background-color: none;
-    border-image: linear-gradient(45deg, #fbfcb9be, #ffcdf3aa, #65d3ffaa);
+    border-image: linear-gradient(to right,
+        ${props => props.theme.accentColor['1']}, 
+        ${props => props.theme.accentColor['2']}, 
+        ${props => props.theme.accentColor['4']});
     border-image-slice: 1;
     :hover {
         border: none;
-        transition: 0.7s;
-        background: linear-gradient(45deg, #fbfcb9be, #ffcdf3aa, #65d3ffaa);
+        font-weight: bold;
+        // transition: 0.7s;
+        color: white;
+        background: linear-gradient(45deg, ${props => props.theme.accentColor['1']}, 
+        ${props => props.theme.accentColor['2']},
+        ${props => props.theme.accentColor['3']});
     }
 `
 
