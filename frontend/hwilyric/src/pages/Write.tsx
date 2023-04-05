@@ -38,7 +38,6 @@ function Write() {
           setMemo(LyricInfo.memo)
           setThumbnail(LyricInfo.thumbnail)
         } else {
-          console.log('추천주제는 여기 아냐?')
           setTitle(title)
         } 
       } else {
@@ -50,9 +49,6 @@ function Write() {
           setMemo('')
           setThumbnail('')
           resetThumbnailFile()
-          console.log((localStorage.getItem('note')))
-        } else {
-          console.log('임시저장 후 로그인은 여기 아냐?')
         }
       }
     }
