@@ -13,7 +13,7 @@ export const RecommendContent = styled.div`
 
 export const RecommendBody = styled.div`
   width: 90%;
-  height: 30vh;
+  height: 24vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -33,7 +33,7 @@ export const RandomHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   font-weight: bolder;
 `
 
