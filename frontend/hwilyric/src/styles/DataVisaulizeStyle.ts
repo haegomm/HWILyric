@@ -4,7 +4,7 @@ import { lightTheme } from "../theme/theme";
 export const DataVisualizePage = styled.div`
   display: flex;
   justify-content: space-around;
-  width: 1800px;
+  width: 1900px;
 `;
 
 export const WeeklyReportDiv = styled.div`
@@ -13,7 +13,7 @@ export const WeeklyReportDiv = styled.div`
   justify-content: space-around;
   align-items: center;
   width: ${(368 / 1920) * 100}vw;
-  height: 800px;
+  height: 80vh;
   border-style: solid;
   border-width: 1px 1px 1px 1px;
   border-image: linear-gradient(
@@ -60,8 +60,8 @@ export const WeeklyReportGenreDiv = styled.div`
 `;
 
 export const AnnualReportDiv = styled.div`
-  width: 420px;
-  height: 800px;
+  width: 42vh;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -75,11 +75,11 @@ export const AnnualReportTitle = styled.title`
 `;
 
 export const AnnualGenreDiv = styled.div`
-  width: 420px;
-  height: 380px;
+  width: 56vh;
+  height: 38vh;
   display: flex;
   justify-content: space-around;
-  flex-direction: column;
+  // flex-direction: column;
   align-items: center;
   border-style: solid;
   border-width: 2px 2px 2px 2px;
@@ -101,7 +101,7 @@ export const AnnualGenreDiv = styled.div`
 
 export const TotalTrendDiv = styled.div`
   width: ${(1144 / 1920) * 100}vw;
-  height: 800px;
+  height: 80vh;
   padding-top: 100px;
   display: flex;
   flex-direction: column;
@@ -124,8 +124,8 @@ export const TotalTrendDiv = styled.div`
 // }
 
 export const AnnualKeywordDiv = styled.div`
-  width: 420px;
-  height: 392px;
+  width: 56vh;
+  height: 39vh;
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
