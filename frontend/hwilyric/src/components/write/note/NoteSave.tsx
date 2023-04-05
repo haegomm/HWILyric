@@ -7,6 +7,7 @@ import { memoState } from "../../../atoms/sidebarAtoms"
 import { useNavigate } from "react-router-dom"
 import { SaveDivBox } from "../../../styles/writeNoteStyle"
 import { SaveButton } from "../../../styles/common/ButtonStyle"
+import { isTempAtom } from "../../../atoms/mypageAtom"
 
 function NoteSave () {
     const navigate = useNavigate();
@@ -16,6 +17,7 @@ function NoteSave () {
     const title = useRecoilValue(titleState)
 
     const isLogin = useRecoilValue(IsLoginAtom)
+    const setIsTemp = useSetRecoilState(isTempAtom)
     const memo = useRecoilValue(memoState)
     const thumbnailFile = useRecoilValue(noteThumbnailFileState)
     const noteThumbnailUrl = useRecoilValue(noteThumbnailUrlState)
@@ -46,11 +48,13 @@ function NoteSave () {
             console.log(res)
             setNoteId(() => res)
             setThumbnailImageUrl(res.thumbnail)
+            setIsTemp(false)
     
             // 저장 시간 받기
         } else {
             window.localStorage.setItem('note', JSON.stringify(formData))
             console.log("로컬에 저장~!")
+            setIsTemp(true)
             // 로그인X -> localStorage 저장 후 로그인 물어보기
             if (window.confirm("로그인이 필요합니다. 로그인 하시겠습니까?")) {
                 navigate("/login")

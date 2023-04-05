@@ -10,7 +10,7 @@ import { isModifyingAtom } from "../../atoms/mypageAtom";
 function Navbar({toggleDarkMode}: any) {
   const isLogin = useRecoilValue(IsLoginAtom)
   const nickname = useRecoilValue(userNicknameAtom)
-  const isModifying = useResetRecoilState(isModifyingAtom)
+  const IsModifying = useResetRecoilState(isModifyingAtom)
 
   return (
     <nav>
@@ -26,7 +26,7 @@ function Navbar({toggleDarkMode}: any) {
             <BsFillMoonFill style={{color: "003458"}}/>  
           </DarkModeBox>
           <div>
-            <NavLink to="/write"  style={{ textDecoration: "none" }} onClick={isModifying}>작사하기</NavLink>
+            <NavLink to="/write"  style={{ textDecoration: "none" }} onClick={IsModifying}>작사하기</NavLink>
           </div>
           <div>
             {isLogin ? (

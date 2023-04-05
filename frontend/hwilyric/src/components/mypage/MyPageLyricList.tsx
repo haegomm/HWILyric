@@ -6,13 +6,14 @@ import { lightDelete, lightModify, lightView } from '../../assets/icon/myButtons
 import { deleteNote } from '../../api/deleteApit'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import { useNavigate } from 'react-router-dom'
-import { isModifyingAtom } from '../../atoms/mypageAtom'
+import { isModifyingAtom, isTempAtom } from '../../atoms/mypageAtom'
 
 function MyPageLyricList() {
   const navigate = useNavigate();
   const [myLyrics, setMyLyrics] = useState([])
   const [nullLyrics, setNullLyrics] = useState('')
   const setIsModifying = useSetRecoilState(isModifyingAtom)
+  const setIsTemp = useSetRecoilState(isTempAtom)
       
   async function getMyLyrics() {
     const lyricList = await getLyricList()
@@ -34,6 +35,7 @@ function MyPageLyricList() {
     const noteId = e.currentTarget.id
     navigate(`/modify/${noteId}`)
     setIsModifying(true)
+    setIsTemp(false)
   }
 
   const onDeleteHandler = async (e: React.MouseEvent<HTMLImageElement>) => {
