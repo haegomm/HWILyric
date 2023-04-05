@@ -43,6 +43,7 @@ public class SimilarityService {
             List<String> oneBlock = Arrays.asList(userLyricList[i].split("\n"));
 
             for(String oneLine : oneBlock) {//사용자가 입력한 가사 한 줄에 대해
+                if(oneLine.length()<=3) continue;
                 //특수문자 제거
 //                String fixedLyric = oneLine.replaceAll("[@&#$%*$^,./]", "");
                 //임시로 유사한 가사와 해당 곡제목, 가수를 넣어둘 리스트 -> 나중에 정렬할 것
@@ -57,7 +58,7 @@ public class SimilarityService {
 
                     //유사도 측정
                     Double ratio = js.apply(oneLine, (String) newArr[2]);
-                    if (tempList[j] != null && ratio >= 0.75) {
+                    if (tempList[j] != null && ratio >= 0.8) {
                         //임시 리스트에 가사, 가수, 노래제목, 유사도(비율)넣기
                         LyricInfo info = new LyricInfo((String) newArr[0], (String) newArr[1], (String) newArr[2], ratio);
                         if (similarLyrics.contains(info))
