@@ -4,7 +4,7 @@ import { lightTheme } from "../theme/theme";
 export const DataVisualizePage = styled.div`
   display: flex;
   justify-content: space-around;
-  width: 1900px;
+  width: 2200px;
 `;
 
 export const WeeklyReportDiv = styled.div`
@@ -100,7 +100,8 @@ export const AnnualGenreDiv = styled.div`
 `;
 
 export const TotalTrendDiv = styled.div`
-  width: ${(1144 / 1920) * 100}vw;
+  // width: ${(1144 / 1920) * 100}vw;
+  width: 100%
   height: 80vh;
   padding-top: 100px;
   display: flex;
