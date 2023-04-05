@@ -5,8 +5,8 @@ import AnnualKeyword from "./AnnualKeyword";
 function AnnualReport() {
   return (
     <AnnualReportDiv>
-      <AnnualGenre></AnnualGenre>
-      <AnnualKeyword></AnnualKeyword>
+      <AnnualGenre />
+      <AnnualKeyword />
     </AnnualReportDiv>
   );
 }
