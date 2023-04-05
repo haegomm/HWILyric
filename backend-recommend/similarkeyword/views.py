@@ -93,9 +93,12 @@ class KeywordList(APIView):
                     word_temp.append(ko_word[0])
 
         try:
-            list = kv.most_similar(word_temp[0])
+            if len(word_temp)>0 :
+                list = kv.most_similar(word_temp[0])
+            else:
+                return JsonResponse({"message" : "형용사 or 명사 or 동사만 입력해주세요."}, status=400)
         except KeyError:
-            return JsonResponse({"message": "일치하는 키워드가 없습니다."}, status=404)
+            return JsonResponse({"message" : "유사한 키워드가 없습니다."}, status=404)
         answer = []
         for word in list:
             answer.append(word[0])
