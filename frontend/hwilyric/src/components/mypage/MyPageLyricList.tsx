@@ -60,7 +60,7 @@ function MyPageLyricList() {
                 <LyricListBodyItemDiv width='10vw'>
                   <LyricThumbnail src={myLyric.thumbnail} />
                 </LyricListBodyItemDiv>
-                <LyricListBodyItemDiv width='20vw'>
+                <LyricListBodyItemDiv width='20vw' id={myLyric.id} onClick={onModifyHandler}>
                   {myLyric.title}
                 </LyricListBodyItemDiv>
                 <LyricListBodyItemDiv width='10vw'>
@@ -70,7 +70,7 @@ function MyPageLyricList() {
                   {myLyric.updatedDate.substring(0, 10)}
                 </LyricListBodyItemDiv>
                 <LyricListBodyItemDiv width='10vw'>
-                  <IconImage src={lightView} id={myLyric.id} onClick={onDeleteHandler}/>
+                  {/* <IconImage src={lightView} id={myLyric.id} onClick={onDeleteHandler}/> */}
                   <IconImage src={lightModify} id={myLyric.id} onClick={onModifyHandler}/>
                   <IconImage src={lightDelete} id={myLyric.id} alt={myLyric.title} onClick={onDeleteHandler}/>
                 </LyricListBodyItemDiv>
