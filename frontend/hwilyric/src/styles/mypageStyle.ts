@@ -42,6 +42,10 @@ export const MyProfileImage = styled.img`
   width: 88px;
   
 `
+export const MyProfileSpan = styled.span`
+  cursor: pointer;
+`
+
 
 export const ArrowImage = styled.img`
   width: 16px;
