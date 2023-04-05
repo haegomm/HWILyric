@@ -12,7 +12,11 @@ const NoteBoxInfo = (height? : string) => css`
 
 const NoteBorderBottom = () => css`
     border-bottom: 1px solid;
-    border-image: linear-gradient(to right, #fbfcb9be, #ffcdf3aa, #65d3ffaa);
+    border-image: linear-gradient(to right,
+        ${props => props.theme.accentColor['1']}, 
+        ${props => props.theme.accentColor['2']}, 
+        ${props => props.theme.accentColor['3']},
+        ${props => props.theme.accentColor['4']});
     border-image-slice: 1;
 `
 
@@ -88,6 +92,7 @@ export const DeleteButtonBox = styled.div`
     & > button {
         font-size: 2vw;
         display: none;
+        color: #8A1C70;
     }
 `
 

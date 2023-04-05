@@ -24,6 +24,9 @@ import PrivateRoute from "./features/router";
 import { AppDiv } from "./styles/common/AppStyle";
 
 function App() {
+
+  RouteChangeTracker()
+
   const isLogin = useRecoilValue(IsLoginAtom);
 
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -33,6 +36,7 @@ function App() {
   };
 
   useEffect(() => {
+
     const issueToken = async () => {
       console.log('토큰 한번 받아본다')
       const accessToken = await reissueToken();

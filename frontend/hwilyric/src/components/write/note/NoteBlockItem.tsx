@@ -5,7 +5,7 @@ import { blockListState } from "../../../atoms/noteAtoms"
 import { BlockItemStyle, DeleteButtonBox } from "../../../styles/writeNoteStyle"
 import { ILyricBlockTypes } from "../../../types/writingType"
 import { HamburgerButton } from "../../../assets/writeSideBar/search"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
 interface BlockItemProps {
     block: ILyricBlockTypes
@@ -16,10 +16,14 @@ interface IContainer {
     isDragging: boolean;
 }
 
+const DraggingCss = css`
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+`
+
 const Container = styled.div<IContainer>`
     display: flex;
     justify-content: space-evenly;
-    background-color: ${(props) => (props.isDragging ? "lightgreen" : "")};
+    ${(props) => (props.isDragging ? DraggingCss : "")};
 `;
 
 

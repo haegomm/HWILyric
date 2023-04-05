@@ -1,6 +1,7 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
-import { blockListState, titleState, noteIdState, noteThumbnailFileState, noteThumbnailUrlState } from "../../../atoms/noteAtoms"
-import { IsLoginAtom }  from "../../../atoms/userAtom"
+import { blockListState, titleState, noteIdState, noteThumbnailFileState, noteThumbnailUrlState, saveTimeState } from "../../../atoms/noteAtoms"
+import { useEffect } from "react"
+import { IsLoginAtom } from "../../../atoms/userAtom"
 import { ILyricInfoTypes } from "../../../types/writingType"
 import { saveNote } from "../../../api/writingApi"
 import { memoState } from "../../../atoms/sidebarAtoms"
@@ -21,8 +22,20 @@ function NoteSave () {
     const noteThumbnailUrl = useRecoilValue(noteThumbnailUrlState)
     const setThumbnailImageUrl = useSetRecoilState(noteThumbnailUrlState)
 
+    const setSaveTime = useSetRecoilState(saveTimeState)
+
+    useEffect(() => {
+        const autoSaveNote = setInterval(() => {
+            onSave()
+      }, 180000)
+    
+      return () => {
+        clearInterval(autoSaveNote)
+      }
+    }, [])
+
     const onSave = async () => {
-        
+
         const noteInfo: ILyricInfoTypes = {
             id: noteId,
             title: title,
@@ -44,8 +57,9 @@ function NoteSave () {
         if (isLogin) {
             const res = await saveNote(formData)
             console.log(res)
-            setNoteId(() => res)
+            setNoteId(() => res.id)
             setThumbnailImageUrl(res.thumbnail)
+            setSaveTime(res.updatedDate)
     
             // 저장 시간 받기
         } else {
