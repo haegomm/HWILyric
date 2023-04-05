@@ -16,7 +16,6 @@ function LoginKakao() {
 
   let params = new URL(document.URL).searchParams;
   let code = params.get("code");
-  // console.log(code)
 
   useEffect(() => {
     async function kakaoLogin() {
@@ -28,7 +27,7 @@ function LoginKakao() {
       setIsLogin(true)
       setNickname(data.nickname)
       setProfileImg(data.profileImg)
-      navigate("/home");
+      navigate("/");
     } else {
       console.log('로그인 실패ㅜ;')
     } 
