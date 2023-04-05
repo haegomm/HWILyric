@@ -10,7 +10,7 @@ function AnnualGenreSongs(props: any) {
       {props.data[annualnowsong].map((song: any) => (
         <div
           style={{
-            width: "400px",
+            width: "100%",
             // height: "40px",
             whiteSpace: "pre-wrap",
             overflow: "wrap",

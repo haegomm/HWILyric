@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const AppDiv = styled.div`
-  height: 88vh;
+  height: 88%;
   padding: 0 5vw 0 5vw;
   display: flex;
   flex-wrap: nowrap;

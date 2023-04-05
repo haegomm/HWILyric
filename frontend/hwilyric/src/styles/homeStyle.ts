@@ -6,14 +6,15 @@ interface divWidth{
 
 export const HomeContainer = styled.div`
   overflow: auto;
+  height: 100%;
 `
 
 export const HomeTrapezoid = styled.img`
   position: absolute;
   top: 0;
   left: 0;
-  width: 60vw;
-  height: 100vh;
+  width: 56vw;
+  height: 100%;
   z-index: -1;
 `
 
@@ -23,7 +24,10 @@ export const HomeContent = styled.div`
   overflow-y: scroll;
   align-items: center;
   float: left;
-  height: 100%;
+  height: 50%
+  margin: 0;
+  padding: 0;
+  border: 0;
 `
 
 export const HomeDiv = styled.div`
