@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User
+from .models import User, HangulModel, EnglishModel
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -7,7 +7,12 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__' # 모델 User의 모든 field를 serialize 함.
 
-# class ModelSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Model
-#         fields = '__all__'
+class HangulModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HangulModel
+        fields = ("word", "vector_data")
+
+class EnglishModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EnglishModel
+        fields = ("word", "vector_data")
