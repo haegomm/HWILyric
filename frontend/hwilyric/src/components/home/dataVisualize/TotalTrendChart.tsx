@@ -128,7 +128,7 @@ function TotalTrendChart(props: any) {
           );
         })}
       </defs>
-      <XAxis dataKey="annual" tick={<CustomXAxisTick />} interval={0} />
+      <XAxis dataKey="annual" tick={<CustomXAxisTick />} interval={9} />
       <YAxis type="number" hide={true} domain={[0, "dataMax"]} tick={false} />
       <Tooltip
         content={({ active, payload, label }) => {

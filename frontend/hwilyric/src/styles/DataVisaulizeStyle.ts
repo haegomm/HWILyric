@@ -60,8 +60,8 @@ export const WeeklyReportGenreDiv = styled.div`
 `;
 
 export const AnnualReportDiv = styled.div`
-  width: 42vh;
-  height: 80vh;
+  width: 420px;
+  height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
