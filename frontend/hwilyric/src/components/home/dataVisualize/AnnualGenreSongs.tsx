@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { useRecoilValue } from "recoil";
 import { annualNowSongAtom } from "../../../atoms/visualizingAtoms";
 import { AnnualGenreSongDiv } from "../../../styles/DataVisaulizeStyle";
@@ -7,7 +8,19 @@ function AnnualGenreSongs(props: any) {
   return (
     <AnnualGenreSongDiv>
       {props.data[annualnowsong].map((song: any) => (
-        <div key={song}>{song}</div>
+        <div
+          style={{
+            width: "400px",
+            // height: "40px",
+            whiteSpace: "pre-wrap",
+            overflow: "wrap",
+            display: "flex",
+            justifyContent: "center",
+          }}
+          key={song}
+        >
+          {song}
+        </div>
       ))}
     </AnnualGenreSongDiv>
   );

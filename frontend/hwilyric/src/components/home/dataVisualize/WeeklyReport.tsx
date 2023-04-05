@@ -7,6 +7,17 @@ import {
 } from "../../../styles/DataVisaulizeStyle";
 import { weeklyNewSong } from "../../../api/visualizingApi";
 import { useState, useEffect } from "react";
+
+import axios from "axios";
+import { INewSongTypes } from "../../../types/visualizingType";
+
+const weeklyNewSong2 = async (date: INewSongTypes) => {
+  const res = await axios.get(
+    `https://j8b107.p.ssafy.io/api/trend/weekly?startDate=${date.startDate}&endDate=${date.endDate}`
+  );
+  return res.data;
+};
+
 const today = new Date();
 const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
 
@@ -22,11 +33,11 @@ const weekAgoString = yyyyMMdd(weekAgo); // 일주일 전 날짜의 문자열 �
 
 function WeeklyReport() {
   const [data, setData] = useState({ genres: null, keywords: null });
-
+  console.log(todayString, weekAgoString);
   const getData = async () => {
-    const data = await weeklyNewSong({
-      startDate: todayString,
-      endDate: weekAgoString,
+    const data = await weeklyNewSong2({
+      startDate: weekAgoString,
+      endDate: todayString,
     });
     setData(data);
   };

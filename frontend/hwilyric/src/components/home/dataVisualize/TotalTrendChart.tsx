@@ -1,8 +1,10 @@
-import { AreaChart, XAxis, YAxis, Area, Tooltip } from "recharts";
+import { AreaChart, XAxis, YAxis, Area, Tooltip, Legend } from "recharts";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { annualNowAtom, totalTrendAtom } from "../../../atoms/visualizingAtoms";
 import { lightTheme } from "../../../theme/theme";
 import { useTheme } from "styled-components";
+import AnnualGenreChart from "./AnnualGenreChart";
+import styled from "styled-components";
 
 const genres = [
   "일렉트로니카",
@@ -65,7 +67,7 @@ function getRandomColor(): string {
   const green = Math.floor(Math.random() * 256);
   const blue = Math.floor(Math.random() * 256);
 
-  return `rgb(${red}, ${green}, ${blue})`;
+  return `rgb(${red}, ${green}, ${blue}, 1)`;
 }
 
 const sortTooltip = (a: any, b: any) => {
@@ -77,15 +79,19 @@ function TotalTrendChart(props: any) {
   const setAnnualnow = useSetRecoilState(annualNowAtom);
   const theme = useTheme();
   let colorNum = 0;
+
   return (
     <AreaChart
-      width={1344}
-      height={792}
+      width={920}
+      height={536}
       data={totalTrendData.genres}
       margin={{ top: 10, right: 10, left: 20, bottom: 10 }}
       onClick={(event) => {
-        if (event.activeLabel) {
-          setAnnualnow(event.activeLabel);
+        if (event) {
+          const annual: any = event.activeLabel;
+          if (!isNaN(parseInt(annual))) {
+            setAnnualnow(annual);
+          }
         }
       }}
     >
@@ -96,25 +102,31 @@ function TotalTrendChart(props: any) {
           colorNum++;
           return (
             <>
-              <linearGradient id={genre} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor={color1} stopOpacity={0.2} />
-                <stop offset="95%" stopColor={color2} stopOpacity={0.8} />
+              <linearGradient
+                key={`Grad1-${genre}`}
+                id={genre}
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="1"
+              >
+                <stop offset="5%" stopColor={color1} stopOpacity={0.1} />
+                <stop offset="95%" stopColor={color2} stopOpacity={0.4} />
               </linearGradient>
-              <linearGradient id={"dark" + genre} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor={color1} stopOpacity={0.9} />
-                <stop offset="95%" stopColor={color2} stopOpacity={1} />
+              <linearGradient
+                key={`Grad2-${genre}`}
+                id={"dark" + genre}
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="1"
+              >
+                <stop offset="5%" stopColor={color1} stopOpacity={0.5} />
+                <stop offset="95%" stopColor={color2} stopOpacity={0.7} />
               </linearGradient>
             </>
           );
         })}
-        <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="5%" stopColor="#81E47F" stopOpacity={0.2} />
-          <stop offset="95%" stopColor="#96BCF2" stopOpacity={0.8} />
-        </linearGradient>
-        <linearGradient id="darkcolorUv" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="5%" stopColor="#81E47F" stopOpacity={0.9} />
-          <stop offset="95%" stopColor="#96BCF2" stopOpacity={1} />
-        </linearGradient>
       </defs>
       <XAxis dataKey="annual" tick={<CustomXAxisTick />} interval={0} />
       <YAxis type="number" hide={true} domain={[0, "dataMax"]} tick={false} />
@@ -124,6 +136,7 @@ function TotalTrendChart(props: any) {
             const sortedPayload = [...payload].sort(
               (a: any, b: any) => b.value - a.value
             );
+
             return (
               <div
                 className="custom-tooltip"
@@ -148,13 +161,15 @@ function TotalTrendChart(props: any) {
           }
         }}
       />
+      <Legend layout="vertical" align="left" verticalAlign="top" />
       {genres.map((genre) => {
         return (
           <Area
+            key={`Area-${genre}`}
             type="monotone"
             dataKey={genre}
-            stroke="none"
-            fillOpacity={1}
+            stroke={getRandomColor()}
+            fillOpacity={0.1}
             fill={
               theme === lightTheme ? `url(#${genre})` : `url(#dark${genre})`
             }

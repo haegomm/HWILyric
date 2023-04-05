@@ -24,7 +24,6 @@ function HomeQuickview() {
       const sortedLyrics = lyricList.slice(0).sort((a: IGetILyricInfoTypes, b: IGetILyricInfoTypes) => {
         return new Date(b.updatedDate).valueOf() - new Date(a.updatedDate).valueOf();})
       setMyLyrics(sortedLyrics)
-      console.log('뽑아왔어용', sortedLyrics)
       setNullLyrics('')
     } else {
       console.log('')

@@ -6,9 +6,17 @@ import authValidation from "../../features/validation";
 import { IsKnownPassword } from "../../atoms/userAtom";
 import {
   LoginBoxDiv,
+  LoginButton,
+  LoginButtonBoxDiv,
+  LoginEmailDiv,
+  LoginForm,
+  LoginInputI,
   PWFindTitleBackground,
   PWFindTitleH1,
+  ProfileModificationButton,
 } from "../../styles/loginStyle";
+
+import { useTheme } from "styled-components";
 
 function LoginForgetPassword() {
   const [Email, setEmail] = useState("");
@@ -43,12 +51,28 @@ function LoginForgetPassword() {
     setIsKnownPassword(true);
   };
 
+  const theme = useTheme();
+
   return (
     <LoginBoxDiv>
       <PWFindTitleBackground />
       <PWFindTitleH1 className="signUpTitle">비밀번호 초기화</PWFindTitleH1>
       <br />
-      <div>
+      <LoginForm onSubmit={onSubmitHandler} className="formItemSignup">
+      <p>가입한 이메일을 입력해주세요</p>
+      <LoginEmailDiv>
+          <LoginInputI
+            type="email"
+            placeholder="이메일"
+            className="signUpInputEmail"
+            onChange={onEmailHandler}
+          />
+        </LoginEmailDiv>
+        <LoginButtonBoxDiv>
+          <ProfileModificationButton>임시 비밀번호 발송</ProfileModificationButton>
+        </LoginButtonBoxDiv>
+        </LoginForm>
+      {/* <div>
         <form onSubmit={onSubmitHandler} className="formItemSignup">
           <div className="emailDiv">
             <p>가입한 이메일을 입력해주세요</p>
@@ -83,7 +107,7 @@ function LoginForgetPassword() {
           </button>
         </form>
         <div onClick={onLoginPageHandler}>로그인 하러 갈랭</div>
-      </div>
+      </div> */}
     </LoginBoxDiv>
   );
 }

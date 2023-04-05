@@ -4,7 +4,7 @@ import { lightTheme } from "../theme/theme";
 export const DataVisualizePage = styled.div`
   display: flex;
   justify-content: space-around;
-  width: 2600px;
+  width: 1800px;
 `;
 
 export const WeeklyReportDiv = styled.div`
@@ -12,7 +12,7 @@ export const WeeklyReportDiv = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 368px;
+  width: ${(368 / 1920) * 100}vw;
   height: 800px;
   border-style: solid;
   border-width: 1px 1px 1px 1px;
@@ -100,8 +100,13 @@ export const AnnualGenreDiv = styled.div`
 `;
 
 export const TotalTrendDiv = styled.div`
-  width: 1352px;
+  width: ${(1144 / 1920) * 100}vw;
   height: 800px;
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   border-style: solid;
   border-width: 2px 2px 2px 2px;
   border-image: linear-gradient(
