@@ -32,7 +32,7 @@ export const checkLoadingState = atom<boolean>({
 
 export const keywordModeAtom = atom<string>({
     key: 'kewordMode',
-    default: 'similar',
+    default: 'rhyme',
 })
 
 export const keywordListAtom = atom<[]>({
