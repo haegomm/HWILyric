@@ -19,7 +19,7 @@ function AnnualKeyword(props: any) {
       >
         {annualnow}년대 인기 키워드
       </div>
-      <AnnualKeywordCloud></AnnualKeywordCloud>
+      <AnnualKeywordCloud />
     </AnnualKeywordDiv>
   );
 }
