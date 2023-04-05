@@ -36,7 +36,7 @@ export async function checkSimilarity(body: ISimilarityTypes) {
 
 export async function similarKeyword(word: String) {
   try{
-    const res = await axios.get(`api/keywords/similarity/${word}`)
+    const res = await axios.get(`recommend/keywords/similarity/${word}`)
     const data = res.data
     return data
   } catch(err) {

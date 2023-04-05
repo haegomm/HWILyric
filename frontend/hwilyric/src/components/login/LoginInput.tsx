@@ -46,7 +46,7 @@ function LoginInput() {
       setIsLogin(true)
       setNickname(data.nickname)
       setProfileImg(data.profileImg)
-      navigate("/home");
+      navigate("/");
     } else {
       alert('로그인 실패ㅜ;')
     }
