@@ -23,7 +23,6 @@ public class MailService {
 
     // 인증 코드 생성 시 사용될 문자열
     private static final String CHARACTERS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+";
-    private static final String BORDER = "<hr style='border: solid 5px #B0E3F9'/>";
     private static final String BR = "<br />";
     private static final String DIV = "</div>";
     private final JavaMailSender javaMailSender;
@@ -38,9 +37,8 @@ public class MailService {
         String code = createKey(); // 인증코드 생성
 
         String msg = "";
-        msg += "<div style='margin: 20px; width: 70%; text-align: center'>";
-        msg += BORDER;
-        msg += "<img style='width: 100%' src='https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/profile/hwilyric_banner.png'/>"; // 해당 경로는 S3에 올린 후 변경 예정
+        msg += "<div style='margin: 0 auto; width: 70%; text-align: center; border: solid 1px gray;'>";
+        msg += "<img style='width: 100%' src='https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/thumbnail/default_thumbnail.png'/>";
         msg += BR;
         msg += BR;
         msg += "<h2>인증코드 안내 이메일 입니다.</h2>";
@@ -52,15 +50,18 @@ public class MailService {
         msg += "<p>아래 코드를 입력하여 회원가입을 완료해 주세요!</p>";
         msg += BR;
         msg += "<div style='margin: 0 auto; text-align: center; width: 300px; border: none; font-family: verdana; padding: 10px;'>";
-        msg += "<div style='font-size: 130%'><strong>";
+        msg += "<div style='font-size: 250%'><strong>";
         msg += code + "</strong></div>";
         msg += DIV;
         msg += BR;
         msg += BR;
+        msg += "<hr>";
+        msg += BR;
+        msg += "<p style='color: gray'>본 메일은 발신전용 메일이므로 답장을 통한 문의는 처리되지 않습니다.</p>";
+        msg += BR;
         msg += "<img style='width: 25%' src='https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/profile/hwilyric_logo.png'/>";
         msg += BR;
         msg += BR;
-        msg += BORDER;
         msg += DIV;
 
         MailDto mailDto = new MailDto();
@@ -89,9 +90,8 @@ public class MailService {
             user.updatePassword(bCryptPasswordEncoder.encode(code));
         }
         String msg = "";
-        msg += "<div style='margin: 20px; width: 70%; text-align: center'>";
-        msg += BORDER;
-        msg += "<img style='width: 100%' src='https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/profile/hwilyric_banner.png'/>"; // 해당 경로는 S3에 올린 후 변경 예정
+        msg += "<div style='margin: 0 auto; width: 70%; text-align: center; border: solid 1px gray;'>";
+        msg += "<img style='width: 100%' src='https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/thumbnail/default_thumbnail.png'/>";
         msg += BR;
         msg += BR;
         msg += "<h1>임시 비밀번호 안내 이메일 입니다.</h1>";
@@ -103,15 +103,18 @@ public class MailService {
         msg += "<p>아래 임시 비밀번호로 로그인 후 비밀번호 변경을 해주세요!</p>";
         msg += BR;
         msg += "<div style='margin: 0 auto; text-align: center; width: 300px; border: none; font-family: verdana; padding: 10px;'>";
-        msg += "<div style='color: #765790; font-size: 130%'><strong>";
+        msg += "<div style='color: #765790; font-size: 250%'><strong>";
         msg += code + "</strong></div>";
         msg += DIV;
         msg += BR;
         msg += BR;
+        msg += "<hr>";
+        msg += BR;
+        msg += "<p style='color: gray'>본 메일은 발신전용 메일이므로 답장을 통한 문의는 처리되지 않습니다.</p>";
+        msg += BR;
         msg += "<img style='width: 25%' src='https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/profile/hwilyric_logo.png'/>";
         msg += BR;
         msg += BR;
-        msg += BORDER;
         msg += DIV;
 
         MailDto mailDto = new MailDto();
