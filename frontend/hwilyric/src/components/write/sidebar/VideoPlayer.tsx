@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { PlayVideoId } from "../../../atoms/youtubeVideoAtoms";
 import { PlayerBox, PlayerVideoBox, PlayButton, PlayerProgressBox, PlayerButtonBox } from "../../../styles/writeNoteStyle";
+import { css } from "styled-components";
 
 function VideoPlayer() {
   const playerRef = useRef<YT.Player | null>(null)
@@ -101,7 +102,8 @@ function VideoPlayer() {
         </PlayerVideoBox>
         <PlayerProgressBox>
           <ProgressBar
-            style={{width: '100%'}}
+            style={{ width: '100%' }}
+            variant= '#B0E3F9'
             now={time}
             max={durationTime}
           />

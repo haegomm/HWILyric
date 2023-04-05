@@ -92,7 +92,7 @@ export const DeleteButtonBox = styled.div`
     & > button {
         font-size: 2vw;
         display: none;
-        color: #8A1C70;
+        color: ${props => props.theme.accentColor['2']};
     }
 `
 

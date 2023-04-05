@@ -14,7 +14,6 @@ export const ButtonCss = (width?: string, height?: string) => css`
     :hover {
         border: none;
         font-weight: bold;
-        // transition: 0.7s;
         color: white;
         background: linear-gradient(45deg, ${props => props.theme.accentColor['1']}, 
         ${props => props.theme.accentColor['2']},
