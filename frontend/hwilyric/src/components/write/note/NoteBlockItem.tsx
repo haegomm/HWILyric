@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil"
 import { blockListState } from "../../../atoms/noteAtoms"
 import { BlockItemStyle, DeleteButtonBox } from "../../../styles/writeNoteStyle"
 import { ILyricBlockTypes } from "../../../types/writingType"
-import { HamburgerButton } from "../../../assets/writeSideBar/search"
+import { HamburgerButton } from "../../../assets/writeSideBar/writeImg"
 import styled, { css } from "styled-components"
 
 interface BlockItemProps {

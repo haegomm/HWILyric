@@ -8,8 +8,8 @@ import { useRecoilValue, useResetRecoilState } from "recoil"
 import { blockListState, noteIdState, noteThumbnailFileState, noteThumbnailUrlState, titleState } from "../../atoms/noteAtoms"
 import { memoState } from "../../atoms/sidebarAtoms"
 import VideoPlayer from "./sidebar/VideoPlayer"
-import NoteSave from "./note/NoteSave"
 import { isTempAtom } from "../../atoms/mypageAtom"
+import SaveNote from "./note/SaveNote"
 
 function WriteNote() {
 
@@ -41,7 +41,7 @@ function WriteNote() {
         <WriteNoteDivBox>           
             <NoteTitle />
             <BlockList />
-            <NoteSave />
+            <SaveNote />
             <BlockCreate />
             <VideoPlayer />
         </WriteNoteDivBox>

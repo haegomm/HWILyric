@@ -3,7 +3,7 @@ import { ISimilarInfoTypes } from "../../../types/writingType"
 import { ArrowImage } from "../../../styles/mypageStyle";
 import { downArrow, upArrow } from "../../../assets/icon/arrow";
 import { SimilarLyricInfo, SimilarLyricSubInfo, SimilarUserLyric } from "../../../styles/writeSidebarStyle";
-import { LightLodaing } from "../../../assets/writeSideBar/search"
+import { LightLodaing } from "../../../assets/writeSideBar/writeImg"
 import { checkLoadingState } from "../../../atoms/sidebarAtoms";
 import { useRecoilValue } from "recoil";
 
@@ -40,7 +40,7 @@ function SimilarItem({ similar }: SimilarItemProps): JSX.Element {
                         : <ArrowImage src={downArrow} />
                     }
                     </SimilarUserLyric>
-                    { isOpen && (
+                    { isOpen ? (
                         <div className="similarLyric-drop">
                         {similar.lyricList.map((similarLyric, index) => (
                             <SimilarLyricInfo
@@ -54,7 +54,7 @@ function SimilarItem({ similar }: SimilarItemProps): JSX.Element {
                             </SimilarLyricInfo>
                         ))}
                         </div>
-                    )}
+                    ) : (<p>가사를 작성하고 버튼을 눌려보세요:)</p>)}
                 </>
             )
         }

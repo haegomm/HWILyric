@@ -58,12 +58,17 @@ export const SearchboxForm = styled.form`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  border: 1px solid black;
-  border-radius: 16px;
-  width: 90%;
-  padding: 4px 16px 4px 16px;
-  margin: 0 4% 0 4%;
-`
+  border: 2px solid;
+  background-color: none;
+  border-image: linear-gradient(to right,
+    ${props => props.theme.accentColor['2']}, 
+    ${props => props.theme.accentColor['3']});
+    border-image-slice: 1;
+    width: 90%;
+    padding: 4px 16px 4px 16px;
+    margin: 0 4% 0 4%;
+    border-radius: 16px;
+    `
 
 export const SearchboxInput = styled.input`
   width: 100%;
