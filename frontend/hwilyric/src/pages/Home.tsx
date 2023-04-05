@@ -6,18 +6,25 @@ import HomeQuickview from '../components/home/HomeQuickview';
 import { IsLoginAtom } from '../atoms/userAtom';
 import HomeNotLoggedIn from '../components/home/HomeNotLoggedIn';
 import HomeCenter from '../components/home/HomeCenter';
-import { lightTrape } from '../assets/icon/myButtons';
+import { darkTrape, lightTrape } from '../assets/icon/myButtons';
 import { DataVisualizePage } from "../styles/DataVisaulizeStyle";
 import WeeklyReport from "../components/home/dataVisualize/WeeklyReport";
 import TotalTrend from "../components/home/dataVisualize/TotalTrend";
 import AnnualReport from "../components/home/dataVisualize/AnnualReport";
+import { useTheme } from "styled-components";
+import { lightTheme } from "../theme/theme";
 
 function Home() {
+    const theme = useTheme();
+
     const scrollRef = useHorizontalScroll();
     const isLogin = useRecoilValue(IsLoginAtom);
     return (
         <HomeContainer ref={scrollRef}>
-            <HomeTrapezoid src={lightTrape} />
+            {(theme === lightTheme) ? 
+                <HomeTrapezoid src={lightTrape} />
+                : <HomeTrapezoid src={darkTrape} />
+            }
             <HomeContent>
                 <HomeDiv>
                     {isLogin ? 

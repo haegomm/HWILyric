@@ -3,3 +3,4 @@ export const lightModify = require('./light-modify.png');
 export const lightView = require('./light-view.png');
 export const lightRefresh = require('./light-refresh.png');
 export const lightTrape = require('./light-trape.png')
+export const darkTrape = require('./dark-trape.png')
