@@ -45,8 +45,8 @@ export const getErrorMessageAtom = atom<string>({
     default: '키워드를 검색해주세요'
 })
 
-export const noSimilarState = atom<boolean>({
-    key: "noSimilarState",
+export const similarResultState = atom<boolean>({
+    key: "similarResultState",
     default: false,
 })
 
