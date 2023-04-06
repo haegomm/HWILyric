@@ -123,4 +123,5 @@ export const LyricText = styled.div<divWidth>`
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-align: start;
+  padding-left: 1vw;
 `
