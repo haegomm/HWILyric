@@ -11,9 +11,15 @@ export const MyPageContainer = styled.div`
   align-items: center;
 `
 
+export const MyPageNicknameSpan = styled.span`
+  padding-left: 3%; 
+  width: 7vw;
+  font-weight: bold;  
+`
+
 export const MyPageProfileDiv = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   height: 128px;
   width: 60vw;
   align-items: center;
@@ -49,6 +55,15 @@ export const MyProfileImage = styled.img`
   
 `
 export const MyPageSpan = styled.span`
+  &:hover{
+    background-color: #FF9090;
+    color: rgb(255, 255, 255, 100);
+  }
+  margin: 4px 12px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background-color: ${props => props.theme.accentColor['3']};
+  color: rgb(255, 255, 255, 100);
   cursor: pointer;
 `
 

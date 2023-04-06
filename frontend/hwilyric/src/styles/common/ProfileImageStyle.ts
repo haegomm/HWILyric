@@ -11,7 +11,7 @@ export const ProfileImageDiv = styled.div<divSize>`
   height: ${(props) => (props.height) ? (props.height) : '60px'};
   border-radius: ${(props) => (props.borderRadius) ? (props.borderRadius) : '70%'};
   overflow: hidden;
-  position: absolute;
+  // position: absolute;
 `
 
 export const ProfileImageImg = styled.img`
