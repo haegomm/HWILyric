@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import { ThumbnailLabel } from "../writeSidebarStyle";
 
 export const ButtonCss = (width?: string, height?: string) => css`
     width: ${width};
