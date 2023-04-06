@@ -13,6 +13,15 @@ export const HomeContainer = styled.div`
   -khtml-user-select: none;
   -webkit-user-select: none;
   user-select: none;
+  &::-webkit-scrollbar {
+    width: 8px;    
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #DEB3FB;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 3px solid transparent;
+  }
 `;
 
 export const HomeTrapezoid = styled.img`
