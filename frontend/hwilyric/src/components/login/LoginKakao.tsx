@@ -27,8 +27,7 @@ function LoginKakao() {
       setNickname(data.nickname)
       setProfileImg(data.profileImg)
       navigate("/");
-    } else {
-    } 
+    }  
   }
   kakaoLogin();
 }, [code])
