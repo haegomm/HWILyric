@@ -1,4 +1,3 @@
-
 FROM python:3.8
 ENV PYTHONUNBUFFERED 1
 RUN apt-get -y update && apt-get -y install vim && apt-get clean && apt-get -y install libgl1-mesa-glx && apt-get install -y python3-pip
