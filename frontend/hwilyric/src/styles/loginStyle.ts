@@ -98,10 +98,12 @@ export const LoginForgotPWDiv = styled.div`
   height: 12px;
   font-size: 10px;
   text-align: right;
+  cursor: pointer;
 `;
 
 export const LoginButtonBoxDiv = styled.div`
   padding: 20px;
+  cursor: pointer;
 `;
 
 export const LoginButton = styled.button`
@@ -119,6 +121,7 @@ export const LoginNoIdDiv = styled.div`
   padding: 20px;
   display: flex;
   justify-content: center;
+  cursor: pointer;
 `;
 
 export const LoginSignUpBoxDiv = styled.div`
