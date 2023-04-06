@@ -50,7 +50,6 @@ cursor.execute(sql, val)
 
 for each_lyric in cursor.fetchall():
     data.append(each_lyric[0]) # 한 곡씩 추가
-    # data += each_lyric[0].split(',')
 
 realData = {'lyrics' : data} # music 테이블에서 리스트 형태로 가져온 data를 담아준다.
 
@@ -72,7 +71,7 @@ okt = Okt()
 tokenized_data = []
 for sentence in tqdm(train_data['lyrics']):
     tokenized_sentence = okt.morphs(sentence, stem=True) # 토큰화
-    stopwords_removed_sentence = [word for word in tokenized_sentence if not word in stopwords] # 불용어 제거
+    stopwords_removed_sentence = [word for word in tokenized_sentence if word not in stopwords] # 불용어 제거
     tokenized_data.append(stopwords_removed_sentence)
 
 model = Word2Vec(sentences = tokenized_data, vector_size= 100, window = 5, min_count = 5, workers = 4, sg = 1)
