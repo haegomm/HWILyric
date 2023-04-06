@@ -143,7 +143,7 @@ export const HomeCenterWord = styled.div`
 
 export const HomeWordItem = styled.div`
   &:hover{
-    background-color: rgb(0, 0, 0, 0.5);
+    background-color: ${props => props.theme.accentColor['1']};
     color: rgb(255, 255, 255, 100);
   }
   margin: 4px 12px;

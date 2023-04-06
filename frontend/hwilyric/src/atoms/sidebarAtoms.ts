@@ -44,3 +44,13 @@ export const getErrorMessageAtom = atom<string>({
     key: 'getErrorMessage',
     default: '키워드를 검색해주세요'
 })
+
+export const noSimilarState = atom<boolean>({
+    key: "noSimilarState",
+    default: false,
+})
+
+export const isLoadingState = atom<boolean>({
+    key: "isLoadingState",
+    default: false,
+})

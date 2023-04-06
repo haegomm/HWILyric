@@ -35,7 +35,11 @@ export const blockIdState = atom<number>({
 
 export const blockListState = atom<ILyricBlockTypes[]>({
     key: 'blockListState',
-    default: [],
+    default: [{
+        blockId: getCurrentDateTime(),
+        type: "verse",
+        lyrics: ""
+    }],
     effects_UNSTABLE: [persistAtom],
 })
 
