@@ -15,6 +15,7 @@ function AnnualKeyword(props: any) {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          userSelect: "none",
         }}
       >
         {annualnow}년대 인기 키워드

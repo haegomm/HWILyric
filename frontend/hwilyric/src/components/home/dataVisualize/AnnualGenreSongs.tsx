@@ -16,6 +16,7 @@ function AnnualGenreSongs(props: any) {
             overflow: "wrap",
             display: "flex",
             justifyContent: "center",
+            userSelect: "none",
           }}
           key={song}
         >

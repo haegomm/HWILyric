@@ -66,7 +66,7 @@ function AnnualKeywordCloud() {
   };
 
   return (
-    <div style={{ width: "420px", height: "520px" }}>
+    <div style={{ width: "420px", height: "520px", userSelect: "none" }}>
       <ReactWordcloud
         words={keywords}
         minSize={[420, 570]}

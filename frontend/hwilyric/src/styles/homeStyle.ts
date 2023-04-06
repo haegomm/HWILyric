@@ -9,6 +9,11 @@ export const HomeContainer = styled.div`
   overflow: auto;
   height: 100%;
   width: 500vw;
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 `;
 
 export const HomeTrapezoid = styled.img`
@@ -18,6 +23,7 @@ export const HomeTrapezoid = styled.img`
   width: 56vw;
   height: 100%;
   z-index: -1;
+  userselect: none;
 `;
 
 export const HomeContent = styled.div`

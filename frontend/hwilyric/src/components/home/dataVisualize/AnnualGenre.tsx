@@ -10,6 +10,9 @@ import AnnualGenreSongs from "./AnnualGenreSongs";
 import { useTheme } from "styled-components";
 
 function AnnualGenre(props: any) {
+  const handleDragStart = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+  };
   const annualnow = useRecoilValue(annualNowAtom);
   const setAnnualNowSong = useSetRecoilState(annualNowSongAtom);
   const data = useRecoilValue(annualGenreRatioSongAtom);
@@ -36,7 +39,7 @@ function AnnualGenre(props: any) {
   setAnnualNowSong(chartData[0].id);
   const theme = useTheme();
   return (
-    <AnnualGenreDiv theme={theme}>
+    <AnnualGenreDiv theme={theme} onDragStart={handleDragStart}>
       <AnnualGenreChart data={chartData}></AnnualGenreChart>
       <AnnualGenreSongs data={songData}></AnnualGenreSongs>
     </AnnualGenreDiv>
