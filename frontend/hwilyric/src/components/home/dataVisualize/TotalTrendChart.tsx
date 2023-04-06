@@ -150,7 +150,7 @@ function TotalTrendChart(props: any) {
                   className="custom-tooltip"
                   style={{
                     background: theme === lightTheme ? "white" : "#636161",
-                    color: theme === lightTheme ? "black" : "black",
+                    color: theme === lightTheme ? "black" : "white",
                     borderRadius: "5px",
                     padding: "10px",
                     opacity: theme === lightTheme ? "1" : "0.7",
