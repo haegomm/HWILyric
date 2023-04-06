@@ -7,13 +7,16 @@ import { checkNickname, modifyProfile } from "../../api/userApi";
 import { IModifyTypes } from "../../types/userType";
 import { userNicknameAtom, userProfileImgAtom } from "../../atoms/userAtom";
 import {
-  ModifyEmailDiv,
   ModifyEmailInput,
   ModifyInput,
   ModifyLabel,
+  ModifyNicknameDiv,
+  ModifyProfileDiv,
+  ModifyProfileImg,
   ModifyProfileInput,
   ModifyProfileInputBox,
   ModifyProfileInputLeft,
+  ModifyProfileTitle,
   ModifyUploadDiv,
   ProfileModificationOuterBoxDiv,
   SignupContentBoxDiv,
@@ -111,28 +114,28 @@ function ModifyProfile() {
       <SignupTitleH1>프로필 수정</SignupTitleH1>
       <SignupContentBoxDiv>
         <SignupInnerBoxDiv>
-          <ModifyEmailDiv className="nicknameDiv">
+          <ModifyNicknameDiv className="nicknameDiv">
             <ModifyEmailInput
               type="text"
               placeholder="닉네임"
               className="signUpInputNickname"
               onBlur={onNicknameHandler}
             />
-          </ModifyEmailDiv>
+          </ModifyNicknameDiv>
 
           <SignupEmailErrorSpan className="nicknameError">
             {nicknameError}
             {nicknameFormError}
           </SignupEmailErrorSpan>
 
-          <ModifyEmailDiv>
+          <ModifyProfileDiv>
             <ModifyUploadDiv>
               <ModifyLabel className="ModifyLabel" htmlFor="profileImg">
                 업로드
               </ModifyLabel>
             </ModifyUploadDiv>
 
-            <SignupProfileTitle>프로필 사진</SignupProfileTitle>
+            <ModifyProfileTitle>프로필 사진</ModifyProfileTitle>
 
             <ModifyInput
               className="ModifyInput"
@@ -141,11 +144,11 @@ function ModifyProfile() {
               onChange={onProfileImgHandler}
               accept="image/gif, image/jpeg, image/png"
             />
-          </ModifyEmailDiv>
+          </ModifyProfileDiv>
         </SignupInnerBoxDiv>
 
         <ModifyProfileInputBox>
-          <SignupProfileImg src={newProfileImageUrl} alt="profileImg" />
+          <ModifyProfileImg src={newProfileImageUrl} alt="profileImg" />
         </ModifyProfileInputBox>
       </SignupContentBoxDiv>
       <ProfileModificationButton onClick={onSaveProfileHandler}>저장</ProfileModificationButton>

@@ -120,10 +120,12 @@ export const SignupEmailDiv = styled.div`
   padding: 0;
 `;
 
-export const ModifyEmailDiv = styled.div`
-  padding-bottom: 10px;
-  padding-top: 10px;
-  width: ${(400 / 1920) * 100}vw;
+export const ModifyNicknameDiv = styled.div`
+  width: 400px;
+`;
+export const ModifyProfileDiv = styled.div`
+  width: 400px;
+  padding-top: 50px;
 `;
 
 export const SignupEmailInput = styled.input`
@@ -243,6 +245,13 @@ export const SignupProfileTitle = styled.div`
   border-image: #636161;
 `;
 
+export const ModifyProfileTitle = styled.div`
+  border-style: solid;
+  border-width: 0px 0px 2px 0px;
+  border-image: #636161;
+  padding-bottom: 9px;
+`;
+
 export const SignupProfileInputLeft = styled.div`
   padding-right: 20px;
   width: 60%;
@@ -259,6 +268,12 @@ export const SignupProfileImg = styled.img`
   background: #c8c8c8;
 `;
 
+export const ModifyProfileImg = styled.img`
+  width: 160px;
+  height: 160px;
+  background: #c8c8c8;
+`;
+
 export const SignupSubmitButton = styled.button`
   ${ButtonCss("10vw", "6vh")}
   margin-top: 20px;
@@ -269,34 +284,18 @@ export const ModifyUploadDiv = styled.div`
   display: flex;
   align-items: end;
   justify-content: end;
+  cursor: pointer;
 `;
 
 export const ModifyLabel = styled.label`
-  width: 80px;
-  height: 40px;
-  display: felx;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid;
-  background-color: none;
-  border-image: linear-gradient(
-    to right,
-    ${(props) => props.theme.accentColor["1"]},
-    ${(props) => props.theme.accentColor["2"]},
-    ${(props) => props.theme.accentColor["4"]}
-  );
-  border-image-slice: 1;
-  :hover {
-    border: none;
-    font-weight: bold;
-    color: white;
-    background: linear-gradient(
-      45deg,
-      ${(props) => props.theme.accentColor["1"]},
-      ${(props) => props.theme.accentColor["2"]},
-      ${(props) => props.theme.accentColor["4"]}
-    );
-  }
+  position: absolute;
+  padding: 2px;
+  right: 2%;
+  bottom: 23%;
+  border-width: 1px 1px 1px 1px;
+  border-image: #636161 1;
+  border-style: solid;
+  cursor: pointer;
 `;
 
 export const ModifyInput = styled.input`
