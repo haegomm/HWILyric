@@ -28,7 +28,7 @@ function SidebarRecommendRandom() {
   return (
     <RecommendBody>
       <RandomHeader>
-        <span>랜덤 키워드</span>
+        <span>랜덤 키워드&nbsp;</span>
         <IconImage src={lightRefresh} onClick={onRefreshHandler}/>
       </RandomHeader>
       <WordContainer>

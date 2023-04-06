@@ -13,10 +13,10 @@ function WriteSidebar() {
     const [currentTab, setCurrentTab] = useState(0)
 
     const tabArr = [
-        { name: '레퍼런스', content: <SidebaarReferenceTab /> },
         { name: '키워드 추천', content: <SidebarRecommend /> },
         { name: '내 가사', content: <SidebarMyLyrics /> },
         { name: '유사도 측정', content: <SidebarCheckSimilarityTab /> },
+        { name: '레퍼런스', content: <SidebaarReferenceTab /> },
     ]
 
     const selectTabHandler = (index: number) => {

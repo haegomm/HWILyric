@@ -1,5 +1,5 @@
 import { useRecoilValue, useRecoilState, useSetRecoilState, useResetRecoilState } from "recoil"
-import SimilarItem from "./SimilarItem"
+import SimilarItem from "./SimilarList"
 import { blockListState } from "../../../atoms/noteAtoms"
 import { similarListState, similarListLengthState, checkLoadingState } from "../../../atoms/sidebarAtoms"
 import { ISimilarityTypes } from "../../../types/writingType"
@@ -33,13 +33,13 @@ function CheckSimilarity() {
             userLyric: lyrics
         }      
         try {
+            console.log("유사도 검사할 리스트", body)
             const data = await checkSimilarity(body);
             setSimilarList(data.similarList);
             setSimilarListLength(data.similarList.length);
             await setCheckLoadingState(false);
             return data;
         } catch (err: any) {
-            alert("유사한 가사가 없습니다. 특수문자가 있다면 제거하고 다시 시도해보세요!")
             await setCheckLoadingState(false);
         }
     }

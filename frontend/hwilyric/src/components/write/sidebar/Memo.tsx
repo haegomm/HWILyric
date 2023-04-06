@@ -17,7 +17,7 @@ function Memo() {
                 className="writeLyric"
                 value={memo}
                 onChange={onEditMemo}
-                placeholder="현재 생각을 메모해보세요"
+                placeholder="영감을 받은 사진, 글귀, 음악을 기록해보세요!"
             />
         </div>
     )

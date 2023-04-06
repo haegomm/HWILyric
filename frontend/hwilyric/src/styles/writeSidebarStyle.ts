@@ -24,7 +24,7 @@ export const SideBarBox = styled.div`
 `
 // 탭
 export const TabMenu = styled.ul`
-    color: 636161;
+    color: ${props => props.theme.textColor};
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -41,7 +41,9 @@ export const TabMenu = styled.ul`
 
     .focused {
         font-weight: bold;
-        color: rgb(222,179,251);
+        color: ${props => props.theme.accentColor['2']};
+        cursor: pointer;
+}
     }
 
     & div.desc {
@@ -80,7 +82,7 @@ export const SimilarUserLyric = styled.div`
 export const SimilarLyricSubInfo = styled.span`
     display: flex;
     justify-content: flex-end;
-    font-size: 10px;
+    font-size: 14px;
 `
 
 export const SimilarInform = styled.div`

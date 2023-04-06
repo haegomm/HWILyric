@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil"
 import { similarListLengthState } from "../../atoms/sidebarAtoms"
 import CheckSimilarity from "./sidebar/CheckSimilarity"
-import SimilarItem from "./sidebar/SimilarItem"
+import SimilarItem from "./sidebar/SimilarList"
 import SimilarityResult from "./sidebar/SimilarityResult"
 
 

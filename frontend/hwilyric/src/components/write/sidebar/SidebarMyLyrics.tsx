@@ -75,11 +75,11 @@ function SidebarMyLyrics() {
       </div>
     </div> ) : (
       <NotLoggedInDiv>
-        <p>로그인하지 않으셨어요!</p>
+        <p>로그인 하지 않으면 가사를 저장할 수 없어요</p>
         <br/>
-        <p>로그인하고 더 많은 기능을 이용해보세요</p>
+        <p>로그인 후 더 많은 기능을 이용해보세요!</p>
         <Link to="/login">
-          <LoginRecButton>로그인</LoginRecButton>
+          <LoginRecButton>지금 쓴 가사 저장하러 가기</LoginRecButton>
         </Link>
       </NotLoggedInDiv>)
     }
