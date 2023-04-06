@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil"
 import { checkLoadingState, similarListLengthState } from "../../../atoms/sidebarAtoms"
 import { SimilarInform } from "../../../styles/writeSidebarStyle";
-import { LightLodaing } from "../../../assets/writeSideBar/search"
+import { LightLodaing } from "../../../assets/writeSideBar/writeImg"
 
 function SimilarityResult() {
 

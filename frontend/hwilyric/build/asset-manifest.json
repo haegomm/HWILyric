@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c483b12c.css",
+    "main.js": "/static/js/main.bd67b819.js",
+    "static/media/colordodge.png": "/static/media/colordodge.c8b69c8a7185748abfd0.png",
+    "static/media/darken.png": "/static/media/darken.9881e1d94ee295bd25e0.png",
+    "static/media/light-trape.png": "/static/media/light-trape.f54b74ae4feb5f4de2fa.png",
+    "static/media/default_thumbnail_1.jpg": "/static/media/default_thumbnail_1.5a27e8bb6cd351c51b39.jpg",
+    "static/media/light_loading.gif": "/static/media/light_loading.ca6027406b5126af1c8a.gif",
+    "static/media/default.png": "/static/media/default.1c102380672ab3161c8d.png",
+    "index.html": "/index.html",
+    "main.c483b12c.css.map": "/static/css/main.c483b12c.css.map",
+    "main.bd67b819.js.map": "/static/js/main.bd67b819.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c483b12c.css",
+    "static/js/main.bd67b819.js"
+  ]
+}

@@ -92,7 +92,7 @@ export const DeleteButtonBox = styled.div`
     & > button {
         font-size: 2vw;
         display: none;
-        color: #8A1C70;
+        color: ${props => props.theme.accentColor['2']};
     }
 `
 
@@ -166,8 +166,10 @@ export const PlayerProgressBox = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: flex-end;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     padding: 0 10px;
 `
 

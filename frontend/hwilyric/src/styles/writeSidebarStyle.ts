@@ -5,8 +5,17 @@ const sideWidth = 30;
 const sideMargin = 4;
 const borderWidth = 2;
 const inputPadding = 5;
-const mainGradientColor = 'linear-gradient(to right, #fbfcb9be, #ffcdf3aa, #65d3ffaa)';
-const sideBarVH = 80;
+const mainGradientColor = css`linear-gradient(to right, ${props => props.theme.accentColor['2']}, 
+${props => props.theme.accentColor['4']})`;
+
+const BorderColor = css`
+    border-image: linear-gradient(to right,
+        ${props => props.theme.accentColor['1']}, 
+        ${props => props.theme.accentColor['2']}, 
+        ${props => props.theme.accentColor['3']},
+        ${props => props.theme.accentColor['4']});
+    border-image-slice: 1;
+`
 
 // 전체 사이드바
 export const SideBarBox = styled.div`
@@ -66,10 +75,7 @@ export const SimilarUserLyric = styled.div`
         justify-content: space-evenly;
         align-items: center;
         border-radius: 10px;
-
-}
-
-`
+}`
 
 export const SimilarLyricSubInfo = styled.span`
     display: flex;
@@ -104,7 +110,6 @@ export const ThumbnailBox = styled.div`
     height: 15vh;
     display: flex;
     justify-content: space-between;
-
 `
 
 export const ThumbnailImage = styled.img`
@@ -122,13 +127,23 @@ export const ThumbnailUploadDiv = styled.div`
 export const ThumbnailLabel = styled.label`
     width: 80px;
     height: 30px;
-    border: ${borderWidth}px solid transparent;
-    border-image: ${mainGradientColor};
+    display: felx;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid;
+    background-color: none;
+    border-image: linear-gradient(to right,
+        ${props => props.theme.accentColor['1']}, 
+        ${props => props.theme.accentColor['2']}, 
+        ${props => props.theme.accentColor['4']});
     border-image-slice: 1;
-    line-height: 30px;
     :hover {
-        transition: 0.7s;
-        background: ${mainGradientColor};
+        border: none;
+        font-weight: bold;
+        color: white;
+        background: linear-gradient(45deg, ${props => props.theme.accentColor['1']}, 
+        ${props => props.theme.accentColor['2']},
+        ${props => props.theme.accentColor['4']});
     }
 `
 
@@ -146,8 +161,7 @@ export const ThumbnailInput = styled.input`
 export const MemoBox = styled.textarea`
     ${BoxCSS()};
     border: ${borderWidth}px solid transparent;
-    border-image: ${mainGradientColor};
-    border-image-slice: 1;
+    ${BorderColor};
     resize : none;
     font-size: 16px;
     background-color: transparent;
@@ -161,15 +175,18 @@ export const SearchBox = styled.div`
     ${BoxCSS()};
     align-content: center;
     justify-content: center;
-`
-export const SearchBoxStyle = styled.div`
+    `
+    export const SearchBoxStyle = styled.div`
     height: 4vh;
     justify-content: center;
-    border: ${borderWidth}px solid transparent;
+    background-color: none;
+    border: ${borderWidth}px solid ;
     border-radius: 50px;
-    background-image: ${mainGradientColor};
-    background-origin: border-box;
-    background-clip: border-box;
+    border-image: linear-gradient(to right,
+        ${props => props.theme.accentColor['1']}, 
+        ${props => props.theme.accentColor['2']}, 
+        ${props => props.theme.accentColor['4']});
+    border-image-slice: 1;
     position: relative;
     margin: 0px auto;
     margin-bottom: 5%;

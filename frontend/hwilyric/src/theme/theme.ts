@@ -16,10 +16,10 @@ export const darkTheme = {
     bgColor: '#191B1F',
     textColor: '#fff',
     accentColor: {
-        1: '#8A1C70',
-        2: '#572681',
-        3: '#E8AFFD',
-        4: '#EC4884',
+        1: '#572681',
+        2: '#8A1C70',
+        3: '#DF457D',
+        4: '#A580B3',
     },
     logoUrl: 'image/dark-logo.png'
 };
