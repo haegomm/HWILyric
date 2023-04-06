@@ -26,11 +26,11 @@ JONGSUNG_LIST = ['', 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', '�
 
 
 db = pymysql.connect(
-    host='j8b107.p.ssafy.io',
-    port=3306,
-    user='root',
-    passwd='hwilYRIC107',
-    db='hwilyric',
+    host='',
+    port=,
+    user='',
+    passwd='',
+    db='',
     charset='utf8mb4'
 )
 
