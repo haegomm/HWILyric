@@ -62,12 +62,20 @@ const CustomXAxisTick = (props: any) => {
   );
 };
 
-function getRandomColor(): string {
-  const red = Math.floor(Math.random() * 256);
-  const green = Math.floor(Math.random() * 256);
-  const blue = Math.floor(Math.random() * 256);
+const e = ["#88C4E9", "#D1C4F1"];
+let strokeNum = -1;
+function getColor(): string {
+  const colorData = [
+    "#f757f7",
+    "#3c86f0",
+    "#cd2d48",
+    "#20c4c9",
+    "#841B95",
+    "#ebc41a",
+  ];
+  strokeNum++;
 
-  return `rgb(${red}, ${green}, ${blue}, 1)`;
+  return colorData[strokeNum % 6];
 }
 
 const sortTooltip = (a: any, b: any) => {
@@ -105,8 +113,6 @@ function TotalTrendChart(props: any) {
     );
     chartData.push(annualObj);
   }
-
-  console.log(chartData);
 
   return (
     <AreaChart
@@ -179,9 +185,9 @@ function TotalTrendChart(props: any) {
                 <p>{label}년 인기 장르</p>
                 <ul>
                   {sortedPayload.map((entry: any, index) => (
-                    <li key={`item-${index}`}>{`${entry.name}: ${Math.round(
-                      entry.value * 100
-                    )}%`}</li>
+                    <li key={`totalTrendItems-${index}`}>{`${
+                      entry.name
+                    }: ${Math.round(entry.value * 100)}%`}</li>
                   ))}
                 </ul>
               </div>
@@ -193,10 +199,11 @@ function TotalTrendChart(props: any) {
       {selectedGenres2.map((genre) => {
         return (
           <Area
-            key={`Area-${genre}`}
+            key={`totalTrendArea-${genre}`}
             type="monotone"
             dataKey={genre}
-            stroke={getRandomColor()}
+            stroke={getColor()}
+            strokeWidth={4}
             fillOpacity={0.1}
             fill={
               theme === lightTheme ? `url(#${genre})` : `url(#dark${genre})`
