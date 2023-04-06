@@ -45,7 +45,6 @@ function AnnualGenreChart(props: any) {
       }}
       onDragStart={handleDragStart}
     >
-      <AnnualReportTitle>{annualnow}년대 인기 장르</AnnualReportTitle>
       <ResponsivePie
         data={props.data}
         margin={{ top: 10 }}
@@ -53,14 +52,13 @@ function AnnualGenreChart(props: any) {
         cornerRadius={3}
         activeOuterRadiusOffset={0}
         colors={[
-          "#E4B2FA",
-          "#96BCF2",
-          "#88C4E9",
-          "#D1C4F1",
-          "#CD2D87",
-          "#71C6C9",
-          "#841B95",
-          "#E399E4",
+          "#deb3fb",
+          "#Fbd5e0",
+          "#c9387d",
+          "#9e9ade",
+          "#afd7d8",
+          "#96aee8",
+          "#fec3b5",
         ]}
         borderWidth={1}
         sortByValue={true}

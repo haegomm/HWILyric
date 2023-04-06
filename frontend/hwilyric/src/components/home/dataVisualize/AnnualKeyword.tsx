@@ -11,11 +11,12 @@ function AnnualKeyword(props: any) {
         style={{
           width: "420px",
           height: "24px",
-          fontSize: "24px",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           userSelect: "none",
+          fontSize: "30px",
+          fontWeight: "bold",
         }}
       >
         {annualnow}년대 인기 키워드
