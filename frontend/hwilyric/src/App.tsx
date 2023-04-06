@@ -38,8 +38,7 @@ function App() {
       const accessToken = await reissueToken();
       if (accessToken !== null) {
         window.localStorage.setItem("accessToken", accessToken);
-      } else {
-      }
+      } 
     }
     setInterval(() => {
       if (isLogin) {
