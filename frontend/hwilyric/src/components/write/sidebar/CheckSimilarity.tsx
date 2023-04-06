@@ -33,7 +33,6 @@ function CheckSimilarity() {
             userLyric: lyrics
         }      
         try {
-            console.log("유사도 검사할 리스트", body)
             const data = await checkSimilarity(body);
             setSimilarList(data.similarList);
             setSimilarListLength(data.similarList.length);
