@@ -3,8 +3,8 @@ import { lightTheme } from "../theme/theme";
 
 export const DataVisualizePage = styled.div`
   display: flex;
-  justify-content: space-around;
-  width: 2600px;
+  justify-content: center;
+  width: 2800px;
   background: ${(props) => (props.theme === lightTheme ? "white" : "#191b1f")};
 `;
 
@@ -13,8 +13,10 @@ export const WeeklyReportDiv = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: ${(440 / 1920) * 100}vw;
+  width: 440px;
   height: 80vh;
+  margin-left: 20px;
+  margin-right: 20px;
   border-style: solid;
   border-width: 1px 1px 1px 1px;
   border-image: linear-gradient(
@@ -25,6 +27,8 @@ export const WeeklyReportDiv = styled.div`
       #fbd1dd
     )
     1;
+  margin-left: 20px;
+  margin-right: 20px;
 `;
 
 export const WeeklyReportTitle = styled.title`
@@ -70,7 +74,8 @@ export const AnnualReportDiv = styled.div`
 `;
 
 export const AnnualReportTitle = styled.title`
-  font-size: 25px;
+  font-size: 30px;
+  font-weight: bold;
   display: flex;
   justify-content: center;
   align-item: center;
@@ -82,8 +87,10 @@ export const AnnualReportTitle = styled.title`
 `;
 
 export const AnnualGenreDiv = styled.div`
-  width: 56vh;
+  width: 600px;
   height: 80vh;
+  margin-left: 20px;
+  margin-right: 20px;
   display: flex;
   justify-content: space-around;
   flex-direction: column;
@@ -107,9 +114,11 @@ export const AnnualGenreDiv = styled.div`
 `;
 
 export const TotalTrendDiv = styled.div`
-  width: ${(1248 / 1920) * 100}vw;
+  width: 1248px;
   height: 80vh;
   padding-top: 100px;
+  margin-right: 20px;
+  margin-left: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -131,7 +140,7 @@ export const TotalTrendDiv = styled.div`
 // }
 
 export const AnnualKeywordDiv = styled.div`
-  width: 56vh;
+  width: 600px;
   height: 80vh;
   display: flex;
   justify-content: space-evenly;
@@ -152,6 +161,8 @@ export const AnnualKeywordDiv = styled.div`
   -khtml-user-select: none;
   -webkit-user-select: none;
   user-select: none;
+  margin-left: 20px;
+  margin-right: 20px;
 `;
 
 export const WeeklyKeywordLineDiv = styled.div`

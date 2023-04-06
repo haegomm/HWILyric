@@ -66,12 +66,13 @@ const e = ["#88C4E9", "#D1C4F1"];
 let strokeNum = -1;
 function getColor(): string {
   const colorData = [
-    "#f757f7",
-    "#3c86f0",
-    "#cd2d48",
-    "#20c4c9",
-    "#841B95",
-    "#ebc41a",
+    "#deb3fb",
+    "#Fbd5e0",
+    "#c9387d",
+    "#9e9ade",
+    "#afd7d8",
+    "#96aee8",
+    "#fec3b5",
   ];
   strokeNum++;
 
@@ -116,7 +117,7 @@ function TotalTrendChart(props: any) {
 
   return (
     <AreaChart
-      width={1000}
+      width={1200}
       height={600}
       data={chartData}
       margin={{ top: 5, right: 10, left: 20, bottom: 60 }}

@@ -1,5 +1,8 @@
 import AnnualGenreChart from "./AnnualGenreChart";
-import { AnnualGenreDiv } from "../../../styles/DataVisaulizeStyle";
+import {
+  AnnualGenreDiv,
+  AnnualReportTitle,
+} from "../../../styles/DataVisaulizeStyle";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { annualGenreRatioSongAtom } from "../../../atoms/visualizingGenreAtom";
 import {
@@ -40,6 +43,7 @@ function AnnualGenre(props: any) {
   const theme = useTheme();
   return (
     <AnnualGenreDiv theme={theme} onDragStart={handleDragStart}>
+      <AnnualReportTitle>{annualnow}년대 인기 장르</AnnualReportTitle>
       <AnnualGenreChart data={chartData}></AnnualGenreChart>
       <AnnualGenreSongs data={songData}></AnnualGenreSongs>
     </AnnualGenreDiv>
