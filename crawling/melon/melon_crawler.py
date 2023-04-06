@@ -25,13 +25,6 @@ while (year_num <= 2022):
         driver.implicitly_wait(time_to_wait)
         time.sleep(time_to_sleep)
 
-        # # 셀레니움으로 일간 페이지까지 찾아 들어가기
-        # driver.find_element_by_xpath('//*[@id="gnb_menu"]/ul[1]/li[1]/a/span[2]').click()
-        # time.sleep(2)
-
-        # driver.find_element_by_xpath('//*[@id="gnb_menu"]/ul[1]/li[1]/div/ul/li[2]/a/span').click()
-        # time.sleep(2)
-
         # 해당 페이지 사용. bs를 활용
         html = driver.page_source
         soup = bs(html, 'html.parser')
