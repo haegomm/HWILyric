@@ -1,4 +1,3 @@
-import numpy as np
 from django.db import models
 
 # Create your models here.

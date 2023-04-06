@@ -14,6 +14,7 @@ import {
   PWFindTitleBackground,
   PWFindTitleH1,
   ProfileModificationButton,
+  PWFindButton,
 } from "../../styles/loginStyle";
 
 import { useTheme } from "styled-components";
@@ -59,8 +60,8 @@ function LoginForgetPassword() {
       <PWFindTitleH1 className="signUpTitle">비밀번호 초기화</PWFindTitleH1>
       <br />
       <LoginForm onSubmit={onSubmitHandler} className="formItemSignup">
-      <p>가입한 이메일을 입력해주세요</p>
-      <LoginEmailDiv>
+        <p>가입한 이메일을 입력해주세요</p>
+        <LoginEmailDiv>
           <LoginInputI
             type="email"
             placeholder="이메일"
@@ -69,9 +70,9 @@ function LoginForgetPassword() {
           />
         </LoginEmailDiv>
         <LoginButtonBoxDiv>
-          <ProfileModificationButton>임시 비밀번호 발송</ProfileModificationButton>
+          <PWFindButton>임시 비밀번호 발송</PWFindButton>
         </LoginButtonBoxDiv>
-        </LoginForm>
+      </LoginForm>
       {/* <div>
         <form onSubmit={onSubmitHandler} className="formItemSignup">
           <div className="emailDiv">

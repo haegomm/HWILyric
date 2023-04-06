@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil"
 import { blockListState } from "../../../atoms/noteAtoms"
 import { BlockItemStyle, DeleteButtonBox } from "../../../styles/writeNoteStyle"
 import { ILyricBlockTypes } from "../../../types/writingType"
-import { HamburgerButton } from "../../../assets/writeSideBar/search"
+import { HamburgerButton } from "../../../assets/writeSideBar/writeImg"
 import styled, { css } from "styled-components"
 
 interface BlockItemProps {
@@ -90,6 +90,8 @@ function BlockItem({ block, index}: BlockItemProps) {
                             <option value={"verse"}>verse</option>
                             <option value={"bridge"}>bridge</option>
                             <option value={"hook"}>hook</option>
+                            <option value={"chrous"}>chrous</option>
+                            <option value={"pre-chorus"}>pre-chorus</option>
                             <option value={"etc"}>etc</option>
                         </select>
                         <textarea
@@ -97,6 +99,7 @@ function BlockItem({ block, index}: BlockItemProps) {
                             value={block.lyrics}
                             ref={ref}
                             onChange={onEditLyrics}
+                            placeholder="여기에 가사를 작성해보세요"
                             onInput={handleResizeHeight}
                         />
                         <img src={HamburgerButton} style={{width: '1vw'}} alt="hamburgerButton" />

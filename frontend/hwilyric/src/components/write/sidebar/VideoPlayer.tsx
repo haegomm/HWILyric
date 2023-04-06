@@ -6,8 +6,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { PlayVideoId } from "../../../atoms/youtubeVideoAtoms";
 import { PlayerBox, PlayerVideoBox, PlayButton, PlayerProgressBox, PlayerButtonBox } from "../../../styles/writeNoteStyle";
+import { Pause_Button, Play_Button } from "../../../assets/writeSideBar/writeImg";
 
 function VideoPlayer() {
+
   const playerRef = useRef<YT.Player | null>(null)
   const ytInterval = useRef<NodeJS.Timer | null> (null)
   const videoId = useRecoilValue(PlayVideoId)
@@ -86,8 +88,8 @@ function VideoPlayer() {
         <PlayerVideoBox>
           <YouTube
             opts={{
-              width: "60",
-              height: "60",
+              width: "50",
+              height: "50",
               playerVars: {
                 rel: 0,
                 modestbranding: 1
@@ -101,18 +103,19 @@ function VideoPlayer() {
         </PlayerVideoBox>
         <PlayerProgressBox>
           <ProgressBar
-            style={{width: '100%'}}
+            style={{ width: '100%' }}
+            variant="warning"
             now={time}
             max={durationTime}
           />
-          <p>{`${hourTime}:${minTime}:${secTime}`}</p>
+          <p style={{fontSize: 12, paddingTop: "1%"}}>{`${hourTime}:${minTime}:${secTime}`}</p>
         </PlayerProgressBox>
         <PlayerButtonBox>
-          {isPlay ? (<PlayButton onClick={handlePause}>
-            ||
-          </PlayButton>) : (<PlayButton onClick={handlePlay}>
-            ▶
-          </PlayButton>)}
+          {isPlay ? (<button onClick={handlePause} disabled={!videoId}>
+            <img src={Pause_Button} alt="" />
+          </button>) : (<button onClick={handlePlay} disabled={!videoId}>
+            <img src={Play_Button} alt="" />
+          </button>)}
         </PlayerButtonBox>
       </PlayerBox>
     );

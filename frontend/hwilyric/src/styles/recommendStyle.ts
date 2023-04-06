@@ -38,15 +38,24 @@ export const RandomHeader = styled.div`
 `
 
 export const WordContainer = styled.div`
-display: flex;
-justify-content: center;
-flex-wrap: wrap;
-width: 90%
-text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 90%
+  text-align: center;
+  overflow: hidden;
 ` 
 
 export const WordItem = styled.div`
-  margin: 4%;
+  &:hover{
+    background-color: rgb(0, 0, 0, 0.5);
+    color: rgb(255, 255, 255, 100);
+  }
+  margin: 3px 11px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
 `
 
 export const ButtonBox = styled.div`
@@ -58,12 +67,17 @@ export const SearchboxForm = styled.form`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  border: 1px solid black;
-  border-radius: 16px;
-  width: 90%;
-  padding: 4px 16px 4px 16px;
-  margin: 0 4% 0 4%;
-`
+  border: 2px solid;
+  background-color: none;
+  border-image: linear-gradient(to right,
+    ${props => props.theme.accentColor['2']}, 
+    ${props => props.theme.accentColor['3']});
+    border-image-slice: 1;
+    width: 90%;
+    padding: 4px 16px 4px 16px;
+    margin: 0 4% 0 4%;
+    border-radius: 16px;
+    `
 
 export const SearchboxInput = styled.input`
   width: 100%;
@@ -82,16 +96,16 @@ export const NotLoggedInDiv = styled.div`
 `
 
 export const LoginRecButton = styled.button`
-  width: 72px;
+  width: 200px;
   height: 32px;
-  background-color: #FBD5E0;
-  border: 2px solid #FBD5E0;
-  color: #ffffff;
+  background-color: ${props => props.theme.accentColor['4']};
+  border: 2px solid ${props => props.theme.accentColor['4']};
+  color: ${props => props.theme.textColor};
   margin-top: 16px;
   :hover {
     transition: 0.7s;
     background: none;
-    color: #636161;
+    color: ${props => props.theme.textColor};
   }
 `
 
@@ -99,9 +113,9 @@ export const RecommendSelectButton = styled.button`
   border-radius: 16px;
   margin: 0 0 4% 16px;
   padding: 4px 8px 4px 8px;
-  background-color: #FBD5E0;
-  border: 2px solid #FBD5E0;
-  color: #ffffff;
+  background-color: ${props => props.theme.accentColor['4']};
+  border: 2px solid ${props => props.theme.accentColor['4']};
+  color: ${props => props.theme.textColor};
 `
 
 export const RecommendButton = styled.button`
@@ -109,6 +123,7 @@ export const RecommendButton = styled.button`
   margin: 0 0 4% 16px;
   padding: 4px 8px 4px 8px;
   border: 2px solid #FBD5E0;
+  border-color:${props => props.theme.accentColor['4']};
   background: none;
-  color: #636161;
+  color: ${props => props.theme.textColor};
 `

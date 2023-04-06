@@ -1,0 +1,22 @@
+
+pipeline {
+    agent any
+
+    stages {
+        stage('BUILD') {
+            when { changeset "**/backend-recommend/**" }
+            steps {
+		        sh "chmod +x -R ${env.WORKSPACE}"
+                sh './pipeline/jenkins/backend-recommend/build/build.sh'
+            }
+        }
+	    stage('DEPLOY') {
+            when { changeset "**/backend-recommend/**" }
+            steps {
+                sh "chmod +x -R ${env.WORKSPACE}"
+                sh './pipeline/jenkins/backend-recommend/deploy/deploy.sh'
+            }
+        }
+
+    }
+}

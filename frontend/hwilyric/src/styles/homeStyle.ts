@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
-interface divWidth {
+
+interface divWidth{
   width: string;
 }
 
@@ -143,11 +144,16 @@ export const HomeCenterWord = styled.div`
 `;
 
 export const HomeWordItem = styled.div`
+  &:hover{
+    background-color: ${props => props.theme.accentColor['1']};
+    color: rgb(255, 255, 255, 100);
+  }
   margin: 4px 12px;
   padding: 8px 12px;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.5);
-`;
+  cursor: pointer;
+`
 
 export const QuickviewHeader = styled.div`
   height: 10vh;
@@ -166,7 +172,8 @@ export const QuickviewHeaderSpan = styled.span`
 export const HeaderP = styled.p`
   font-size: 24px;
   margin-right: 16px;
-`;
+  font-weight: bold;
+`
 
 export const TopicHeader = styled.div`
   height: 15vh;

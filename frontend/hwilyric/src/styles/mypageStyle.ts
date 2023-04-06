@@ -42,6 +42,10 @@ export const MyProfileImage = styled.img`
   width: 88px;
   
 `
+export const MyPageSpan = styled.span`
+  cursor: pointer;
+`
+
 
 export const ArrowImage = styled.img`
   width: 16px;
@@ -56,6 +60,9 @@ export const IconImage = styled.img`
 
 export const LyricThumbnail = styled.img`
   width: 8vw;
+  height: 8vw;
+  object-fit: cover;
+  overflow: hidden;
 `
 
 export const LyricListHeader = styled.div`
@@ -80,6 +87,7 @@ export const LyricListBodyItemDiv = styled.div<divWidth>`
   width: ${(props) => (props.width) ? (props.width) : '60px'};
   display: flex;
   justify-content: center;
+  cursor: pointer
 `
 
 export const LyricListBodyItemContent = styled.div`

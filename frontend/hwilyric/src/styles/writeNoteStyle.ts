@@ -4,7 +4,7 @@ import reset from 'styled-reset';
 const NoteBoxInfo = (height? : string) => css`
     align-items : center;
     height: ${height};
-    background-clolor: none;
+    background-color: none;
     margin: 0;
     padding: 0;
     border: 0;
@@ -92,7 +92,7 @@ export const DeleteButtonBox = styled.div`
     & > button {
         font-size: 2vw;
         display: none;
-        color: #8A1C70;
+        color: ${props => props.theme.accentColor['2']};
     }
 `
 
@@ -120,6 +120,10 @@ export const BlockItemStyle =  styled.div<{ height: number }>`
         line-height: 20px;
         font-size: 16px;
         scrollbar-width: none;
+        ::placeholder {
+            font-weight: 100;
+            font-size: 14px;
+        }
         ::-webkit-scrollbar {
             display: none;
         }
@@ -166,8 +170,10 @@ export const PlayerProgressBox = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: flex-end;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     padding: 0 10px;
 `
 

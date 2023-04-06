@@ -1,5 +1,4 @@
-import { createGlobalStyle, ThemeProvider } from "styled-components";
-import theme from "./theme";
+import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 export const GlobalStyle = createGlobalStyle`
@@ -20,5 +19,9 @@ export const GlobalStyle = createGlobalStyle`
     .main-logo {
         content:url(${(props) => props.theme.logoUrl});
     }
+    input, textarea {
+        : focus{
+            ::placeholder {color:transparent}
+        }
     }
 `;

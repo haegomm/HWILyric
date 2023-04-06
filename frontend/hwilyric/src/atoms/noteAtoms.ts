@@ -1,7 +1,7 @@
 import { atom, selector } from "recoil"
 import { recoilPersist } from 'recoil-persist';
 import { ILyricBlockTypes } from "../types/writingType"
-import { Default_thumbnail_1 } from "../assets/writeSideBar/search"
+import { Default_thumbnail_1 } from "../assets/writeSideBar/writeImg"
 
 const { persistAtom } = recoilPersist();
 
@@ -35,7 +35,11 @@ export const blockIdState = atom<number>({
 
 export const blockListState = atom<ILyricBlockTypes[]>({
     key: 'blockListState',
-    default: [],
+    default: [{
+        blockId: getCurrentDateTime(),
+        type: "verse",
+        lyrics: ""
+    }],
     effects_UNSTABLE: [persistAtom],
 })
 
@@ -71,4 +75,10 @@ export const saveTimeSelector = selector({
         })
         return convertedDate
     }
+})
+
+export const isDarkModeState = atom<boolean>({
+    key: "isDarkModeState",
+    default: false,
+    effects_UNSTABLE: [persistAtom],
 })
