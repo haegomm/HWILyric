@@ -7,7 +7,7 @@ import { useRecoilValue } from 'recoil'
 import { getLyricList } from '../../../api/writingApi'
 import MyPageDropbox from '../../mypage/MyPageDropbox'
 import { IsLoginAtom } from '../../../atoms/userAtom'
-import { MyLyricBody, MyLyricListBodyItemContent, MyLyricThumbnail } from '../../../styles/MyLyricStyle'
+import { MyLyricBody, MyLyricListBodyItemContent, MyLyricThumbnail, MyLyricListBodyDiv, MyLyricSubBody } from '../../../styles/MyLyricStyle'
 import { sidebarCategoryAtom } from '../../../atoms/sidebarAtoms'
 import SidebarMyLyricsSelect from './SidebarMyLyricsSelect'
 import { LoginRecButton, NotLoggedInDiv } from '../../../styles/recommendStyle'
@@ -41,9 +41,9 @@ function SidebarMyLyrics() {
   return (
     <MyLyricBody>
       {isLogin ? (
-      <div>
+      <MyLyricSubBody>
       <SidebarMyLyricsSelect />
-      <div>
+      <MyLyricListBodyDiv>
         {nullLyrics === '' ?
           <div>
             {myLyrics.map((myLyric:IGetILyricInfoTypes) => (
@@ -72,8 +72,8 @@ function SidebarMyLyrics() {
             {nullLyrics}
           </LyricListBodyItem>
         }
-      </div>
-    </div> ) : (
+      </MyLyricListBodyDiv>
+    </MyLyricSubBody> ) : (
       <NotLoggedInDiv>
         <p>로그인 하지 않으면 가사를 저장할 수 없어요</p>
         <br/>
