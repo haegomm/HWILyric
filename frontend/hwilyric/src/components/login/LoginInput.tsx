@@ -1,12 +1,39 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Link, useNavigate } from "react-router-dom";
-import { useSetRecoilState } from 'recoil';
+import { Link, useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
 
 import { login } from "../../api/userApi";
 import { ILoginTypes } from "../../types/userType";
 import { saveUserInfo } from "../../features/userInfo";
-import { IsLoginAtom, userNicknameAtom, userProfileImgAtom, IsKnownPassword } from "../../atoms/userAtom";
+import {
+  IsLoginAtom,
+  userNicknameAtom,
+  userProfileImgAtom,
+  IsKnownPassword,
+} from "../../atoms/userAtom";
 import socailLoginButton from "../../assets/socialLogin/socialLoginButton";
+
+import {
+  LoginBoxDiv,
+  LoginTitleH1,
+  LoginForm,
+  LoginEmailDiv,
+  LoginPasswordDiv,
+  LoginForgotPWDiv,
+  LoginButtonBoxDiv,
+  LoginButton,
+  LoginNoIdDiv,
+  LoginSignUpBoxDiv,
+  LoginSignUpDiv,
+  LoginKakaoA,
+  LoginInputI,
+  LoginTitleBackground,
+  LoginKakaoImg,
+  LoginSignUpWrapper,
+  LoginPasswordBox,
+} from "../../styles/loginStyle";
+
+import { useTheme } from "styled-components";
 
 function LoginInput() {
   const navigate = useNavigate();
@@ -18,10 +45,10 @@ function LoginInput() {
 
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  const setIsLogin = useSetRecoilState(IsLoginAtom)
-  const setNickname = useSetRecoilState(userNicknameAtom)
-  const setProfileImg = useSetRecoilState(userProfileImgAtom)
-  const setIsKnownPassword = useSetRecoilState(IsKnownPassword)
+  const setIsLogin = useSetRecoilState(IsLoginAtom);
+  const setNickname = useSetRecoilState(userNicknameAtom);
+  const setProfileImg = useSetRecoilState(userProfileImgAtom);
+  const setIsKnownPassword = useSetRecoilState(IsKnownPassword);
 
   const onEmailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.currentTarget.value);
@@ -30,8 +57,8 @@ function LoginInput() {
     setPassword(e.currentTarget.value);
   };
   const onLoginPageHandler = (e: React.MouseEvent<HTMLDivElement>) => {
-    setIsKnownPassword(false)
-  }
+    setIsKnownPassword(false);
+  };
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -40,59 +67,70 @@ function LoginInput() {
       password: Password,
     };
 
-    const data = await login(body)
+    const data = await login(body);
     if (data !== null) {
-      saveUserInfo(data)
-      setIsLogin(true)
-      setNickname(data.nickname)
-      setProfileImg(data.profileImg)
-      navigate("/home");
+      saveUserInfo(data);
+      setIsLogin(true);
+      setNickname(data.nickname);
+      setProfileImg(data.profileImg);
+      navigate("/");
     } else {
-      alert('로그인 실패ㅜ;')
+      alert("로그인 실패ㅜ;");
     }
   };
 
+  const theme = useTheme();
 
   return (
-    <div>
-      <h1 className="loginTitle">로그인</h1>
-      <form onSubmit={onSubmitHandler}>
-        <div className="formItem">
-          <input
+    <LoginBoxDiv>
+      <LoginTitleBackground theme={theme} />
+      <LoginTitleH1 className="loginTitle">로그인</LoginTitleH1>
+      <LoginForm onSubmit={onSubmitHandler}>
+        <LoginEmailDiv>
+          <LoginInputI
             type="email"
             placeholder="이메일"
             className="inputEmail"
             onChange={onEmailHandler}
           />
-        </div>
-        <div className="formItem">
-          <input
-            type="password"
-            placeholder="비밀번호"
-            className="inputPassword"
-            onChange={onPasswordHandler}
-          />
-        </div>
-        <div onClick={onLoginPageHandler}>
-          비밀번호를 잊으셨나요?
-        </div>
-        <div>
-          <button type="submit" className="loginButton">
-            로그인하기
-          </button>
-        </div>
-      </form>
-      <div className="idMessage">아직 아이디가 없으신가요?</div>
-      <div className="bottomButton">
-        <Link to="/signup">
-          <div className="normalSignUpButton">가입하기</div>
-        </Link>
-        <a href={KAKAO_REQUEST}>
-          <img src={socailLoginButton} className="kakaoSignUpButton" alt="" />
-        </a>
-      </div>
-    </div>
-  )
+        </LoginEmailDiv>
+        <LoginPasswordBox>
+          <LoginPasswordDiv>
+            <LoginInputI
+              type="password"
+              placeholder="비밀번호"
+              className="inputPassword"
+              onChange={onPasswordHandler}
+            />
+          </LoginPasswordDiv>
+          <LoginForgotPWDiv onClick={onLoginPageHandler}>
+            비밀번호를 잊으셨나요?
+          </LoginForgotPWDiv>
+        </LoginPasswordBox>
+        <LoginButtonBoxDiv>
+          <LoginButton type="submit">로그인</LoginButton>
+        </LoginButtonBoxDiv>
+      </LoginForm>
+      <LoginSignUpWrapper>
+        <LoginNoIdDiv>아직 아이디가 없으신가요?</LoginNoIdDiv>
+        <LoginSignUpBoxDiv>
+          <Link
+            to="/signup"
+            style={{ textDecoration: "none", color: "#636161" }}
+          >
+            <LoginSignUpDiv>가입하기</LoginSignUpDiv>
+          </Link>
+          <LoginKakaoA href={KAKAO_REQUEST}>
+            <LoginKakaoImg
+              src={socailLoginButton}
+              className="kakaoSignUpButton"
+              alt=""
+            />
+          </LoginKakaoA>
+        </LoginSignUpBoxDiv>
+      </LoginSignUpWrapper>
+    </LoginBoxDiv>
+  );
 }
 
-export default LoginInput
+export default LoginInput;

@@ -25,13 +25,6 @@ while (year_num <= 2022):
         driver.implicitly_wait(time_to_wait)
         time.sleep(time_to_sleep)
 
-        # # 셀레니움으로 일간 페이지까지 찾아 들어가기
-        # driver.find_element_by_xpath('//*[@id="gnb_menu"]/ul[1]/li[1]/a/span[2]').click()
-        # time.sleep(2)
-
-        # driver.find_element_by_xpath('//*[@id="gnb_menu"]/ul[1]/li[1]/div/ul/li[2]/a/span').click()
-        # time.sleep(2)
-
         # 해당 페이지 사용. bs를 활용
         html = driver.page_source
         soup = bs(html, 'html.parser')
@@ -96,7 +89,7 @@ while (year_num <= 2022):
             chartyear = year_num
             try:
                 lyrics = soup.select_one('#d_video_summary').get_text('\n').strip('\n\t').split('\n')
-            except:
+            except Exception as e:
                 lyrics = ['가사 정보 없음']
             song_list[idx].update({'artist':artist, 'album':album, 'release_date':release_date,'genre': genre, 'lyrics':lyrics, 'chartyear':chartyear})
 

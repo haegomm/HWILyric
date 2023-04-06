@@ -2,13 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { IconImage, LyricListBody, LyricListBodyItem, LyricListBodyItemDiv, LyricThumbnail } from '../../styles/mypageStyle'
 import { getLyricList } from '../../api/writingApi'
 import { IGetILyricInfoTypes } from '../../types/mypageType'
-import { lightDelete, lightModify, lightView } from '../../assets/mypage/myButtons'
+import { lightDelete, lightModify } from '../../assets/icon/myButtons'
 import { deleteNote } from '../../api/deleteApit'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
+import { useNavigate } from 'react-router-dom'
+import { isModifyingAtom, isTempAtom } from '../../atoms/mypageAtom'
 
 function MyPageLyricList() {
+  const navigate = useNavigate();
   const [myLyrics, setMyLyrics] = useState([])
   const [nullLyrics, setNullLyrics] = useState('')
+  const setIsModifying = useSetRecoilState(isModifyingAtom)
+  const setIsTemp = useSetRecoilState(isTempAtom)
       
   async function getMyLyrics() {
     const lyricList = await getLyricList()
@@ -17,7 +22,6 @@ function MyPageLyricList() {
         return new Date(b.updatedDate).valueOf() - new Date(a.updatedDate).valueOf();})
       setMyLyrics(sortedLyrics)
     } else {
-      console.log('')
       setNullLyrics('새로운 곡을 작사해보세요')
     }
   }
@@ -25,6 +29,13 @@ function MyPageLyricList() {
   useEffect(() => {
     getMyLyrics()
   }, [])
+
+  const onModifyHandler = (e: React.MouseEvent<HTMLImageElement>) => {
+    const noteId = e.currentTarget.id
+    navigate(`/modify/${noteId}`)
+    setIsModifying(true)
+    setIsTemp(false)
+  }
 
   const onDeleteHandler = async (e: React.MouseEvent<HTMLImageElement>) => {
     if (window.confirm(`${e.currentTarget.alt}을(를) 삭제하시겠습니까?`)) {
@@ -50,7 +61,7 @@ function MyPageLyricList() {
                 <LyricListBodyItemDiv width='10vw'>
                   <LyricThumbnail src={myLyric.thumbnail} />
                 </LyricListBodyItemDiv>
-                <LyricListBodyItemDiv width='20vw'>
+                <LyricListBodyItemDiv width='20vw' id={myLyric.id} onClick={onModifyHandler}>
                   {myLyric.title}
                 </LyricListBodyItemDiv>
                 <LyricListBodyItemDiv width='10vw'>
@@ -60,8 +71,8 @@ function MyPageLyricList() {
                   {myLyric.updatedDate.substring(0, 10)}
                 </LyricListBodyItemDiv>
                 <LyricListBodyItemDiv width='10vw'>
-                  <IconImage src={lightView} id={myLyric.id} onClick={onDeleteHandler}/>
-                  <IconImage src={lightModify} id={myLyric.id} onClick={onDeleteHandler}/>
+                  {/* <IconImage src={lightView} id={myLyric.id} onClick={onDeleteHandler}/> */}
+                  <IconImage src={lightModify} id={myLyric.id} onClick={onModifyHandler}/>
                   <IconImage src={lightDelete} id={myLyric.id} alt={myLyric.title} onClick={onDeleteHandler}/>
                 </LyricListBodyItemDiv>
               </LyricListBodyItem>

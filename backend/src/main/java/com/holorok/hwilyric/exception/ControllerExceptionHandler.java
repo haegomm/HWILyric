@@ -48,5 +48,12 @@ public class ControllerExceptionHandler {
         return ErrorRes.make(e.getMessage());
     }
 
+    @ExceptionHandler(InvalidInputException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorRes handleInvalidInputException(InvalidInputException e) {
+        log.error(e.getMessage());
+        return ErrorRes.make(e.getMessage());
+    }
 
 }

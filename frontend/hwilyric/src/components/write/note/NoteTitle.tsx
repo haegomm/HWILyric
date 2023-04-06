@@ -1,19 +1,24 @@
 import { useRef } from "react"
-import { useRecoilState } from "recoil"
-import { titleState } from "../../../atoms/noteAtoms"
+import { useRecoilState, useRecoilValue } from "recoil"
+import { noteIdState, titleState, saveTimeSelector } from "../../../atoms/noteAtoms"
 import { TitleDivBox } from "../../../styles/writeNoteStyle"
 
 function NoteTitle() {
     const titleInput = useRef<HTMLInputElement>(null)
     const [title, setWTitle] = useRecoilState(titleState)
+  
+    const noteId = useRecoilValue(noteIdState)
+    const updateTime = useRecoilValue(saveTimeSelector)
     
     const handleChangeTitle = () => {
         if (titleInput.current) {
             setWTitle(titleInput.current.value)
         }
     }
+  
 
-    return (
+  return (
+      <>      
         <TitleDivBox>
           <input
             ref={titleInput}
@@ -21,7 +26,9 @@ function NoteTitle() {
             placeholder={"무제"}
             onChange={handleChangeTitle}
           />
-        </TitleDivBox>
+      {(noteId) ? <p style={{fontSize: 12}}>최근 저장일: { updateTime }</p> : (<></>)}
+      </TitleDivBox>
+      </>
     )
 }
 

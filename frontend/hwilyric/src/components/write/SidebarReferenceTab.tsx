@@ -1,15 +1,13 @@
 import Memo from "./sidebar/Memo"
 import SearchVideo from "./sidebar/SearchVideo"
 import Thumbnail from "./sidebar/Thumbnail"
-import VideoPlayer from "./sidebar/VideoPlayer"
 
 function SidebarReferenceTab() {
     return (
-        <div>
+        <div style={{margin: '0px', display: 'block', justifyContent: 'center', alignItems: 'center'}}>
             <Thumbnail />
             <Memo />
             <SearchVideo />
-            <VideoPlayer />
         </div>
     )
 }

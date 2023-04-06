@@ -1,16 +1,16 @@
 import axios from "axios"
 import { useState } from "react"
-import { useSetRecoilState } from "recoil"
+import { useRecoilState } from "recoil"
 import { PlayVideoId } from "../../../atoms/youtubeVideoAtoms";
-import { SearchBoxStyle, SearchInput, SearchResultItem, SearchResultList, SearchIconButton } from "../../../styles/writeSidebarStyle";
-import {SearchIcon} from "../../../assets/writeSideBar/search";
+import { SearchBox, SearchBoxStyle, SearchInput, SearchResultItem, SearchResultList, SearchIconButton, SearchResultItemText } from "../../../styles/writeSidebarStyle";
+import {SearchIcon} from "../../../assets/writeSideBar/writeImg";
+import MusicBar from "../MusicBar";
 
 
 function SearchVideo() {
     const [query, setQuery] = useState("");
     const [results, setResults] = useState<any[]>([]);
-    const setVideoId = useSetRecoilState(PlayVideoId)
-    
+    const [videoId, setVideoId] = useRecoilState(PlayVideoId);
     
     const handleSearch = async () => {
       try {
@@ -29,44 +29,42 @@ function SearchVideo() {
         
         const items = response.data.items.map((item: any) => {
           const { id, snippet } = item
-          // const title = snippet.title.replace(/[^\w\s]/gi, "");
           const title = snippet.title.replace(/[^\uAC00-\uD7AF\u1100-\u11FF\u3130-\u318F]/g, " ")
           const thumbnail = snippet.thumbnails.default.url
           return { id, title, thumbnail }
         });
 
           setResults(() => items)
-          console.log(response)
-        console.log(items)
       } catch (error) {
         console.error(error)
       }
     };
   
-  const handleGetVideoId = (videoId: string) => {
-    setVideoId(videoId)
-    console.log(videoId)
+  const handleGetVideoId = (clickVideoId: string) => {
+    setVideoId(() => clickVideoId);
     }
 
 
   
     return (
-      <div>
-        <SearchBoxStyle>
-          <SearchInput type="text" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="노래를 검색해보세요" />
-          <SearchIconButton onClick={handleSearch}><img style={{width:"3vh", height: "3vh"}} src={SearchIcon} /></SearchIconButton>
+      <SearchBox className="SearchBox">
+        <SearchBoxStyle className="SearchBoxStyle">
+          <SearchInput className="SearchInput" type="text" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="노래를 검색해보세요" onKeyDown={(e) => {if (e.key === 'Enter') {handleSearch()}}}/>
+          <SearchIconButton className="SearchIconButton" onClick={handleSearch}>
+            <img style={{ width: "3vh", height: "3vh" }} src={SearchIcon} />
+          </SearchIconButton>
         </SearchBoxStyle>
-        <SearchResultList>
-          {results.map((result) => (
-            <div key={result.id.videoId}>
-              <SearchResultItem>
-                <img src={result.thumbnail} alt="thumnail" />
-                <p onClick={(e)=>{handleGetVideoId(result.id.videoId)}}>{result.title}</p>
+        {results ? (
+          <SearchResultList className="SearchResultList">
+            {results.map((result) => (
+              <SearchResultItem className="SearchResultItem" key={result.id.videoId}>
+                <img src={result.thumbnail} alt="thumbnail" />
+                <SearchResultItemText onClick={(e) => { handleGetVideoId(result.id.videoId) }} style={{ fontSize: "12px" }}>{result.title}</SearchResultItemText>
+                {(videoId === result.id.videoId) ? <MusicBar></MusicBar> : <></>}
               </SearchResultItem>
-            </div>
-          ))}
-        </SearchResultList>
-      </div>
+            ))}
+          </SearchResultList>) : <></>}
+      </SearchBox>
     );
 }
   

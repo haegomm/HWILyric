@@ -1,137 +1,127 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { useRecoilValue } from "recoil";
 import YouTube from "react-youtube";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { PlayVideoId } from "../../../atoms/youtubeVideoAtoms";
-import { PlayerBox, PlayerVideoBox, PlayButton } from "../../../styles/writeSidebarStyle";
-
-type PlayerState = "playing" | "paused" | "stopped" | "unstarted";
-
-
+import { PlayerBox, PlayerVideoBox, PlayerProgressBox, PlayerButtonBox } from "../../../styles/writeNoteStyle";
+import { Pause_Button, Play_Button } from "../../../assets/writeSideBar/writeImg";
 
 function VideoPlayer() {
-  const [playerState, setPlayerState] = useState<PlayerState>("unstarted")
+
   const playerRef = useRef<YT.Player | null>(null)
+  const ytInterval = useRef<NodeJS.Timer | null> (null)
   const videoId = useRecoilValue(PlayVideoId)
 
   const [isPlay, setIsPlay] = useState(false)
-  const toggleIsPlay = () => setIsPlay(!isPlay)
-
-  const currentTime = useRef<number>(0);
+  const [time, setTime] = useState(0)
   const [durationTime, setDurationTime] = useState(0);
   
   const [hourTime, setHourTime] = useState<string>('00')
   const [minTime, setMinTime] = useState<string>('00')
   const [secTime, setSecTime] = useState<string>('00')
   
-  
-  const handlePlayerReady = (event: YT.PlayerEvent) => {
-    setDurationTime(event.target.getDuration())
-    playerRef.current = event.target
-  }
-  
-  const handlePlayerStateChange = (event: YT.OnStateChangeEvent) => {
-    setPlayerState(() => getPlayerState(event.data))
-    onCurrentChange(event)
-  }
-  
-  const getPlayerState = (state: number): PlayerState => {
-    switch (state) {
-      case YT.PlayerState.PLAYING:
-        return "playing";
-      case YT.PlayerState.PAUSED:
-        onPlayerStop()
-        return "paused";
-      case YT.PlayerState.ENDED:
-      case YT.PlayerState.CUED:
-        onPlayerStop()
-        return "stopped";
-      default:
-        return "unstarted";
-    }
-  }
-            
   const handlePlay = () => {
-    if (playerRef.current) {
-      playerRef.current.playVideo()
-      toggleIsPlay()
-    }
+    setIsPlay(()=>true);
+    if(playerRef.current) {playerRef.current.playVideo()};
   }
             
   const handlePause = () => {
-    if (playerRef.current) {
-      playerRef.current.pauseVideo()
-      onPlayerStop()
-      clearInterval(intervalId)
-      toggleIsPlay()
+    setIsPlay(()=>false);
+    if(playerRef.current) {playerRef.current.pauseVideo()}
+  }
+
+  const handlePlayerStateChange = (event: YT.OnStateChangeEvent) => {
+    const ytState = event.data;
+    if (ytState === 1) {
+      setIsPlay(() => true); 
+    }
+    else if (ytState === 2){
+      setIsPlay(() => false);
+    }
+    else if (ytState === 5){
+      playerRef.current = event.target;
+      setDurationTime(() => event.target.getDuration());
+      if (videoId) {
+        playerRef.current.playVideo()
+      }
+    } 
+    else if (ytState === -1) {
+      setIsPlay(() => false);
+      setTime(() => 0);
+      setHourTime(() => '00');
+      setMinTime(() => '00');
+      setSecTime(() => '00');
+      if (ytInterval.current) {clearTimer()}
     }
   }
-            
-  const secondToHourMinute = () => {
-    const now = currentTime.current
-    const hour: number = Math.floor(now / 3600)
-    const min: number = Math.floor((now % 3600) / 60)
-    const sec: number = (now % 60)
+
+  const setTimer = (event: any) => {
+    if (ytInterval.current) {clearTimer()}
+    ytInterval.current = setInterval(() => {
+      let currentTime = event.target.getCurrentTime();
+      setTime(() => Math.floor(currentTime))
+      secondToHourMinute(currentTime)
+    },100)
+  }
+
+  const clearTimer = () => {
+    if (ytInterval.current) {
+      clearInterval(ytInterval.current)
+    };
+  }
+
+  const secondToHourMinute = (t: number) => {
+    const hour: number = Math.floor(t / 3600)
+    const min: number = Math.floor((t % 3600) / 60)
+    const sec: number = Math.floor(t % 60)
 
     setHourTime(() => (hour < 10) ? '0' + String(hour) : String(hour))
     setMinTime(() => (min < 10) ? '0' + String(min) : String(min))
     setSecTime(() => (sec < 10) ? '0' + String(sec) : String(sec))
-  }
+  }            
   
-  let intervalId: NodeJS.Timer
-  const onCurrentChange = (event: any) => {
-    if (playerState === "playing") {
-      intervalId = setInterval(() => {
-        currentTime.current = Math.floor(event.target.getCurrentTime())
-        secondToHourMinute()
-        console.log("멈췄을까?")
-      }, 100);
-    } else if (
-      event.data === YouTube.PlayerState.PAUSED ||
-      event.data === YouTube.PlayerState.ENDED
-    ) {
-      clearInterval(intervalId);
-    }
-  }
-
-    const onPlayerStop = () => {
-      clearInterval(intervalId)
-    }
-  
-    return (
-      <PlayerBox>
-        <PlayerVideoBox>
-          <YouTube
-            opts={{
-              width: "70",
-              height: "70",
-              playerVars: {
-                rel: 0,
-                modestbranding: 1
-              }
-            }}
-            videoId={videoId}
-            onReady={handlePlayerReady}
-            onPlay={handlePlayerStateChange}
-            onPause={handlePlayerStateChange}
-            onStateChange={handlePlayerStateChange}
-            onEnd={(event) => { event.target.stopVideo(0); }}
-          />
-        </PlayerVideoBox>
-        <ProgressBar
-          now={currentTime.current}
-          max={durationTime}
-        />
-        <p>{`${hourTime}:${minTime}:${secTime}`}</p>
-        {isPlay ? (<PlayButton onClick={handlePause}>
-          ||
-        </PlayButton>) : (<PlayButton onClick={handlePlay}>
-          ▶
-        </PlayButton>)}
+  return (
+    <PlayerBox>
+      {videoId ? 
+        <>
+          <PlayerVideoBox>
+            <YouTube
+              opts={{
+                width: "50",
+                height: "50",
+                playerVars: {
+                  rel: 0,
+                  modestbranding: 1
+                }
+              }}
+              videoId={videoId}
+              onPlay={setTimer}
+              onPause={clearTimer}
+              onStateChange={handlePlayerStateChange}
+            />
+          </PlayerVideoBox>
+          <PlayerProgressBox>
+            <ProgressBar
+              style={{ width: '100%' }}
+              variant="warning"
+              now={time}
+              max={durationTime}
+            />
+            <p style={{fontSize: 12, paddingTop: "1%"}}>{`${hourTime}:${minTime}:${secTime}`}</p>
+          </PlayerProgressBox>
+          <PlayerButtonBox>
+            {isPlay ? (<button onClick={handlePause} disabled={!videoId}>
+              <img src={Pause_Button} alt="" />
+            </button>) : (<button onClick={handlePlay} disabled={!videoId}>
+              <img src={Play_Button} alt="" />
+            </button>)}
+          </PlayerButtonBox>
+        </> : <div style={{margin:'auto'}}>레퍼런스 탭에서 노래를 검색해보세요</div>}
       </PlayerBox>
-    );
+    
+  );
   }
 
 

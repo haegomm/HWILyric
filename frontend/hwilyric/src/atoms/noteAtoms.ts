@@ -1,6 +1,7 @@
-import { atom } from "recoil"
+import { atom, selector } from "recoil"
 import { recoilPersist } from 'recoil-persist';
 import { ILyricBlockTypes } from "../types/writingType"
+import { Default_thumbnail_1 } from "../assets/writeSideBar/writeImg"
 
 const { persistAtom } = recoilPersist();
 
@@ -11,7 +12,9 @@ function getCurrentDateTime() {
     const day = String(now.getDate()).padStart(2, '0');
     const hour = String(now.getHours()).padStart(2, '0');
     const minute = String(now.getMinutes()).padStart(2, '0');
-    const id = `${year}${month}${day}${hour}${minute}`;
+    const second = String(now.getSeconds()).padStart(2, '0');
+    const milliseconds = String(now.getMilliseconds()).padStart(2, '0');
+    const id = `${year}${month}${day}${hour}${minute}${second}${milliseconds}`;
     return Number(id);
 }
 
@@ -34,18 +37,50 @@ export const blockIdState = atom<number>({
 
 export const blockListState = atom<ILyricBlockTypes[]>({
     key: 'blockListState',
-    default: [],
+    default: [{
+        blockId: getCurrentDateTime(),
+        type: "verse",
+        lyrics: ""
+    }],
     effects_UNSTABLE: [persistAtom],
 })
 
 export const noteThumbnailFileState = atom<File | "">({
     key: "noteThumbnailFileState",
-    default: "",
+    default: Default_thumbnail_1,
     effects_UNSTABLE: [persistAtom],
 })
 
 export const noteThumbnailUrlState = atom<string>({
     key: "noteThumbnailUrlState",
-    default: "",
+    default: Default_thumbnail_1,
+    effects_UNSTABLE: [persistAtom],
+})
+
+export const saveTimeState = atom<string>({
+    key: "saveTimeState",
+    default: ""
+})
+
+export const saveTimeSelector = selector({
+    key: "saveTimeSelector",
+    get: ({ get }) => {
+        const originalDate = get(saveTimeState);
+        const convertedDate = new Date(originalDate).toLocaleString('ko-KR', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour12: true,
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric'
+        })
+        return convertedDate
+    }
+})
+
+export const isDarkModeState = atom<boolean>({
+    key: "isDarkModeState",
+    default: false,
     effects_UNSTABLE: [persistAtom],
 })

@@ -6,12 +6,18 @@ export const ButtonCss = (width?: string, height?: string) => css`
     font-size: 16px;
     border: 2px solid;
     background-color: none;
-    border-image: linear-gradient(45deg, #fbfcb9be, #ffcdf3aa, #65d3ffaa);
+    border-image: linear-gradient(to right,
+        ${props => props.theme.accentColor['1']}, 
+        ${props => props.theme.accentColor['2']}, 
+        ${props => props.theme.accentColor['4']});
     border-image-slice: 1;
     :hover {
         border: none;
-        transition: 0.7s;
-        background: linear-gradient(45deg, #fbfcb9be, #ffcdf3aa, #65d3ffaa);
+        font-weight: bold;
+        color: white;
+        background: linear-gradient(45deg, ${props => props.theme.accentColor['1']}, 
+        ${props => props.theme.accentColor['2']},
+        ${props => props.theme.accentColor['3']});
     }
 `
 
@@ -22,13 +28,11 @@ export const Button = styled.button`
 export const SaveButton = styled.button`
     ${ButtonCss("5vw", "4vh")};
     position: absolute;
-    left: 1472px;
-    top: 520px;
 `
 
 export const CheckButton = styled.button`
     ${ButtonCss("12vw", "8vh")};
-    // font-weight: 400;
+    margin-top: 5%;
 `
 
 export const SearchButton = styled.button`

@@ -1,49 +1,52 @@
 import { ISimilarityTypes } from '../types/writingType'
 import { axios, fileAxios } from './https'
 
-// 자동저장
 export async function saveNote(formData: FormData) {
   try {
       const res = await fileAxios.post(`api/notes/save`, formData)
       const data = res.data
-      console.log("저장 성공!",data)
       return data
-  } catch(err) {
-      console.log("저장 안돼ㅠ", err)
+  } catch (err) {
+    return null
   }
 }
 
-// 유사도 검사
+export async function getLyricInfo(noteId: string|undefined) {
+  try {
+    const res = await axios.get(`api/notes/detail?noteId=${noteId}`)
+    const data = res.data
+    return data
+  } catch (err) {
+    return null
+  }
+}
+
 export async function checkSimilarity(body: ISimilarityTypes) {
   try {
       const res = await axios.post(`api/similarity`, body)
       const data = res.data
-      console.log("췤췤 성공", data)
       return data
   } catch (err) {
-      console.log("췤췤 실패", err)
+    return null
   }
 }
 
-export async function randomKeyword() {
+export async function similarKeyword(word: string) {
   try{
-    const res = await axios.get('api/keywords/random')
+    const res = await axios.get(`recommend/keywords/similarity/${word}`)
     const data = res.data
     return data
   } catch(err) {
-    console.log('랜덤 키워드 못 받았단다')
-    console.log(err)
-    return err
+    return null
   }
 }
 
-export async function similarKeyword(word: String) {
+export async function rhymeKeyword(word: string) {
   try{
-    const res = await axios.get(`api/keywords/similarity/${word}`)
+    const res = await axios.get(`api/keywords/rhyme/${word}`)
     const data = res.data
     return data
   } catch(err) {
-    console.log('유사 키워드 못 받았단다')
     return null
   }
 }
@@ -54,7 +57,6 @@ export async function getLyricList() {
     const data = res.data
     return data
   } catch(err) {
-    console.log('리스트 못 받았단다')
     return null
   }
 }
@@ -65,7 +67,16 @@ export async function getRandomdWord() {
     const wordList = res.data
     return wordList
   } catch(err) {
-    console.log('랜덤키워드 안나옴')
+    return null
+  }
+}
+
+export async function recommendTopic() {
+  try{
+    const res = await axios.get('api/keywords/topics')
+    const wordList = res.data
+    return wordList
+  } catch(err) {
     return null
   }
 }

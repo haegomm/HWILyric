@@ -1,0 +1,11 @@
+# docker-compose.yml
+
+version: "3"
+services:
+  hl-django:
+    container_name: hl-django
+    build:
+      context: ../../../backend-recommend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"

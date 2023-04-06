@@ -33,7 +33,7 @@ public class NoteService {
         Optional<Note> findNote = noteRepository.findById(note.getId());
 
         //기본 이미지
-        String thumbnailImg = "https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/thumbnail/default_thumbnail.png";
+        String thumbnailImg = "https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/thumbnail/default_thumbnail_1.jpg";
 
         //사용자가 파일을 업로드한 경우
         if(multipartFile != null) {

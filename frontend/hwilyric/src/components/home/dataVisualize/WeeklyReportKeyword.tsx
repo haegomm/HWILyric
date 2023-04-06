@@ -1,41 +1,84 @@
-import React from "react";
+import { useTheme } from "styled-components";
 import {
   WeeklyKeywordBlockP,
   WeeklyKeywordLineDiv,
   WeeklyReportKeywordsDiv,
 } from "../../../styles/DataVisaulizeStyle";
-import { IWeeklyReportKeyword } from "../../../types/visualizingType";
+
+import { isModifyingAtom } from "../../../atoms/mypageAtom";
+import {
+  blockListState,
+  noteIdState,
+  noteThumbnailFileState,
+  noteThumbnailUrlState,
+  titleState,
+} from "../../../atoms/noteAtoms";
+import { memoState } from "../../../atoms/sidebarAtoms";
+import { useSetRecoilState, useResetRecoilState } from "recoil";
+import { useNavigate } from "react-router-dom";
 
 function WeeklyReportKeyword(props: any) {
-  // const data = props.data
-  const data: IWeeklyReportKeyword[] = [
-    { name: "키워드1", count: 1 },
-    { name: "키워드2", count: 2 },
-    { name: "키워드3", count: 3 },
-    { name: "키워드4", count: 4 },
-    { name: "키워드5", count: 5 },
-    { name: "키워드6", count: 6 },
-  ];
+  const navigate = useNavigate();
+  const isModifying = useSetRecoilState(isModifyingAtom);
+  const setTitle = useSetRecoilState(titleState);
+  const resetNoteId = useResetRecoilState(noteIdState);
+  const resetBlockList = useResetRecoilState(blockListState);
+  const resetMemo = useResetRecoilState(memoState);
+  const resetThumbnail = useResetRecoilState(noteThumbnailUrlState);
+  const resetThumbnailFile = useResetRecoilState(noteThumbnailFileState);
 
   const keywordBlockColors = ["#B0E3F9", "#DEB3FB", "#FEC3B5", "#FBD5E0"];
+  const theme = useTheme();
 
-  // 키워드 데이터를 그룹화하여 3개씩 나누기
+  const onWeeklyKeywordHandler = (e: React.MouseEvent<HTMLDivElement>) => {
+    const eventTarget = e.target as HTMLElement;
+    const word = eventTarget.innerText;
+    isModifying(true);
+    setTitle(word);
+    resetNoteId();
+    resetBlockList();
+    resetMemo();
+    resetThumbnail();
+    resetThumbnailFile();
+    navigate("/write");
+  };
+
   const groupedData = [];
-  for (let i = 0; i < 6; i += 3) {
-    const mydata = props.data.length !== 0 ? props.data : data;
-    groupedData.push(mydata.slice(i, i + 3));
+  const data = props.data;
+  const dataLeng = data.length;
+  const idxs = new Set<number>();
+
+  if (data.length !== 0) {
+    while (idxs.size < 6) {
+      const num = Math.floor(Math.random() * dataLeng);
+      idxs.add(num);
+    }
+    let numArr: any[] = [];
+    idxs.forEach((index) => {
+      numArr.push(data[index]);
+      if (numArr.length === 3) {
+        groupedData.push(numArr);
+        numArr = [];
+      }
+    });
+    groupedData.push(numArr);
   }
   let colorNum = -1;
   return (
     <WeeklyReportKeywordsDiv>
       {groupedData.map((group) => {
         return (
-          <WeeklyKeywordLineDiv>
-            {group.map((genreData: any) => {
+          <WeeklyKeywordLineDiv key={`weeklyKeywordLines-${colorNum}`}>
+            {group.map((keywordData: any) => {
               colorNum++;
               return (
-                <WeeklyKeywordBlockP color={keywordBlockColors[colorNum % 4]}>
-                  {genreData.name}
+                <WeeklyKeywordBlockP
+                  color={keywordBlockColors[colorNum % 4]}
+                  theme={theme}
+                  key={`weeklyKeywordBlock-${colorNum}`}
+                  onClick={onWeeklyKeywordHandler}
+                >
+                  {keywordData}
                 </WeeklyKeywordBlockP>
               );
             })}

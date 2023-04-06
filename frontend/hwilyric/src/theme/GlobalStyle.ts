@@ -19,5 +19,9 @@ export const GlobalStyle = createGlobalStyle`
     .main-logo {
         content:url(${(props) => props.theme.logoUrl});
     }
+    input, textarea {
+        : focus{
+            ::placeholder {color:transparent}
+        }
     }
 `;
