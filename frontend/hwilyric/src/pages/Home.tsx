@@ -17,9 +17,6 @@ import WeeklyReport from "../components/home/dataVisualize/WeeklyReport";
 import TotalTrend from "../components/home/dataVisualize/TotalTrend";
 import AnnualReport from "../components/home/dataVisualize/AnnualReport";
 import { useTheme } from "styled-components";
-import { lightTheme } from "../theme/theme";
-
-import { useTheme } from "styled-components";
 
 function Home() {
   const theme = useTheme();
