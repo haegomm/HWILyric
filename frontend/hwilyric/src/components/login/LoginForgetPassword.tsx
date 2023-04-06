@@ -15,6 +15,7 @@ import {
   PWFindTitleH1,
   ProfileModificationButton,
   PWFindButton,
+  LoginDiv,
 } from "../../styles/loginStyle";
 
 import { useTheme } from "styled-components";
@@ -94,7 +95,7 @@ function LoginForgetPassword() {
           </PWFindButton>
         </LoginButtonBoxDiv>
         <LoginButtonBoxDiv>
-          <div onClick={onLoginPageHandler}>로그인 하러 가기</div>
+          <LoginDiv onClick={onLoginPageHandler}>로그인 하러 가기</LoginDiv>
         </LoginButtonBoxDiv>
       </LoginForm>
     </LoginBoxDiv>
