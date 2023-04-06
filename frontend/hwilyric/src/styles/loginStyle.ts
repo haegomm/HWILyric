@@ -16,11 +16,13 @@ export const LoginBoxDiv = styled.div`
   border-radius: 0px;
   border-style: solid;
   border-width: 1px 1px 1px 1px;
-  border-image: linear-gradient(to right,
-    ${props => props.theme.accentColor['1']}, 
-    ${props => props.theme.accentColor['2']}, 
-    ${props => props.theme.accentColor['3']},
-    ${props => props.theme.accentColor['4']});
+  border-image: linear-gradient(
+    to right,
+    ${(props) => props.theme.accentColor["1"]},
+    ${(props) => props.theme.accentColor["2"]},
+    ${(props) => props.theme.accentColor["3"]},
+    ${(props) => props.theme.accentColor["4"]}
+  );
   border-image-slice: 1;
 `;
 
@@ -31,8 +33,11 @@ export const LoginTitleH1 = styled.h1`
   font-weight: bold;
   color: rgba(0, 0, 0, 0);
   z-index: 1;
-  background: linear-gradient(to right, ${props => props.theme.accentColor['4']},
-  ${props => props.theme.accentColor['2']});
+  background: linear-gradient(
+    to right,
+    ${(props) => props.theme.accentColor["4"]},
+    ${(props) => props.theme.accentColor["2"]}
+  );
   background-clip: text;
   -webkit-background-clip: text;
 `;
@@ -68,9 +73,11 @@ export const LoginInputI = styled.input`
   transition: transform 0.2s ease-in-out;
 
   &:focus {
-    border-image: linear-gradient(to right,
-      ${props => props.theme.accentColor['2']}, 
-      ${props => props.theme.accentColor['3']});
+    border-image: linear-gradient(
+      to right,
+      ${(props) => props.theme.accentColor["2"]},
+      ${(props) => props.theme.accentColor["3"]}
+    );
     border-image-slice: 1;
     outline: none;
     transform: scale(1.05);
@@ -110,11 +117,6 @@ export const LoginButton = styled.button`
   ${ButtonCss("5vw", "32px")}
 `;
 
-export const ProfileModificationButton = styled.button`
-  ${ButtonCss("8vw", "6vh")}
-  margin-top: 30px;
-`;
-
 export const LoginNoIdDiv = styled.div`
   font-size: 20px;
   width: auto;
@@ -130,8 +132,8 @@ export const LoginSignUpBoxDiv = styled.div`
 `;
 
 export const LoginSignUpDiv = styled.div`
-  width: 6vw;
-  height: 6vh;
+  width: 80px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -141,8 +143,8 @@ export const LoginSignUpDiv = styled.div`
 `;
 
 export const LoginKakaoA = styled.a`
-  width: 6vw;
-  height: 6vh;
+  width: 80px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -184,12 +186,33 @@ export const PWFindTitleH1 = styled.h1`
   font-weight: bold;
   color: rgba(0, 0, 0, 0);
   z-index: 1;
-  background: linear-gradient(to right,  ${props => props.theme.accentColor['2']}, 
-  ${props => props.theme.accentColor['3']});
+  background: linear-gradient(
+    to right,
+    ${(props) => props.theme.accentColor["2"]},
+    ${(props) => props.theme.accentColor["3"]}
+  );
   background-clip: text;
   -webkit-background-clip: text;
 `;
 
 export const PWFindButton = styled.button`
   ${ButtonCss("10vw", "6vh")}
+`;
+
+export const LoginDiv = styled.div`
+  cursor: pointer;
+`;
+
+export const ProfileModificationTitleBackground = styled.div`
+  background: ${(props) => (props.theme === lightTheme ? "white" : "#191B1F")};
+  position: absolute;
+  width: 250px;
+  height: 48px;
+  top: -24px;
+  z-index: 1;
+`;
+
+export const ProfileModificationButton = styled.button`
+  ${ButtonCss("8vw", "6vh")}
+  margin-top: 30px;
 `;

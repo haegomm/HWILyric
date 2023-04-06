@@ -1,41 +1,9 @@
 import { atom } from "recoil";
-import {
-  IAnnualGenreChart,
-  IAnnualGenreRatio,
-  IGenreRatio,
-  IAnnualGenresChart,
-} from "../types/visualizingType";
 
 export const totalTrendAtom = atom({
   key: "totalTrend",
   default: {
     genres: [
-      // { "성인가요/트로트": 0.95, "록/메탈": 0.05, annual: 1964 },
-      // { "성인가요/트로트": 1, annual: 1965 },
-      // { "성인가요/트로트": 0.89, 발라드: 0.11, annual: 1966 },
-      // {
-      //   "성인가요/트로트": 0.89,
-      //   국악가요: 0.05,
-      //   국악: 0.05,
-      //   발라드: 0.02,
-      //   annual: 1967,
-      // },
-      // {
-      //   "성인가요/트로트": 0.9,
-      //   발라드: 0.03,
-      //   국악가요: 0.03,
-      //   국악: 0.03,
-      //   annual: 1968,
-      // },
-      // {
-      //   "성인가요/트로트": 0.76,
-      //   "R&B/Soul": 0.08,
-      //   국악가요: 0.05,
-      //   국악: 0.05,
-      //   발라드: 0.03,
-      //   "포크/블루스": 0.03,
-      //   annual: 1969,
-      // },
       {
         "성인가요/트로트": 0.81,
         "록/메탈": 0.11,

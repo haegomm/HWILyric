@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'backend-recommend-insecure-=yr7z=)^0p8a*hrnab=6xki2i+(tj#(lf*g_fn7nfz*mb@&oem'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 

@@ -7,7 +7,6 @@ import authValidation from "../../features/validation";
 import {
   LoginBoxDiv,
   LoginButtonBoxDiv,
-  LoginEmailDiv,
   LoginTitleBackground,
   LoginTitleH1,
   ProfileModificationButton,

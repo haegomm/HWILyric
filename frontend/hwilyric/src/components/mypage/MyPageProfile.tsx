@@ -1,15 +1,12 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { logout } from '../../api/userApi';
 
 import { IsLoginAtom, userNicknameAtom, userProfileImgAtom } from '../../atoms/userAtom'
-import { lyricCategoryAtom } from '../../atoms/mypageAtom';
 import { deleteUserInfo } from '../../features/userInfo';
-import { DropboxDiv, LyricListBodyItemDiv, MyPageProfileDiv, MyProfileImage, MyPageSpan, MyPageNicknameSpan} from '../../styles/mypageStyle';
+import { DropboxDiv, LyricListBodyItemDiv, MyPageProfileDiv, MyPageSpan, MyPageNicknameSpan} from '../../styles/mypageStyle';
 import MyPageDropbox from './MyPageDropbox';
 import { ProfileImageDiv, ProfileImageImg } from '../../styles/common/ProfileImageStyle';
-import ProfileImage from '../common/ProfileImage';
 
 function MyPageProfile() {
   const navigate = useNavigate();
@@ -23,7 +20,6 @@ function MyPageProfile() {
   }
 
   const onLogoutHandler = async(e: React.MouseEvent<HTMLSpanElement>) => {
-    const message = await logout()
       deleteUserInfo()
       setIsLogin(false)
       navigate("/");

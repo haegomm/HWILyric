@@ -65,10 +65,6 @@ for year_id in range(1, 60):
     # 각 장르 숫자를 전체 장르 숫자로 나누는 칼럼을 추가
     genre_count = genre_count.withColumn("ratio", round(col("count") / total_count, 2)).orderBy("ratio", ascending=False)
 
-    # print(f"{year}년 인기 장르")
-    # genre_count.show(n=100)
-    # print()
-
     # SQL에 입력
     sql2 = "INSERT INTO trend_genre (`trend_id`, `name`, `ratio`) VALUES "
     sql2_plus = ''

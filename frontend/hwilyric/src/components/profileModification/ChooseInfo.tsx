@@ -4,11 +4,9 @@ import { selectModification } from "../../atoms/userAtom";
 
 import { getUserInfo } from "../../features/userInfo";
 
-import { useTheme } from "styled-components";
 import {
   LoginBoxDiv,
   LoginButtonBoxDiv,
-  LoginTitleBackground,
   LoginTitleH1,
   ProfileModificationButton,
   PWFindTitleBackground,
@@ -23,8 +21,6 @@ function ChooseInfo() {
   const onModifyingPasswordHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     setSelectModificationPage("checkPassword");
   };
-
-  const theme = useTheme();
 
   return (
     <LoginBoxDiv>

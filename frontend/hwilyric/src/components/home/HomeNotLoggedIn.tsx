@@ -1,5 +1,4 @@
-import React from 'react'
-import { NotLoggedInBlock, QuickView, QuickViewBody, QuickviewHeader } from '../../styles/homeStyle'
+import { NotLoggedInBlock, QuickView } from '../../styles/homeStyle'
 import { Link } from 'react-router-dom'
 import { LoginRecButton } from '../../styles/recommendStyle'
 

@@ -5,7 +5,7 @@ import WriteSidebar from "../components/write/WriteSidebar"
 import { useParams } from "react-router-dom"
 import { getLyricInfo } from '../api/writingApi'
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
-import { blockListState, noteIdState, noteThumbnailFileState, noteThumbnailUrlState, titleState } from '../atoms/noteAtoms'
+import { blockListState, noteIdState, noteThumbnailFileState, noteThumbnailUrlState, saveTimeState, titleState } from '../atoms/noteAtoms'
 import { memoState } from '../atoms/sidebarAtoms'
 import { IsLoginAtom } from '../atoms/userAtom'
 import { isModifyingAtom, isTempAtom } from '../atoms/mypageAtom'
@@ -26,6 +26,7 @@ function Write() {
   const setMemo = useSetRecoilState(memoState)
   const setThumbnail = useSetRecoilState(noteThumbnailUrlState)
   const resetThumbnailFile = useResetRecoilState(noteThumbnailFileState)
+  const setSaveTime = useSetRecoilState(saveTimeState)
 
   async function modifyInfo(noteId: string|undefined) {
     if (isLogin) {
@@ -37,6 +38,7 @@ function Write() {
           setBlockList(LyricInfo.lyricList)
           setMemo(LyricInfo.memo)
           setThumbnail(LyricInfo.thumbnail)
+          setSaveTime(LyricInfo.updatedDate)
         } else {
           setTitle(title)
         } 

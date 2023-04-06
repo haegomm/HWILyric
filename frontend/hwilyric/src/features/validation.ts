@@ -1,5 +1,3 @@
-import React from "react";
-
 function authValidation(value:string, type:string) {
   const REGEX = {
     EMAIL: /\S+@\S+\.\S+/,

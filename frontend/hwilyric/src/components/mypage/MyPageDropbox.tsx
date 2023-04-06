@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useRecoilState } from 'recoil';
-import { downArrow, upArrow } from "../../assets/icon/arrow";
 
 import { lyricCategoryAtom } from '../../atoms/mypageAtom';
-import { ArrowImage, DropboxSelect, DropboxOption } from "../../styles/mypageStyle";
+import { DropboxSelect, DropboxOption } from "../../styles/mypageStyle";
 
 function MyPageDropbox() {
   const [category, setCategory] = useRecoilState(lyricCategoryAtom);
@@ -12,14 +11,15 @@ function MyPageDropbox() {
     { name: '전체', state: ''},
     { name: 'verse', state: 'verse'},
     { name: 'bridge', state: 'bridge'},
-    { name: 'hook', state: 'hook'},
+    { name: 'hook', state: 'hook' },
+    { name: 'chrous', state: 'chrous'},
+    { name: 'pre-chorus', state: 'pre-chorus'},
     { name: 'etc', state: 'etc'},
   ];
   
   const onCategoryHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const currentCtgr = e.target.value
     setCategory(currentCtgr)
-    console.log(currentCtgr)
   }
 
   useEffect(()=> {

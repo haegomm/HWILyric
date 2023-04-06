@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useSetRecoilState, useRecoilState } from "recoil";
 import { noteThumbnailFileState, noteThumbnailUrlState } from "../../../atoms/noteAtoms";
-import {ThumbnailBox, ThumbnailInput, ThumbnailImage, ThumbnailLabel, ThumbnailUploadDiv} from "../../../styles/writeSidebarStyle"
+import {ThumbnailBox, ThumbnailInput, ThumbnailLabel, ThumbnailUploadDiv} from "../../../styles/writeSidebarStyle"
 import { ProfileImageDiv, ProfileImageImg } from "../../../styles/common/ProfileImageStyle";
 
 function Thumbnail() {
@@ -25,7 +25,7 @@ function Thumbnail() {
 
     return (
         <ThumbnailBox className="ThumbnailBox">
-            <ProfileImageDiv width="50%" height="100%" borderRadius="0" style={{position
+            <ProfileImageDiv width="100px" height="100px" borderRadius="0" style={{position
             :'relative'}}>
                 <ProfileImageImg className="ThumbnailImage" src={thumbnailImageUrl} alt="thumbnail" />
             </ProfileImageDiv>

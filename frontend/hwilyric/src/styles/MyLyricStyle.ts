@@ -8,6 +8,7 @@ export const MyLyricBody = styled.div`
   width: 90%
   display: flex;
   flex-direction: column;
+  overflow: auto;
 `
 export const MyLyricSubBody = styled.div`
   width: 90%
@@ -59,4 +60,5 @@ export const MyLyricListDropboxSelect =styled.select<divWidth>`
     background-clip: padding-box;
     border: 2px solid transparent;
   }
+
 `

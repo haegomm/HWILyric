@@ -4,7 +4,7 @@ import { ArrowImage } from "../../../styles/mypageStyle";
 import { downArrow, upArrow } from "../../../assets/icon/arrow";
 import { SimilarLyricInfo, SimilarLyricSubInfo, SimilarUserLyric } from "../../../styles/writeSidebarStyle";
 import { LightLodaing } from "../../../assets/writeSideBar/writeImg"
-import { checkLoadingState, similarListLengthState } from "../../../atoms/sidebarAtoms";
+import { checkLoadingState, similarListLengthState, similarResultState } from "../../../atoms/sidebarAtoms";
 import { useRecoilValue } from "recoil";
 
 interface SimilarItemProps {
@@ -16,13 +16,14 @@ function SimilarItem({ similar }: SimilarItemProps): JSX.Element {
     const [isOpen, setIsOpen] = useState(false)
     const checkLoading = useRecoilValue(checkLoadingState)
     const similarListLength = useRecoilValue(similarListLengthState)
+    const similarResult = useRecoilValue(similarResultState)
     
     const onDropHandler = (e: React.MouseEvent<HTMLDivElement>) => {
         setIsOpen(!isOpen)
     }
 
     return (
-        ((similar) ? (
+        ((similar && !similarResult) ? (
             <><SimilarUserLyric
             className={`select-box ${isOpen ? 'open' : ''}`}
             onClick={onDropHandler}>
@@ -40,8 +41,8 @@ function SimilarItem({ similar }: SimilarItemProps): JSX.Element {
                     key="index">
                         {similarLyric}
                         <SimilarLyricSubInfo>
-                            <p>{similar.titleList[index]}</p>
-                            <p>&nbsp;_&nbsp;{similar.artistList[index]}</p>
+                            <p style={{fontSize: 11, lineHeight: 2}}>{similar.titleList[index]}</p>
+                            <p style={{fontSize: 11, lineHeight: 2}}>&nbsp;_&nbsp;{similar.artistList[index]}</p>
                         </SimilarLyricSubInfo>
                     </SimilarLyricInfo>
                 ))}

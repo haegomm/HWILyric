@@ -14,7 +14,7 @@ import {
   titleState,
 } from "../../../atoms/noteAtoms";
 import { memoState } from "../../../atoms/sidebarAtoms";
-import { useRecoilValue, useSetRecoilState, useResetRecoilState } from "recoil";
+import { useSetRecoilState, useResetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 
 function WeeklyReportKeyword(props: any) {
@@ -43,7 +43,6 @@ function WeeklyReportKeyword(props: any) {
     navigate("/write");
   };
 
-  // 키워드 데이터를 그룹화하여 3개씩 나누기
   const groupedData = [];
   const data = props.data;
   const dataLeng = data.length;

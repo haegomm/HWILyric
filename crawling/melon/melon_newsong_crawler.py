@@ -68,7 +68,7 @@ while (not is_end):
             chart_year = 'NULL'
             try:
                 lyrics = song_soup.select_one('#d_video_summary').get_text('\n').strip('\n\t').split('\n')
-            except:
+            except Exception as e:
                 lyrics = ['가사 정보 없음']
             musics_list.append([title, artist, album, release_date, genre, rank, chart_year])
             lyrics_list.append(lyrics)

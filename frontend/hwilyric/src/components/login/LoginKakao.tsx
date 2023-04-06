@@ -22,15 +22,12 @@ function LoginKakao() {
       if (!code) return;
     const data = await loginKakao(code)
     if (data !== null) {
-      console.log('카카오 됏당')
       saveUserInfo(data)
       setIsLogin(true)
       setNickname(data.nickname)
       setProfileImg(data.profileImg)
       navigate("/");
-    } else {
-      console.log('로그인 실패ㅜ;')
-    } 
+    }  
   }
   kakaoLogin();
 }, [code])

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { ButtonBox, RecommendBody, RecommendButton, RecommendHeader, RecommendSelectButton, SearchButton, SearchboxForm, SearchboxInput } from '../../../styles/recommendStyle'
+import React, { useState } from 'react'
+import { ButtonBox, RecommendButton, RecommendHeader, RecommendSelectButton, SearchButton, SearchboxForm, SearchboxInput } from '../../../styles/recommendStyle'
 import { IconImage } from '../../../styles/mypageStyle'
 import { SearchIcon } from '../../../assets/writeSideBar/writeImg'
 import { useRecoilState, useSetRecoilState } from 'recoil'
@@ -18,12 +18,10 @@ function SidebarRecommendHeader() {
   async function getSimilar(searchWord:string) {
     const newWordList = await similarKeyword(searchWord)
     if (newWordList !== null) {
-      console.log(newWordList)
       await setIsLoading(false)
       setWordList(newWordList)
       setErrorMessage('')
     } else {
-      console.log('유사실패ㅜ')
       setIsLoading(false)
       setErrorMessage('연관 키워드를 찾지 못했습니다')
     }
@@ -32,12 +30,10 @@ function SidebarRecommendHeader() {
   async function getRhyme(searchWord:string) {
     const newWordList = await rhymeKeyword(searchWord)
     if (newWordList !== null) {
-      console.log(newWordList)
       await setIsLoading(false)
       setWordList(newWordList)
       setErrorMessage('')
     } else {
-      console.log('라임실패ㅜ')
       setIsLoading(false)
       setErrorMessage('라임 키워드를 찾지 못했습니다')
     }
@@ -50,7 +46,6 @@ function SidebarRecommendHeader() {
 
   const onSearchHandler = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('검색어는', searchKeyword)
     setIsLoading(true)
     if (keywordMode === 'similar') {
       getSimilar(searchKeyword)
@@ -61,7 +56,6 @@ function SidebarRecommendHeader() {
 
   const onModeHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     const recommendMode = e.currentTarget.value
-    console.log(recommendMode)
     setKeywordMode(recommendMode);
     setErrorMessage('키워드를 검색해주세요')
   };

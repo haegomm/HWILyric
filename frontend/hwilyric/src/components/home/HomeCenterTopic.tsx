@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { recommendTopic } from '../../api/writingApi';
-import { RandomHeader, RecommendBody, WordContainer, WordItem } from '../../styles/recommendStyle';
+import { WordContainer } from '../../styles/recommendStyle';
 import { IconImage } from '../../styles/mypageStyle';
 import { lightRefresh } from '../../assets/icon/myButtons';
 import { HeaderP, HomeCenterWord, HomeWordItem, TopicHeader } from '../../styles/homeStyle';

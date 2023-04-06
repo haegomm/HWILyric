@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { ThemeProvider } from 'styled-components'
 import { BrowserRouter } from "react-router-dom";
 import { Route, Routes } from "react-router";
@@ -15,12 +15,10 @@ import LoginKakao from "./components/login/LoginKakao";
 import Signup from "./pages/Signup";
 import Mypage from "./pages/Mypage";
 import ProfileModification from "./pages/ProfileModification";
-import HWILyric from "./pages/Hwilyric";
 import { IsLoginAtom } from "./atoms/userAtom";
 import { reissueToken } from "./api/userApi";
 
 import DataVisualize from "./pages/DataVisualize";
-import PrivateRoute from "./features/router";
 import { AppDiv } from "./styles/common/AppStyle";
 import { isDarkModeState } from "./atoms/noteAtoms";
 
@@ -37,14 +35,10 @@ function App() {
   useEffect(() => {
 
     const issueToken = async () => {
-      console.log('토큰 한번 받아본다')
       const accessToken = await reissueToken();
       if (accessToken !== null) {
-        console.log("토큰 재발급~~");
         window.localStorage.setItem("accessToken", accessToken);
-      } else {
-        console.log("토큰재발급 실패ㅜㅜ");
-      }
+      } 
     }
     setInterval(() => {
       if (isLogin) {
@@ -69,12 +63,6 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="oauth2/code/kakao" element={<LoginKakao />} />
                 <Route path="/signup" element={<Signup />} />
-                {/* <Route
-                path="myvoca/mypage"
-                element={
-                  <PrivateRoute authenticated={isLogin} component={<Mypage />} />
-                }
-                /> */}
                 <Route path="/mypage" element={<Mypage />} />
                 <Route path="/profilemodification" element={<ProfileModification />}
                 />
