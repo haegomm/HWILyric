@@ -23,7 +23,13 @@ function AnnualGenre(props: any) {
     ratioRemain -= i.ratio;
     cnt++;
     if (cnt == 5) {
-      chartData.push({ id: "기타", label: "기타", value: ratioRemain });
+      if (ratioRemain > 0) {
+        chartData.push({
+          id: "기타",
+          label: "기타",
+          value: ratioRemain,
+        });
+      }
       break;
     }
   }
