@@ -5,17 +5,20 @@ import { IsLoginAtom, userNicknameAtom } from "../../atoms/userAtom"
 import { ToggleBoxWrapper, ToggleBox, ToggleBoxLabel } from '../../styles/toggleButton'
 import { NavBox, NavMenu, DarkModeBox } from "../../styles/common/NavbarStyle";
 import { isModifyingAtom } from "../../atoms/mypageAtom";
+import { isDarkModeState } from "../../atoms/noteAtoms";
+import { lightLogo, darkLogo} from "../../assets/home/navLogo"
 
 
 function Navbar({toggleDarkMode}: any) {
   const isLogin = useRecoilValue(IsLoginAtom)
   const nickname = useRecoilValue(userNicknameAtom)
+  const isDarkMode = useRecoilValue(isDarkModeState)
   const IsModifying = useResetRecoilState(isModifyingAtom)
 
   return (
     <nav>
       <NavBox>
-        <NavLink to="*"  style={{ textDecoration: "none" }}><img className="main-logo"></img></NavLink>
+        <NavLink to="*"  style={{ textDecoration: "none" }}><img src={isDarkMode ? darkLogo : lightLogo } style={{ width: '10vw' }} alt="loading" /></NavLink>
         <NavMenu>
           <DarkModeBox>
             <BsFillSunFill  style={{color: "#ffd700"}}/>

@@ -12,7 +12,9 @@ function getCurrentDateTime() {
     const day = String(now.getDate()).padStart(2, '0');
     const hour = String(now.getHours()).padStart(2, '0');
     const minute = String(now.getMinutes()).padStart(2, '0');
-    const id = `${year}${month}${day}${hour}${minute}`;
+    const second = String(now.getSeconds()).padStart(2, '0');
+    const milliseconds = String(now.getMilliseconds()).padStart(2, '0');
+    const id = `${year}${month}${day}${hour}${minute}${second}${milliseconds}`;
     return Number(id);
 }
 
