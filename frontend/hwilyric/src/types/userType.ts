@@ -21,6 +21,6 @@ export interface IUserInfoTypes {
 }
 
 export interface IPrivateRouteProps {
-  component ?: ReactElement; // Router.tsx에서 PrivateRoute가 감싸고 있는 Componet Element
-  authenticated : boolean; // true :인증을 반드시 해야하만 접속가능, false : 인증을 반디스 안해야만 접속 가능
+  component ?: ReactElement;
+  authenticated : boolean;
 }

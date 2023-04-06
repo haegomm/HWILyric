@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { RandomHeader, RecommendBody, WordContainer, WordItem } from '../../../styles/recommendStyle'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { getErrorMessageAtom, keywordListAtom } from '../../../atoms/sidebarAtoms'

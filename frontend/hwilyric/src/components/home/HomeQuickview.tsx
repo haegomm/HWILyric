@@ -4,7 +4,6 @@ import { getLyricList } from "../../api/writingApi";
 
 import { userNicknameAtom } from '../../atoms/userAtom'
 import { ILyricInfoTypes } from "../../types/writingType";
-import HomeQuickviewBlock from "./HomeQuickviewBlock";
 import { QuickView, QuickViewBlock, QuickViewBlockCover, QuickViewBlockImg, QuickViewBlockItem, QuickViewBody, QuickviewHeader, QuickviewHeaderSpan } from "../../styles/homeStyle";
 import { IGetILyricInfoTypes } from "../../types/mypageType";
 import { useNavigate } from "react-router-dom";
@@ -26,7 +25,6 @@ function HomeQuickview() {
       setMyLyrics(sortedLyrics)
       setNullLyrics('')
     } else {
-      console.log('')
       setNullLyrics('새로운 곡을 작사해보세요')
     }
   }
@@ -39,7 +37,6 @@ function HomeQuickview() {
   
   useEffect(()  => {
       getMyLyrics()
-      console.log(myLyrics)
   }, [])
 
   return (

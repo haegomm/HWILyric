@@ -5,7 +5,7 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { PlayVideoId } from "../../../atoms/youtubeVideoAtoms";
-import { PlayerBox, PlayerVideoBox, PlayButton, PlayerProgressBox, PlayerButtonBox } from "../../../styles/writeNoteStyle";
+import { PlayerBox, PlayerVideoBox, PlayerProgressBox, PlayerButtonBox } from "../../../styles/writeNoteStyle";
 import { Pause_Button, Play_Button } from "../../../assets/writeSideBar/writeImg";
 
 function VideoPlayer() {
@@ -34,26 +34,25 @@ function VideoPlayer() {
 
   const handlePlayerStateChange = (event: YT.OnStateChangeEvent) => {
     const ytState = event.data;
-    if (ytState === 1) { // playing
+    if (ytState === 1) {
       setIsPlay(() => true); 
     }
-    else if (ytState === 2){ // pause
+    else if (ytState === 2){
       setIsPlay(() => false);
     }
-    else if (ytState === 5){ // get signal
+    else if (ytState === 5){
       playerRef.current = event.target;
       setDurationTime(() => event.target.getDuration());
       if (videoId) {
         playerRef.current.playVideo()
       }
     } 
-    else if (ytState === -1) { // initialize
+    else if (ytState === -1) {
       setIsPlay(() => false);
       setTime(() => 0);
       setHourTime(() => '00');
       setMinTime(() => '00');
       setSecTime(() => '00');
-      console.log(ytInterval.current)
       if (ytInterval.current) {clearTimer()}
     }
   }
@@ -119,7 +118,7 @@ function VideoPlayer() {
               <img src={Play_Button} alt="" />
             </button>)}
           </PlayerButtonBox>
-        </> : <div style={{margin:'auto'}}>레퍼런스 탭에서 노래를 검색해보세요 ^~^</div>}
+        </> : <div style={{margin:'auto'}}>레퍼런스 탭에서 노래를 검색해보세요</div>}
       </PlayerBox>
     
   );

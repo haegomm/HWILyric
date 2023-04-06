@@ -19,7 +19,6 @@ function SidebarMyLyricsSelect() {
   const onCategoryHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const currentCtgr = e.target.value
     setCategory(currentCtgr)
-    console.log(currentCtgr)
   }
 
   useEffect(()=> {

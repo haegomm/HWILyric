@@ -1,5 +1,4 @@
-import styled, { css } from "styled-components";
-import { ButtonCss } from "./common/ButtonStyle";
+import styled from "styled-components";
 
 export const RecommendContent = styled.div`
   width: 90%;

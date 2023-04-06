@@ -1,4 +1,3 @@
-import React from 'react'
 import { LyricListBodyItemDiv } from '../../styles/mypageStyle'
 
 function MyPageLyricListItem() {

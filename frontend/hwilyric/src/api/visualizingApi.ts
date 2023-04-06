@@ -9,7 +9,6 @@ export async function weeklyNewSong(param: INewSongTypes) {
     const data = res.data;
     return data;
   } catch (err) {
-    console.log("신곡 안왔어요");
     return err;
   }
 }
@@ -20,7 +19,6 @@ export async function annualGenre() {
     const data = res.data;
     return data;
   } catch (err) {
-    console.log("연간장르 안왔어요");
     return err;
   }
 }
@@ -31,7 +29,6 @@ export async function annualData(years: string) {
     const data = res.data;
     return data;
   } catch (err) {
-    console.log("연간데이터 안왔어요");
     return err;
   }
 }

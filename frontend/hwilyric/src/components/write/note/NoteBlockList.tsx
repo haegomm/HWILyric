@@ -13,10 +13,8 @@ function BlockList() {
     const onDragEnd = useCallback((result: DropResult) => {
         const { destination, source } = result
 
-        // 리스트 밖으로 drop되면 destination(drop이 끝난 위치)이 null
         if (!destination) return
 
-        // drag시작과 drop의 끝이 같으면 변한 것이 없음
         if (destination.droppableId === source.droppableId &&
             source.index === destination.index) return
         
@@ -25,7 +23,6 @@ function BlockList() {
         copyBlockList.splice(destination.index, 0, reorderedBlocks)
 
         setBlockList(() => copyBlockList)
-        console.log(blockList)
     }, [blockList, setBlockList])
 
 

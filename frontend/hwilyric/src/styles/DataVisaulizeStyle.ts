@@ -135,9 +135,6 @@ export const TotalTrendDiv = styled.div`
     2;
 `;
 
-// & path {
-//   opacity: ${(props) => (props.theme === lightTheme ? "0.2" : "1")};
-// }
 
 export const AnnualKeywordDiv = styled.div`
   width: 600px;

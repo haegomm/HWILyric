@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { getRandomdWord } from '../../../api/writingApi';
-import { async } from 'q';
 import { IconImage } from '../../../styles/mypageStyle';
 import { lightRefresh } from '../../../assets/icon/myButtons';
 import { RandomHeader, RecommendBody, WordContainer, WordItem } from '../../../styles/recommendStyle';

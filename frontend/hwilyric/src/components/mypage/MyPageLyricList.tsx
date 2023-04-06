@@ -22,7 +22,6 @@ function MyPageLyricList() {
         return new Date(b.updatedDate).valueOf() - new Date(a.updatedDate).valueOf();})
       setMyLyrics(sortedLyrics)
     } else {
-      console.log('')
       setNullLyrics('새로운 곡을 작사해보세요')
     }
   }
