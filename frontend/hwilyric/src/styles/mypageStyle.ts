@@ -63,8 +63,6 @@ export const LyricThumbnail = styled.img`
   height: 8vw;
   object-fit: cover;
   overflow: hidden;
-  border-radius: 5%;
-  box-shadow: 2px 2px 5px 2px lightgray;
 `
 
 export const LyricListHeader = styled.div`
@@ -89,6 +87,7 @@ export const LyricListBodyItemDiv = styled.div<divWidth>`
   width: ${(props) => (props.width) ? (props.width) : '60px'};
   display: flex;
   justify-content: center;
+  cursor: pointer
 `
 
 export const LyricListBodyItemContent = styled.div`
