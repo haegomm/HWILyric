@@ -11,6 +11,7 @@ import {
   LoginTitleBackground,
   LoginTitleH1,
   ProfileModificationButton,
+  PWFindTitleBackground,
 } from "../../styles/loginStyle";
 
 function ChooseInfo() {
@@ -27,7 +28,7 @@ function ChooseInfo() {
 
   return (
     <LoginBoxDiv>
-      <LoginTitleBackground theme={theme} />
+      <PWFindTitleBackground />
       <LoginTitleH1 className="loginTitle">프로필 수정</LoginTitleH1>
       <LoginButtonBoxDiv>
         <ProfileModificationButton

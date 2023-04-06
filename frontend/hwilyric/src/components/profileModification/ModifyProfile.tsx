@@ -7,6 +7,10 @@ import { checkNickname, modifyProfile } from "../../api/userApi";
 import { IModifyTypes } from "../../types/userType";
 import { userNicknameAtom, userProfileImgAtom } from "../../atoms/userAtom";
 import {
+  ModifyEmailDiv,
+  ModifyEmailInput,
+  ProfileModificationOuterBoxDiv,
+  SignupContentBoxDiv,
   SignupEmailDiv,
   SignupEmailErrorSpan,
   SignupEmailInput,
@@ -93,32 +97,37 @@ function ModifyProfile() {
   const theme = useTheme();
 
   return (
-    <SignupOuterBoxDiv>
+    <ProfileModificationOuterBoxDiv>
       <SignupTitleBackground theme={theme} />
       <SignupTitleH1>프로필 수정</SignupTitleH1>
-      <SignupInnerBoxDiv>
-        <SignupEmailDiv className="nicknameDiv">
-          <SignupEmailInput
-            type="text"
-            placeholder="닉네임"
-            className="signUpInputNickname"
-            onBlur={onNicknameHandler}
-          />
-        </SignupEmailDiv>
-        <SignupEmailErrorSpan className="nicknameError">
-          {nicknameError}
-          {nicknameFormError}
-        </SignupEmailErrorSpan>
-      </SignupInnerBoxDiv>
-      <SignupProfileInputBox>
-        <SignupProfileInputLeft>
-          <SignupProfileTitle>프로필 사진</SignupProfileTitle>
-          <SignupProfileInput type={"file"} onChange={onProfileImgHandler} />
-        </SignupProfileInputLeft>
-        <SignupProfileImg src={newProfileImageUrl} alt="profileImg" />
-      </SignupProfileInputBox>
+      <SignupContentBoxDiv>
+        <SignupInnerBoxDiv>
+          <ModifyEmailDiv className="nicknameDiv">
+            <ModifyEmailInput
+              type="text"
+              placeholder="닉네임"
+              className="signUpInputNickname"
+              onBlur={onNicknameHandler}
+            />
+          </ModifyEmailDiv>
+
+          <SignupEmailErrorSpan className="nicknameError">
+            {nicknameError}
+            {nicknameFormError}
+          </SignupEmailErrorSpan>
+
+          <SignupProfileInputLeft>
+            <SignupProfileTitle>프로필 사진</SignupProfileTitle>
+            <SignupProfileInput type={"file"} onChange={onProfileImgHandler} />
+          </SignupProfileInputLeft>
+        </SignupInnerBoxDiv>
+
+        <SignupProfileInputBox>
+          <SignupProfileImg src={newProfileImageUrl} alt="profileImg" />
+        </SignupProfileInputBox>
+      </SignupContentBoxDiv>
       <ProfileModificationButton onClick={onSaveProfileHandler}>저장</ProfileModificationButton>
-    </SignupOuterBoxDiv>
+    </ProfileModificationOuterBoxDiv>
   );
 }
 

@@ -10,7 +10,8 @@ export const LoginBoxDiv = styled.div`
   align-items: center;
   position: relative;
   height: auto;
-  padding: 150px 100px 80px 100px;
+  padding: 100px 100px 80px 100px;
+  margin-top: 60px;
   width: auto;
   border-radius: 0px;
   border-style: solid;
@@ -97,7 +98,9 @@ export const LoginForgotPWDiv = styled.div`
   text-align: right;
 `;
 
-export const LoginButtonBoxDiv = styled.div``;
+export const LoginButtonBoxDiv = styled.div`
+  padding: 20px;
+`;
 
 export const LoginButton = styled.button`
   ${ButtonCss("5vw", "32px")}
@@ -105,11 +108,13 @@ export const LoginButton = styled.button`
 
 export const ProfileModificationButton = styled.button`
   ${ButtonCss("8vw", "6vh")}
+  margin-top: 30px;
 `;
 
 export const LoginNoIdDiv = styled.div`
   font-size: 20px;
-  width: ${(300 / 1920) * 100}vw;
+  width: auto;
+  padding: 20px;
   display: flex;
   justify-content: center;
 `;

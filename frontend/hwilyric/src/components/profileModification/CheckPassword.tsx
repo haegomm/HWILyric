@@ -27,20 +27,19 @@ function CheckPassword() {
   };
 
   const onCheckingPasswordHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    // const message = await checkPassword({ password: Password });
-    // if (message === "success") {
-    setSelectModificationPage("modifyPassword");
-    // } else {
-    //   console.log(message);
-    //   alert("비밀번호가 일치하지 않습니다. 다시 시도해주세요.");
-    // }
+    const message = await checkPassword({ password: Password });
+    if (message === "success") {
+      setSelectModificationPage("modifyPassword");
+    } else {
+      console.log(message);
+      alert("비밀번호가 일치하지 않습니다. 다시 시도해주세요.");
+    }
   };
 
   const theme = useTheme();
 
   return (
     <LoginBoxDiv>
-      <LoginTitleBackground theme={theme} />
       <LoginNoIdDiv>비밀번호를 다시 한 번 입력해주세요</LoginNoIdDiv>
       <LoginPasswordBox>
         <LoginPasswordDiv>

@@ -39,11 +39,11 @@ function LoginForgetPassword() {
     const message = await resetPassword(body);
 
     if (message === "success") {
-      console.log("일반회원");
+      alert("임시 비밀번호가 이메일로 발송되었습니다");
     } else if (message === "KAKAO") {
-      console.log("카카오회원");
+      alert("카카오 회원입니다\n카카오 로그인 해주세요");
     } else {
-      console.log("가입을 안햇어용");
+      alert("존재하지 않는 이메일입니다\n회원가입 후 이용해주세요");
     }
     setIsKnownPassword(true);
   };
@@ -58,9 +58,9 @@ function LoginForgetPassword() {
     <LoginBoxDiv>
       <PWFindTitleBackground />
       <PWFindTitleH1 className="signUpTitle">비밀번호 초기화</PWFindTitleH1>
+      <p>가입한 이메일을 입력해주세요</p>
       <br />
       <LoginForm onSubmit={onSubmitHandler} className="formItemSignup">
-        <p>가입한 이메일을 입력해주세요</p>
         <LoginEmailDiv>
           <LoginInputI
             type="email"
@@ -68,24 +68,10 @@ function LoginForgetPassword() {
             className="signUpInputEmail"
             onChange={onEmailHandler}
           />
+          <p>{emailFormError}</p>
         </LoginEmailDiv>
         <LoginButtonBoxDiv>
-          <PWFindButton>임시 비밀번호 발송</PWFindButton>
-        </LoginButtonBoxDiv>
-      </LoginForm>
-      {/* <div>
-        <form onSubmit={onSubmitHandler} className="formItemSignup">
-          <div className="emailDiv">
-            <p>가입한 이메일을 입력해주세요</p>
-            <input
-              type="email"
-              placeholder="이메일"
-              className="signUpInputEmail"
-              onBlur={onEmailHandler}
-            />
-            <p>{emailFormError}</p>
-          </div>
-          <button
+          <PWFindButton
             type="submit"
             className="signupButton"
             // disabled={
@@ -105,10 +91,12 @@ function LoginForgetPassword() {
             // }
           >
             임시 비밀번호 발송
-          </button>
-        </form>
-        <div onClick={onLoginPageHandler}>로그인 하러 갈랭</div>
-      </div> */}
+          </PWFindButton>
+        </LoginButtonBoxDiv>
+        <LoginButtonBoxDiv>
+          <div onClick={onLoginPageHandler}>로그인 하러 가기</div>
+        </LoginButtonBoxDiv>
+      </LoginForm>
     </LoginBoxDiv>
   );
 }

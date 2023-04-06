@@ -5,6 +5,7 @@ import { checkEmail, signup, checkNickname, verifyEmail } from "../api/userApi";
 import { ISignupTypes } from "../types/userType";
 import authValidation from "../features/validation";
 import {
+  SignupConfirmNumberDiv,
   SignupContentBoxDiv,
   SignupEmailDiv,
   SignupEmailErrorSpan,
@@ -58,10 +59,7 @@ function Signup() {
     };
 
     const userInfoString = JSON.stringify(userInfo);
-    formData.append(
-      "userInfo",
-      new Blob([userInfoString], { type: "application/json" })
-    );
+    formData.append("userInfo", new Blob([userInfoString], { type: "application/json" }));
 
     const message = await signup(formData);
     console.log(formData);
@@ -165,20 +163,16 @@ function Signup() {
             <SignupInnerWrapperInner>
               <SignupInnerBoxDiv>
                 <SignupEmailDiv>
-                  <SignupEmailInput
-                    type="email"
-                    placeholder="이메일"
-                    onBlur={onEmailHandler}
-                  />
-                  <SignupSendNumberDiv onClick={onSendHandler}>
-                    인증번호전송
-                  </SignupSendNumberDiv>
+                  <SignupEmailInput type="email" placeholder="이메일" onBlur={onEmailHandler} />
+                  <SignupSendNumberDiv onClick={onSendHandler}>인증번호전송</SignupSendNumberDiv>
                 </SignupEmailDiv>
+
                 <SignupEmailErrorSpan>
                   {emailError}
                   {emailFormError}
                 </SignupEmailErrorSpan>
               </SignupInnerBoxDiv>
+
               <SignupInnerBoxDiv>
                 <SignupEmailDiv className="nicknameDiv">
                   <SignupEmailInput
@@ -193,6 +187,7 @@ function Signup() {
                   {nicknameFormError}
                 </SignupEmailErrorSpan>
               </SignupInnerBoxDiv>
+
               <SignupInnerBoxDiv>
                 <SignupEmailDiv className="passwordDiv">
                   <SignupEmailInput
@@ -207,6 +202,7 @@ function Signup() {
                   {passwordError}
                 </SignupEmailErrorSpan>
               </SignupInnerBoxDiv>
+
               <SignupInnerBoxDiv>
                 <SignupEmailDiv className="passwordCheckDiv">
                   <SignupEmailInput
@@ -222,6 +218,7 @@ function Signup() {
                 </SignupEmailErrorSpan>
               </SignupInnerBoxDiv>
             </SignupInnerWrapperInner>
+
             <SignupInnerWrapperInner>
               <SignupInnerVerifyBoxDiv>
                 <SignupEmailDiv className="verificationDiv">
@@ -230,9 +227,9 @@ function Signup() {
                     className="signUpInputVerification"
                     onBlur={onCodeHandler}
                   />
-                  <SignupSendNumberDiv onClick={onVerificationHandler}>
+                  <SignupConfirmNumberDiv onClick={onVerificationHandler}>
                     인증번호확인
-                  </SignupSendNumberDiv>
+                  </SignupConfirmNumberDiv>
                 </SignupEmailDiv>
                 <SignupEmailErrorSpan className="emailError">
                   {verificationError}
@@ -241,15 +238,13 @@ function Signup() {
               <SignupProfileInputBox>
                 <SignupProfileInputLeft>
                   <SignupProfileTitle>프로필 사진</SignupProfileTitle>
-                  <SignupProfileInput
-                    type={"file"}
-                    onChange={onProfileImgHandler}
-                  />
+                  <SignupProfileInput type={"file"} onChange={onProfileImgHandler} />
                 </SignupProfileInputLeft>
                 <SignupProfileImg src={profileImageUrl} alt="profileImg" />
               </SignupProfileInputBox>
             </SignupInnerWrapperInner>
           </SignupInnerWrapper>
+
           <SignupSubmitButton
             type="submit"
             className="signupButton"
