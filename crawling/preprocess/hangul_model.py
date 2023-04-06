@@ -1,7 +1,5 @@
 import numpy as np
 from pandas import Series, DataFrame
-import sys
-print(sys.path)
 
 import pymysql
 from gensim.models import Word2Vec
