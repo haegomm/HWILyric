@@ -16,11 +16,13 @@ export const SignupOuterBoxDiv = styled.div`
   align-items: center;
   border-style: solid;
   border-width: 1px 1px 1px 1px;
-  border-image: linear-gradient(to right,
-    ${props => props.theme.accentColor['1']}, 
-    ${props => props.theme.accentColor['2']}, 
-    ${props => props.theme.accentColor['3']},
-    ${props => props.theme.accentColor['4']});
+  border-image: linear-gradient(
+    to right,
+    ${(props) => props.theme.accentColor["1"]},
+    ${(props) => props.theme.accentColor["2"]},
+    ${(props) => props.theme.accentColor["3"]},
+    ${(props) => props.theme.accentColor["4"]}
+  );
   border-image-slice: 1;
 `;
 
@@ -28,7 +30,7 @@ export const ProfileModificationOuterBoxDiv = styled.div`
   width: auto;
   height: auto;
   display: flex;
-  padding: 60px 100px 60px 100px;
+  padding: 100px 100px 60px 100px;
   justify-content: center;
   position: relative;
   margin-top: 60px;
@@ -36,12 +38,14 @@ export const ProfileModificationOuterBoxDiv = styled.div`
   align-items: center;
   border-style: solid;
   border-width: 1px 1px 1px 1px;
-  border-image: linear-gradient(to right,
-    ${props => props.theme.accentColor['1']}, 
-    ${props => props.theme.accentColor['2']}, 
-    ${props => props.theme.accentColor['3']},
-    ${props => props.theme.accentColor['4']});
-  border-image-slice: 1;;
+  border-image: linear-gradient(
+    to right,
+    ${(props) => props.theme.accentColor["1"]},
+    ${(props) => props.theme.accentColor["2"]},
+    ${(props) => props.theme.accentColor["3"]},
+    ${(props) => props.theme.accentColor["4"]}
+  );
+  border-image-slice: 1; ;
 `;
 
 export const SignupTitleH1 = styled.h1`
@@ -50,8 +54,11 @@ export const SignupTitleH1 = styled.h1`
   font-size: 48px;
   color: rgba(0, 0, 0, 0);
   z-index: 1;
-  background: linear-gradient(to right, ${props => props.theme.accentColor['4']}, 
-  ${props => props.theme.accentColor['2']});
+  background: linear-gradient(
+    to right,
+    ${(props) => props.theme.accentColor["4"]},
+    ${(props) => props.theme.accentColor["2"]}
+  );
   background-clip: text;
   -webkit-background-clip: text;
 `;
@@ -114,7 +121,9 @@ export const SignupEmailDiv = styled.div`
 `;
 
 export const ModifyEmailDiv = styled.div`
-  padding-bottom: 20px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  width: ${(400 / 1920) * 100}vw;
 `;
 
 export const SignupEmailInput = styled.input`
@@ -144,7 +153,7 @@ export const SignupEmailInput = styled.input`
   `;
 
 export const ModifyEmailInput = styled.input`
-  width:auto;
+  width:100%;
   border-top: 0;
   border-right: 0;
   border-left: 0;
@@ -205,7 +214,24 @@ export const SignupProfileInput = styled.input`
   padding: 5px;
   `;
 
+export const ModifyProfileInput = styled.input`
+  width: 80%;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  border-image: #636161
+  outline: none;
+  padding: 5px;
+  `;
+
 export const SignupProfileInputBox = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  height: 65%;
+`;
+
+export const ModifyProfileInputBox = styled.div`
+  padding-left: 80px;
   display: flex;
   justify-content: space-evenly;
   height: 65%;
@@ -222,6 +248,11 @@ export const SignupProfileInputLeft = styled.div`
   width: 60%;
 `;
 
+export const ModifyProfileInputLeft = styled.div`
+  margin-top: 0px;
+  width: 60%;
+`;
+
 export const SignupProfileImg = styled.img`
   width: ${(200 / 1920) * 100}vw;
   height: ${(200 / 1920) * 100}vw;
@@ -231,4 +262,49 @@ export const SignupProfileImg = styled.img`
 export const SignupSubmitButton = styled.button`
   ${ButtonCss("10vw", "6vh")}
   margin-top: 20px;
+`;
+
+export const ModifyUploadDiv = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: end;
+  justify-content: end;
+`;
+
+export const ModifyLabel = styled.label`
+  width: 80px;
+  height: 40px;
+  display: felx;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid;
+  background-color: none;
+  border-image: linear-gradient(
+    to right,
+    ${(props) => props.theme.accentColor["1"]},
+    ${(props) => props.theme.accentColor["2"]},
+    ${(props) => props.theme.accentColor["4"]}
+  );
+  border-image-slice: 1;
+  :hover {
+    border: none;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(
+      45deg,
+      ${(props) => props.theme.accentColor["1"]},
+      ${(props) => props.theme.accentColor["2"]},
+      ${(props) => props.theme.accentColor["4"]}
+    );
+  }
+`;
+
+export const ModifyInput = styled.input`
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 `;

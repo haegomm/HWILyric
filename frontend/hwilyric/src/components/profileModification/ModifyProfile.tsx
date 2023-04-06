@@ -9,6 +9,12 @@ import { userNicknameAtom, userProfileImgAtom } from "../../atoms/userAtom";
 import {
   ModifyEmailDiv,
   ModifyEmailInput,
+  ModifyInput,
+  ModifyLabel,
+  ModifyProfileInput,
+  ModifyProfileInputBox,
+  ModifyProfileInputLeft,
+  ModifyUploadDiv,
   ProfileModificationOuterBoxDiv,
   SignupContentBoxDiv,
   SignupEmailDiv,
@@ -26,7 +32,10 @@ import {
   SignupTitleH1,
 } from "../../styles/signUpStyle";
 import { useTheme } from "styled-components";
-import { ProfileModificationButton } from "../../styles/loginStyle";
+import {
+  ProfileModificationButton,
+  ProfileModificationTitleBackground,
+} from "../../styles/loginStyle";
 
 function ModifyProfile() {
   const navigate = useNavigate();
@@ -98,7 +107,7 @@ function ModifyProfile() {
 
   return (
     <ProfileModificationOuterBoxDiv>
-      <SignupTitleBackground theme={theme} />
+      <ProfileModificationTitleBackground theme={theme} />
       <SignupTitleH1>프로필 수정</SignupTitleH1>
       <SignupContentBoxDiv>
         <SignupInnerBoxDiv>
@@ -116,15 +125,28 @@ function ModifyProfile() {
             {nicknameFormError}
           </SignupEmailErrorSpan>
 
-          <SignupProfileInputLeft>
+          <ModifyEmailDiv>
+            <ModifyUploadDiv>
+              <ModifyLabel className="ModifyLabel" htmlFor="profileImg">
+                업로드
+              </ModifyLabel>
+            </ModifyUploadDiv>
+
             <SignupProfileTitle>프로필 사진</SignupProfileTitle>
-            <SignupProfileInput type={"file"} onChange={onProfileImgHandler} />
-          </SignupProfileInputLeft>
+
+            <ModifyInput
+              className="ModifyInput"
+              id="profileImg"
+              type={"file"}
+              onChange={onProfileImgHandler}
+              accept="image/gif, image/jpeg, image/png"
+            />
+          </ModifyEmailDiv>
         </SignupInnerBoxDiv>
 
-        <SignupProfileInputBox>
+        <ModifyProfileInputBox>
           <SignupProfileImg src={newProfileImageUrl} alt="profileImg" />
-        </SignupProfileInputBox>
+        </ModifyProfileInputBox>
       </SignupContentBoxDiv>
       <ProfileModificationButton onClick={onSaveProfileHandler}>저장</ProfileModificationButton>
     </ProfileModificationOuterBoxDiv>

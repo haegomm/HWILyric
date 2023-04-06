@@ -116,11 +116,6 @@ export const LoginButton = styled.button`
   ${ButtonCss("5vw", "32px")}
 `;
 
-export const ProfileModificationButton = styled.button`
-  ${ButtonCss("8vw", "6vh")}
-  margin-top: 30px;
-`;
-
 export const LoginNoIdDiv = styled.div`
   font-size: 20px;
   width: auto;
@@ -204,4 +199,18 @@ export const PWFindButton = styled.button`
 
 export const LoginDiv = styled.div`
   cursor: pointer;
+`;
+
+export const ProfileModificationTitleBackground = styled.div`
+  background: ${(props) => (props.theme === lightTheme ? "white" : "#191B1F")};
+  position: absolute;
+  width: 250px;
+  height: 48px;
+  top: -24px;
+  z-index: 1;
+`;
+
+export const ProfileModificationButton = styled.button`
+  ${ButtonCss("8vw", "6vh")}
+  margin-top: 30px;
 `;
