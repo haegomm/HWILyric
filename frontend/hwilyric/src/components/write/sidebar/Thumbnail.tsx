@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useSetRecoilState, useRecoilState } from "recoil";
 import { noteThumbnailFileState, noteThumbnailUrlState } from "../../../atoms/noteAtoms";
-import {ThumbnailBox, ThumbnailInput, ThumbnailImage, ThumbnailLabel, ThumbnailUploadDiv} from "../../../styles/writeSidebarStyle"
+import {ThumbnailBox, ThumbnailInput, ThumbnailLabel, ThumbnailUploadDiv} from "../../../styles/writeSidebarStyle"
 import { ProfileImageDiv, ProfileImageImg } from "../../../styles/common/ProfileImageStyle";
 
 function Thumbnail() {

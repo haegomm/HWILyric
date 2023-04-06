@@ -1,7 +1,6 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { logout } from '../../api/userApi';
 
 import { IsLoginAtom, userNicknameAtom, userProfileImgAtom } from '../../atoms/userAtom'
 import { deleteUserInfo } from '../../features/userInfo';
