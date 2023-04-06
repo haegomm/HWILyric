@@ -15,7 +15,7 @@ public class Keyword {
 
     // pk
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto-increment 지원
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     // 단어

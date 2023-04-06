@@ -15,6 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.mail.MessagingException;
 import java.security.SecureRandom;
 
+/**
+ * 메일과 관련된 로직을 처리하는 서비스입니다
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -31,7 +34,11 @@ public class MailService {
     
     private static SecureRandom random = new SecureRandom(); // 그냥 Random() 보다 강력한 친구
 
-    // 회원가입용 이메일
+    /**
+     * 인증코드를 이메일로 보내줍니다
+     * @param email 인증코드를 보낼 이메일
+     * @return 이메일로 전송된 인증코드
+     */
     public MailDto createSignupEmail(String email) {
 
         String code = createKey(); // 인증코드 생성
@@ -73,7 +80,11 @@ public class MailService {
         return mailDto;
     }
 
-    // 임시 비밀번호 생성
+    /**
+     * 비밀 번호를 리셋하여 이메일로 전송해줍니다
+     * @param email 리셋된 비밀 번호를 전송받을 이메일
+     * @return
+     */
     @Transactional
     public MailDto createTempPassword(String email) {
 
@@ -126,7 +137,10 @@ public class MailService {
         return mailDto;
     }
 
-    // 인증코드 생성
+    /**
+     * 인증코드, 임시 비밀번호를 생성해줍니다
+     * @return 생성된 코드
+     */
     public static String createKey() {
         StringBuilder key = new StringBuilder();
 
@@ -138,6 +152,12 @@ public class MailService {
         return key.toString();
     }
 
+    /**
+     * 실제 메일을 보내줍니다
+     * @param mailDto 메일로 보낼 데이터
+     * @throws NotFoundException
+     * @throws MessagingException
+     */
     public void sendEmail(MailDto mailDto) throws NotFoundException, MessagingException {
         MailHandler mailHandler = new MailHandler(javaMailSender);
 

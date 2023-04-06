@@ -32,11 +32,11 @@ import javax.validation.Valid;
 import java.util.Date;
 
 
-@Slf4j // log 사용하기 위한 어노테이션
+@Slf4j
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-@Api(tags = {"사용자 API"}) // Swagger에서 보이는 controller 이름
+@Api(tags = {"사용자 API"})
 public class UserController {
 
     private static final String SUCCESS = "success";
@@ -50,7 +50,13 @@ public class UserController {
     private final AppProperties appProperties;
 
 
-    @ApiOperation(value = "이메일 중복체크") // Swagger에서 보이는 메서드 이름
+    /**
+     * 이메일 중복 체크
+     * @param email 중복 체크 할 이메일
+     * @return 성공 시 success 반환
+     * @throws DuplicateException
+     */
+    @ApiOperation(value = "이메일 중복체크")
     @GetMapping(value = "/guests/email/{email}")
     public ResponseEntity<SuccessRes> duplicateEmail(@PathVariable("email") String email) throws DuplicateException {
 
@@ -63,6 +69,12 @@ public class UserController {
 
     }
 
+    /**
+     * 닉네임 중복 체크
+     * @param nickname 중복 체크 할 닉네임
+     * @return 성공 시 success 반환
+     * @throws DuplicateException
+     */
     @ApiOperation(value = "닉네임 중복체크")
     @GetMapping(value = "/guests/nickname/{nickname}")
     public ResponseEntity<SuccessRes> duplicateNickname(@PathVariable("nickname") String nickname) throws DuplicateException {
@@ -76,6 +88,15 @@ public class UserController {
         return new ResponseEntity<>(successRes, HttpStatus.OK);
     }
 
+    /**
+     * 사용자가 입력한 정보를 DB에 insert한다
+     * @param insertUserReq 사용자가 입력한 정보
+     * @param multipartFile 사용자가 업로드 한 프로필 사진
+     * @return 성공 시 success를 반환
+     * @throws Exception
+     * @throws DuplicateException
+     * @throws NullPointerException
+     */
     @ApiOperation(value = "회원가입")
     @PostMapping(value = "/guests", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<SuccessRes> insertUser(@Valid @RequestPart(value = "userInfo") InsertUserReq insertUserReq, @RequestPart(value = "profileImg", required = false) MultipartFile multipartFile) throws Exception, DuplicateException, NullPointerException {
@@ -88,6 +109,13 @@ public class UserController {
         return new ResponseEntity<>(successRes, HttpStatus.OK);
     }
 
+    /**
+     * 회원 가입 시 이메일 인증 코드를 발송합니다
+     * @param email 인증 코드를 발송할 이메일
+     * @return 성공 시 발송된 코드를 반환합니다
+     * @throws NotFoundException
+     * @throws MessagingException
+     */
     @ApiOperation(value = "회원가입 시 email 인증코드 전송")
     @GetMapping(value = "/guests/check/{email}")
     public ResponseEntity<SendSignupEmailRes> sendSignupEmail(@PathVariable("email") String email) throws NotFoundException, MessagingException {
@@ -99,6 +127,15 @@ public class UserController {
         return new ResponseEntity<>(sendSignupEmailRes, HttpStatus.OK);
     }
 
+    /**
+     * 소셜 로그인 요청을 처리해줍니다
+     * @param code 소셜 로그인 요청으로 받아온 인가 코드
+     * @param httpServletRequest
+     * @param httpServletResponse
+     * @return 성공 시 상시 노출되어야 하는 사용자 정보를 반환합니다
+     * @throws NotFoundException
+     * @throws IllegalArgumentException
+     */
     @ApiOperation(value = "소셜 로그인-카카오")
     @GetMapping(value = "/guests/kakao/{code}")
     public ResponseEntity<KakaoLoginRes> kakaoLogin(@PathVariable("code") String code, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws NotFoundException, IllegalArgumentException {
@@ -109,6 +146,14 @@ public class UserController {
         return oAuthService.kakaoLogin(kakaoAccessToken, httpServletRequest, httpServletResponse);
     }
 
+    /**
+     * 로그인 요청이 들어오면 로그인 처리해줍니다
+     * @param loginUserReq 로그인 요청한 사용자의 이메일, 비밀 번호
+     * @param httpServletRequest
+     * @param httpServletResponse
+     * @return 성공 시 상시 노출되어야 하는 사용자 정보를 반환합니다
+     * @throws NotFoundException
+     */
     @ApiOperation(value = "로그인")
     @PostMapping(value = "/guests/login")
     public ResponseEntity<LoginUserRes> loginUser(@RequestBody LoginUserReq loginUserReq, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws NotFoundException {
@@ -163,6 +208,13 @@ public class UserController {
         return new ResponseEntity<>(loginUserRes, status);
     }
 
+    /**
+     * 임시 비밀번호 이메일로 전송합니다
+     * @param sendTempPasswordReq 임시 비밀번호를 전송할 이메일
+     * @return 성공 시 success를 반환합니다
+     * @throws NotFoundException
+     * @throws MessagingException
+     */
     @ApiOperation(value = "임시 비밀번호 이메일 전송")
     @PatchMapping(value = "/guests/password")
     public ResponseEntity<SuccessRes> sendTempPassword(@RequestBody SendTempPasswordReq sendTempPasswordReq) throws NotFoundException, MessagingException {
@@ -182,6 +234,13 @@ public class UserController {
         return new ResponseEntity<>(successRes, HttpStatus.OK);
     }
 
+    /**
+     * 사용자가 로그아웃 요청을 하면 DB에서 refresh token을 삭제하고 쿠키 값을 삭제하여 로그아웃 처리합니다
+     * @param httpServletRequest
+     * @param httpServletResponse
+     * @return 성공 시 success를 반환합니다
+     * @throws NotFoundException
+     */
     @ApiOperation(value = "로그아웃")
     @GetMapping(value = "/users/logout")
     public ResponseEntity<SuccessRes> logoutUser(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws NotFoundException {
@@ -196,6 +255,12 @@ public class UserController {
 
     }
 
+    /**
+     * access token 재발급 요청 시 재발급합니다
+     * @param httpServletRequest
+     * @return 성공 시 재발급된 access toekn을 반환합니다
+     * @throws UnAuthorizedException
+     */
     @ApiOperation(value = "Access Token 재발급")
     @GetMapping(value = "/users/access-token")
     public ResponseEntity<ReMakeAccessTokenRes> reMakeAccessToken(HttpServletRequest httpServletRequest) throws UnAuthorizedException {
@@ -230,6 +295,13 @@ public class UserController {
         return new ResponseEntity<>(reMakeAccessTokenRes, HttpStatus.OK);
     }
 
+    /**
+     * DB에 저장된 비밀 번호와 사용자가 입력한 비밀 번호 일치 여부를 확인합니다
+     * @param checkPasswordReq
+     * @param httpServletRequest
+     * @return 성공 시 success를 반환합니다
+     * @throws NotFoundException
+     */
     @ApiOperation(value = "비밀번호 일치 여부 확인")
     @PostMapping(value = "/users/password")
     public ResponseEntity<SuccessRes> checkPassword(@RequestBody CheckPasswordReq checkPasswordReq, HttpServletRequest httpServletRequest) throws NotFoundException {
@@ -243,6 +315,17 @@ public class UserController {
 
     }
 
+    /**
+     * 사용자가 입력한 정보를 DB에 update 합니다
+     * @param updateUserReq
+     * @param multipartFile
+     * @param httpServletRequest
+     * @return 성공 시 상시 화면에 노출되어야 하는 정보를 반환합니다
+     * @throws Exception
+     * @throws NotFoundException
+     * @throws DuplicateException
+     * @throws NullPointerException
+     */
     @ApiOperation(value = "프로필 수정")
     @PatchMapping(value = "/users/profile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<UpdateUserRes> updateUser(@RequestPart(value = "userInfo") UpdateUserReq updateUserReq, @RequestPart(value = "profileImg", required = false) MultipartFile multipartFile, HttpServletRequest httpServletRequest) throws Exception, NotFoundException, DuplicateException, NullPointerException {
@@ -252,6 +335,12 @@ public class UserController {
         return new ResponseEntity<>(updateUserRes, HttpStatus.OK);
     }
 
+    /**
+     * 사용자가 입력한 비밀 번호를 DB에 반영합니다
+     * @param updatePasswordReq
+     * @param httpServletRequest
+     * @return 성공 시 success를 반환합니다
+     */
     @ApiOperation(value = "비밀번호 수정")
     @PatchMapping(value = "/users/password")
     public ResponseEntity<SuccessRes> updatePassword(@RequestBody UpdatePasswordReq updatePasswordReq, HttpServletRequest httpServletRequest){
