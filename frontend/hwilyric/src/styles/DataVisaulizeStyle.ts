@@ -74,6 +74,11 @@ export const AnnualReportTitle = styled.title`
   display: flex;
   justify-content: center;
   align-item: center;
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 `;
 
 export const AnnualGenreDiv = styled.div`
@@ -142,6 +147,11 @@ export const AnnualKeywordDiv = styled.div`
       #fbd5e0
     )
     2;
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 `;
 
 export const WeeklyKeywordLineDiv = styled.div`
@@ -163,6 +173,7 @@ export const WeeklyKeywordBlockP = styled.p`
   padding: 8px 12px;
   border-radius: 10px;
   background: rgb(251, 213, 224, 0.25);
+  cursor: pointer;
 `;
 
 export const AnnualGenreSongDiv = styled.div`
@@ -173,6 +184,11 @@ export const AnnualGenreSongDiv = styled.div`
   font-size: 30px;
   width: 420px;
   height: 80px;
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 `;
 
 export const WeeklyReportGenreInterval = styled.div`
@@ -195,7 +211,7 @@ export const WeeklyReportMoveBox = styled.div`
   width: 280px;
   height: 50px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 `;
 

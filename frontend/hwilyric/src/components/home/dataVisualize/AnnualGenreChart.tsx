@@ -22,6 +22,9 @@ const colorArr = [
 ];
 
 function AnnualGenreChart(props: any) {
+  const handleDragStart = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+  };
   const annualnow = useRecoilValue(annualNowAtom);
   const setAnnualnowSong = useSetRecoilState(annualNowSongAtom);
   function myFunc(node: any, event: Object) {
@@ -40,6 +43,7 @@ function AnnualGenreChart(props: any) {
         flexDirection: "column",
         justifyContent: "space-around",
       }}
+      onDragStart={handleDragStart}
     >
       <AnnualReportTitle>{annualnow}년대 인기 장르</AnnualReportTitle>
       <ResponsivePie
