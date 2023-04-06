@@ -32,7 +32,7 @@ for file in csv_list:
             if (len(word)>= 8):
                 continue
             # 예외 단어 제외 - 자음 또는 모음 포함 (총 7184 개)
-            regex = re.compile("[ㄱ-ㅎ|ㅏ-ㅣ|`~!@#$%^&*()_|+\-=?;:'\",.<>\{\}\[\]\\\/]")
+            regex = re.compile("[ㄱ-ㅎ|ㅏ-ㅣ|`~!@#$%^&*()_+\-=?;:'\",.<>\{\}\[\]\\\/]")
             m = regex.search(word)
             if m is not None:
                 error_cnt += 1
