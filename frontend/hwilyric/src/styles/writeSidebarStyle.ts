@@ -31,6 +31,7 @@ export const TabMenu = styled.ul`
     list-style: none;
     margin-bottom: 5%;
     margin-top: 5%;
+    cursor: pointer;
 
     .submenu {
         display: flex;
@@ -42,7 +43,6 @@ export const TabMenu = styled.ul`
     .focused {
         font-weight: bold;
         color: ${props => props.theme.accentColor['2']};
-        cursor: pointer;
 }
     }
 

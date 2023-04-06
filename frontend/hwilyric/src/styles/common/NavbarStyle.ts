@@ -5,7 +5,7 @@ export const NavBox = styled.div`
     justify-content: space-between;
     align-items : center;
     backgound-color: none;
-    height: 12vh;
+    height: 10vh;
     padding: 0;
     margin: 0 5vw;
 `
