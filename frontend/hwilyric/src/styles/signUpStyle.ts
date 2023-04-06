@@ -16,14 +16,12 @@ export const SignupOuterBoxDiv = styled.div`
   align-items: center;
   border-style: solid;
   border-width: 1px 1px 1px 1px;
-  border-image: linear-gradient(
-      to right bottom,
-      #ace5f8,
-      #e6b2fd,
-      #fdbfb4,
-      #fbd1dd
-    )
-    1;
+  border-image: linear-gradient(to right,
+    ${props => props.theme.accentColor['1']}, 
+    ${props => props.theme.accentColor['2']}, 
+    ${props => props.theme.accentColor['3']},
+    ${props => props.theme.accentColor['4']});
+  border-image-slice: 1;
 `;
 
 export const ProfileModificationOuterBoxDiv = styled.div`
@@ -38,14 +36,12 @@ export const ProfileModificationOuterBoxDiv = styled.div`
   align-items: center;
   border-style: solid;
   border-width: 1px 1px 1px 1px;
-  border-image: linear-gradient(
-      to right bottom,
-      #ace5f8,
-      #e6b2fd,
-      #fdbfb4,
-      #fbd1dd
-    )
-    1;
+  border-image: linear-gradient(to right,
+    ${props => props.theme.accentColor['1']}, 
+    ${props => props.theme.accentColor['2']}, 
+    ${props => props.theme.accentColor['3']},
+    ${props => props.theme.accentColor['4']});
+  border-image-slice: 1;;
 `;
 
 export const SignupTitleH1 = styled.h1`
@@ -54,7 +50,8 @@ export const SignupTitleH1 = styled.h1`
   font-size: 48px;
   color: rgba(0, 0, 0, 0);
   z-index: 1;
-  background: linear-gradient(to right, #ace5f8, #e6b2fd);
+  background: linear-gradient(to right, ${props => props.theme.accentColor['4']}, 
+  ${props => props.theme.accentColor['2']});
   background-clip: text;
   -webkit-background-clip: text;
 `;

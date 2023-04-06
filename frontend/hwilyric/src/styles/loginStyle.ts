@@ -16,14 +16,12 @@ export const LoginBoxDiv = styled.div`
   border-radius: 0px;
   border-style: solid;
   border-width: 1px 1px 1px 1px;
-  border-image: linear-gradient(
-      to right bottom,
-      #ace5f8,
-      #e6b2fd,
-      #fdbfb4,
-      #fbd1dd
-    )
-    1;
+  border-image: linear-gradient(to right,
+    ${props => props.theme.accentColor['1']}, 
+    ${props => props.theme.accentColor['2']}, 
+    ${props => props.theme.accentColor['3']},
+    ${props => props.theme.accentColor['4']});
+  border-image-slice: 1;
 `;
 
 export const LoginTitleH1 = styled.h1`
@@ -33,7 +31,8 @@ export const LoginTitleH1 = styled.h1`
   font-weight: bold;
   color: rgba(0, 0, 0, 0);
   z-index: 1;
-  background: linear-gradient(to right, #ace5f8, #e6b2fd);
+  background: linear-gradient(to right, ${props => props.theme.accentColor['4']},
+  ${props => props.theme.accentColor['2']});
   background-clip: text;
   -webkit-background-clip: text;
 `;
@@ -62,21 +61,17 @@ export const LoginInputI = styled.input`
   border-top: 0;
   border-right: 0;
   border-left: 0;
-  border-image: #636161
+  border-image: #636161;
   outline: none;
   padding: 5px;
   transform: scale(1);
   transition: transform 0.2s ease-in-out;
 
   &:focus {
-    border-image: linear-gradient(
-      to right bottom,
-      #ace5f8,
-      #e6b2fd,
-      #fdbfb4,
-      #fbd1dd
-    )
-    2;
+    border-image: linear-gradient(to right,
+      ${props => props.theme.accentColor['2']}, 
+      ${props => props.theme.accentColor['3']});
+    border-image-slice: 1;
     outline: none;
     transform: scale(1.05);
     transition: transform 0.2s ease-in-out;
@@ -189,7 +184,8 @@ export const PWFindTitleH1 = styled.h1`
   font-weight: bold;
   color: rgba(0, 0, 0, 0);
   z-index: 1;
-  background: linear-gradient(to right, #ace5f8, #e6b2fd);
+  background: linear-gradient(to right,  ${props => props.theme.accentColor['2']}, 
+  ${props => props.theme.accentColor['3']});
   background-clip: text;
   -webkit-background-clip: text;
 `;
