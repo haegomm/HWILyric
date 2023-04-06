@@ -14,11 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 
-@Slf4j // log를 사용하기 위한 어노테이션
+/**
+ * User 관련 로직을 처리하는 서비스입니다
+ * 
+ */
+@Slf4j
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true) // 이 어노테이션을 붙이면 이 class 안에 있는 모든 메서드는 데이터를 읽기 전용으로 불러온다.
-// 만약 데이터를 insert 하거나 update 하는 등 DB에 변경사항이 생겨야 하는 메서드의 경우 46번 줄에 있는 주석 참고해주세요!
+@Transactional(readOnly = true)
 public class UserService {
 
     private final UserRepository userRepository;
@@ -29,7 +32,12 @@ public class UserService {
     private static final String PROFILE = "profile";
 
 
-    // 이메일 중복체크
+    /**
+     * 요청 온 이메일을 DB에서 중복체크하여 중복된 경우에는 DuplicateException을 throw 합니다.
+     * @param email 중복체크 요청한 이메일
+     * @return
+     * @throws DuplicateException
+     */
     public String duplicateEmail(String email) throws DuplicateException {
         User user = userRepository.findByEmail(email).orElse(null);
         if (user != null) {
@@ -41,7 +49,11 @@ public class UserService {
         return "success";
     }
 
-    // 닉네임 중복체크
+    /**
+     * 요청 온 닉네임을 DB에서 중복체크하여 중복된 경우에는 DuplicateException을 throw 합니다
+     * @param nickname nickname 중복체크 요청한 닉네임
+     * @throws DuplicateException
+     */
     public void duplicateNickname(String nickname) throws DuplicateException {
         if (userRepository.findByNickname(nickname).isPresent()) {
             throw new DuplicateException("중복된 닉네임입니다.");
@@ -49,21 +61,28 @@ public class UserService {
 
     }
 
-    // 일반 사용자 회원가입
+    /**
+     * DB에 사용자 정보를 저장합니다
+     * @param insertUserReq 회원 가입 form에 사용자가 입력한 정보
+     * @param multipartFile 회원 가입 시 사용자가 등록한 프로필 사진
+     * @throws Exception
+     * @throws DuplicateException
+     * @throws NullPointerException
+     */
     @Transactional
     public void insertUser(InsertUserReq insertUserReq, MultipartFile multipartFile) throws Exception, DuplicateException, NullPointerException {
 
-        // 사용자가 프로필 사진 업로드 하지 않으면 주어지는 default 프사
-        String profileImg = "https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/profile/hwilyric_logo.png";
+
+        String profileImg = "https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/profile/%EC%A0%9C%EB%A6%AC%EC%9D%B8%EC%82%AC-%EC%A1%B4%EC%A4%91.gif";
         log.debug("사용자가 넘겨준 프사가 null인가? {}", multipartFile == null);
 
-        // 만약 사용자가 프사를 업로드 한 경우
+
         if (multipartFile != null) {
             log.debug("프사가 null이 아니네!!");
-            profileImg = awsService.upload(multipartFile, PROFILE); // 프로필 이미지 업로드
+            profileImg = awsService.upload(multipartFile, PROFILE);
         }
 
-        // 사용자 비밀번호 암호화
+
         String password = bCryptPasswordEncoder.encode(insertUserReq.getPassword());
 
         User user = User.builder().insertUserReq(insertUserReq).password(password).profileImg(profileImg).build();
@@ -71,7 +90,12 @@ public class UserService {
         userRepository.save(user);
     }
 
-    // 로그인
+    /**
+     * 로그인 요청한 정보와 DB에 저장된 정보가 일치하는지 확인합니다
+     * @param loginUserReq 사용자가 입력한 이메일과 비밀번호
+     * @return 성공 시 해당 사용자의 정보 중 화면에 상시 노출되어야 하는 정보를 User 객체로 반환합니다
+     * @throws NotFoundException
+     */
     public User loginUser(LoginUserReq loginUserReq) throws NotFoundException {
         User user = userRepository.findByEmail(loginUserReq.getEmail()).orElseThrow(() -> new NotFoundException(NOT_FOUND_USER));
 
@@ -83,20 +107,32 @@ public class UserService {
         }
     }
 
-    // refresh 토큰 DB에 저장 - 로그인용
+    /**
+     * 발급된 refresh token을 DB에 저장합니다
+     * @param user refresh token을 저장할 사용자
+     * @param refreshToken DB에 저장할 refresh token
+     */
     @Transactional
     public void saveRefreshToken(User user, String refreshToken) {
         user.saveRefreshToken(refreshToken);
     }
 
-    // refresh 토큰 DB에서 삭제 - 로그아웃용
+    /**
+     * 로그아웃 시 호출되는 메서드로 DB에 저장된 refresh token을 삭제합니다
+     * @param id refresh toekn을 삭제할  id(user table PK)
+     */ 
     @Transactional
     public void deleteRefreshToken(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(NOT_FOUND_USER));
         user.deleteRefreshToken();
     }
 
-    // 비밀번호 일치 여부 확인
+    /**
+     * 비밀 번호가 일치하는지 확인합니다
+     * @param id 비밀 번호를 확인할 user table의 PK
+     * @param password 사용자가 입력한 비밀 번호
+     * @throws NotFoundException
+     */
     public void checkPassword(Long id, String password) throws NotFoundException {
         User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(NOT_FOUND_USER));
         if (!bCryptPasswordEncoder.matches(password, user.getPassword())) {
@@ -105,16 +141,25 @@ public class UserService {
     }
 
 
-    // 프로필 수정
+    /**
+     * 사용자가 입력한 정보를 DB에 update 해줍니다
+     * @param id update할 사용자의 id(user table PK)
+     * @param updateUserReq 수정할 닉네임
+     * @param multipartFile 수정할 프로필 사진
+     * @return DB에 update된 정보를 반환합니다
+     * @throws Exception
+     * @throws NotFoundException
+     * @throws DuplicateException
+     * @throws NullPointerException
+     */
     @Transactional
     public UpdateUserRes updateUser(Long id, UpdateUserReq updateUserReq, MultipartFile multipartFile) throws Exception, NotFoundException, DuplicateException, NullPointerException {
 
         User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(NOT_FOUND_USER));
 
-        // 닉네임을 기본으로 DB에 저장되어 있는 값을 저장
+
         String nickname = user.getNickname();
 
-        // 닉네임을 수정한 경우에만 닉네임 중복 체크를 하고 nickname 변수에 담아준다.
         if (!updateUserReq.getNickname().equals(nickname)) {
             log.debug("기존 닉네임이랑 달라!!! 닉네임 중복체크 하러 들어옴");
             duplicateNickname(updateUserReq.getNickname());
@@ -122,13 +167,11 @@ public class UserService {
 
         }
 
-        // profileImg에 기존에 user 프로필 이미지 URL을 넣어준다.
         String profileImg = user.getProfileImg();
 
-        // 만약 사용자가 프사를 수정한 경우
-        if (multipartFile!=null) {
+        if (multipartFile != null) {
             log.debug("프사 수정했네!");
-            profileImg = awsService.upload(multipartFile, PROFILE); // 프로필 이미지 업로드
+            profileImg = awsService.upload(multipartFile, PROFILE);
         }
 
         user.updateUser(nickname, profileImg);
@@ -137,12 +180,16 @@ public class UserService {
 
     }
 
-    // 비밀번호 수정
+    /**
+     * 변경된 비밀 번호를 DB에 반영합니다
+     * @param id 비밀 번호를 변경할 id (user table PK)
+     * @param updatePasswordReq 변경할 비밀 번호
+     */
     @Transactional
     public void updatePassword(Long id, UpdatePasswordReq updatePasswordReq) {
         User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(NOT_FOUND_USER));
 
-        // 비밀번호를 변경한 경우에만 update 수행
+
         if (updatePasswordReq.getPassword() != null) {
             String password = bCryptPasswordEncoder.encode(updatePasswordReq.getPassword());
             user.updatePassword(password);

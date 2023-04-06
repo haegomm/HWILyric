@@ -25,11 +25,3 @@ class HangulModel(models.Model):
     class Meta:
         managed = False
         db_table = 'hangul_model'
-
-class EnglishModel(models.Model):
-    word = models.CharField(max_length=255, db_comment='단어')
-    vector_data = models.TextField(blank=True, null=True, db_comment='벡터데이터')
-
-    class Meta:
-        managed = False
-        db_table = 'english_model'
