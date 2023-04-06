@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { useRecoilValue } from "recoil";
 import { annualNowSongAtom } from "../../../atoms/visualizingAtoms";
 import { AnnualGenreSongDiv } from "../../../styles/DataVisaulizeStyle";
@@ -11,7 +10,6 @@ function AnnualGenreSongs(props: any) {
         <div
           style={{
             width: "100%",
-            // height: "40px",
             whiteSpace: "pre-wrap",
             overflow: "wrap",
             display: "flex",

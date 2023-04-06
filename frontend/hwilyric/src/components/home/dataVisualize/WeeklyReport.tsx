@@ -7,21 +7,9 @@ import {
   WeeklyReportGenreInterval,
   WeeklyGenreIntervalText,
   WeeklyReportMoveBox,
-  WeeklyReportMoveArrow,
 } from "../../../styles/DataVisaulizeStyle";
 import { weeklyNewSong } from "../../../api/visualizingApi";
 import { useState, useEffect } from "react";
-
-import axios from "axios";
-import { INewSongTypes } from "../../../types/visualizingType";
-import { getDefaultNormalizer } from "@testing-library/react";
-
-const weeklyNewSong2 = async (date: INewSongTypes) => {
-  const res = await axios.get(
-    `https://j8b107.p.ssafy.io/api/trend/weekly?startDate=${date.startDate}&endDate=${date.endDate}`
-  );
-  return res.data;
-};
 
 const today = new Date();
 let weekEnd = new Date(today.getTime() - today.getDay() * 24 * 60 * 60 * 1000);
@@ -47,23 +35,13 @@ let weekStartString = yyyyMMdd(weekStart); // 일주일 전 날짜의 문자열 
 function WeeklyReport(props: any) {
   const [data, setData] = useState({ genres: null, keywords: null });
   const getData = async () => {
-    const data = await weeklyNewSong2({
+    const data = await weeklyNewSong({
       startDate: weekStartString,
       endDate: weekEndString,
     });
     setData(data);
   };
 
-  const weekMove = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const num = 1;
-    weekEnd = new Date(
-      today.getTime() - (today.getDay() - num) * 24 * 60 * 60 * 1000
-    );
-    weekStart = new Date(weekEnd.getTime() - 7 * 24 * 60 * 60 * 1000);
-    weekEndString = yyyyMMdd(weekEnd);
-    weekStartString = yyyyMMdd(weekStart);
-    getData();
-  };
   useEffect(() => {
     getData();
   }, []);
