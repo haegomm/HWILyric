@@ -51,7 +51,7 @@ function SidebarMyLyrics() {
                 if (lyricCtgr.type === currentCategory) {
                   return (
                     <LyricListBodyItem key={myLyric.id}>
-                      <LyricListBodyItemDiv width='35%'>
+                      <LyricListBodyItemDiv width='80px' style={{height: "80px"}}>
                         <MyLyricThumbnail src={myLyric.thumbnail} />
                       </LyricListBodyItemDiv>
                       <MyLyricListBodyItemContent>                                 

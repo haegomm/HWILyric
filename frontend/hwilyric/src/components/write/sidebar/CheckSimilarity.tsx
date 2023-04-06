@@ -35,10 +35,12 @@ function CheckSimilarity() {
         try {
             const data = await checkSimilarity(body);
             setSimilarList(data.similarList);
-            setSimilarListLength(data.similarList.length);
+            await setSimilarListLength(data.similarList.length);
             await setCheckLoadingState(false);
             return data;
         } catch (err: any) {
+            resetSimilarListLength()
+            alert ("유사한 가사가 없습니다.\n3글자 이상 작성 또는 특수 문자를 제거하고 다시 시도해주세요!")
             await setCheckLoadingState(false);
         }
     }
