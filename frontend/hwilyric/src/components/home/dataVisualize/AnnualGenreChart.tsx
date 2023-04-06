@@ -32,7 +32,15 @@ function AnnualGenreChart(props: any) {
   const theme = useTheme();
 
   return (
-    <div style={{ width: "232px", height: "200px" }}>
+    <div
+      style={{
+        width: "400px",
+        height: "400px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-around",
+      }}
+    >
       <AnnualReportTitle>{annualnow}년대 인기 장르</AnnualReportTitle>
       <ResponsivePie
         data={props.data}
@@ -41,7 +49,7 @@ function AnnualGenreChart(props: any) {
         cornerRadius={3}
         activeOuterRadiusOffset={0}
         colors={[
-          "#81E47F",
+          "#E4B2FA",
           "#96BCF2",
           "#88C4E9",
           "#D1C4F1",
@@ -68,56 +76,6 @@ function AnnualGenreChart(props: any) {
           from: "color",
           modifiers: [["darker", 2]],
         }}
-        fill={[
-          {
-            match: {
-              id: "ruby",
-            },
-            id: "dots",
-          },
-          {
-            match: {
-              id: "c",
-            },
-            id: "dots",
-          },
-          {
-            match: {
-              id: "go",
-            },
-            id: "dots",
-          },
-          {
-            match: {
-              id: "python",
-            },
-            id: "dots",
-          },
-          {
-            match: {
-              id: "scala",
-            },
-            id: "lines",
-          },
-          {
-            match: {
-              id: "lisp",
-            },
-            id: "lines",
-          },
-          {
-            match: {
-              id: "elixir",
-            },
-            id: "lines",
-          },
-          {
-            match: {
-              id: "javascript",
-            },
-            id: "lines",
-          },
-        ]}
         legends={[]}
         onClick={myFunc}
         tooltip={({ datum }) => (
@@ -142,7 +100,7 @@ function AnnualGenreChart(props: any) {
                   display: "block",
                   width: "12px",
                   height: "12px",
-                  background: "rgb(239, 237, 245)",
+                  background: `${datum.color}`,
                   marginRight: "7px",
                 }}
               ></span>

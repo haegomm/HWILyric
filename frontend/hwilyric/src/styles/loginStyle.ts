@@ -161,7 +161,7 @@ export const LoginPasswordBox = styled.div`
 export const PWFindTitleBackground = styled.div`
   background: ${(props) => (props.theme === lightTheme ? "white" : "#191B1F")};
   position: absolute;
-  width: 144px;
+  width: 312px;
   height: 48px;
   top: -24px;
   z-index: 1;

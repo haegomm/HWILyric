@@ -1,11 +1,16 @@
 import { useRecoilValue } from "recoil";
 
-import { useHorizontalScroll } from '../features/useHorizontalScroll';
-import { HomeContainer, HomeDiv, HomeContent, HomeTrapezoid } from '../styles/homeStyle';
-import HomeQuickview from '../components/home/HomeQuickview';
-import { IsLoginAtom } from '../atoms/userAtom';
-import HomeNotLoggedIn from '../components/home/HomeNotLoggedIn';
-import HomeCenter from '../components/home/HomeCenter';
+import { useHorizontalScroll } from "../features/useHorizontalScroll";
+import {
+  HomeContainer,
+  HomeDiv,
+  HomeContent,
+  HomeTrapezoid,
+} from "../styles/homeStyle";
+import HomeQuickview from "../components/home/HomeQuickview";
+import { IsLoginAtom } from "../atoms/userAtom";
+import HomeNotLoggedIn from "../components/home/HomeNotLoggedIn";
+import HomeCenter from "../components/home/HomeCenter";
 import { darkTrape, lightTrape } from '../assets/icon/myButtons';
 import { DataVisualizePage } from "../styles/DataVisaulizeStyle";
 import WeeklyReport from "../components/home/dataVisualize/WeeklyReport";
@@ -14,33 +19,31 @@ import AnnualReport from "../components/home/dataVisualize/AnnualReport";
 import { useTheme } from "styled-components";
 import { lightTheme } from "../theme/theme";
 
-function Home() {
-    const theme = useTheme();
+import { useTheme } from "styled-components";
 
-    const scrollRef = useHorizontalScroll();
-    const isLogin = useRecoilValue(IsLoginAtom);
-    return (
-        <HomeContainer ref={scrollRef}>
-            {(theme === lightTheme) ? 
-                <HomeTrapezoid src={lightTrape} />
-                : <HomeTrapezoid src={darkTrape} />
-            }
-            <HomeContent>
-                <HomeDiv>
-                    {isLogin ? 
-                        <HomeQuickview />
-                        : <HomeNotLoggedIn />
-                    }
-                </HomeDiv>
-                <HomeCenter />
-                <DataVisualizePage>
-                  <WeeklyReport />
-                  <TotalTrend />
-                  <AnnualReport />
-                </DataVisualizePage>
-            </HomeContent>
-        </HomeContainer>        
-    )
+function Home() {
+  const theme = useTheme();
+  const scrollRef = useHorizontalScroll();
+  const isLogin = useRecoilValue(IsLoginAtom);
+
+  const handleDragStart = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+  };
+
+  return (
+    <HomeContainer ref={scrollRef} onDragStart={handleDragStart}>
+      <HomeTrapezoid src={lightTrape} onDragStart={handleDragStart} />
+      <HomeContent onDragStart={handleDragStart}>
+        <HomeDiv>{isLogin ? <HomeQuickview /> : <HomeNotLoggedIn />}</HomeDiv>
+        <HomeCenter />
+        <DataVisualizePage theme={theme} onDragStart={handleDragStart}>
+          <WeeklyReport onDragStart={handleDragStart} />
+          <TotalTrend onDragStart={handleDragStart} />
+          <AnnualReport onDragStart={handleDragStart} />
+        </DataVisualizePage>
+      </HomeContent>
+    </HomeContainer>
+  );
 }
 
 export default Home;
