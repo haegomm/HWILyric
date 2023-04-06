@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-
-interface divWidth{
+interface divWidth {
   width: string;
 }
 
@@ -150,8 +149,8 @@ export const HomeCenterWord = styled.div`
 `;
 
 export const HomeWordItem = styled.div`
-  &:hover{
-    background-color: ${props => props.theme.accentColor['1']};
+  &:hover {
+    background-color: ${(props) => props.theme.accentColor["1"]};
     color: rgb(255, 255, 255, 100);
   }
   margin: 4px 12px;
@@ -159,7 +158,7 @@ export const HomeWordItem = styled.div`
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.5);
   cursor: pointer;
-`
+`;
 
 export const QuickviewHeader = styled.div`
   height: 10vh;
@@ -179,7 +178,7 @@ export const HeaderP = styled.p`
   font-size: 24px;
   margin-right: 16px;
   font-weight: bold;
-`
+`;
 
 export const TopicHeader = styled.div`
   height: 15vh;
@@ -187,4 +186,18 @@ export const TopicHeader = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 1vh;
+`;
+
+export const ArrowContainerDiv = styled.a`
+  animation-name: blink;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  @keyframes blink {
+    50% {
+      opacity: 0.5;
+    }
+  }
+  cursor: pointer;
 `;
