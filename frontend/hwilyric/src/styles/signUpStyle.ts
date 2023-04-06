@@ -87,7 +87,7 @@ export const SignupInnerWrapper = styled.div`
 `;
 
 export const SignupInnerWrapperInner = styled.div`
-  width: auto;
+  width: 50%;
   display: flex;
   padding-left: 30px;
   padding-right: 30px;
@@ -105,9 +105,9 @@ export const SignupInnerBoxDiv = styled.div`
 `;
 
 export const SignupInnerVerifyBoxDiv = styled.div`
-  width: ${(400 / 1920) * 100}vw;
+  width: 100%;
   position: relative;
-  padding: 5px;
+  padding-top: 20px;
 `;
 export const SignupEmailDiv = styled.div`
   padding: 0;
@@ -171,26 +171,38 @@ export const ModifyEmailInput = styled.input`
 
 export const SignupSendNumberDiv = styled.div`
   position: absolute;
-  right: 0%;
-  top: 25px;
+  right: 1%;
+  top: 22px;
+  padding: 3px;
   border-width: 1px 1px 1px 1px;
   border-image: #636161 1;
   border-style: solid;
+  cursor: pointer;
+  :hover {
+    background: #636161;
+    color: #ffffff;
+  }
 `;
 
 export const SignupConfirmNumberDiv = styled.div`
   position: absolute;
-  right: 2%;
-  top: 10px;
+  right: 1%;
+  top: 22px;
+  padding: 3px;
   border-width: 1px 1px 1px 1px;
   border-image: #636161 1;
   border-style: solid;
+  cursor: pointer;
+  :hover {
+    background: #636161;
+    color: #ffffff;
+  }
 `;
 
 export const SignupEmailErrorSpan = styled.span`
   margin-left: auto;
   padding-top: 5px;
-  font-size: 14px;
+  font-size: 8px;
 `;
 
 export const SignupVerifyDiv = styled.div``;
@@ -223,8 +235,8 @@ export const SignupProfileInputLeft = styled.div`
 `;
 
 export const SignupProfileImg = styled.img`
-  width: ${(200 / 1920) * 100}vw;
-  height: ${(200 / 1920) * 100}vw;
+  width: 200px;
+  height: 200px;
   background: #c8c8c8;
 `;
 

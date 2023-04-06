@@ -59,7 +59,10 @@ function Signup() {
     };
 
     const userInfoString = JSON.stringify(userInfo);
-    formData.append("userInfo", new Blob([userInfoString], { type: "application/json" }));
+    formData.append(
+      "userInfo",
+      new Blob([userInfoString], { type: "application/json" })
+    );
 
     const message = await signup(formData);
     console.log(formData);
@@ -163,8 +166,14 @@ function Signup() {
             <SignupInnerWrapperInner>
               <SignupInnerBoxDiv>
                 <SignupEmailDiv>
-                  <SignupEmailInput type="email" placeholder="이메일" onBlur={onEmailHandler} />
-                  <SignupSendNumberDiv onClick={onSendHandler}>인증번호전송</SignupSendNumberDiv>
+                  <SignupEmailInput
+                    type="email"
+                    placeholder="이메일"
+                    onBlur={onEmailHandler}
+                  />
+                  <SignupSendNumberDiv onClick={onSendHandler}>
+                    인증번호전송
+                  </SignupSendNumberDiv>
                 </SignupEmailDiv>
 
                 <SignupEmailErrorSpan>
@@ -238,7 +247,10 @@ function Signup() {
               <SignupProfileInputBox>
                 <SignupProfileInputLeft>
                   <SignupProfileTitle>프로필 사진</SignupProfileTitle>
-                  <SignupProfileInput type={"file"} onChange={onProfileImgHandler} />
+                  <SignupProfileInput
+                    type={"file"}
+                    onChange={onProfileImgHandler}
+                  />
                 </SignupProfileInputLeft>
                 <SignupProfileImg src={profileImageUrl} alt="profileImg" />
               </SignupProfileInputBox>

@@ -66,11 +66,11 @@ function AnnualKeywordCloud() {
   };
 
   return (
-    <div style={{ width: "420px", height: "520px", userSelect: "none" }}>
+    <div style={{ width: "420px", height: "536px", userSelect: "none" }}>
       <ReactWordcloud
         words={keywords}
-        minSize={[420, 570]}
-        size={[420, 570]}
+        minSize={[420, 536]}
+        size={[420, 536]}
         callbacks={{ onWordClick: onCloudHandler }}
         options={{
           rotations: 2,

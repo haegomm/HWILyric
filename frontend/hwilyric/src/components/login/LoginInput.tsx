@@ -69,10 +69,10 @@ function LoginInput() {
 
     const data = await login(body);
     if (data !== null) {
-      saveUserInfo(data)
-      setIsLogin(true)
-      setNickname(data.nickname)
-      setProfileImg(data.profileImg)
+      saveUserInfo(data);
+      setIsLogin(true);
+      setNickname(data.nickname);
+      setProfileImg(data.profileImg);
       navigate("/");
     } else {
       alert("로그인 실패ㅜ;");
