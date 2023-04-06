@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import ReactWordcloud from "react-wordcloud";
-import { IAnnaulKeywordOptions } from "../../../types/visualizingType";
 import { annualNowAtom } from "../../../atoms/visualizingAtoms";
 import { useRecoilValue, useSetRecoilState, useResetRecoilState } from "recoil";
 import { annualData } from "../../../api/visualizingApi";
-import axios from "axios";
 import { isModifyingAtom } from "../../../atoms/mypageAtom";
 import {
   blockListState,
@@ -15,13 +13,6 @@ import {
 } from "../../../atoms/noteAtoms";
 import { memoState } from "../../../atoms/sidebarAtoms";
 import { useNavigate } from "react-router-dom";
-
-const annualData2 = async (annualnow: any) => {
-  const res = await axios.get(
-    "https://j8b107.p.ssafy.io/api/trend/annual/" + annualnow
-  );
-  return res.data;
-};
 
 function AnnualKeywordCloud() {
   const navigate = useNavigate();
@@ -36,7 +27,7 @@ function AnnualKeywordCloud() {
   const annualnow = useRecoilValue(annualNowAtom);
   const [keywords, setKeywords] = useState([{ text: "", value: 0 }]);
   const getData = async () => {
-    const data = await annualData2(annualnow);
+    const data = await annualData(annualnow);
     const keywordsData = data.keywords;
     const resultData = [];
     for (let i = 0; i < 50; i++) {
