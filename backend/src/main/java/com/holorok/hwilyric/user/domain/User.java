@@ -17,7 +17,7 @@ public class User extends TimeEntity {
 
     // pk
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto-increment 지원
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     // 이메일
@@ -68,7 +68,7 @@ public class User extends TimeEntity {
     public User(String email, String nickname) {
         this.email = email;
         this.nickname = nickname;
-        this.profileImg = "https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/profile/hwilyric_logo.png";
+        this.profileImg = "https://holorok-hwilyric-bucket.s3.ap-northeast-2.amazonaws.com/profile/%EC%A0%9C%EB%A6%AC%EC%9D%B8%EC%82%AC-%EC%A1%B4%EC%A4%91.gif";
         this.userType = "KAKAO";
         this.role = "ROLE_USER";
         this.isActive = true;

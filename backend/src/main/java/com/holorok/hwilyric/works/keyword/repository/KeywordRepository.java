@@ -12,5 +12,5 @@ import java.util.List;
 public interface KeywordRepository extends JpaRepository<Keyword, Long> {
 
     @Query(value = "select k.word from keyword k where k.category = :category and k.is_hangul = :isHangul order by rand() limit :num", nativeQuery = true)
-    List<String> findRandomWord(@Param("category") String category, @Param("isHangul") boolean isHangul,@Param("num") int num);
+    List<String> findRandomWord(@Param("category") String category, @Param("isHangul") boolean isHangul, @Param("num") int num);
 }
