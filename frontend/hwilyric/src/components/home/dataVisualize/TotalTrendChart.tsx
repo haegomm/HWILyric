@@ -64,7 +64,7 @@ const CustomXAxisTick = (props: any) => {
 
 const e = ["#88C4E9", "#D1C4F1"];
 let strokeNum = -1;
-function getRandomColor(): string {
+function getColor(): string {
   const colorData = [
     "#f757f7",
     "#3c86f0",
@@ -185,9 +185,9 @@ function TotalTrendChart(props: any) {
                 <p>{label}년 인기 장르</p>
                 <ul>
                   {sortedPayload.map((entry: any, index) => (
-                    <li key={`item-${index}`}>{`${entry.name}: ${Math.round(
-                      entry.value * 100
-                    )}%`}</li>
+                    <li key={`totalTrendItems-${index}`}>{`${
+                      entry.name
+                    }: ${Math.round(entry.value * 100)}%`}</li>
                   ))}
                 </ul>
               </div>
@@ -199,10 +199,11 @@ function TotalTrendChart(props: any) {
       {selectedGenres2.map((genre) => {
         return (
           <Area
-            key={`Area-${genre}`}
+            key={`totalTrendArea-${genre}`}
             type="monotone"
             dataKey={genre}
-            stroke={getRandomColor()}
+            stroke={getColor()}
+            strokeWidth={4}
             fillOpacity={0.1}
             fill={
               theme === lightTheme ? `url(#${genre})` : `url(#dark${genre})`
