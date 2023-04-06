@@ -29,7 +29,7 @@ function WeeklyReportGenre(props: any) {
         width={304}
         height={264}
         data={data.length !== 0 ? data : []}
-        margin={{ top: 10, bottom: 30, left: 20, right: 20 }}
+        margin={{ top: 10, bottom: 40, left: 20, right: 20 }}
         barCategoryGap={20}
       >
         <defs>

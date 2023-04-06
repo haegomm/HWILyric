@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-
-interface divWidth{
+interface divWidth {
   width: string;
 }
 
@@ -9,6 +8,11 @@ export const HomeContainer = styled.div`
   overflow: auto;
   height: 100%;
   width: 500vw;
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 `;
 
 export const HomeTrapezoid = styled.img`
@@ -18,6 +22,7 @@ export const HomeTrapezoid = styled.img`
   width: 56vw;
   height: 100%;
   z-index: -1;
+  userselect: none;
 `;
 
 export const HomeContent = styled.div`
@@ -144,8 +149,8 @@ export const HomeCenterWord = styled.div`
 `;
 
 export const HomeWordItem = styled.div`
-  &:hover{
-    background-color: ${props => props.theme.accentColor['1']};
+  &:hover {
+    background-color: ${(props) => props.theme.accentColor["1"]};
     color: rgb(255, 255, 255, 100);
   }
   margin: 4px 12px;
@@ -153,7 +158,7 @@ export const HomeWordItem = styled.div`
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.5);
   cursor: pointer;
-`
+`;
 
 export const QuickviewHeader = styled.div`
   height: 10vh;
@@ -173,7 +178,7 @@ export const HeaderP = styled.p`
   font-size: 24px;
   margin-right: 16px;
   font-weight: bold;
-`
+`;
 
 export const TopicHeader = styled.div`
   height: 15vh;
@@ -181,4 +186,18 @@ export const TopicHeader = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 1vh;
+`;
+
+export const ArrowContainerDiv = styled.a`
+  animation-name: blink;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  @keyframes blink {
+    50% {
+      opacity: 0.5;
+    }
+  }
+  cursor: pointer;
 `;

@@ -203,7 +203,7 @@ function TotalTrendChart(props: any) {
             type="monotone"
             dataKey={genre}
             stroke={getColor()}
-            strokeWidth={4}
+            strokeWidth={3}
             fillOpacity={0.1}
             fill={
               theme === lightTheme ? `url(#${genre})` : `url(#dark${genre})`

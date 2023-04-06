@@ -75,9 +75,7 @@ function WeeklyReport(props: any) {
   return (
     <WeeklyReportDiv>
       <WeeklyReportMoveBox>
-        <WeeklyReportMoveArrow>{"<"}</WeeklyReportMoveArrow>
         <WeeklyReportTitle>주간 리포트</WeeklyReportTitle>
-        <WeeklyReportMoveArrow>{">"}</WeeklyReportMoveArrow>
       </WeeklyReportMoveBox>
       <WeeklyReportSubtitle>최근 인기 키워드</WeeklyReportSubtitle>
       <WeeklyReportKeyword data={data.keywords} />
