@@ -1,38 +1,17 @@
 import { ResponsivePie } from "@nivo/pie";
-import { useSetRecoilState, useRecoilValue } from "recoil";
-import {
-  annualNowAtom,
-  annualNowSongAtom,
-} from "../../../atoms/visualizingAtoms";
-import { AnnualReportTitle } from "../../../styles/DataVisaulizeStyle";
-import { useTheme } from "styled-components";
-import { lightTheme } from "../../../theme/theme";
-
-const colorArr = [
-  ["#81E47F", "#96BCF2"],
-  ["#88C4E9", "#D1C4F1"],
-  ["#CD2D87", "#71C6C9"],
-  ["#841B95", "#E399E4"],
-  ["#E4B2FA", "#FDC3B7"],
-  ["#FACFD6", "#B1ADF6"],
-  ["#ACE5F8", "#E6B2FD"],
-  ["#FDBFB4", "#FBD1DD"],
-  ["#FDC3B7", "#FACFD6"],
-  ["#E6B2FD", "#FDBFB4"],
-];
+import { useSetRecoilState } from "recoil";
+import { annualNowSongAtom } from "../../../atoms/visualizingAtoms";
 
 function AnnualGenreChart(props: any) {
   const handleDragStart = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
   };
-  const annualnow = useRecoilValue(annualNowAtom);
   const setAnnualnowSong = useSetRecoilState(annualNowSongAtom);
   function myFunc(node: any, event: Object) {
     if (node && node.id !== "기타") {
       setAnnualnowSong(node.id);
     }
   }
-  const theme = useTheme();
 
   return (
     <div

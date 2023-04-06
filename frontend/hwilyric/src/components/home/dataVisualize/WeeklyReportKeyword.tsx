@@ -14,7 +14,7 @@ import {
   titleState,
 } from "../../../atoms/noteAtoms";
 import { memoState } from "../../../atoms/sidebarAtoms";
-import { useRecoilValue, useSetRecoilState, useResetRecoilState } from "recoil";
+import { useSetRecoilState, useResetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 
 function WeeklyReportKeyword(props: any) {

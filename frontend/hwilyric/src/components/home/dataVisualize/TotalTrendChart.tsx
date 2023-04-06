@@ -3,33 +3,7 @@ import { useSetRecoilState, useRecoilValue } from "recoil";
 import { annualNowAtom, totalTrendAtom } from "../../../atoms/visualizingAtoms";
 import { lightTheme } from "../../../theme/theme";
 import { useTheme } from "styled-components";
-import AnnualGenreChart from "./AnnualGenreChart";
-import styled from "styled-components";
 import { TotalTrendGenreTitle } from "../../../styles/DataVisaulizeStyle";
-
-const genres = [
-  "일렉트로니카",
-  "키즈",
-  "국악가요",
-  "장르정보없음",
-  "POP",
-  "포크/블루스",
-  "국내영화",
-  "록/메탈",
-  "성인가요/트로트",
-  "애시드/퓨전/팝",
-  "창작동요",
-  "랩/힙합",
-  "인디음악",
-  "R&B/Soul",
-  "댄스",
-  "보컬재즈",
-  "발라드",
-  "뉴에이지",
-  "국악",
-  "국내드라마",
-  "재즈",
-];
 
 const colorArr = [
   ["#81E47F", "#96BCF2"],
@@ -79,10 +53,6 @@ function getColor(): string {
 
   return colorData[strokeNum % 6];
 }
-
-const sortTooltip = (a: any, b: any) => {
-  return b.value - a.value; // value 기준으로 내림차순 정렬
-};
 
 const selectedGenres = [
   "발라드",
