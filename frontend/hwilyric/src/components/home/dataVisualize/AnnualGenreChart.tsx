@@ -1,34 +1,44 @@
-import React, { useState } from "react";
-import { Pie } from "react-chartjs-2";
-import { useSpring, animated } from "react-spring";
 import { ResponsivePie } from "@nivo/pie";
-import { getAllJSDocTagsOfKind } from "typescript";
-import { useSetRecoilState, useRecoilValue } from "recoil";
-import {
-  annualNowAtom,
-  annualNowSongAtom,
-} from "../../../atoms/visualizingAtoms";
-import { annualGenreRatioSongAtom } from "../../../atoms/visualizingGenreAtom";
-import { AnnualReportTitle } from "../../../styles/DataVisaulizeStyle";
+import { useSetRecoilState } from "recoil";
+import { annualNowSongAtom } from "../../../atoms/visualizingAtoms";
 
 function AnnualGenreChart(props: any) {
-  const annualnow = useRecoilValue(annualNowAtom);
+  const handleDragStart = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+  };
   const setAnnualnowSong = useSetRecoilState(annualNowSongAtom);
   function myFunc(node: any, event: Object) {
-    if (node) {
+    if (node && node.id !== "기타") {
       setAnnualnowSong(node.id);
     }
   }
+
   return (
-    <div style={{ width: "232px", height: "240px" }}>
-      <AnnualReportTitle>{annualnow}년대 인기 장르</AnnualReportTitle>
+    <div
+      style={{
+        width: "400px",
+        height: "400px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-around",
+      }}
+      onDragStart={handleDragStart}
+    >
       <ResponsivePie
         data={props.data}
         margin={{ top: 10 }}
         padAngle={0.7}
         cornerRadius={3}
         activeOuterRadiusOffset={0}
-        colors={{ scheme: "blue_purple" }}
+        colors={[
+          "#deb3fb",
+          "#Fbd5e0",
+          "#c9387d",
+          "#9e9ade",
+          "#afd7d8",
+          "#96aee8",
+          "#fec3b5",
+        ]}
         borderWidth={1}
         sortByValue={true}
         borderColor={{
@@ -47,58 +57,41 @@ function AnnualGenreChart(props: any) {
           from: "color",
           modifiers: [["darker", 2]],
         }}
-        fill={[
-          {
-            match: {
-              id: "ruby",
-            },
-            id: "dots",
-          },
-          {
-            match: {
-              id: "c",
-            },
-            id: "dots",
-          },
-          {
-            match: {
-              id: "go",
-            },
-            id: "dots",
-          },
-          {
-            match: {
-              id: "python",
-            },
-            id: "dots",
-          },
-          {
-            match: {
-              id: "scala",
-            },
-            id: "lines",
-          },
-          {
-            match: {
-              id: "lisp",
-            },
-            id: "lines",
-          },
-          {
-            match: {
-              id: "elixir",
-            },
-            id: "lines",
-          },
-          {
-            match: {
-              id: "javascript",
-            },
-            id: "lines",
-          },
-        ]}
         legends={[]}
         onClick={myFunc}
+        tooltip={({ datum }) => (
+          <div
+            style={{
+              background: "white",
+              color: "black",
+              fontSize: "inherit",
+              borderRadius: "2px",
+              boxShadow: "rgba(0, 0, 0, 0.25) 0px 1px 2px; padding: 5px 9px",
+            }}
+          >
+            <div
+              style={{
+                whiteSpace: "pre",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <span
+                style={{
+                  display: "block",
+                  width: "12px",
+                  height: "12px",
+                  background: `${datum.color}`,
+                  marginRight: "7px",
+                }}
+              ></span>
+              <span>
+                {datum.label} :{" "}
+                <strong>{Math.round(datum.value * 100)}%</strong>
+              </span>
+            </div>
+          </div>
+        )}
       />
     </div>
   );

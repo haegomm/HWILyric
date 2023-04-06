@@ -1,45 +1,5 @@
-import React from "react";
 import { WeeklyReportGenreDiv } from "../../../styles/DataVisaulizeStyle";
-import {
-  BarChart,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  Bar,
-} from "recharts";
-
-const data = [
-  {
-    name: "Page A",
-    count: 4000,
-  },
-  {
-    name: "Page B",
-    count: 3000,
-  },
-  {
-    name: "Page C",
-    count: 2000,
-  },
-  {
-    name: "Page D",
-    count: 2780,
-  },
-  {
-    name: "Page E",
-    count: 1890,
-  },
-  {
-    name: "Page F",
-    count: 2390,
-  },
-  {
-    name: "Page G",
-    count: 3490,
-  },
-];
+import { BarChart, XAxis, YAxis, Tooltip, Bar } from "recharts";
 
 const CustomXAxisTick = (props: any) => {
   const { x, y, payload } = props;
@@ -50,8 +10,8 @@ const CustomXAxisTick = (props: any) => {
         y={0}
         dy={16}
         textAnchor="end"
-        fontSize={10} // 글자 크기 조절
-        fill="#666" // 글자 색상
+        fontSize={10}
+        fill="#666"
         transform="rotate(-35)"
       >
         {payload.value}
@@ -61,13 +21,15 @@ const CustomXAxisTick = (props: any) => {
 };
 
 function WeeklyReportGenre(props: any) {
+  const data = props.data;
+  data.sort((a: any, b: any) => b.count - a.count);
   return (
     <WeeklyReportGenreDiv>
       <BarChart
         width={304}
-        height={240}
-        data={props.data.length !== 0 ? props.data : data}
-        margin={{ top: 10, bottom: 10, left: 20, right: 20 }}
+        height={264}
+        data={data.length !== 0 ? data : []}
+        margin={{ top: 10, bottom: 40, left: 20, right: 20 }}
         barCategoryGap={20}
       >
         <defs>
@@ -76,7 +38,6 @@ function WeeklyReportGenre(props: any) {
             <stop offset="80%" stopColor="#D1C4F1" stopOpacity={0.7} />
           </linearGradient>
         </defs>
-        <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" tick={<CustomXAxisTick />} interval={0} />
         <YAxis hide={true} />
         <Tooltip />

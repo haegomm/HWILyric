@@ -2,6 +2,7 @@ package com.holorok.hwilyric.works.rhyme.controller;
 
 import com.holorok.hwilyric.exception.NotFoundException;
 import com.holorok.hwilyric.works.rhyme.service.RhymeService;
+import com.jcraft.jsch.JSchException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -13,9 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 
-@Slf4j
 @RestController
 @RequestMapping("/api/keywords")
 @RequiredArgsConstructor
@@ -24,7 +25,7 @@ public class RhymeController {
     private final RhymeService rhymeService;
     @ApiOperation(value = "라임 키워드 조회")
     @GetMapping(value = "/rhyme/{word}", produces = "application/json;charset=utf-8")
-    public ResponseEntity<List<String>> getRhymeKeyword(@PathVariable("word") String word) throws NotFoundException {
+    public ResponseEntity<List<String>> getRhymeKeyword(@PathVariable("word") String word) throws NotFoundException, JSchException, IOException {
 
         List<String> rhymeList = rhymeService.getRhymeKeyword(word);
 

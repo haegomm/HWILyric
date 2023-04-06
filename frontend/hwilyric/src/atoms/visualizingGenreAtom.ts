@@ -1,9 +1,6 @@
 import { atom } from "recoil";
 import {
-  IAnnualGenreChart,
   IAnnualGenreRatio,
-  IGenreRatio,
-  IAnnualGenresChart,
 } from "../types/visualizingType";
 
 export const annualGenreRatioSongAtom = atom<IAnnualGenreRatio>({

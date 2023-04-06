@@ -7,12 +7,14 @@ pipeline {
 
     stages {
         stage('BUILD') {
+            when { changeset "**/backend/**" }
             steps {
-		sh "chmod +x -R ${env.WORKSPACE}"
+		        sh "chmod +x -R ${env.WORKSPACE}"
                 sh './pipeline/jenkins/backend/build/build.sh'
             }
         }
-	stage('DEPLOY') {
+	    stage('DEPLOY') {
+            when { changeset "**/backend/**" }
             steps {
                 sh "chmod +x -R ${env.WORKSPACE}"
                 sh './pipeline/jenkins/backend/deploy/deploy.sh'

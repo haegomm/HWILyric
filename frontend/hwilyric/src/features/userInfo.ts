@@ -1,4 +1,3 @@
-import React from 'react'
 import { IUserInfoTypes } from '../types/userType';
 
 export const saveUserInfo = (user: IUserInfoTypes) => {

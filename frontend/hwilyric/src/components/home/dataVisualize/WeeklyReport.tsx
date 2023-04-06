@@ -1,15 +1,19 @@
-import React from "react";
 import WeeklyReportKeyword from "./WeeklyReportKeyword";
 import WeeklyReportGenre from "./WeeklyReportGenre";
 import {
   WeeklyReportDiv,
   WeeklyReportTitle,
   WeeklyReportSubtitle,
+  WeeklyReportGenreInterval,
+  WeeklyGenreIntervalText,
+  WeeklyReportMoveBox,
 } from "../../../styles/DataVisaulizeStyle";
 import { weeklyNewSong } from "../../../api/visualizingApi";
-import axios from "axios";
+import { useState, useEffect } from "react";
+
 const today = new Date();
-const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+let weekEnd = new Date(today.getTime() - today.getDay() * 24 * 60 * 60 * 1000);
+let weekStart = new Date(weekEnd.getTime() - 7 * 24 * 60 * 60 * 1000);
 
 const yyyyMMdd = (date: Date) => {
   const year = date.getFullYear().toString();
@@ -18,34 +22,49 @@ const yyyyMMdd = (date: Date) => {
   return `${year}${month}${day}`;
 };
 
-const todayString = yyyyMMdd(today); // 오늘 날짜의 문자열 표현
-const weekAgoString = yyyyMMdd(weekAgo); // 일주일 전 날짜의 문자열 표현
+const yyyyMMdd2 = (date: Date) => {
+  const year = date.getFullYear().toString();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  return `${year}년${month}월${day}일`;
+};
 
-function WeeklyReport() {
-  const keywordData: any[] = [];
-  const genresData: any[] = [];
+let weekEndString = yyyyMMdd(weekEnd);
+let weekStartString = yyyyMMdd(weekStart);
+
+function WeeklyReport(props: any) {
+  const [data, setData] = useState({ genres: null, keywords: null });
   const getData = async () => {
     const data = await weeklyNewSong({
-      startDate: todayString,
-      endDate: weekAgoString,
+      startDate: weekStartString,
+      endDate: weekEndString,
     });
-    if (data.genres) {
-      for (const i of data.genres) {
-        genresData.push(i);
-      }
-      for (const i of data.keywords) {
-        keywordData.push(i);
-      }
-    }
+    setData(data);
   };
-  getData();
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  if (!data.genres) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <WeeklyReportDiv>
-      <WeeklyReportTitle>주간 리포트</WeeklyReportTitle>
+      <WeeklyReportMoveBox>
+        <WeeklyReportTitle>주간 리포트</WeeklyReportTitle>
+      </WeeklyReportMoveBox>
       <WeeklyReportSubtitle>최근 인기 키워드</WeeklyReportSubtitle>
-      <WeeklyReportKeyword data={keywordData} />
+      <WeeklyReportKeyword data={data.keywords} />
       <WeeklyReportSubtitle>주간 신곡 인기 장르</WeeklyReportSubtitle>
-      <WeeklyReportGenre data={genresData} />
+      <WeeklyReportGenreInterval>
+        {yyyyMMdd2(weekStart)} - {yyyyMMdd2(weekEnd)}
+        <WeeklyGenreIntervalText>
+          * 주간 신곡은 매주 일요일에 반영됩니다. *
+        </WeeklyGenreIntervalText>
+      </WeeklyReportGenreInterval>
+      <WeeklyReportGenre data={data.genres} />
     </WeeklyReportDiv>
   );
 }

@@ -1,10 +1,11 @@
-import { useCallback, useRef } from "react"
+import { useCallback, useRef, useState } from "react"
 import { Draggable } from "react-beautiful-dnd"
 import { useRecoilState } from "recoil"
 import { blockListState } from "../../../atoms/noteAtoms"
-import { BlockItemStyle } from "../../../styles/writeNoteStyle"
+import { BlockItemStyle, DeleteButtonBox } from "../../../styles/writeNoteStyle"
 import { ILyricBlockTypes } from "../../../types/writingType"
-import styled from "styled-components"
+import { HamburgerButton } from "../../../assets/writeSideBar/writeImg"
+import styled, { css } from "styled-components"
 
 interface BlockItemProps {
     block: ILyricBlockTypes
@@ -15,10 +16,14 @@ interface IContainer {
     isDragging: boolean;
 }
 
+const DraggingCss = css`
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+`
+
 const Container = styled.div<IContainer>`
-    padding: 8px;
-    margin-bottom: 8px;
-    background-color: ${(props) => (props.isDragging ? "lightgreen" : "white")};
+    display: flex;
+    justify-content: space-evenly;
+    ${(props) => (props.isDragging ? DraggingCss : "")};
 `;
 
 
@@ -27,6 +32,7 @@ function BlockItem({ block, index}: BlockItemProps) {
     const [blockList, setBlockList] = useRecoilState(blockListState)
 
     const ref = useRef<HTMLTextAreaElement>(null)
+    const [height, setHeight] = useState(30)
 
     const onEditBlockType = (event: React.ChangeEvent<HTMLSelectElement>) => {
         let newType: string = event.target.value
@@ -62,6 +68,7 @@ function BlockItem({ block, index}: BlockItemProps) {
         }
         ref.current.style.height = '30px'
         ref.current.style.height = ref.current.scrollHeight + 'px'
+        setHeight(ref.current.scrollHeight)
     }, [])
 
     return (
@@ -72,13 +79,19 @@ function BlockItem({ block, index}: BlockItemProps) {
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
                     isDragging={snapshot.isDragging}>
-                    <BlockItemStyle>
+                    <BlockItemStyle height={height}>
+                        <DeleteButtonBox>
+                            <button onClick={onDeleteBlock} style={{
+                                width: '100%', height: '100%'}}>-</button>
+                        </DeleteButtonBox>
                         <select
                             defaultValue={block.type}
                             onChange={onEditBlockType}>
                             <option value={"verse"}>verse</option>
                             <option value={"bridge"}>bridge</option>
                             <option value={"hook"}>hook</option>
+                            <option value={"chrous"}>chrous</option>
+                            <option value={"pre-chorus"}>pre-chorus</option>
                             <option value={"etc"}>etc</option>
                         </select>
                         <textarea
@@ -86,9 +99,10 @@ function BlockItem({ block, index}: BlockItemProps) {
                             value={block.lyrics}
                             ref={ref}
                             onChange={onEditLyrics}
+                            placeholder="여기에 가사를 작성해보세요"
                             onInput={handleResizeHeight}
                         />
-                        <button onClick={onDeleteBlock}>-</button>
+                        <img src={HamburgerButton} style={{width: '1vw'}} alt="hamburgerButton" />
                     </BlockItemStyle>
                 </Container>
             )}

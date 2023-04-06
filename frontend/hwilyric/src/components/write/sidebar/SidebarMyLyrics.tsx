@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { IGetILyricInfoTypes } from '../../../types/mypageType'
 import { ILyricBlockTypes } from '../../../types/writingType'
 import { LyricListBodyItem, LyricListBodyItemDiv, LyricText } from '../../../styles/mypageStyle'
 import { useRecoilValue } from 'recoil'
 import { getLyricList } from '../../../api/writingApi'
-import MyPageDropbox from '../../mypage/MyPageDropbox'
 import { IsLoginAtom } from '../../../atoms/userAtom'
-import { MyLyricBody, MyLyricListBodyItemContent, MyLyricThumbnail } from '../../../styles/MyLyricStyle'
+import { MyLyricBody, MyLyricListBodyItemContent, MyLyricThumbnail, MyLyricListBodyDiv, MyLyricSubBody } from '../../../styles/MyLyricStyle'
 import { sidebarCategoryAtom } from '../../../atoms/sidebarAtoms'
 import SidebarMyLyricsSelect from './SidebarMyLyricsSelect'
+import { LoginRecButton, NotLoggedInDiv } from '../../../styles/recommendStyle'
 
 function SidebarMyLyrics() {
   const [myLyrics, setMyLyrics] = useState([])
@@ -24,7 +25,6 @@ function SidebarMyLyrics() {
         return new Date(b.updatedDate).valueOf() - new Date(a.updatedDate).valueOf();})
         setMyLyrics(sortedLyrics)
     } else {
-      console.log('')
       setNullLyrics('해당 카테고리의 가사가 없습니다')
     }
   }
@@ -38,9 +38,9 @@ function SidebarMyLyrics() {
   return (
     <MyLyricBody>
       {isLogin ? (
-      <div>
+      <MyLyricSubBody>
       <SidebarMyLyricsSelect />
-      <div>
+      <MyLyricListBodyDiv>
         {nullLyrics === '' ?
           <div>
             {myLyrics.map((myLyric:IGetILyricInfoTypes) => (
@@ -48,7 +48,7 @@ function SidebarMyLyrics() {
                 if (lyricCtgr.type === currentCategory) {
                   return (
                     <LyricListBodyItem key={myLyric.id}>
-                      <LyricListBodyItemDiv width='35%'>
+                      <LyricListBodyItemDiv width='80px' style={{height: "80px"}}>
                         <MyLyricThumbnail src={myLyric.thumbnail} />
                       </LyricListBodyItemDiv>
                       <MyLyricListBodyItemContent>                                 
@@ -69,12 +69,16 @@ function SidebarMyLyrics() {
             {nullLyrics}
           </LyricListBodyItem>
         }
-      </div>
-    </div> ) : (
-      <div>
-        <p>로그인하지 않으셨어요!</p>
-        <p>로그인하고 더 많은 기능을 이용해보세요</p>
-      </div>)
+      </MyLyricListBodyDiv>
+    </MyLyricSubBody> ) : (
+      <NotLoggedInDiv>
+        <p>로그인 하지 않으면 가사를 저장할 수 없어요</p>
+        <br/>
+        <p>로그인 후 더 많은 기능을 이용해보세요!</p>
+        <Link to="/login">
+          <LoginRecButton>지금 쓴 가사 저장하러 가기</LoginRecButton>
+        </Link>
+      </NotLoggedInDiv>)
     }
     </MyLyricBody>
   )

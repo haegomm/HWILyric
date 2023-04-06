@@ -1,18 +1,12 @@
-import { useEffect } from "react";
 import { TotalTrendDiv } from "../../../styles/DataVisaulizeStyle";
 import TotalTrendChart from "./TotalTrendChart";
-import TotalTrendChart2 from "./TotalTrendChart2";
-import { annualGenre } from "../../../api/visualizingApi";
-import { useRecoilState } from "recoil";
-import { totalTrendAtom } from "../../../atoms/visualizingAtoms";
-import { IAnnualGenreChart } from "../../../types/visualizingType";
+import { useTheme } from "styled-components";
 
-function TotalTrend() {
-  const [totalTrendData, setTotalTrendData] = useRecoilState(totalTrendAtom);
-
+function TotalTrend(props: any) {
+  const theme = useTheme();
   return (
-    <TotalTrendDiv>
-      <TotalTrendChart2></TotalTrendChart2>
+    <TotalTrendDiv theme={theme}>
+      <TotalTrendChart />
     </TotalTrendDiv>
   );
 }

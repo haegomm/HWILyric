@@ -1,175 +1,192 @@
-import React from "react";
-import { ResponsiveStream } from "@nivo/stream";
+import { AreaChart, XAxis, YAxis, Area, Tooltip, Legend } from "recharts";
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import { annualNowAtom, totalTrendAtom } from "../../../atoms/visualizingAtoms";
+import { lightTheme } from "../../../theme/theme";
+import { useTheme } from "styled-components";
+import { TotalTrendGenreTitle } from "../../../styles/DataVisaulizeStyle";
 
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
-// website examples showcase many properties,
-// you'll often use just a few of them.
-
-const data = [
-  {
-    Raoul: 88,
-    Josiane: 161,
-    Marcel: 191,
-    René: 77,
-    Paul: 78,
-    Jacques: 55,
-  },
-  {
-    Raoul: 44,
-    Josiane: 91,
-    Marcel: 148,
-    René: 50,
-    Paul: 23,
-    Jacques: 66,
-  },
-  {
-    Raoul: 171,
-    Josiane: 10,
-    Marcel: 177,
-    René: 27,
-    Paul: 192,
-    Jacques: 11,
-  },
-  {
-    Raoul: 60,
-    Josiane: 30,
-    Marcel: 135,
-    René: 93,
-    Paul: 89,
-    Jacques: 37,
-  },
-  {
-    Raoul: 186,
-    Josiane: 161,
-    Marcel: 200,
-    René: 151,
-    Paul: 121,
-    Jacques: 101,
-  },
-  {
-    Raoul: 50,
-    Josiane: 149,
-    Marcel: 172,
-    René: 59,
-    Paul: 143,
-    Jacques: 100,
-  },
-  {
-    Raoul: 132,
-    Josiane: 139,
-    Marcel: 147,
-    René: 146,
-    Paul: 161,
-    Jacques: 59,
-  },
-  {
-    Raoul: 71,
-    Josiane: 118,
-    Marcel: 179,
-    René: 193,
-    Paul: 11,
-    Jacques: 95,
-  },
-  {
-    Raoul: 69,
-    Josiane: 37,
-    Marcel: 127,
-    René: 60,
-    Paul: 22,
-    Jacques: 171,
-  },
+const colorArr = [
+  ["#81E47F", "#96BCF2"],
+  ["#88C4E9", "#D1C4F1"],
+  ["#CD2D87", "#71C6C9"],
+  ["#841B95", "#E399E4"],
+  ["#E4B2FA", "#FDC3B7"],
+  ["#FACFD6", "#B1ADF6"],
+  ["#ACE5F8", "#E6B2FD"],
+  ["#FDBFB4", "#FBD1DD"],
+  ["#FDC3B7", "#FACFD6"],
+  ["#E6B2FD", "#FDBFB4"],
 ];
 
-function TotalTrendChart() {
+const CustomXAxisTick = (props: any) => {
+  const { x, y, payload } = props;
   return (
-    <div style={{ width: "1344px", height: "800px" }}>
-      <ResponsiveStream
-        data={data}
-        keys={["Raoul", "Josiane", "Marcel", "René", "Paul", "Jacques"]}
-        margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-        axisTop={null}
-        axisRight={null}
-        axisBottom={{
-          // orient: 'bottom',
-          tickSize: 5,
-          tickPadding: 5,
-          tickRotation: 0,
-          legend: "",
-          legendOffset: 36,
+    <g transform={`translate(${x},${y})`}>
+      <text
+        x={0}
+        y={0}
+        dy={16}
+        textAnchor="end"
+        fontSize={10}
+        fill="#666"
+        transform="rotate(-35)"
+      >
+        {payload.value}
+      </text>
+    </g>
+  );
+};
+
+const e = ["#88C4E9", "#D1C4F1"];
+let strokeNum = -1;
+function getColor(): string {
+  const colorData = [
+    "#deb3fb",
+    "#Fbd5e0",
+    "#c9387d",
+    "#9e9ade",
+    "#afd7d8",
+    "#96aee8",
+    "#fec3b5",
+  ];
+  strokeNum++;
+
+  return colorData[strokeNum % 6];
+}
+
+const selectedGenres = [
+  "발라드",
+  "댄스",
+  "성인가요/트로트",
+  "포크/블루스",
+  "록/메탈",
+  "랩/힙합",
+  "annual",
+];
+
+const selectedGenres2 = [
+  "발라드",
+  "댄스",
+  "성인가요/트로트",
+  "포크/블루스",
+  "록/메탈",
+  "랩/힙합",
+];
+
+function TotalTrendChart(props: any) {
+  const totalTrendData = useRecoilValue(totalTrendAtom);
+  const setAnnualnow = useSetRecoilState(annualNowAtom);
+  const theme = useTheme();
+  let colorNum = 0;
+  let chartData = [];
+  for (const i of totalTrendData.genres) {
+    const annualObj = Object.fromEntries(
+      Object.entries(i).filter(([key, value]) => selectedGenres.includes(key))
+    );
+    chartData.push(annualObj);
+  }
+
+  return (
+    <>
+      <TotalTrendGenreTitle>연간 주요 장르 비율</TotalTrendGenreTitle>
+      <AreaChart
+        width={1200}
+        height={600}
+        data={chartData}
+        margin={{ top: 5, right: 10, left: 20, bottom: 60 }}
+        onClick={(event) => {
+          if (event) {
+            const annual: any = event.activeLabel;
+            if (!isNaN(parseInt(annual))) {
+              setAnnualnow(annual);
+            }
+          }
         }}
-        axisLeft={null}
-        enableGridX={true}
-        enableGridY={false}
-        curve="basis"
-        offsetType="none"
-        colors={{ scheme: "blues" }}
-        fillOpacity={0.75}
-        borderColor={{ theme: "background" }}
-        defs={[
-          {
-            id: "dots",
-            type: "patternDots",
-            background: "inherit",
-            color: "#2c998f",
-            size: 4,
-            padding: 2,
-            stagger: true,
-          },
-          {
-            id: "squares",
-            type: "patternSquares",
-            background: "inherit",
-            color: "#e4c912",
-            size: 6,
-            padding: 2,
-            stagger: true,
-          },
-        ]}
-        fill={[
-          {
-            match: {
-              id: "Paul",
-            },
-            id: "dots",
-          },
-          {
-            match: {
-              id: "Marcel",
-            },
-            id: "squares",
-          },
-        ]}
-        dotSize={8}
-        dotColor={{ from: "color" }}
-        dotBorderWidth={2}
-        dotBorderColor={{
-          from: "color",
-          modifiers: [["darker", 0.7]],
-        }}
-        legends={[
-          {
-            anchor: "bottom-right",
-            direction: "column",
-            translateX: 100,
-            itemWidth: 80,
-            itemHeight: 20,
-            itemTextColor: "#999999",
-            symbolSize: 12,
-            symbolShape: "circle",
-            effects: [
-              {
-                on: "hover",
-                style: {
-                  itemTextColor: "#000000",
-                },
-              },
-            ],
-          },
-        ]}
-      />
-    </div>
+      >
+        <defs>
+          {selectedGenres2.map((genre) => {
+            const color1 = colorArr[colorNum % 10][0];
+            const color2 = colorArr[colorNum % 10][1];
+            colorNum++;
+            return (
+              <>
+                <linearGradient
+                  key={`Grad1-${genre}`}
+                  id={genre}
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="1"
+                >
+                  <stop offset="5%" stopColor={color1} stopOpacity={0.1} />
+                  <stop offset="95%" stopColor={color2} stopOpacity={0.4} />
+                </linearGradient>
+                <linearGradient
+                  key={`Grad2-${genre}`}
+                  id={"dark" + genre}
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="1"
+                >
+                  <stop offset="5%" stopColor={color1} stopOpacity={0.5} />
+                  <stop offset="95%" stopColor={color2} stopOpacity={0.7} />
+                </linearGradient>
+              </>
+            );
+          })}
+        </defs>
+        <XAxis dataKey="annual" tick={<CustomXAxisTick />} interval={9} />
+        <YAxis type="number" hide={true} domain={[0, "dataMax"]} tick={false} />
+        <Tooltip
+          content={({ active, payload, label }) => {
+            if (active && payload) {
+              const sortedPayload = [...payload].sort(
+                (a: any, b: any) => b.value - a.value
+              );
+
+              return (
+                <div
+                  className="custom-tooltip"
+                  style={{
+                    background: theme === lightTheme ? "white" : "#636161",
+                    color: theme === lightTheme ? "black" : "white",
+                    borderRadius: "5px",
+                    padding: "10px",
+                    opacity: theme === lightTheme ? "1" : "0.7",
+                  }}
+                >
+                  <p>{label}년 인기 장르</p>
+                  <ul>
+                    {sortedPayload.map((entry: any, index) => (
+                      <li key={`totalTrendItems-${index}`}>{`${
+                        entry.name
+                      }: ${Math.round(entry.value * 100)}%`}</li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            }
+          }}
+        />
+        <Legend layout="vertical" align="left" verticalAlign="middle" />
+        {selectedGenres2.map((genre) => {
+          return (
+            <Area
+              key={`totalTrendArea-${genre}`}
+              type="monotone"
+              dataKey={genre}
+              stroke={getColor()}
+              strokeWidth={3}
+              fillOpacity={0.1}
+              fill={
+                theme === lightTheme ? `url(#${genre})` : `url(#dark${genre})`
+              }
+            />
+          );
+        })}
+      </AreaChart>
+    </>
   );
 }
 

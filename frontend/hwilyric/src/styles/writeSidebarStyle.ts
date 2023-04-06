@@ -1,61 +1,52 @@
-import styled from "styled-components"; 
+import styled, { css } from "styled-components"; 
 import { SearchButton } from "../styles/common/ButtonStyle";
 
-const sideWidth = 440;
-const sideMargin = 20;
+const sideWidth = 30;
+const sideMargin = 4;
 const borderWidth = 2;
+const inputPadding = 5;
+const mainGradientColor = css`linear-gradient(to right, ${props => props.theme.accentColor['2']}, 
+${props => props.theme.accentColor['4']})`;
 
+const BorderColor = css`
+    border-image: linear-gradient(to right,
+        ${props => props.theme.accentColor['1']}, 
+        ${props => props.theme.accentColor['2']}, 
+        ${props => props.theme.accentColor['3']},
+        ${props => props.theme.accentColor['4']});
+    border-image-slice: 1;
+`
+
+// 전체 사이드바
 export const SideBarBox = styled.div`
-    width: ${sideWidth}px;
+    margin: 0px;
+    width: ${sideWidth}vw;
 `
-
-export const MemoBox = styled.textarea`
-    width: ${sideWidth-sideMargin}px;
-    height: 28vh;
-    margin: 0 auto;
-    padding: 0;
-    border: ${borderWidth}px solid;
-    resize : none;
-    font-size: 16px;
-    background-color: transparent;
-    :focus {
-        outline: none;
-}
-`
-
+// 탭
 export const TabMenu = styled.ul`
-    // background-color: #dcdcdc;
-    // color: rgb(232, 234, 237);
-    background-color: FFFFFF;
-    color: 636161
-    font-weight: bold;
+    color: ${props => props.theme.textColor};
     display: flex;
-    flex-direction: row;
     align-items: center;
+    justify-content: space-evenly;
     list-style: none;
-    margin-bottom: 7rem;
-    margin-top: 10px;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    cursor: pointer;
 
     .submenu {
         display: flex;
-        /* justify-content: space-between;
-        width: 380px;
-        heigth: 30px; */
-        width: calc(100% /3);
         justify-content: center;
-        padding: 10px;
         font-size: 15px;
-        transition: 0.5s;
-        // border-radius: 10px 10px 0px 0px;
+        transition: 0.1s;
     }
 
     .focused {
-        // background-color: rgb(255,255,255);
-        color: rgb(222,179,251);
+        font-weight: bold;
+        color: ${props => props.theme.accentColor['2']};
+}
     }
 
     & div.desc {
-        text-align: center;
     }
 `;
 
@@ -64,49 +55,147 @@ export const Desc = styled.div`
 `;
 
 export const SimilarListBox = styled.div`
-    margin: 2vw;
-    height: 30vh;
-    align-items: center;
+    margin: 4vw 2vh 1vh 2vw;
+    height: 36vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: auto;
 `
     
 export const SimilarUserLyric = styled.div`
-    // margin: 2vw;
-    font-size: 3vh;
-`
+    font-size: 16px;
+    margin-bottom: 4%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    `
     
-export const SimilarLyricInfo = styled.div`
-    display: block;
-    margin: 1vw;
-    overflow: scroll;
-`
+    export const SimilarLyricInfo = styled.div`
+        margin: 2vh;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        overflow: auto;
+}`
 
 export const SimilarLyricSubInfo = styled.span`
     display: flex;
-    margin: 1vw;
     justify-content: flex-end;
-    font-size: 0.8vw;
+    font-size: 14px;
 `
 
 export const SimilarInform = styled.div`
-    // width: 8vw;
-    // height: 5vh;
-    // border: dashed;
+    border: 2px dashed ${props => props.theme.accentColor['2']};
+    border-radius: 10px;
+    width: 70%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & > div {
+        margin: 3%;
+    }
 `
 
-export const SearchBoxStyle = styled.div`
-    width: ${sideWidth - sideMargin}px;
+const BoxCSS = () => css`
+    width: ${sideWidth-sideMargin}vw;
+    height: 26vh;
+    padding: ${inputPadding}px;
+    margin: 0px auto;
+    margin-bottom: 4vh;
+`
+// 썸네일
+export const ThumbnailBox = styled.div`
+    ${BoxCSS()};
+    margin-bottom: 4%;
+    height: 15vh;
+    display: flex;
+    justify-content: space-between;
+`
+
+export const ThumbnailImage = styled.img`
+    height: 100%;
+    object-fit: contain;
+`
+
+export const ThumbnailUploadDiv = styled.div`
+    width: 20%;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+`
+
+export const ThumbnailLabel = styled.label`
+    width: 80px;
+    height: 30px;
+    display: felx;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid;
+    background-color: none;
+    border-image: linear-gradient(to right,
+        ${props => props.theme.accentColor['1']}, 
+        ${props => props.theme.accentColor['2']}, 
+        ${props => props.theme.accentColor['4']});
+    border-image-slice: 1;
+    :hover {
+        border: none;
+        font-weight: bold;
+        color: white;
+        background: linear-gradient(45deg, ${props => props.theme.accentColor['1']}, 
+        ${props => props.theme.accentColor['2']},
+        ${props => props.theme.accentColor['4']});
+    }
+`
+
+export const ThumbnailInput = styled.input`
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip:rect(0,0,0,0);
+    border: 0;
+`
+// 메모
+export const MemoBox = styled.textarea`
+    ${BoxCSS()};
+    border: ${borderWidth}px solid transparent;
+    ${BorderColor};
+    resize : none;
+    font-size: 16px;
+    background-color: transparent;
+    :focus {
+        outline: none;
+    }
+    padding: 10px 20px;
+`
+// 유튜브 검색
+export const SearchBox = styled.div`
+    ${BoxCSS()};
+    align-content: center;
+    justify-content: center;
+    `
+    export const SearchBoxStyle = styled.div`
     height: 4vh;
     justify-content: center;
-    border: 2px solid transparent;
+    background-color: none;
+    border: ${borderWidth}px solid ;
     border-radius: 50px;
-    background-image: linear-gradient(-45deg, #fbfcb9be, #ffcdf3aa, #65d3ffaa);
-    background-origin: border-box;
-    background-clip: border-box;
+    border-image: linear-gradient(to right,
+        ${props => props.theme.accentColor['1']}, 
+        ${props => props.theme.accentColor['2']}, 
+        ${props => props.theme.accentColor['4']});
+    border-image-slice: 1;
     position: relative;
-    margin: 10px auto;
+    margin: 0px auto;
+    margin-bottom: 5%;
 `
-
-const inputPadding = 5;
 
 export const SearchInput = styled.input`
     border: none;
@@ -116,41 +205,42 @@ export const SearchInput = styled.input`
     :focus {
         outline: none;
     }
-    padding: ${inputPadding/2}px ${inputPadding}px;
+    padding: ${inputPadding/2}px ${inputPadding*3}px;
 `
 
 export const SearchIconButton = styled(SearchButton)`
+    width: 20px;
+    height: 20px;
     position: absolute;
-    top: ${inputPadding/2}px;
-    right: ${inputPadding*3}px;
-`
-
-export const PlayButton = styled.button`
-    width: 40px;
-    height: 40px;
-    margin: 10px;    
-    background: linear-gradient(#B0E3F9, #DEB3FB, #FEC3B5, #FBD5E0);
-    border-radius: 50%;
-`
-
-export const PlayerBox = styled.div`
-    display: flex;
-`
-
-export const PlayerVideoBox = styled.div`
-    width: 96px;
-    height: 96px;
+    top: ${inputPadding/2}%;
+    right: ${inputPadding}%;
 `
 
 export const SearchResultList = styled.div`
-    width: ${sideWidth - sideMargin};
-    height: 30vh;
+    width: ${sideWidth}vw;
+    height: 20vh;
     margin: 0 auto;
+    padding: 0;
     overflow: scroll;
 `
 
+const itemHeight = 10;
 export const SearchResultItem = styled.div`
     display: flex;
-    width: ${sideWidth - sideMargin};
-    margin: 0 auto;
+    justify-content: center;
+    height:${itemHeight}vh;
+    width: 24vw;
+    margin-bottom: 2%;
+    overflow: hidden;
+    :hover {
+        background-color: rgba(0,0,0,0.2);
+        color: white;
+        cursor: pointer;
+    }
+`
+export const SearchResultItemText = styled.p`
+    width: 100%;
+    text-align: left;
+    padding: 0 0 0 4%;
+    line-height: ${itemHeight}vh;
 `

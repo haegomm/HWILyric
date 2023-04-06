@@ -16,22 +16,18 @@ function LoginKakao() {
 
   let params = new URL(document.URL).searchParams;
   let code = params.get("code");
-  // console.log(code)
 
   useEffect(() => {
     async function kakaoLogin() {
       if (!code) return;
     const data = await loginKakao(code)
     if (data !== null) {
-      console.log('카카오 됏당')
       saveUserInfo(data)
       setIsLogin(true)
       setNickname(data.nickname)
       setProfileImg(data.profileImg)
-      navigate("/home");
-    } else {
-      console.log('로그인 실패ㅜ;')
-    } 
+      navigate("/");
+    }  
   }
   kakaoLogin();
 }, [code])
