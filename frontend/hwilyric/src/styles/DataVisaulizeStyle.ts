@@ -233,3 +233,8 @@ export const WeeklyReportMoveArrow = styled.div`
   align-items: center;
   font-size: 40px;
 `;
+
+export const TotalTrendGenreTitle = styled.div`
+  font-size: 40px;
+  font-weight: bold;
+`;
