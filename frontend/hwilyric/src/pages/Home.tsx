@@ -18,6 +18,7 @@ import WeeklyReport from "../components/home/dataVisualize/WeeklyReport";
 import TotalTrend from "../components/home/dataVisualize/TotalTrend";
 import AnnualReport from "../components/home/dataVisualize/AnnualReport";
 import { useTheme } from "styled-components";
+import { lightTheme } from "../theme/theme";
 import { useRef } from "react";
 import { FiChevronsRight } from "react-icons/fi";
 
@@ -51,7 +52,11 @@ function Home() {
           }}
         />
       </ArrowContainerDiv>
-      <HomeTrapezoid src={lightTrape} />
+      {(theme === lightTheme) ? 
+        <HomeTrapezoid src={lightTrape} />
+        : <HomeTrapezoid src={darkTrape} />
+      
+    }
       <HomeContent>
         <HomeDiv onClick={moveToTrendChart}>
           {isLogin ? <HomeQuickview /> : <HomeNotLoggedIn />}
