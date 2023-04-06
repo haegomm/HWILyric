@@ -7,8 +7,17 @@ import { checkNickname, modifyProfile } from "../../api/userApi";
 import { IModifyTypes } from "../../types/userType";
 import { userNicknameAtom, userProfileImgAtom } from "../../atoms/userAtom";
 import {
-  ModifyEmailDiv,
   ModifyEmailInput,
+  ModifyInput,
+  ModifyLabel,
+  ModifyNicknameDiv,
+  ModifyProfileDiv,
+  ModifyProfileImg,
+  ModifyProfileInput,
+  ModifyProfileInputBox,
+  ModifyProfileInputLeft,
+  ModifyProfileTitle,
+  ModifyUploadDiv,
   ProfileModificationOuterBoxDiv,
   SignupContentBoxDiv,
   SignupEmailDiv,
@@ -26,7 +35,10 @@ import {
   SignupTitleH1,
 } from "../../styles/signUpStyle";
 import { useTheme } from "styled-components";
-import { ProfileModificationButton } from "../../styles/loginStyle";
+import {
+  ProfileModificationButton,
+  ProfileModificationTitleBackground,
+} from "../../styles/loginStyle";
 
 function ModifyProfile() {
   const navigate = useNavigate();
@@ -98,33 +110,46 @@ function ModifyProfile() {
 
   return (
     <ProfileModificationOuterBoxDiv>
-      <SignupTitleBackground theme={theme} />
+      <ProfileModificationTitleBackground theme={theme} />
       <SignupTitleH1>프로필 수정</SignupTitleH1>
       <SignupContentBoxDiv>
         <SignupInnerBoxDiv>
-          <ModifyEmailDiv className="nicknameDiv">
+          <ModifyNicknameDiv className="nicknameDiv">
             <ModifyEmailInput
               type="text"
               placeholder="닉네임"
               className="signUpInputNickname"
               onBlur={onNicknameHandler}
             />
-          </ModifyEmailDiv>
+          </ModifyNicknameDiv>
 
           <SignupEmailErrorSpan className="nicknameError">
             {nicknameError}
             {nicknameFormError}
           </SignupEmailErrorSpan>
 
-          <SignupProfileInputLeft>
-            <SignupProfileTitle>프로필 사진</SignupProfileTitle>
-            <SignupProfileInput type={"file"} onChange={onProfileImgHandler} />
-          </SignupProfileInputLeft>
+          <ModifyProfileDiv>
+            <ModifyUploadDiv>
+              <ModifyLabel className="ModifyLabel" htmlFor="profileImg">
+                업로드
+              </ModifyLabel>
+            </ModifyUploadDiv>
+
+            <ModifyProfileTitle>프로필 사진</ModifyProfileTitle>
+
+            <ModifyInput
+              className="ModifyInput"
+              id="profileImg"
+              type={"file"}
+              onChange={onProfileImgHandler}
+              accept="image/gif, image/jpeg, image/png"
+            />
+          </ModifyProfileDiv>
         </SignupInnerBoxDiv>
 
-        <SignupProfileInputBox>
-          <SignupProfileImg src={newProfileImageUrl} alt="profileImg" />
-        </SignupProfileInputBox>
+        <ModifyProfileInputBox>
+          <ModifyProfileImg src={newProfileImageUrl} alt="profileImg" />
+        </ModifyProfileInputBox>
       </SignupContentBoxDiv>
       <ProfileModificationButton onClick={onSaveProfileHandler}>저장</ProfileModificationButton>
     </ProfileModificationOuterBoxDiv>
