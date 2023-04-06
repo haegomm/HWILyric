@@ -4,7 +4,7 @@ import reset from 'styled-reset';
 const NoteBoxInfo = (height? : string) => css`
     align-items : center;
     height: ${height};
-    background-clolor: none;
+    background-color: none;
     margin: 0;
     padding: 0;
     border: 0;
@@ -120,6 +120,10 @@ export const BlockItemStyle =  styled.div<{ height: number }>`
         line-height: 20px;
         font-size: 16px;
         scrollbar-width: none;
+        ::placeholder {
+            font-weight: 100;
+            font-size: 14px;
+        }
         ::-webkit-scrollbar {
             display: none;
         }

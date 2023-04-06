@@ -32,6 +32,8 @@ function BlockCreate() {
                     <option value={"verse"}>verse</option>
                     <option value={"bridge"}>bridge</option>
                     <option value={"hook"}>hook</option>
+                    <option value={"chrous"}>chrous</option>
+                    <option value={"pre-chorus"}>pre-chorus</option>
                     <option value={"etc"}>etc</option>
                 </select>
                 <button onClick={onCreate} style={{fontSize: 14}}>여기를 눌러서 블록을 추가해보세요</button>
