@@ -55,8 +55,8 @@ export const Desc = styled.div`
 `;
 
 export const SimilarListBox = styled.div`
-    margin: 2vw;
-    height: 34vh;
+    margin: 4vw 2vh 1vh 2vw;
+    height: 36vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -65,18 +65,21 @@ export const SimilarListBox = styled.div`
     
 export const SimilarUserLyric = styled.div`
     font-size: 16px;
-    margin-bottom: 2%;
-    // overflow: auto;
+    margin-bottom: 4%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
     `
     
     export const SimilarLyricInfo = styled.div`
         margin: 2vh;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         flex-wrap: nowrap;
-        justify-content: space-evenly;
-        align-items: center;
-        border-radius: 10px;
+        justify-content: flex-start;
+        align-items: flex-start;
+        overflow: auto;
 }`
 
 export const SimilarLyricSubInfo = styled.span`

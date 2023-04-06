@@ -11,6 +11,8 @@ function SidebarMyLyricsSelect() {
     { name: 'verse', state: 'verse'},
     { name: 'bridge', state: 'bridge'},
     { name: 'hook', state: 'hook'},
+    { name: 'chrous', state: 'chrous'},
+    { name: 'pre-chorus', state: 'pre-chorus'},
     { name: 'etc', state: 'etc'},
   ];
 

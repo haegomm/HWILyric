@@ -12,7 +12,9 @@ function MyPageDropbox() {
     { name: '전체', state: ''},
     { name: 'verse', state: 'verse'},
     { name: 'bridge', state: 'bridge'},
-    { name: 'hook', state: 'hook'},
+    { name: 'hook', state: 'hook' },
+    { name: 'chrous', state: 'chrous'},
+    { name: 'pre-chorus', state: 'pre-chorus'},
     { name: 'etc', state: 'etc'},
   ];
   

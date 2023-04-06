@@ -25,7 +25,7 @@ function Thumbnail() {
 
     return (
         <ThumbnailBox className="ThumbnailBox">
-            <ProfileImageDiv width="50%" height="100%" borderRadius="0" style={{position
+            <ProfileImageDiv width="100px" height="100px" borderRadius="0" style={{position
             :'relative'}}>
                 <ProfileImageImg className="ThumbnailImage" src={thumbnailImageUrl} alt="thumbnail" />
             </ProfileImageDiv>
