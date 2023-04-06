@@ -143,7 +143,7 @@ export const AnnualKeywordDiv = styled.div`
   width: 600px;
   height: 80vh;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   flex-direction: column;
   align-items: center;
   border-style: solid;

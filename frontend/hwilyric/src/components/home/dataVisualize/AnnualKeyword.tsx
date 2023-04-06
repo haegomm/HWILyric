@@ -10,7 +10,7 @@ function AnnualKeyword(props: any) {
       <div
         style={{
           width: "420px",
-          height: "24px",
+          height: "60px",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -22,6 +22,8 @@ function AnnualKeyword(props: any) {
         {annualnow}년대 인기 키워드
       </div>
       <AnnualKeywordCloud />
+      <div></div>
+      <div></div>
     </AnnualKeywordDiv>
   );
 }

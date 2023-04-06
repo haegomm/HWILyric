@@ -16,7 +16,14 @@ export const LoginBoxDiv = styled.div`
   border-radius: 0px;
   border-style: solid;
   border-width: 1px 1px 1px 1px;
-  border-image: linear-gradient(to right bottom, #ace5f8, #e6b2fd, #fdbfb4, #fbd1dd) 1;
+  border-image: linear-gradient(
+      to right bottom,
+      #ace5f8,
+      #e6b2fd,
+      #fdbfb4,
+      #fbd1dd
+    )
+    1;
 `;
 
 export const LoginTitleH1 = styled.h1`
@@ -96,10 +103,12 @@ export const LoginForgotPWDiv = styled.div`
   height: 12px;
   font-size: 10px;
   text-align: right;
+  cursor: pointer;
 `;
 
 export const LoginButtonBoxDiv = styled.div`
   padding: 20px;
+  cursor: pointer;
 `;
 
 export const LoginButton = styled.button`
@@ -117,6 +126,7 @@ export const LoginNoIdDiv = styled.div`
   padding: 20px;
   display: flex;
   justify-content: center;
+  cursor: pointer;
 `;
 
 export const LoginSignUpBoxDiv = styled.div`
