@@ -27,8 +27,8 @@ const CustomXAxisTick = (props: any) => {
         y={0}
         dy={16}
         textAnchor="end"
-        fontSize={10} // 글자 크기 조절
-        fill="#666" // 글자 색상
+        fontSize={10}
+        fill="#666"
         transform="rotate(-35)"
       >
         {payload.value}

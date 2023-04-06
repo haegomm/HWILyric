@@ -3,10 +3,10 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { IconImage, LyricListBody, LyricListBodyItem, LyricListBodyItemContent, LyricListBodyItemDiv, LyricText, LyricThumbnail } from '../../styles/mypageStyle'
 import { getLyricList } from '../../api/writingApi'
-import { IFilteringLyricTypes, IGetILyricInfoTypes } from '../../types/mypageType'
+import { IGetILyricInfoTypes } from '../../types/mypageType'
 import { isModifyingAtom, lyricCategoryAtom } from '../../atoms/mypageAtom'
 import { deleteNote } from '../../api/deleteApit'
-import { lightDelete, lightModify, lightView } from '../../assets/icon/myButtons'
+import { lightDelete, lightModify } from '../../assets/icon/myButtons'
 import { ILyricBlockTypes } from '../../types/writingType'
 import { useNavigate } from 'react-router-dom'
 
@@ -25,7 +25,6 @@ function MyPageFilterList() {
         return new Date(b.updatedDate).valueOf() - new Date(a.updatedDate).valueOf();})
         setMyLyrics(sortedLyrics)
     } else {
-      console.log('')
       setNullLyrics('해당 카테고리의 가사가 없습니다')
     }
   }

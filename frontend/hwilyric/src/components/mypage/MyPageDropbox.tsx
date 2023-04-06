@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useRecoilState } from 'recoil';
-import { downArrow, upArrow } from "../../assets/icon/arrow";
 
 import { lyricCategoryAtom } from '../../atoms/mypageAtom';
 import { ArrowImage, DropboxSelect, DropboxOption } from "../../styles/mypageStyle";
@@ -21,7 +20,6 @@ function MyPageDropbox() {
   const onCategoryHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const currentCtgr = e.target.value
     setCategory(currentCtgr)
-    console.log(currentCtgr)
   }
 
   useEffect(()=> {

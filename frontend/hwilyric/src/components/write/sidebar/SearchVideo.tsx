@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useState } from "react"
-import { useRecoilState, useSetRecoilState } from "recoil"
+import { useRecoilState } from "recoil"
 import { PlayVideoId } from "../../../atoms/youtubeVideoAtoms";
 import { SearchBox, SearchBoxStyle, SearchInput, SearchResultItem, SearchResultList, SearchIconButton, SearchResultItemText } from "../../../styles/writeSidebarStyle";
 import {SearchIcon} from "../../../assets/writeSideBar/writeImg";
@@ -29,15 +29,12 @@ function SearchVideo() {
         
         const items = response.data.items.map((item: any) => {
           const { id, snippet } = item
-          // const title = snippet.title.replace(/[^\w\s]/gi, "");
           const title = snippet.title.replace(/[^\uAC00-\uD7AF\u1100-\u11FF\u3130-\u318F]/g, " ")
           const thumbnail = snippet.thumbnails.default.url
           return { id, title, thumbnail }
         });
 
           setResults(() => items)
-          console.log(response)
-        console.log(items)
       } catch (error) {
         console.error(error)
       }

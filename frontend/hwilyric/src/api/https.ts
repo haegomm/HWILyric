@@ -22,7 +22,6 @@ axios.interceptors.response.use(
       if (error.response.status === 401) {
         deleteUserInfo()
         alert("로그인이 필요합니다.");
-        console.log('강종')
         window.location.replace("/login");
         // ForcedLogout()
         return new Promise(() => {});
@@ -55,7 +54,6 @@ fileAxios.interceptors.response.use(
       if (error.response.status === 401) {
         deleteUserInfo()
         alert("로그인이 필요합니다.");
-        console.log('강종')
         window.location.replace("/login");
         // ForcedLogout()
         return new Promise(() => {});

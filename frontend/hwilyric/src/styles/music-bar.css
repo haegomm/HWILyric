@@ -1,12 +1,10 @@
 .playing {
-    /* position: fixed; */
     top: 50%;
     left: 50%;
     width: auto;
     transform: translateY(50%);
   }
   .playing:after {
-    /* content: "Now Playing."; */
     display: block;
     width: 100%;
     margin-top: 10px;

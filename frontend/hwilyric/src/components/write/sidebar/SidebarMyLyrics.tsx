@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { IGetILyricInfoTypes } from '../../../types/mypageType'
 import { ILyricBlockTypes } from '../../../types/writingType'
 import { LyricListBodyItem, LyricListBodyItemDiv, LyricText } from '../../../styles/mypageStyle'
 import { useRecoilValue } from 'recoil'
 import { getLyricList } from '../../../api/writingApi'
-import MyPageDropbox from '../../mypage/MyPageDropbox'
 import { IsLoginAtom } from '../../../atoms/userAtom'
 import { MyLyricBody, MyLyricListBodyItemContent, MyLyricThumbnail } from '../../../styles/MyLyricStyle'
 import { sidebarCategoryAtom } from '../../../atoms/sidebarAtoms'
 import SidebarMyLyricsSelect from './SidebarMyLyricsSelect'
 import { LoginRecButton, NotLoggedInDiv } from '../../../styles/recommendStyle'
-import { Button, SaveButton } from '../../../styles/common/ButtonStyle'
 
 function SidebarMyLyrics() {
   const [myLyrics, setMyLyrics] = useState([])
@@ -27,7 +25,6 @@ function SidebarMyLyrics() {
         return new Date(b.updatedDate).valueOf() - new Date(a.updatedDate).valueOf();})
         setMyLyrics(sortedLyrics)
     } else {
-      console.log('')
       setNullLyrics('해당 카테고리의 가사가 없습니다')
     }
   }

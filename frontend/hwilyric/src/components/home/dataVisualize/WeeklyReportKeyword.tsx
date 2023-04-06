@@ -43,7 +43,6 @@ function WeeklyReportKeyword(props: any) {
     navigate("/write");
   };
 
-  // 키워드 데이터를 그룹화하여 3개씩 나누기
   const groupedData = [];
   const data = props.data;
   const dataLeng = data.length;
