@@ -96,7 +96,7 @@ while (year_num <= 2022):
             chartyear = year_num
             try:
                 lyrics = soup.select_one('#d_video_summary').get_text('\n').strip('\n\t').split('\n')
-            except:
+            except Exception as e:
                 lyrics = ['가사 정보 없음']
             song_list[idx].update({'artist':artist, 'album':album, 'release_date':release_date,'genre': genre, 'lyrics':lyrics, 'chartyear':chartyear})
 
