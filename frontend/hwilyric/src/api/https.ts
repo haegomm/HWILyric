@@ -1,7 +1,5 @@
 import baseAxios from "axios";
-
 import { deleteUserInfo, getUserInfo } from "../features/userInfo";
-import ForcedLogout from "./logout";
 
 export const axios = baseAxios.create({
   baseURL: process.env.REACT_APP_API,
