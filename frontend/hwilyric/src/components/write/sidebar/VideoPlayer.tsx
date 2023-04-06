@@ -83,42 +83,46 @@ function VideoPlayer() {
     setSecTime(() => (sec < 10) ? '0' + String(sec) : String(sec))
   }            
   
-    return (
-      <PlayerBox>
-        <PlayerVideoBox>
-          <YouTube
-            opts={{
-              width: "50",
-              height: "50",
-              playerVars: {
-                rel: 0,
-                modestbranding: 1
-              }
-            }}
-            videoId={videoId}
-            onPlay={setTimer}
-            onPause={clearTimer}
-            onStateChange={handlePlayerStateChange}
-          />
-        </PlayerVideoBox>
-        <PlayerProgressBox>
-          <ProgressBar
-            style={{ width: '100%' }}
-            variant="warning"
-            now={time}
-            max={durationTime}
-          />
-          <p style={{fontSize: 12, paddingTop: "1%"}}>{`${hourTime}:${minTime}:${secTime}`}</p>
-        </PlayerProgressBox>
-        <PlayerButtonBox>
-          {isPlay ? (<button onClick={handlePause} disabled={!videoId}>
-            <img src={Pause_Button} alt="" />
-          </button>) : (<button onClick={handlePlay} disabled={!videoId}>
-            <img src={Play_Button} alt="" />
-          </button>)}
-        </PlayerButtonBox>
+  return (
+    <PlayerBox>
+      {videoId ? 
+        <>
+          <PlayerVideoBox>
+            <YouTube
+              opts={{
+                width: "50",
+                height: "50",
+                playerVars: {
+                  rel: 0,
+                  modestbranding: 1
+                }
+              }}
+              videoId={videoId}
+              onPlay={setTimer}
+              onPause={clearTimer}
+              onStateChange={handlePlayerStateChange}
+            />
+          </PlayerVideoBox>
+          <PlayerProgressBox>
+            <ProgressBar
+              style={{ width: '100%' }}
+              variant="warning"
+              now={time}
+              max={durationTime}
+            />
+            <p style={{fontSize: 12, paddingTop: "1%"}}>{`${hourTime}:${minTime}:${secTime}`}</p>
+          </PlayerProgressBox>
+          <PlayerButtonBox>
+            {isPlay ? (<button onClick={handlePause} disabled={!videoId}>
+              <img src={Pause_Button} alt="" />
+            </button>) : (<button onClick={handlePlay} disabled={!videoId}>
+              <img src={Play_Button} alt="" />
+            </button>)}
+          </PlayerButtonBox>
+        </> : <div style={{margin:'auto'}}>레퍼런스 탭에서 노래를 검색해보세요 ^~^</div>}
       </PlayerBox>
-    );
+    
+  );
   }
 
 

@@ -44,6 +44,9 @@ export const TitleDivBox = styled.div`
         font-size: 20px;
         background-color: none;
         outline: none;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 `
 
