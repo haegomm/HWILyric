@@ -1,25 +1,37 @@
 import styled from "styled-components";
 
 import { lightTheme } from "../theme/theme";
+import { ButtonCss } from "./common/ButtonStyle";
 
 export const SignupOuterBoxDiv = styled.div`
-  width: ${(1040 / 1920) * 100}vw;
-  height: 680px;
+  margin-bottom: 30px;
+  width: auto;
+  height: auto;
   display: flex;
+  padding: 100px 0px 50px 0px;
   justify-content: center;
   position: relative;
+  margin-top: 40px;
   flex-direction: column;
   align-items: center;
   border-style: solid;
   border-width: 1px 1px 1px 1px;
-  border-image: linear-gradient(
-      to right bottom,
-      #ace5f8,
-      #e6b2fd,
-      #fdbfb4,
-      #fbd1dd
-    )
-    1;
+  border-image: linear-gradient(to right bottom, #ace5f8, #e6b2fd, #fdbfb4, #fbd1dd) 1;
+`;
+
+export const ProfileModificationOuterBoxDiv = styled.div`
+  width: auto;
+  height: auto;
+  display: flex;
+  padding: 60px 100px 60px 100px;
+  justify-content: center;
+  position: relative;
+  margin-top: 60px;
+  flex-direction: column;
+  align-items: center;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-image: linear-gradient(to right bottom, #ace5f8, #e6b2fd, #fdbfb4, #fbd1dd) 1;
 `;
 
 export const SignupTitleH1 = styled.h1`
@@ -34,7 +46,7 @@ export const SignupTitleH1 = styled.h1`
 `;
 
 export const SignupTitleBackground = styled.div`
-  width: 168px;
+  width: 200px;
   height: 48px;
   background: ${(props) => (props.theme === lightTheme ? "white" : "#191B1F")};
   position: absolute;
@@ -43,35 +55,39 @@ export const SignupTitleBackground = styled.div`
 `;
 
 export const SignupContentBoxDiv = styled.div`
-  width: ${(900 / 1920) * 100}vw;
-  height: 500px;
+  width: auto;
+  height: auto;
+  display: flex;
 `;
 
 export const SignupForm = styled.form`
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-  height: 500px;
+  height: auto;
   align-items: center;
 `;
 
 export const SignupInnerWrapper = styled.div`
+  width: 80%;
   display: flex;
   justify-content: space-around;
-  height: 350px;
+  height: auto;
 `;
 
 export const SignupInnerWrapperInner = styled.div`
-  width: 45%;
+  width: auto;
   display: flex;
+  padding-left: 30px;
+  padding-right: 30px;
   justify-content: space-between;
   flex-direction: column;
 `;
 
 export const SignupInnerBoxDiv = styled.div`
-  width: ${(400 / 1920) * 100}vw;
+  width: auto;
   position: relative;
-  padding: 5px;
+  padding: 20px 0px 30px 0px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -82,7 +98,13 @@ export const SignupInnerVerifyBoxDiv = styled.div`
   position: relative;
   padding: 5px;
 `;
-export const SignupEmailDiv = styled.div``;
+export const SignupEmailDiv = styled.div`
+  padding: 0;
+`;
+
+export const ModifyEmailDiv = styled.div`
+  padding-bottom: 20px;
+`;
 
 export const SignupEmailInput = styled.input`
   width:100%;
@@ -91,7 +113,33 @@ export const SignupEmailInput = styled.input`
   border-left: 0;
   border-image: #636161
   outline: none;
-  padding: 5px;
+  padding-bottom: 10px;
+  transform: scale(1);
+  transition: transform 0.2s ease-in-out;
+
+  &:focus {
+    border-image: linear-gradient(
+      to right bottom,
+      #ace5f8,
+      #e6b2fd,
+      #fdbfb4,
+      #fbd1dd
+    )
+    2;
+    outline: none;
+    transform: scale(1.05);
+    transition: transform 0.2s ease-in-out;
+  }
+  `;
+
+export const ModifyEmailInput = styled.input`
+  width:auto;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  border-image: #636161
+  outline: none;
+  padding-bottom: 10px;
   transform: scale(1);
   transition: transform 0.2s ease-in-out;
 
@@ -112,7 +160,16 @@ export const SignupEmailInput = styled.input`
 
 export const SignupSendNumberDiv = styled.div`
   position: absolute;
-  right: 5px;
+  right: 0%;
+  top: 25px;
+  border-width: 1px 1px 1px 1px;
+  border-image: #636161 1;
+  border-style: solid;
+`;
+
+export const SignupConfirmNumberDiv = styled.div`
+  position: absolute;
+  right: 2%;
   top: 10px;
   border-width: 1px 1px 1px 1px;
   border-image: #636161 1;
@@ -121,6 +178,7 @@ export const SignupSendNumberDiv = styled.div`
 
 export const SignupEmailErrorSpan = styled.span`
   margin-left: auto;
+  padding-top: 5px;
   font-size: 14px;
 `;
 
@@ -149,7 +207,8 @@ export const SignupProfileTitle = styled.div`
 `;
 
 export const SignupProfileInputLeft = styled.div`
-  width: 45%;
+  padding-right: 20px;
+  width: 60%;
 `;
 
 export const SignupProfileImg = styled.img`
@@ -159,17 +218,6 @@ export const SignupProfileImg = styled.img`
 `;
 
 export const SignupSubmitButton = styled.button`
-  width: ${(160 / 1920) * 100}vw;
-  height: 48px;
-  border-style: solid;
-  border-width: 1px 1px 1px 1px;
-  border-image: linear-gradient(
-      to right bottom,
-      #ace5f8,
-      #e6b2fd,
-      #fdbfb4,
-      #fbd1dd
-    )
-    3;
-  font-size: 24px;
+  ${ButtonCss("10vw", "6vh")}
+  margin-top: 20px;
 `;
