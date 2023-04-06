@@ -62,12 +62,20 @@ const CustomXAxisTick = (props: any) => {
   );
 };
 
+const e = ["#88C4E9", "#D1C4F1"];
+let strokeNum = -1;
 function getRandomColor(): string {
-  const red = Math.floor(Math.random() * 256);
-  const green = Math.floor(Math.random() * 256);
-  const blue = Math.floor(Math.random() * 256);
+  const colorData = [
+    "#f757f7",
+    "#3c86f0",
+    "#cd2d48",
+    "#20c4c9",
+    "#841B95",
+    "#ebc41a",
+  ];
+  strokeNum++;
 
-  return `rgb(${red}, ${green}, ${blue}, 1)`;
+  return colorData[strokeNum % 6];
 }
 
 const sortTooltip = (a: any, b: any) => {
@@ -105,8 +113,6 @@ function TotalTrendChart(props: any) {
     );
     chartData.push(annualObj);
   }
-
-  console.log(chartData);
 
   return (
     <AreaChart
