@@ -1,15 +1,13 @@
 import { ISimilarityTypes } from '../types/writingType'
 import { axios, fileAxios } from './https'
 
-// 자동저장
 export async function saveNote(formData: FormData) {
   try {
       const res = await fileAxios.post(`api/notes/save`, formData)
       const data = res.data
-      console.log("저장 성공!",data)
       return data
-  } catch(err) {
-      console.log("저장 안돼ㅠ", err)
+  } catch (err) {
+    return null
   }
 }
 
@@ -18,19 +16,18 @@ export async function getLyricInfo(noteId: string|undefined) {
     const res = await axios.get(`api/notes/detail?noteId=${noteId}`)
     const data = res.data
     return data
-  } catch(err) {
+  } catch (err) {
+    return null
   }
 }
 
-// 유사도 검사
 export async function checkSimilarity(body: ISimilarityTypes) {
   try {
       const res = await axios.post(`api/similarity`, body)
       const data = res.data
-      console.log("췤췤 성공", data)
       return data
   } catch (err) {
-      console.log("췤췤 실패", err)
+    return null
   }
 }
 
