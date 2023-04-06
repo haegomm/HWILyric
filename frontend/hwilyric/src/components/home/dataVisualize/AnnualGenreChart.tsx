@@ -32,7 +32,15 @@ function AnnualGenreChart(props: any) {
   const theme = useTheme();
 
   return (
-    <div style={{ width: "232px", height: "200px" }}>
+    <div
+      style={{
+        width: "400px",
+        height: "400px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-around",
+      }}
+    >
       <AnnualReportTitle>{annualnow}년대 인기 장르</AnnualReportTitle>
       <ResponsivePie
         data={props.data}

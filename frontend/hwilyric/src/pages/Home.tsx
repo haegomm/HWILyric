@@ -23,16 +23,21 @@ function Home() {
   const theme = useTheme();
   const scrollRef = useHorizontalScroll();
   const isLogin = useRecoilValue(IsLoginAtom);
+
+  const handleDragStart = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+  };
+
   return (
-    <HomeContainer ref={scrollRef}>
-      <HomeTrapezoid src={lightTrape} />
-      <HomeContent>
+    <HomeContainer ref={scrollRef} onDragStart={handleDragStart}>
+      <HomeTrapezoid src={lightTrape} onDragStart={handleDragStart} />
+      <HomeContent onDragStart={handleDragStart}>
         <HomeDiv>{isLogin ? <HomeQuickview /> : <HomeNotLoggedIn />}</HomeDiv>
         <HomeCenter />
-        <DataVisualizePage theme={theme}>
-          <WeeklyReport />
-          <TotalTrend />
-          <AnnualReport />
+        <DataVisualizePage theme={theme} onDragStart={handleDragStart}>
+          <WeeklyReport onDragStart={handleDragStart} />
+          <TotalTrend onDragStart={handleDragStart} />
+          <AnnualReport onDragStart={handleDragStart} />
         </DataVisualizePage>
       </HomeContent>
     </HomeContainer>

@@ -105,10 +105,13 @@ export const LoginForgotPWDiv = styled.div`
 
 export const LoginButtonBoxDiv = styled.div``;
 
-export const LoginButton = styled.button`${ButtonCss("5vw", "32px")}`;
+export const LoginButton = styled.button`
+  ${ButtonCss("5vw", "32px")}
+`;
 
-export const ProfileModificationButton = styled.button`${ButtonCss("8vw", "6vh")}`;
-
+export const ProfileModificationButton = styled.button`
+  ${ButtonCss("8vw", "6vh")}
+`;
 
 export const LoginNoIdDiv = styled.div`
   font-size: 20px;
@@ -144,7 +147,6 @@ export const LoginKakaoA = styled.a`
 export const LoginKakaoImg = styled.img`
   max-width: 100%;
   max-height: 100%;
-
 `;
 
 export const LoginSignUpWrapper = styled.div`
@@ -165,7 +167,7 @@ export const LoginPasswordBox = styled.div`
 export const PWFindTitleBackground = styled.div`
   background: ${(props) => (props.theme === lightTheme ? "white" : "#191B1F")};
   position: absolute;
-  width: 144px;
+  width: 312px;
   height: 48px;
   top: -24px;
   z-index: 1;
