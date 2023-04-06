@@ -16,7 +16,6 @@ import {
   LoginDiv,
 } from "../../styles/loginStyle";
 
-import { useTheme } from "styled-components";
 
 function LoginForgetPassword() {
   const [Email, setEmail] = useState("");
@@ -50,8 +49,6 @@ function LoginForgetPassword() {
   const onLoginPageHandler = (e: React.MouseEvent<HTMLDivElement>) => {
     setIsKnownPassword(true);
   };
-
-  const theme = useTheme();
 
   return (
     <LoginBoxDiv>
