@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useRecoilState } from 'recoil';
 
 import { lyricCategoryAtom } from '../../atoms/mypageAtom';
-import { ArrowImage, DropboxSelect, DropboxOption } from "../../styles/mypageStyle";
+import { DropboxSelect, DropboxOption } from "../../styles/mypageStyle";
 
 function MyPageDropbox() {
   const [category, setCategory] = useRecoilState(lyricCategoryAtom);

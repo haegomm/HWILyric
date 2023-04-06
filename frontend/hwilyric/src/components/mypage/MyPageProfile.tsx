@@ -21,7 +21,6 @@ function MyPageProfile() {
   }
 
   const onLogoutHandler = async(e: React.MouseEvent<HTMLSpanElement>) => {
-    const message = await logout()
       deleteUserInfo()
       setIsLogin(false)
       navigate("/");

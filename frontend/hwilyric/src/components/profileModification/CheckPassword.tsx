@@ -13,8 +13,6 @@ import {
   ProfileModificationButton,
 } from "../../styles/loginStyle";
 
-import { useTheme } from "styled-components";
-
 function CheckPassword() {
   const setSelectModificationPage = useSetRecoilState(selectModification);
   const [Password, setPassword] = useState("");
@@ -31,8 +29,6 @@ function CheckPassword() {
       alert("비밀번호가 일치하지 않습니다. 다시 시도해주세요.");
     }
   };
-
-  const theme = useTheme();
 
   return (
     <LoginBoxDiv>
