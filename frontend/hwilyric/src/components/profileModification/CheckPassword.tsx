@@ -6,13 +6,10 @@ import { selectModification } from "../../atoms/userAtom";
 import {
   LoginBoxDiv,
   LoginButtonBoxDiv,
-  LoginForgotPWDiv,
   LoginInputI,
   LoginNoIdDiv,
   LoginPasswordBox,
   LoginPasswordDiv,
-  LoginTitleBackground,
-  LoginTitleH1,
   ProfileModificationButton,
 } from "../../styles/loginStyle";
 
@@ -31,7 +28,6 @@ function CheckPassword() {
     if (message === "success") {
       setSelectModificationPage("modifyPassword");
     } else {
-      console.log(message);
       alert("비밀번호가 일치하지 않습니다. 다시 시도해주세요.");
     }
   };

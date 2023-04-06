@@ -13,25 +13,13 @@ import {
   ModifyNicknameDiv,
   ModifyProfileDiv,
   ModifyProfileImg,
-  ModifyProfileInput,
   ModifyProfileInputBox,
-  ModifyProfileInputLeft,
   ModifyProfileTitle,
   ModifyUploadDiv,
   ProfileModificationOuterBoxDiv,
   SignupContentBoxDiv,
-  SignupEmailDiv,
   SignupEmailErrorSpan,
-  SignupEmailInput,
   SignupInnerBoxDiv,
-  SignupOuterBoxDiv,
-  SignupProfileImg,
-  SignupProfileInput,
-  SignupProfileInputBox,
-  SignupProfileInputLeft,
-  SignupProfileTitle,
-  SignupSubmitButton,
-  SignupTitleBackground,
   SignupTitleH1,
 } from "../../styles/signUpStyle";
 import { useTheme } from "styled-components";
@@ -74,10 +62,8 @@ function ModifyProfile() {
     if (e.target.files === null) return;
 
     if (e.target.files[0]) {
-      console.log(e.target.files[0]);
       setNewProfileImage(e.target.files[0]);
       const url = URL.createObjectURL(e.target.files[0]);
-      console.log(url);
       setNewProfileImageUrl(url);
     }
   };
@@ -94,7 +80,6 @@ function ModifyProfile() {
     formData.append("userInfo", new Blob([userInfoString], { type: "application/json" }));
 
     const data = await modifyProfile(formData);
-    console.log(data);
 
     if (data !== null) {
       setNickname(data.nickname);

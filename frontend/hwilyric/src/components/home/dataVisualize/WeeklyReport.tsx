@@ -29,8 +29,8 @@ const yyyyMMdd2 = (date: Date) => {
   return `${year}년${month}월${day}일`;
 };
 
-let weekEndString = yyyyMMdd(weekEnd); // 오늘 날짜의 문자열 표현
-let weekStartString = yyyyMMdd(weekStart); // 일주일 전 날짜의 문자열 표현
+let weekEndString = yyyyMMdd(weekEnd);
+let weekStartString = yyyyMMdd(weekStart);
 
 function WeeklyReport(props: any) {
   const [data, setData] = useState({ genres: null, keywords: null });

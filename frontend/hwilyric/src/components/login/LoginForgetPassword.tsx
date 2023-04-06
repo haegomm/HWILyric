@@ -6,14 +6,12 @@ import authValidation from "../../features/validation";
 import { IsKnownPassword } from "../../atoms/userAtom";
 import {
   LoginBoxDiv,
-  LoginButton,
   LoginButtonBoxDiv,
   LoginEmailDiv,
   LoginForm,
   LoginInputI,
   PWFindTitleBackground,
   PWFindTitleH1,
-  ProfileModificationButton,
   PWFindButton,
   LoginDiv,
 } from "../../styles/loginStyle";
@@ -75,21 +73,6 @@ function LoginForgetPassword() {
           <PWFindButton
             type="submit"
             className="signupButton"
-            // disabled={
-            //   Email &&
-            //   Nickname &&
-            //   Password &&
-            //   ConfirmPassword &&
-            //   profileImage &&
-            //   !emailError &&
-            //   !emailFormError &&
-            //   !nicknameError &&
-            //   !nicknameFormError &&
-            //   !passwordError &&
-            //   !confirmPasswordError
-            //     ? false
-            //     : true
-            // }
           >
             임시 비밀번호 발송
           </PWFindButton>

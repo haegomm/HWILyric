@@ -8,7 +8,6 @@ import { useTheme } from "styled-components";
 import {
   LoginBoxDiv,
   LoginButtonBoxDiv,
-  LoginTitleBackground,
   LoginTitleH1,
   ProfileModificationButton,
   PWFindTitleBackground,

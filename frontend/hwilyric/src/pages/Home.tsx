@@ -29,10 +29,6 @@ function Home() {
   const isLogin = useRecoilValue(IsLoginAtom);
 
   const moveToTrendChart = () => {
-    // if (myRef.current) {
-    //   myRef.current.scrollIntoView({ behavior: "smooth", inline: "nearest" });
-    // }
-    // window.scrollTo({ left: 1000, behavior: "smooth" });
     window.scrollTo({ left: 2000, top: 0 });
   };
 

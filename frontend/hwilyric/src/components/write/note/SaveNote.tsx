@@ -53,7 +53,6 @@ function SaveNote() {
     
         if (isLogin) {
             const res = await saveNote(formData)
-            console.log(res)
             setNoteId(() => res.id)
             setThumbnailImageUrl(res.thumbnail)
             setSaveTime(res.updatedDate)
@@ -61,7 +60,6 @@ function SaveNote() {
     
         } else {
             window.localStorage.setItem('note', JSON.stringify(formData))
-            console.log("로컬 저장!")
             setIsTemp(true)
         }
     }
