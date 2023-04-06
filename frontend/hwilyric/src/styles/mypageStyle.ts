@@ -15,7 +15,7 @@ export const MyPageProfileDiv = styled.div`
   display: flex;
   justify-content: space-between;
   height: 128px;
-  width: 55vw;
+  width: 60vw;
   align-items: center;
   margin-bottom: 24px;
 `
@@ -25,17 +25,23 @@ export const DropboxDiv =styled.div`
 `
 
 export const DropboxSelect =styled.select<divWidth>`
-  border: none;
+  float: right;
+  height: 30px;
+  margin-bottom: 5px;
   width: ${(props) => (props.width) ? (props.width) : '60px'};
-  ...
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-...
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #DEB3FB;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
 `
 
 export const DropboxOption =styled.option`
-  border: none;
+  border: none;  
 `
 
 export const MyProfileImage = styled.img`

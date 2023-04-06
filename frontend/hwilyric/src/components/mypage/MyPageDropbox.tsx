@@ -27,7 +27,7 @@ function MyPageDropbox() {
   }, [])
 
   return (
-        <DropboxSelect width='5vw' onChange={onCategoryHandler}>
+        <DropboxSelect width='6vw' onChange={onCategoryHandler}>
           {lyricCategoryList.map((ctgr, index) => (
               <DropboxOption
               key={index}
