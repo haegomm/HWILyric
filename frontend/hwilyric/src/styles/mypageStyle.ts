@@ -42,7 +42,7 @@ export const MyProfileImage = styled.img`
   width: 88px;
   
 `
-export const MyProfileSpan = styled.span`
+export const MyPageSpan = styled.span`
   cursor: pointer;
 `
 
@@ -60,6 +60,11 @@ export const IconImage = styled.img`
 
 export const LyricThumbnail = styled.img`
   width: 8vw;
+  height: 8vw;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 5%;
+  box-shadow: 2px 2px 5px 2px lightgray;
 `
 
 export const LyricListHeader = styled.div`
