@@ -5,9 +5,43 @@ import {
   WeeklyReportKeywordsDiv,
 } from "../../../styles/DataVisaulizeStyle";
 
+import { isModifyingAtom } from "../../../atoms/mypageAtom";
+import {
+  blockListState,
+  noteIdState,
+  noteThumbnailFileState,
+  noteThumbnailUrlState,
+  titleState,
+} from "../../../atoms/noteAtoms";
+import { memoState } from "../../../atoms/sidebarAtoms";
+import { useRecoilValue, useSetRecoilState, useResetRecoilState } from "recoil";
+import { useNavigate } from "react-router-dom";
+
 function WeeklyReportKeyword(props: any) {
+  const navigate = useNavigate();
+  const isModifying = useSetRecoilState(isModifyingAtom);
+  const setTitle = useSetRecoilState(titleState);
+  const resetNoteId = useResetRecoilState(noteIdState);
+  const resetBlockList = useResetRecoilState(blockListState);
+  const resetMemo = useResetRecoilState(memoState);
+  const resetThumbnail = useResetRecoilState(noteThumbnailUrlState);
+  const resetThumbnailFile = useResetRecoilState(noteThumbnailFileState);
+
   const keywordBlockColors = ["#B0E3F9", "#DEB3FB", "#FEC3B5", "#FBD5E0"];
   const theme = useTheme();
+
+  const onWeeklyKeywordHandler = (e: React.MouseEvent<HTMLDivElement>) => {
+    const eventTarget = e.target as HTMLElement;
+    const word = eventTarget.innerText;
+    isModifying(true);
+    setTitle(word);
+    resetNoteId();
+    resetBlockList();
+    resetMemo();
+    resetThumbnail();
+    resetThumbnailFile();
+    navigate("/write");
+  };
 
   // 키워드 데이터를 그룹화하여 3개씩 나누기
   const groupedData = [];
@@ -35,14 +69,15 @@ function WeeklyReportKeyword(props: any) {
     <WeeklyReportKeywordsDiv>
       {groupedData.map((group) => {
         return (
-          <WeeklyKeywordLineDiv key={`Line-${colorNum}`}>
+          <WeeklyKeywordLineDiv key={`weeklyKeywordLines-${colorNum}`}>
             {group.map((keywordData: any) => {
               colorNum++;
               return (
                 <WeeklyKeywordBlockP
                   color={keywordBlockColors[colorNum % 4]}
                   theme={theme}
-                  key={`Block-${colorNum}`}
+                  key={`weeklyKeywordBlock-${colorNum}`}
+                  onClick={onWeeklyKeywordHandler}
                 >
                   {keywordData}
                 </WeeklyKeywordBlockP>
