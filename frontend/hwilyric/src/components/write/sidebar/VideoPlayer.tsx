@@ -118,7 +118,7 @@ function VideoPlayer() {
               <img src={Play_Button} alt="" />
             </button>)}
           </PlayerButtonBox>
-        </> : <div style={{margin:'auto'}}>레퍼런스 탭에서 노래를 검색해보세요</div>}
+        </> : <div style={{margin:'auto', color: "#CECECE"}}>레퍼런스 탭에서 노래를 검색해보세요</div>}
       </PlayerBox>
     
   );
