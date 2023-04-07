@@ -13,8 +13,7 @@ function getCurrentDateTime() {
     const hour = String(now.getHours()).padStart(2, '0');
     const minute = String(now.getMinutes()).padStart(2, '0');
     const second = String(now.getSeconds()).padStart(2, '0');
-    const milliseconds = String(now.getMilliseconds()).padStart(2, '0');
-    const id = `${year}${month}${day}${hour}${minute}${second}${milliseconds}`;
+    const id = `${year}${month}${day}${hour}${minute}${second}`;
     return Number(id);
 }
 
@@ -37,11 +36,7 @@ export const blockIdState = atom<number>({
 
 export const blockListState = atom<ILyricBlockTypes[]>({
     key: 'blockListState',
-    default: [{
-        blockId: getCurrentDateTime(),
-        type: "verse",
-        lyrics: ""
-    }],
+    default: [],
     effects_UNSTABLE: [persistAtom],
 })
 

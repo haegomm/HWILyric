@@ -21,12 +21,12 @@ function Navbar({toggleDarkMode}: any) {
         <NavLink to="*"  style={{ textDecoration: "none" }}><img src={isDarkMode ? darkLogo : lightLogo } style={{ width: '10vw' }} alt="loading" /></NavLink>
         <NavMenu>
           <DarkModeBox>
-            <BsFillSunFill  style={{color: "#ffd700"}}/>
+            <BsFillSunFill  style={{ color: isDarkMode ? "#003458" : "#ffd700" }}/>
             <ToggleBoxWrapper>
                 <ToggleBox id="checkbox" type="checkbox" onClick={toggleDarkMode} />
                 <ToggleBoxLabel htmlFor="checkbox" />
             </ToggleBoxWrapper>
-            <BsFillMoonFill style={{color: "003458"}}/>  
+            <BsFillMoonFill style={{ color: isDarkMode ? "#ffd700" : "#003458" }}/>  
           </DarkModeBox>
           <div>
             <NavLink to="/write"  style={{ textDecoration: "none" }} onClick={IsModifying}>작사하기</NavLink>

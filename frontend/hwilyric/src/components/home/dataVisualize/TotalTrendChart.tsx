@@ -93,7 +93,7 @@ function TotalTrendChart(props: any) {
         width={1200}
         height={600}
         data={chartData}
-        margin={{ top: 5, right: 10, left: 20, bottom: 60 }}
+        margin={{ top: 5, right: 10, left: 20, bottom: 100 }}
         onClick={(event) => {
           if (event) {
             const annual: any = event.activeLabel;
