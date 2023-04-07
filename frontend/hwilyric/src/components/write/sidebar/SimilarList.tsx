@@ -39,10 +39,10 @@ function SimilarItem({ similar }: SimilarItemProps): JSX.Element {
                     <SimilarLyricInfo
                     className="similarLyric-item"
                     key="index">
-                        {similarLyric}
+                        <p style={{ fontSize: 14 }} >{similarLyric}</p>
                         <SimilarLyricSubInfo>
-                            <p style={{fontSize: 11, lineHeight: 2}}>{similar.titleList[index]}</p>
-                            <p style={{fontSize: 11, lineHeight: 2}}>&nbsp;_&nbsp;{similar.artistList[index]}</p>
+                            <p style={{fontSize: 12, lineHeight: 2}}>{similar.titleList[index]}</p>
+                            <p style={{fontSize: 12, lineHeight: 2}}>&nbsp;_&nbsp;{similar.artistList[index]}</p>
                         </SimilarLyricSubInfo>
                     </SimilarLyricInfo>
                 ))}

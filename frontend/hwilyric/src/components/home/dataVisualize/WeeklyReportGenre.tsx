@@ -23,6 +23,7 @@ const CustomXAxisTick = (props: any) => {
 function WeeklyReportGenre(props: any) {
   const data = props.data;
   data.sort((a: any, b: any) => b.count - a.count);
+  
   return (
     <WeeklyReportGenreDiv>
       <BarChart

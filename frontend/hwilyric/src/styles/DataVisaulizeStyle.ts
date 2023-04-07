@@ -5,7 +5,7 @@ export const DataVisualizePage = styled.div`
   display: flex;
   justify-content: center;
   width: 2800px;
-  background: ${(props) => (props.theme === lightTheme ? "white" : "#191b1f")};
+  // background: ${(props) => (props.theme === lightTheme ? "white" : "#191b1f")};
 `;
 
 export const WeeklyReportDiv = styled.div`
@@ -29,6 +29,7 @@ export const WeeklyReportDiv = styled.div`
     1;
   margin-left: 20px;
   margin-right: 20px;
+  background-color: rgba(255, 255, 255, 0.6);
 `;
 
 export const WeeklyReportTitle = styled.title`
@@ -111,6 +112,7 @@ export const AnnualGenreDiv = styled.div`
   & div {
     background: "#636161";
   }
+  background-color: rgba(255, 255, 255, 0.6);
 `;
 
 export const TotalTrendDiv = styled.div`
@@ -133,6 +135,7 @@ export const TotalTrendDiv = styled.div`
       #fbd5e0
     )
     2;
+  background-color: rgba(255, 255, 255, 0.6);
 `;
 
 

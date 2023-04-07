@@ -34,20 +34,6 @@ function Home() {
 
   return (
     <HomeContainer ref={scrollRef}>
-      <ArrowContainerDiv>
-        <FiChevronsRight
-          onClick={moveToTrendChart}
-          href="#there"
-          size={124}
-          color="#E4B2FA"
-          style={{
-            position: "absolute",
-            top: "320px",
-            left: "1400px",
-            opacity: "0.4",
-          }}
-        />
-      </ArrowContainerDiv>
       {(theme === lightTheme) ? 
         <HomeTrapezoid src={lightTrape} />
         : <HomeTrapezoid src={darkTrape} />
